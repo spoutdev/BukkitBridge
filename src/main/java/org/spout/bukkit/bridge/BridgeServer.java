@@ -48,17 +48,18 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
 import java.util.logging.Logger;
+import org.spout.api.Spout;
 
 public class BridgeServer implements Server {
 
     @Override
     public String getName() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return Spout.getGame().getName();
     }
 
     @Override
     public String getVersion() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return Spout.getGame().getVersion();
     }
 
     @Override
@@ -73,7 +74,7 @@ public class BridgeServer implements Server {
 
     @Override
     public int getMaxPlayers() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return Spout.getGame().getMaxPlayers();
     }
 
     @Override
@@ -83,17 +84,17 @@ public class BridgeServer implements Server {
 
     @Override
     public int getViewDistance() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return 0;
     }
 
     @Override
     public String getIp() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return Spout.getGame().getAddress();
     }
 
     @Override
     public String getServerName() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return null; //TODO: Adjust for usage with Spout!
     }
 
     @Override
@@ -132,8 +133,9 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public int broadcastMessage(String s) {
-        return 0;  //TODO: Adjust for usage with Spout!
+    public int broadcastMessage(String message) {
+        Spout.getGame().broadcastMessage(message);
+        return Spout.getGame().getOnlinePlayers().length;
     }
 
     @Override
