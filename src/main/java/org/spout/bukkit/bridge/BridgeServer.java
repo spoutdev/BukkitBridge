@@ -1,7 +1,33 @@
+/*
+ * This file is part of BukkitBridge (http://www.spout.org/).
+ *
+ * BukkitBridge is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BukkitBridge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.spout.bukkit.bridge;
 
 import com.avaje.ebean.config.ServerConfig;
-import org.bukkit.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -21,368 +47,367 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
-import java.util.*;
 import java.util.logging.Logger;
 
 public class BridgeServer implements Server {
 
     @Override
     public String getName() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getVersion() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getBukkitVersion() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Player[] getOnlinePlayers() {
-        return new Player[0];  //To change body of implemented methods use File | Settings | File Templates.
+        return new Player[0];  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getMaxPlayers() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getPort() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getViewDistance() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getIp() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getServerName() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getServerId() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean getAllowEnd() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean getAllowNether() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean hasWhitelist() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void setWhitelist(boolean b) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Set<OfflinePlayer> getWhitelistedPlayers() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void reloadWhitelist() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int broadcastMessage(String s) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getUpdateFolder() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public File getUpdateFolderFile() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getTicksPerAnimalSpawns() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getTicksPerMonsterSpawns() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Player getPlayer(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Player getPlayerExact(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public List<Player> matchPlayer(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public PluginManager getPluginManager() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public BukkitScheduler getScheduler() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public ServicesManager getServicesManager() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public List<World> getWorlds() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public World createWorld(WorldCreator worldCreator) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean unloadWorld(String s, boolean b) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean unloadWorld(World world, boolean b) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public World getWorld(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public World getWorld(UUID uuid) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public MapView getMap(short i) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public MapView createMap(World world) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void reload() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Logger getLogger() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public PluginCommand getPluginCommand(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void savePlayers() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean dispatchCommand(CommandSender commandSender, String s) throws CommandException {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void configureDbConfig(ServerConfig serverConfig) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean addRecipe(Recipe recipe) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public List<Recipe> getRecipesFor(ItemStack itemStack) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Iterator<Recipe> recipeIterator() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void clearRecipes() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void resetRecipes() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Map<String, String[]> getCommandAliases() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int getSpawnRadius() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void setSpawnRadius(int i) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean getOnlineMode() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean getAllowFlight() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public boolean useExactLoginLocation() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void shutdown() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public int broadcast(String s, String s1) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public OfflinePlayer getOfflinePlayer(String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Set<String> getIPBans() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void banIP(String s) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void unbanIP(String s) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Set<OfflinePlayer> getBannedPlayers() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Set<OfflinePlayer> getOperators() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public GameMode getDefaultGameMode() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void setDefaultGameMode(GameMode gameMode) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public ConsoleCommandSender getConsoleSender() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public File getWorldContainer() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public OfflinePlayer[] getOfflinePlayers() {
-        return new OfflinePlayer[0];  //To change body of implemented methods use File | Settings | File Templates.
+        return new OfflinePlayer[0];  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Messenger getMessenger() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public HelpMap getHelpMap() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Inventory createInventory(InventoryHolder inventoryHolder, InventoryType inventoryType) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Inventory createInventory(InventoryHolder inventoryHolder, int i) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Inventory createInventory(InventoryHolder inventoryHolder, int i, String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public void sendPluginMessage(Plugin plugin, String s, byte[] bytes) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public Set<String> getListeningPluginChannels() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO: Adjust for usage with Spout!
     }
 }

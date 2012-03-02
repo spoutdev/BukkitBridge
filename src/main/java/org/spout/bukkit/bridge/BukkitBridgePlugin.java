@@ -15,24 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.spout.bukkit.bridge.block;
+package org.spout.bukkit.bridge;
 
-import org.bukkit.block.Sign;
+import org.spout.api.plugin.CommonPlugin;
 
-public class BridgeSign extends BridgeBlockState implements Sign {
+public class BukkitBridgePlugin extends CommonPlugin {
 
     @Override
-    public String[] getLines() {
-        return new String[0];  //TODO: Adjust for usage with Spout!
+    public void onEnable() {
+        //TODO: Adjust for usage with Spout!
     }
 
     @Override
-    public String getLine(int i) throws IndexOutOfBoundsException {
-        return null;  //TODO: Adjust for usage with Spout!
-    }
-
-    @Override
-    public void setLine(int i, String s) throws IndexOutOfBoundsException {
+    public void onDisable() {
         //TODO: Adjust for usage with Spout!
     }
 }
