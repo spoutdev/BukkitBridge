@@ -14,24 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.spout.bukkit.bridge;
 
-import com.avaje.ebean.config.ServerConfig;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.help.HelpMap;
@@ -43,23 +38,46 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Logger;
+
+import com.avaje.ebean.config.ServerConfig;
 import org.spout.api.Spout;
+import org.spout.bukkit.bridge.entity.BridgePlayer;
+import org.spout.vanilla.VanillaPlugin;
 
 public class BridgeServer implements Server {
+    private org.spout.api.Server server;
+    private final ServicesManager servicesManager = new SimpleServicesManager();
+    private final SimpleCommandMap commandMap = new SimpleCommandMap(this);
+    private final PluginManager pluginManager = new SimplePluginManager(this, commandMap);
+    private final StandardMessenger messenger = new StandardMessenger();
+
+    public void init(org.spout.api.Server server) {
+        this.server = server;
+    }
 
     @Override
     public String getName() {
-        return Spout.getGame().getName();
+        return server.getName();
     }
 
     @Override
     public String getVersion() {
-        return Spout.getGame().getVersion();
+        return server.getVersion();
     }
 
     @Override
@@ -69,7 +87,11 @@ public class BridgeServer implements Server {
 
     @Override
     public Player[] getOnlinePlayers() {
-        return new Player[0];  //TODO: Adjust for usage with Spout!
+        List<Player> players = new ArrayList<Player>();
+        for (org.spout.api.player.Player spoutPlayer : server.getOnlinePlayers()) {
+            players.add(new BridgePlayer(spoutPlayer));
+        }
+        return players.toArray(new Player[players.size()]);
     }
 
     @Override
@@ -84,17 +106,17 @@ public class BridgeServer implements Server {
 
     @Override
     public int getViewDistance() {
-        return 0;
+        return 0; //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public String getIp() {
-        return Spout.getGame().getAddress();
+        return Spout.getGame().getAddress().split(":")[0];
     }
 
     @Override
     public String getServerName() {
-        return null; //TODO: Adjust for usage with Spout!
+        return Spout.getGame().getName();
     }
 
     @Override
@@ -114,22 +136,27 @@ public class BridgeServer implements Server {
 
     @Override
     public boolean hasWhitelist() {
-        return false;  //TODO: Adjust for usage with Spout!
+        return server.isWhitelist();
     }
 
     @Override
     public void setWhitelist(boolean b) {
-        //TODO: Adjust for usage with Spout!
+        server.setWhitelist(true);
     }
 
     @Override
     public Set<OfflinePlayer> getWhitelistedPlayers() {
-        return null;  //TODO: Adjust for usage with Spout!
+        Set<OfflinePlayer> whitelisted = new HashSet<OfflinePlayer>();
+        for (String player : server.getWhitelistedPlayers()) {
+            // whitelisted.add(new BridgeOfflinePlayer(somedata));
+            //TODO: Construct & add OfflinePlayer objects to Set
+        }
+        return whitelisted;
     }
 
     @Override
     public void reloadWhitelist() {
-        //TODO: Adjust for usage with Spout!
+        server.updateWhitelist();
     }
 
     @Override
@@ -175,7 +202,7 @@ public class BridgeServer implements Server {
 
     @Override
     public PluginManager getPluginManager() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return pluginManager;
     }
 
     @Override
@@ -185,7 +212,7 @@ public class BridgeServer implements Server {
 
     @Override
     public ServicesManager getServicesManager() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return servicesManager;
     }
 
     @Override
@@ -215,7 +242,7 @@ public class BridgeServer implements Server {
 
     @Override
     public World getWorld(UUID uuid) {
-        return null;  //TODO: Adjust for usage with Spout!
+        return new BridgeWorld(server.getWorld(uuid));
     }
 
     @Override
@@ -235,12 +262,17 @@ public class BridgeServer implements Server {
 
     @Override
     public Logger getLogger() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return server.getLogger();
     }
 
     @Override
-    public PluginCommand getPluginCommand(String s) {
-        return null;  //TODO: Adjust for usage with Spout!
+    public PluginCommand getPluginCommand(String name) {
+        Command command = commandMap.getCommand(name);
+        if (command instanceof PluginCommand) {
+            return (PluginCommand) command;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -249,8 +281,12 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public boolean dispatchCommand(CommandSender commandSender, String s) throws CommandException {
-        return false;  //TODO: Adjust for usage with Spout!
+    public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
+        if (commandMap.dispatch(sender, commandLine)) {
+            return true;
+        }
+        sender.sendMessage("Unknown command. Type \"help\" for help.");
+        return false;
     }
 
     @Override
@@ -315,7 +351,7 @@ public class BridgeServer implements Server {
 
     @Override
     public void shutdown() {
-        //TODO: Adjust for usage with Spout!
+        server.stop();
     }
 
     @Override
@@ -334,13 +370,13 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public void banIP(String s) {
-        //TODO: Adjust for usage with Spout!
+    public void banIP(String address) {
+        server.ban(address);
     }
 
     @Override
-    public void unbanIP(String s) {
-        //TODO: Adjust for usage with Spout!
+    public void unbanIP(String address) {
+        server.unban(address);
     }
 
     @Override
@@ -350,17 +386,18 @@ public class BridgeServer implements Server {
 
     @Override
     public Set<OfflinePlayer> getOperators() {
+        Set<OfflinePlayer> ops = new HashSet<OfflinePlayer>();
         return null;  //TODO: Adjust for usage with Spout!
     }
 
     @Override
     public GameMode getDefaultGameMode() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return GameMode.getByValue(VanillaPlugin.defaultGamemode.getId());
     }
 
     @Override
     public void setDefaultGameMode(GameMode gameMode) {
-        //TODO: Adjust for usage with Spout!
+        //TODO: Vanilla implementation does not allow default gamemode alteration
     }
 
     @Override
@@ -380,7 +417,7 @@ public class BridgeServer implements Server {
 
     @Override
     public Messenger getMessenger() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return messenger;
     }
 
     @Override
@@ -404,12 +441,21 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public void sendPluginMessage(Plugin plugin, String s, byte[] bytes) {
-        //TODO: Adjust for usage with Spout!
+    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+        StandardMessenger.validatePluginMessage(getMessenger(), source, channel, message);
+
+        for (Player player : getOnlinePlayers()) {
+            player.sendPluginMessage(source, channel, message);
+        }
     }
 
     @Override
     public Set<String> getListeningPluginChannels() {
-        return null;  //TODO: Adjust for usage with Spout!
+        Set<String> result = new HashSet<String>();
+
+        for (Player player : getOnlinePlayers()) {
+            result.addAll(player.getListeningPluginChannels());
+        }
+        return result;
     }
 }
