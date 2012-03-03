@@ -377,7 +377,7 @@ public class BridgeServer implements Server {
 
     @Override
     public Set<String> getIPBans() {
-    	return (Set<String>) server.getIPBans(); //does it cast?
+    	return (Set<String>) server.getIPBans();
     }
 
     @Override
