@@ -101,10 +101,7 @@ public class BridgeServer implements Server {
 
     @Override
     public int getPort() {
-    	if (Spout.getGame().getAddress().split(":").length > 1) {
-    		return Integer.parseInt(Spout.getGame().getAddress().split(":")[1]);
-    	}
-    	return 25565; //If there's no port in address, then we assume it's Vanilla's default, 25565.
+    	return Integer.parseInt(Spout.getGame().getAddress().split(":")[1]);
     }
 
     @Override
@@ -190,27 +187,18 @@ public class BridgeServer implements Server {
 
     @Override
     public Player getPlayer(String s) {
-    	BridgePlayer match = null;
-    	int diff = Integer.MAX_VALUE;
-        for (org.spout.api.player.Player spoutPlayer : server.getOnlinePlayers()) {
-        	if (spoutPlayer.getName().toLowerCase().startsWith(s.toLowerCase())){
-        		int curDiff = spoutPlayer.getName().length() - s.length();
-        		if(curDiff < diff) {
-        			match = new BridgePlayer(spoutPlayer);
-        			diff = curDiff;
-        		}
-        		if (curDiff == 0) break;
-        	}
+    	org.spout.api.player.Player match = server.getPlayer(s, false);
+        if (match != null) {
+        	return new BridgePlayer(match);
         }
-        return match;
+        return null;
     }
 
     @Override
     public Player getPlayerExact(String s) {
-        for (org.spout.api.player.Player spoutPlayer : server.getOnlinePlayers()) {
-        	if (spoutPlayer.getName().equalsIgnoreCase(s)){
-        		return new BridgePlayer(spoutPlayer);
-        	}
+        org.spout.api.player.Player match = server.getPlayer(s, true);
+        if (match != null) {
+        	return new BridgePlayer(match);
         }
         return null;
     }
