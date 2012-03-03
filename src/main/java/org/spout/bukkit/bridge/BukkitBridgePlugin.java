@@ -19,6 +19,7 @@ package org.spout.bukkit.bridge;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 
+import java.io.File;
 import java.util.logging.Level;
 
 import org.spout.api.Spout;
@@ -26,10 +27,12 @@ import org.spout.api.plugin.CommonPlugin;
 
 public class BukkitBridgePlugin extends CommonPlugin {
 
-    private static final BridgeServer bridgeServer = new BridgeServer();
-
+    private final BridgeServer bridgeServer = new BridgeServer(this);
+    private File pluginFolder;
+    
     @Override
     public void onEnable() {
+        this.pluginFolder = new File(this.getGame().getDataFolder().getParentFile() + File.separator + "bukkitplugins");
         if (!(Spout.getGame() instanceof org.spout.api.Server)) {
             this.getPluginLoader().disablePlugin(this);
             this.getLogger().log(Level.SEVERE, "Unable to load SpoutBridge, could not detect a proper GameServer!");
@@ -43,7 +46,11 @@ public class BukkitBridgePlugin extends CommonPlugin {
         //TODO: Adjust for usage with Spout!
     }
 
-    public static Server getServer() {
+    public Server getServer() {
         return bridgeServer;
+    }
+    
+    public File getPluginFolder() {
+        return pluginFolder;
     }
 }

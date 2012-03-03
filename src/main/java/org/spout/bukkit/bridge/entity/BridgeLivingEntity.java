@@ -32,10 +32,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
-    private final org.spout.vanilla.entity.living.LivingEntity spoutEntity;
+import org.spout.vanilla.entity.MovingEntity;
+import org.spout.vanilla.entity.VanillaEntity;
 
-    public BridgeLivingEntity(org.spout.vanilla.entity.living.LivingEntity spoutEntity) {
+public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
+    private final MovingEntity spoutEntity;
+
+    public BridgeLivingEntity(MovingEntity spoutEntity) {
         super(spoutEntity);
         this.spoutEntity = spoutEntity;
     }
