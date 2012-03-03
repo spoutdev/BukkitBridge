@@ -55,16 +55,16 @@
 	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
-			<groupId>org.spout</groupId>
-			<artifactId>spoutapi</artifactId>
-			<version>dev-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
 			<version>${bukkit.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spout</groupId>
+			<artifactId>spoutapi</artifactId>
+			<version>dev-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.spout</groupId>
@@ -119,9 +119,10 @@
 						</goals>
 						<configuration>
 							<artifactSet>
-								<excludes>
-									<exclude>junit:*</exclude>
-								</excludes>
+								<includes>
+									<include>org.bukkit:*</include>
+									<include>org.avaje:*</include>
+								</includes>
 							</artifactSet>
 						</configuration>
 					</execution>
