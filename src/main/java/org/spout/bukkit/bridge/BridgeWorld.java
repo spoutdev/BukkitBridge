@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.spout.bukkit.bridge;
 
 import org.bukkit.BlockChangeDelegate;
@@ -44,35 +43,44 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.spout.bukkit.bridge.block.BridgeBlock;
+import org.spout.bukkit.bridge.entity.BridgePlayer;
+
 public class BridgeWorld implements World {
+    private final org.spout.api.geo.World spoutWorld;
+
+    public BridgeWorld(org.spout.api.geo.World spoutWorld) {
+        this.spoutWorld = spoutWorld;
+    }
 
     @Override
-    public Block getBlockAt(int i, int i1, int i2) {
-        return null;  //TODO: Adjust for usage with Spout!
+    public Block getBlockAt(int x, int y, int z) {
+        return new BridgeBlock(spoutWorld.getChunkFromBlock(x, y, z), spoutWorld.getBlock(x, y, z));
     }
 
     @Override
     public Block getBlockAt(Location location) {
-        return null;  //TODO: Adjust for usage with Spout!
+        return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
     @Override
-    public int getBlockTypeIdAt(int i, int i1, int i2) {
-        return 0;  //TODO: Adjust for usage with Spout!
+    public int getBlockTypeIdAt(int x, int y, int z) {
+        return spoutWorld.getBlockId(x, y, z);
     }
 
     @Override
     public int getBlockTypeIdAt(Location location) {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return getBlockTypeIdAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
     }
 
     @Override
-    public int getHighestBlockYAt(int i, int i1) {
+    public int getHighestBlockYAt(int x, int z) {
         return 0;  //TODO: Adjust for usage with Spout!
     }
 
@@ -248,17 +256,21 @@ public class BridgeWorld implements World {
 
     @Override
     public List<Player> getPlayers() {
-        return null;  //TODO: Adjust for usage with Spout!
+        List<Player> players = new ArrayList<Player>();
+        for (org.spout.api.player.Player player : spoutWorld.getPlayers()) {
+            players.add(new BridgePlayer(player));
+        }
+        return players;
     }
 
     @Override
     public String getName() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return spoutWorld.getName();
     }
 
     @Override
     public UUID getUID() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return spoutWorld.getUID();
     }
 
     @Override
@@ -267,7 +279,7 @@ public class BridgeWorld implements World {
     }
 
     @Override
-    public boolean setSpawnLocation(int i, int i1, int i2) {
+    public boolean setSpawnLocation(int x, int y, int z) {
         return false;  //TODO: Adjust for usage with Spout!
     }
 
