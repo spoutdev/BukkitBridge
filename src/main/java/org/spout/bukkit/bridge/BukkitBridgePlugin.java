@@ -14,20 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.spout.bukkit.bridge;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
+
+import java.util.logging.Level;
+
+import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
 
 public class BukkitBridgePlugin extends CommonPlugin {
 
+    private static final BridgeServer bridgeServer = new BridgeServer();
+
     @Override
     public void onEnable() {
-        //TODO: Adjust for usage with Spout!
+        if (!(Spout.getGame() instanceof org.spout.api.Server)) {
+            this.getPluginLoader().disablePlugin(this);
+            this.getLogger().log(Level.SEVERE, "Unable to load SpoutBridge, could not detect a proper GameServer!");
+        }
+        bridgeServer.init((org.spout.api.Server) Spout.getGame());
+        Bukkit.setServer(bridgeServer);
     }
 
     @Override
     public void onDisable() {
         //TODO: Adjust for usage with Spout!
+    }
+
+    public static Server getServer() {
+        return bridgeServer;
     }
 }

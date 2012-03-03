@@ -29,7 +29,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-public class BridgeBlockState implements BlockState{
+public class BridgeBlockState implements BlockState {
 
     @Override
     public Block getBlock() {

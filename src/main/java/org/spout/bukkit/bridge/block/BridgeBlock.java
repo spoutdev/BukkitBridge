@@ -33,8 +33,18 @@ import org.bukkit.plugin.Plugin;
 import java.util.Collection;
 import java.util.List;
 
-public class BridgeBlock implements Block {
+import org.spout.api.Source;
+import org.spout.bukkit.bridge.BridgeWorld;
 
+public class BridgeBlock implements Block {
+    private final org.spout.api.geo.cuboid.Block block;
+    private final org.spout.api.geo.cuboid.Chunk chunk;
+
+    public BridgeBlock(org.spout.api.geo.cuboid.Chunk chunk, org.spout.api.geo.cuboid.Block block) {
+        this.block = block;
+        this.chunk = chunk;
+    }
+    
     @Override
     public byte getData() {
         return 0;  //TODO: Adjust for usage with Spout!
@@ -57,17 +67,17 @@ public class BridgeBlock implements Block {
 
     @Override
     public Material getType() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return Material.getMaterial(block.getBlockId());
     }
 
     @Override
     public int getTypeId() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return block.getBlockId();
     }
 
     @Override
     public byte getLightLevel() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return (byte) block.getBlockMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
     }
 
     @Override
@@ -82,27 +92,27 @@ public class BridgeBlock implements Block {
 
     @Override
     public World getWorld() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return new BridgeWorld(chunk.getWorld());
     }
 
     @Override
     public int getX() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return block.getX();
     }
 
     @Override
     public int getY() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return block.getY();
     }
 
     @Override
     public int getZ() {
-        return 0;  //TODO: Adjust for usage with Spout!
+        return block.getZ();
     }
 
     @Override
     public Location getLocation() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return new Location(getWorld(), getX(), getY(), getZ());
     }
 
     @Override
@@ -111,33 +121,33 @@ public class BridgeBlock implements Block {
     }
 
     @Override
-    public void setData(byte b) {
-        //TODO: Adjust for usage with Spout!
+    public void setData(byte data) {
+        setData(data, true);
     }
 
     @Override
-    public void setData(byte data, boolean b) {
-        //TODO: Adjust for usage with Spout!
+    public void setData(byte data, boolean updatePhysics) {
+        chunk.setBlockData(block.getX(), block.getY(), block.getZ(), data, true, chunk.getWorld());
     }
 
     @Override
     public void setType(Material material) {
-        //TODO: Adjust for usage with Spout!
+        setTypeId(material.getId(), true);
     }
 
     @Override
     public boolean setTypeId(int i) {
-        return false;  //TODO: Adjust for usage with Spout!
+        return setTypeId(i, true);
     }
 
     @Override
-    public boolean setTypeId(int i, boolean b) {
-        return false;  //TODO: Adjust for usage with Spout!
+    public boolean setTypeId(int i, boolean physics) {
+        return chunk.setBlockId(getX(), getY(), getZ(), (short) i, physics, chunk.getWorld());
     }
 
     @Override
-    public boolean setTypeIdAndData(int i, byte data, boolean b) {
-        return false;  //TODO: Adjust for usage with Spout!
+    public boolean setTypeIdAndData(int i, byte data, boolean physics) {
+        return chunk.setBlockIdAndData(getX(), getY(), getZ(), (short) i, data, physics, chunk.getWorld());
     }
 
     @Override
@@ -187,7 +197,7 @@ public class BridgeBlock implements Block {
 
     @Override
     public boolean isEmpty() {
-        return false;  //TODO: Adjust for usage with Spout!
+        return block.getBlockId() == 0;
     }
 
     @Override

@@ -1,0 +1,225 @@
+/*
+ * This file is part of BukkitBridge (http://www.spout.org/).
+ *
+ * BukkitBridge is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BukkitBridge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.spout.bukkit.bridge.entity;
+
+import org.bukkit.EntityEffect;
+import org.bukkit.Location;
+import org.bukkit.Server;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.util.Vector;
+
+import java.util.List;
+import java.util.UUID;
+
+import org.spout.api.math.Vector3;
+import org.spout.bukkit.bridge.BukkitBridgePlugin;
+import org.spout.vanilla.entity.MovingEntity;
+
+public class BridgeEntity implements Entity {
+    private final MovingEntity spoutEntity;
+
+    public BridgeEntity(MovingEntity spoutEntity) {
+        this.spoutEntity = spoutEntity;
+    }
+
+    @Override
+    public Location getLocation() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setVelocity(Vector vector) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public Vector getVelocity() {
+        Vector3 v = spoutEntity.getVelocity();
+        return new Vector(v.getX(), v.getY(), v.getZ());
+    }
+
+    @Override
+    public World getWorld() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean teleport(Location location) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean teleport(Location location, TeleportCause teleportCause) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean teleport(Entity entity) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean teleport(Entity entity, TeleportCause teleportCause) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public List<Entity> getNearbyEntities(double v, double v1, double v2) {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public int getEntityId() {
+        return 0;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public int getFireTicks() {
+        return spoutEntity.getFireTicks();
+    }
+
+    @Override
+    public int getMaxFireTicks() {
+        return 0;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setFireTicks(int fireTicks) {
+        spoutEntity.setFireTicks(fireTicks);
+    }
+
+    @Override
+    public void remove() {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean isDead() {
+        return false;
+    }
+
+    @Override
+    public Server getServer() {
+        return BukkitBridgePlugin.getServer();
+    }
+
+    @Override
+    public Entity getPassenger() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean setPassenger(Entity entity) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean eject() {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public float getFallDistance() {
+        return 0;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setFallDistance(float v) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setLastDamageCause(EntityDamageEvent entityDamageEvent) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public EntityDamageEvent getLastDamageCause() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public UUID getUniqueId() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public int getTicksLived() {
+        return 0;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setTicksLived(int i) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void playEffect(EntityEffect entityEffect) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public EntityType getType() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean isInsideVehicle() {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean leaveVehicle() {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public Entity getVehicle() {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void setMetadata(String s, MetadataValue metadataValue) {
+        //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public List<MetadataValue> getMetadata(String s) {
+        return null;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public boolean hasMetadata(String s) {
+        return false;  //TODO: Adjust for usage with Spout!
+    }
+
+    @Override
+    public void removeMetadata(String s, Plugin plugin) {
+        //TODO: Adjust for usage with Spout!
+    }
+}
