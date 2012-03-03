@@ -162,7 +162,10 @@ public class BridgeServer implements Server {
 
     @Override
     public int getPort() {
-        return 0;  //TODO: Adjust for usage with Spout!
+    	if (Spout.getGame().getAddress().split(":").length > 1) {
+    		return Integer.parseInt(Spout.getGame().getAddress().split(":")[1]);
+    	}
+    	return 25565; //If there's no port in address, then we assume it's Vanilla's default, 25565.
     }
 
     @Override
@@ -441,7 +444,7 @@ public class BridgeServer implements Server {
 
     @Override
     public Set<String> getIPBans() {
-        return null;  //TODO: Adjust for usage with Spout!
+    	return (Set<String>) server.getIPBans();
     }
 
     @Override
