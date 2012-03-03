@@ -217,7 +217,18 @@ public class BridgeServer implements Server {
 
     @Override
     public List<Player> matchPlayer(String s) {
-        return null;  //TODO: Adjust for usage with Spout!
+    	List<Player> resultPlayers = new ArrayList<Player>();
+    	for (Player player : this.getOnlinePlayers()){
+    		if(player.getName().equalsIgnoreCase(s)) {
+    			resultPlayers.clear();
+    			resultPlayers.add(player);
+    			break;
+    		}
+    		if(player.getName().toLowerCase().contains(s.toLowerCase())) {
+    			resultPlayers.add(player);
+    		}
+    	}
+        return resultPlayers;
     }
 
     @Override
@@ -386,7 +397,7 @@ public class BridgeServer implements Server {
 
     @Override
     public Set<String> getIPBans() {
-        return null;  //TODO: Adjust for usage with Spout!
+    	return (Set<String>) server.getIPBans();
     }
 
     @Override
