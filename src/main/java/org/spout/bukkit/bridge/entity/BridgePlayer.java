@@ -42,7 +42,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.spout.vanilla.entity.MovingEntity;
-import org.spout.vanilla.entity.living.LivingEntity;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
     private final org.spout.api.player.Player spoutPlayer;
