@@ -35,39 +35,100 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.SimpleServicesManager;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.avaje.ebean.config.ServerConfig;
 import org.spout.api.Spout;
 import org.spout.bukkit.bridge.entity.BridgePlayer;
+import org.spout.bukkit.bridge.util.Versioning;
 import org.spout.vanilla.VanillaPlugin;
 
 public class BridgeServer implements Server {
     private org.spout.api.Server server;
+    private final String bukkitVersion = Versioning.getBukkitVersion();
     private final ServicesManager servicesManager = new SimpleServicesManager();
     private final SimpleCommandMap commandMap = new SimpleCommandMap(this);
     private final PluginManager pluginManager = new SimplePluginManager(this, commandMap);
     private final StandardMessenger messenger = new StandardMessenger();
+    private final BukkitBridgePlugin plugin;
+
+    public BridgeServer(BukkitBridgePlugin plugin) {
+        this.plugin = plugin;
+    }
 
     public void init(org.spout.api.Server server) {
         this.server = server;
+        loadPlugins();
+
+    }
+
+    private void loadPlugins() {
+        pluginManager.registerInterface(JavaPluginLoader.class);
+        File pluginFolder = plugin.getPluginFolder();
+        if (pluginFolder.exists()) {
+            Plugin[] plugins = pluginManager.loadPlugins(pluginFolder);
+            for (Plugin plugin : plugins) {
+                try {
+                    String message = String.format("Loading %s", plugin.getDescription().getFullName());
+                    plugin.getLogger().info(message);
+                    plugin.onLoad();
+                } catch (Throwable ex) {
+                    plugin.getLogger().log(Level.SEVERE, ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+                }
+            }
+        } else {
+            pluginFolder.mkdir();
+        }
+    }
+
+    private void enablePlugins(PluginLoadOrder type) {
+        Plugin[] plugins = pluginManager.getPlugins();
+
+        for (Plugin plugin : plugins) {
+            if ((!plugin.isEnabled()) && (plugin.getDescription().getLoad() == type)) {
+                loadPlugin(plugin);
+            }
+        }
+    }
+
+    private void loadPlugin(Plugin plugin) {
+        try {
+            pluginManager.enablePlugin(plugin);
+
+            List<Permission> perms = plugin.getDescription().getPermissions();
+
+            for (Permission perm : perms) {
+                try {
+                    pluginManager.addPermission(perm);
+                } catch (IllegalArgumentException ex) {
+                    getLogger().log(Level.WARNING, "Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered", ex);
+                }
+            }
+        } catch (Throwable ex) {
+            plugin.getLogger().log(Level.SEVERE, ex.getMessage() + " loading " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+        }
     }
 
     @Override
@@ -82,7 +143,7 @@ public class BridgeServer implements Server {
 
     @Override
     public String getBukkitVersion() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return bukkitVersion;
     }
 
     @Override
@@ -170,12 +231,12 @@ public class BridgeServer implements Server {
 
     @Override
     public String getUpdateFolder() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return server.getUpdateFolder().getPath();
     }
 
     @Override
     public File getUpdateFolderFile() {
-        return null;  //TODO: Adjust for usage with Spout!
+        return server.getUpdateFolder();
     }
 
     @Override
@@ -189,46 +250,25 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public Player getPlayer(String s) {
-    	BridgePlayer match = null;
-    	int diff = Integer.MAX_VALUE;
-        for (org.spout.api.player.Player spoutPlayer : server.getOnlinePlayers()) {
-        	if (spoutPlayer.getName().toLowerCase().startsWith(s.toLowerCase())){
-        		int curDiff = spoutPlayer.getName().length() - s.length();
-        		if(curDiff < diff) {
-        			match = new BridgePlayer(spoutPlayer);
-        			diff = curDiff;
-        		}
-        		if (curDiff == 0) break;
-        	}
-        }
-        return match;
+    public Player getPlayer(final String name) {
+        org.spout.api.player.Player found = server.getPlayer(name, false);
+        return found != null ? new BridgePlayer(found) : null;
     }
 
     @Override
-    public Player getPlayerExact(String s) {
-        for (org.spout.api.player.Player spoutPlayer : server.getOnlinePlayers()) {
-        	if (spoutPlayer.getName().equalsIgnoreCase(s)){
-        		return new BridgePlayer(spoutPlayer);
-        	}
-        }
-        return null;
+    public Player getPlayerExact(String name) {
+        org.spout.api.player.Player player = server.getPlayer(name, true);
+        return player != null ? new BridgePlayer(player) : null;
     }
 
     @Override
-    public List<Player> matchPlayer(String s) {
-    	List<Player> resultPlayers = new ArrayList<Player>();
-    	for (Player player : this.getOnlinePlayers()){
-    		if(player.getName().equalsIgnoreCase(s)) {
-    			resultPlayers.clear();
-    			resultPlayers.add(player);
-    			break;
-    		}
-    		if(player.getName().toLowerCase().contains(s.toLowerCase())) {
-    			resultPlayers.add(player);
-    		}
-    	}
-        return resultPlayers;
+    public List<Player> matchPlayer(String name) {
+        List<Player> matched = new ArrayList<Player>();
+        Collection<org.spout.api.player.Player> matchedSpoutPlayers = server.matchPlayer(name);
+        for (org.spout.api.player.Player player : matchedSpoutPlayers) {
+            matched.add(new BridgePlayer(player));
+        }
+        return matched;
     }
 
     @Override
@@ -248,7 +288,12 @@ public class BridgeServer implements Server {
 
     @Override
     public List<World> getWorlds() {
-        return null;  //TODO: Adjust for usage with Spout!
+        List<World> worlds = new ArrayList<World>();
+        Collection<org.spout.api.geo.World> spoutWorlds = server.getWorlds();
+        for (org.spout.api.geo.World world : spoutWorlds) {
+            worlds.add(new BridgeWorld(world));
+        }
+        return worlds;
     }
 
     @Override
@@ -257,23 +302,25 @@ public class BridgeServer implements Server {
     }
 
     @Override
-    public boolean unloadWorld(String s, boolean b) {
-        return false;  //TODO: Adjust for usage with Spout!
+    public boolean unloadWorld(String worldName, boolean save) {
+        return server.unloadWorld(worldName, save);
     }
 
     @Override
-    public boolean unloadWorld(World world, boolean b) {
-        return false;  //TODO: Adjust for usage with Spout!
+    public boolean unloadWorld(World world, boolean save) {
+        return unloadWorld(world.getName(), save);
     }
 
     @Override
-    public World getWorld(String s) {
-        return null;  //TODO: Adjust for usage with Spout!
+    public World getWorld(String name) {
+        org.spout.api.geo.World world = server.getWorld(name);
+        return world != null ? new BridgeWorld(world) : null;
     }
 
     @Override
     public World getWorld(UUID uuid) {
-        return new BridgeWorld(server.getWorld(uuid));
+        org.spout.api.geo.World world = server.getWorld(uuid);
+        return world != null ? new BridgeWorld(world) : null;
     }
 
     @Override
@@ -367,7 +414,7 @@ public class BridgeServer implements Server {
 
     @Override
     public boolean getOnlineMode() {
-        return false;  //TODO: Adjust for usage with Spout!
+        return true;  //TODO: Vanilla only allows online mode
     }
 
     @Override

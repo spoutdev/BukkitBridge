@@ -16,6 +16,7 @@
  */
 package org.spout.bukkit.bridge.entity;
 
+import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -120,7 +121,7 @@ public class BridgeEntity implements Entity {
 
     @Override
     public Server getServer() {
-        return BukkitBridgePlugin.getServer();
+        return Bukkit.getServer();
     }
 
     @Override
