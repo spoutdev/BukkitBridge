@@ -82,6 +82,7 @@ public class BridgeServer implements Server {
 	public void init(org.spout.api.Server server) {
 		this.server = server;
 		loadPlugins();
+		//TODO: Enable all plugins based on load orders
 	}
 
 	private void loadPlugins() {
