@@ -4,5 +4,5 @@ description: BukkitBridge implements the Bukkit API to allow Bukkit plugins to b
 author: SpoutDev
 website: http://www.spout.org
 
-main: org.spout.bukkit.Bridge
+main: org.spout.bukkit.BukkitBridge
 platform: BOTH
