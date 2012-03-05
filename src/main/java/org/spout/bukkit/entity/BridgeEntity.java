@@ -19,6 +19,9 @@ package org.spout.bukkit.entity;
 import java.util.List;
 import java.util.UUID;
 
+import org.spout.api.math.Vector3;
+import org.spout.vanilla.entity.MovingEntity;
+
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -31,10 +34,6 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-
-import org.spout.api.math.Vector3;
-import org.spout.bukkit.BukkitBridge;
-import org.spout.vanilla.entity.MovingEntity;
 
 public class BridgeEntity implements Entity {
 	private final MovingEntity spoutEntity;

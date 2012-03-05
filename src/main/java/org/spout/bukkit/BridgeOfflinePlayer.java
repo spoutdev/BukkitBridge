@@ -22,7 +22,7 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class BridgeOfflinePlayer implements OfflinePlayer{
+public class BridgeOfflinePlayer implements OfflinePlayer {
 	@Override
 	public boolean isOnline() {
 		return false;  //TODO: Adjust for usage with Spout!

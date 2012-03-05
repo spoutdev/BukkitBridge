@@ -19,7 +19,7 @@ package org.spout.bukkit.block;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 
-public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand{
+public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand {
 	@Override
 	public int getBrewingTime() {
 		return 0;  //TODO: Adjust for usage with Spout!

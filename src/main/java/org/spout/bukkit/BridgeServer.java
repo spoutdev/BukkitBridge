@@ -28,8 +28,11 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.avaje.ebean.config.ServerConfig;
+import org.spout.api.Spout;
+import org.spout.bukkit.entity.BridgePlayer;
+import org.spout.bukkit.util.Versioning;
 
+import com.avaje.ebean.config.ServerConfig;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -60,11 +63,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
-
-import org.spout.api.Spout;
-import org.spout.bukkit.entity.BridgePlayer;
-import org.spout.bukkit.util.Versioning;
-import org.spout.vanilla.VanillaPlugin;
 
 public class BridgeServer implements Server {
 	private org.spout.api.Server server;
@@ -470,7 +468,8 @@ public class BridgeServer implements Server {
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		return GameMode.getByValue(VanillaPlugin.defaultGamemode.getId());
+		//TODO Removed Gamemode Implementation from Vanilla...will need another way to get this.
+		return null;
 	}
 
 	@Override
