@@ -20,8 +20,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-import org.spout.vanilla.entity.MovingEntity;
-
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
@@ -33,6 +31,8 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowball;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import org.spout.vanilla.entity.MovingEntity;
 
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	private final MovingEntity spoutEntity;

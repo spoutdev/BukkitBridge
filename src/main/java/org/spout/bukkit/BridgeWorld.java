@@ -23,9 +23,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.spout.bukkit.block.BridgeBlock;
-import org.spout.bukkit.entity.BridgePlayer;
-
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -51,6 +48,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
+import org.spout.bukkit.block.BridgeBlock;
+import org.spout.bukkit.entity.BridgePlayer;
 
 public class BridgeWorld implements World {
 	private final org.spout.api.geo.World spoutWorld;

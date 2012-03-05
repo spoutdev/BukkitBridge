@@ -20,8 +20,6 @@ import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Set;
 
-import org.spout.vanilla.entity.MovingEntity;
-
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
@@ -42,6 +40,8 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+
+import org.spout.vanilla.entity.MovingEntity;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;

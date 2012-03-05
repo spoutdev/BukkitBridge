@@ -19,11 +19,11 @@ package org.spout.bukkit;
 import java.io.File;
 import java.util.logging.Level;
 
-import org.spout.api.Spout;
-import org.spout.api.plugin.CommonPlugin;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+
+import org.spout.api.Spout;
+import org.spout.api.plugin.CommonPlugin;
 
 public class BukkitBridge extends CommonPlugin {
 	private final BridgeServer bridgeServer = new BridgeServer(this);
