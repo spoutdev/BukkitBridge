@@ -33,12 +33,13 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import org.spout.api.math.Vector3;
-import org.spout.vanilla.entity.MovingEntity;
+import org.spout.vanilla.entity.VanillaEntity;
 
 public class BridgeEntity implements Entity {
-	private final MovingEntity spoutEntity;
+	
+	private final VanillaEntity spoutEntity;
 
-	public BridgeEntity(MovingEntity spoutEntity) {
+	public BridgeEntity(VanillaEntity spoutEntity) {
 		this.spoutEntity = spoutEntity;
 	}
 
