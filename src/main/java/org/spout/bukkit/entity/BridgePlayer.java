@@ -40,14 +40,14 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-
-import org.spout.vanilla.entity.MovingEntity;
+import org.spout.vanilla.entity.living.player.VanillaPlayer;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
+	
 	private final org.spout.api.player.Player spoutPlayer;
 
 	public BridgePlayer(org.spout.api.player.Player spoutPlayer) {
-		super((MovingEntity) spoutPlayer.getEntity());
+		super((VanillaPlayer) spoutPlayer.getEntity());
 		this.spoutPlayer = spoutPlayer;
 	}
 
