@@ -32,12 +32,11 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import org.spout.vanilla.entity.MovingEntity;
-
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
-	private final MovingEntity spoutEntity;
+	
+	private final org.spout.vanilla.entity.LivingEntity spoutEntity;
 
-	public BridgeLivingEntity(MovingEntity spoutEntity) {
+	public BridgeLivingEntity(org.spout.vanilla.entity.LivingEntity spoutEntity) {
 		super(spoutEntity);
 		this.spoutEntity = spoutEntity;
 	}
