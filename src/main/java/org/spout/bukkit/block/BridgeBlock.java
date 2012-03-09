@@ -164,6 +164,11 @@ public class BridgeBlock implements Block {
 	}
 
 	@Override
+	public void setBiome(Biome biome) {
+
+	}
+
+	@Override
 	public boolean isBlockPowered() {
 		return false;  //TODO: Adjust for usage with Spout!
 	}

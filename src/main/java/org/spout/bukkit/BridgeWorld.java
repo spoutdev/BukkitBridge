@@ -449,6 +449,11 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
+	public void setBiome(int i, int i1, Biome biome) {
+
+	}
+
+	@Override
 	public double getTemperature(int i, int i1) {
 		return 0;  //TODO: Adjust for usage with Spout!
 	}

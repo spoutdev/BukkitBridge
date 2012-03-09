@@ -29,6 +29,7 @@ import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Statistic;
 import org.bukkit.conversations.Conversation;
+import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -104,6 +105,10 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	@Override
 	public void abandonConversation(Conversation conversation) {
 		//TODO: Adjust for usage with Spout!
+	}
+
+	@Override
+	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent conversationAbandonedEvent) {
 	}
 
 	@Override
