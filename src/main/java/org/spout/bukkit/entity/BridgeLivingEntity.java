@@ -33,7 +33,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
-	
 	private final org.spout.vanilla.entity.LivingEntity spoutEntity;
 
 	public BridgeLivingEntity(org.spout.vanilla.entity.LivingEntity spoutEntity) {

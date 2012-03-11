@@ -36,7 +36,6 @@ import org.spout.api.math.Vector3;
 import org.spout.vanilla.entity.VanillaEntity;
 
 public class BridgeEntity implements Entity {
-	
 	private final VanillaEntity spoutEntity;
 
 	public BridgeEntity(VanillaEntity spoutEntity) {

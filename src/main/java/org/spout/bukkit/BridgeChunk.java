@@ -24,7 +24,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 public class BridgeChunk implements Chunk {
-	
 	@Override
 	public int getX() {
 		return 0;  //TODO: Adjust for usage with Spout!

@@ -536,16 +536,16 @@ public class BridgeServer implements Server {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public String getWorldType() {
 		return "";
-        	//TODO Implement from Vanilla
-    	}
+		//TODO Implement from Vanilla
+	}
 
 	@Override
 	public boolean getGenerateStructures() {
 		return true;
-        	//TODO Implement from Vanilla
-    	}
+		//TODO Implement from Vanilla
+	}
 }
