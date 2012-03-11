@@ -538,12 +538,14 @@ public class BridgeServer implements Server {
 	}
 	
 	@Override
-	public static String getWorldType() {
+	public String getWorldType() {
+		return "";
         	//TODO Implement from Vanilla
     	}
 
 	@Override
-    	public static boolean getGenerateStructures() {
+	public boolean getGenerateStructures() {
+		return true;
         	//TODO Implement from Vanilla
     	}
 }
