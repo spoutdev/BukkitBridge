@@ -45,22 +45,30 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getData() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return (byte) block.getBlockMaterial().getData();
 	}
 
 	@Override
-	public Block getRelative(int i, int i1, int i2) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getRelative(int modX, int modY, int modZ) {
+		return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX() + modX, this.getY() + modY, this.getZ() + modZ), block.getWorld().getBlock(this.getX() + modX, this.getY() + modY, this.getZ() + modZ));
 	}
 
 	@Override
-	public Block getRelative(BlockFace blockFace) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getRelative(BlockFace face) {
+		return this.getRelative(face, 1);
 	}
 
 	@Override
-	public Block getRelative(BlockFace blockFace, int i) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getRelative(BlockFace face, int distance) {
+		switch(face) {
+			case UP: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX(), this.getY() + distance, this.getZ()), block.getWorld().getBlock(this.getX(), this.getY() + distance, this.getZ()));
+			case DOWN: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX(), this.getY() - distance, this.getZ()), block.getWorld().getBlock(this.getX(), this.getY() - distance, this.getZ()));
+			case NORTH: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX() + distance, this.getY(), this.getZ()), block.getWorld().getBlock(this.getX() + distance, this.getY(), this.getZ()));
+			case SOUTH: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX() - distance, this.getY(), this.getZ()), block.getWorld().getBlock(this.getX() - distance, this.getY(), this.getZ()));
+			case EAST: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX(), this.getY(), this.getZ() + distance), block.getWorld().getBlock(this.getX(), this.getY(), this.getZ() + distance));
+			case WEST: return new BridgeBlock(block.getWorld().getChunkFromBlock(this.getX(), this.getY(), this.getZ() - distance), block.getWorld().getBlock(this.getX(), this.getY(), this.getZ() - distance));
+			default: return this;
+		}
 	}
 
 	@Override

@@ -90,7 +90,7 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public Block getHighestBlockAt(int i, int i1) {
+	public Block getHighestBlockAt(int x, int z) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -100,7 +100,7 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public Chunk getChunkAt(int i, int i1) {
+	public Chunk getChunkAt(int x, int z) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -130,17 +130,17 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean isChunkLoaded(int i, int i1) {
+	public boolean isChunkLoaded(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public void loadChunk(int i, int i1) {
+	public void loadChunk(int x, int z) {
 		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean loadChunk(int i, int i1, boolean b) {
+	public boolean loadChunk(int x, int z, boolean b) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -150,37 +150,37 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean unloadChunk(int i, int i1) {
+	public boolean unloadChunk(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean unloadChunk(int i, int i1, boolean b) {
+	public boolean unloadChunk(int x, int z, boolean b) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean unloadChunk(int i, int i1, boolean b, boolean b1) {
+	public boolean unloadChunk(int x, int z, boolean b, boolean b1) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean unloadChunkRequest(int i, int i1) {
+	public boolean unloadChunkRequest(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean unloadChunkRequest(int i, int i1, boolean b) {
+	public boolean unloadChunkRequest(int x, int z, boolean b) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean regenerateChunk(int i, int i1) {
+	public boolean regenerateChunk(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public boolean refreshChunk(int i, int i1) {
+	public boolean refreshChunk(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 

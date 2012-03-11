@@ -131,7 +131,7 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	}
 
 	@Override
-	public void damage(int i, Entity entity) {
+	public void damage(int damage, Entity entity) {
 		//TODO: Adjust for usage with Spout!
 	}
 
