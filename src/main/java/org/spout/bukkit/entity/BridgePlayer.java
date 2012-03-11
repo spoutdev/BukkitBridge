@@ -42,7 +42,11 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.api.Server;
+import org.spout.api.Spout;
+import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.entity.living.player.VanillaPlayer;
+import org.spout.vanilla.protocol.msg.BlockChangeMessage;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;
@@ -112,8 +116,8 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public void sendRawMessage(String s) {
-		//TODO: Adjust for usage with Spout!
+	public void sendRawMessage(String message) {
+		spoutPlayer.sendRawMessage(message);
 	}
 
 	@Override
@@ -192,8 +196,8 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public void sendBlockChange(Location location, Material material, byte b) {
-		//TODO: Adjust for usage with Spout!
+	public void sendBlockChange(Location location, Material material, byte data) {
+		this.sendBlockChange(location, material.getId(), data);
 	}
 
 	@Override
@@ -202,8 +206,8 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public void sendBlockChange(Location location, int i, byte b) {
-		//TODO: Adjust for usage with Spout!
+	public void sendBlockChange(Location location, int type, byte data) {
+		spoutPlayer.getSession().send(new BlockChangeMessage(location.getBlockX(), location.getBlockY(), location.getBlockZ(), type, data));
 	}
 
 	@Override
@@ -393,12 +397,18 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public boolean isBanned() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return Spout.getGame().isBanned(this.getName(), spoutPlayer.getAddress().getHostAddress());
 	}
 
 	@Override
-	public void setBanned(boolean b) {
-		//TODO: Adjust for usage with Spout!
+	public void setBanned(boolean banned) {
+		if(banned) {
+			Spout.getGame().banPlayer(this.getName());
+			Spout.getGame().banIp(spoutPlayer.getAddress().getHostAddress());
+		} else {
+			Spout.getGame().unbanPlayer(this.getName());
+			Spout.getGame().unbanIp(spoutPlayer.getAddress().getHostAddress());
+		}
 	}
 
 	@Override
@@ -407,8 +417,12 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public void setWhitelisted(boolean b) {
-		//TODO: Adjust for usage with Spout!
+	public void setWhitelisted(boolean whitelist) {
+		if(whitelist) {
+			((Server) Spout.getGame()).whitelist(this.getName());
+		} else {
+			((Server) Spout.getGame()).unWhitelist(this.getName());
+		}
 	}
 
 	@Override
@@ -527,8 +541,8 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public boolean hasPermission(String s) {
-		return spoutPlayer.hasPermission(s);
+	public boolean hasPermission(String permission) {
+		return spoutPlayer.hasPermission(permission);
 	}
 
 	@Override
@@ -572,7 +586,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin plugin, String s, byte[] bytes) {
+	public void sendPluginMessage(Plugin plugin, String channel, byte[] data) {
 		//TODO: Adjust for usage with Spout!
 	}
 
@@ -583,11 +597,11 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public boolean isOp() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return VanillaConfiguration.OPS.isOp(this.getName());
 	}
 
 	@Override
-	public void setOp(boolean b) {
-		//TODO: Adjust for usage with Spout!
+	public void setOp(boolean op) {
+		VanillaConfiguration.OPS.setOp(this.getName(), op);
 	}
 }

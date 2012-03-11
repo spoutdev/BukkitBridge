@@ -204,8 +204,8 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public void setWhitelist(boolean b) {
-		server.setWhitelist(true);
+	public void setWhitelist(boolean whitelist) {
+		server.setWhitelist(whitelist);
 	}
 
 	@Override
@@ -297,7 +297,7 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public World createWorld(WorldCreator worldCreator) {
+	public World createWorld(WorldCreator creator) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -324,7 +324,7 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public MapView getMap(short i) {
+	public MapView getMap(short id) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -359,16 +359,17 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-		if (commandMap.dispatch(sender, commandLine)) {
+	public boolean dispatchCommand(CommandSender sender, String command) throws CommandException {
+		if (commandMap.dispatch(sender, command)) {
 			return true;
 		}
+		
 		sender.sendMessage("Unknown command. Type \"help\" for help.");
 		return false;
 	}
 
 	@Override
-	public void configureDbConfig(ServerConfig serverConfig) {
+	public void configureDbConfig(ServerConfig config) {
 		//TODO: Adjust for usage with Spout!
 	}
 
@@ -378,7 +379,7 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(ItemStack itemStack) {
+	public List<Recipe> getRecipesFor(ItemStack item) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -408,7 +409,7 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public void setSpawnRadius(int i) {
+	public void setSpawnRadius(int radius) {
 		//TODO: Adjust for usage with Spout!
 	}
 
@@ -433,12 +434,12 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public int broadcast(String s, String s1) {
+	public int broadcast(String message, String s1) {
 		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(String s) {
+	public OfflinePlayer getOfflinePlayer(String name) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -449,12 +450,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		server.ban(address);
+		server.banIp(address);
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		server.unban(address);
+		server.unbanIp(address);
 	}
 
 	@Override

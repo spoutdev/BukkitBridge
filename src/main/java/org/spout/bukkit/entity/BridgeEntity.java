@@ -32,7 +32,10 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.api.geo.discrete.Point;
 import org.spout.api.math.Vector3;
+import org.spout.api.math.Vector3m;
+import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.entity.VanillaEntity;
 
 public class BridgeEntity implements Entity {
@@ -44,12 +47,16 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public Location getLocation() {
-		return null;  //TODO: Adjust for usage with Spout!
+		Point pos = spoutEntity.getParent().getPosition();
+		
+		return new Location(this.getWorld(), pos.getX(), pos.getY(), pos.getZ(), spoutEntity.getParent().getYaw(), spoutEntity.getParent().getPitch());
 	}
 
 	@Override
 	public void setVelocity(Vector vector) {
-		//TODO: Adjust for usage with Spout!
+		((Vector3m) spoutEntity.getVelocity()).setX((float) vector.getX());
+		((Vector3m) spoutEntity.getVelocity()).setY((float) vector.getY());
+		((Vector3m) spoutEntity.getVelocity()).setZ((float) vector.getZ());
 	}
 
 	@Override
@@ -60,7 +67,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public World getWorld() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new BridgeWorld(spoutEntity.getParent().getWorld());
 	}
 
 	@Override
@@ -90,7 +97,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public int getEntityId() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return spoutEntity.getParent().getId();
 	}
 
 	@Override
@@ -110,12 +117,12 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public void remove() {
-		//TODO: Adjust for usage with Spout!
+		spoutEntity.kill();
 	}
 
 	@Override
 	public boolean isDead() {
-		return false;
+		return spoutEntity.getParent().isDead();
 	}
 
 	@Override
