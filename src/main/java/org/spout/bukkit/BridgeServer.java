@@ -449,12 +449,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		server.ban(address);
+		//server.ban(address);
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		server.unban(address);
+		//server.unban(address);
 	}
 
 	@Override
