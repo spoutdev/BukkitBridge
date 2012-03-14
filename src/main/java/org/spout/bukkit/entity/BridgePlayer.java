@@ -590,4 +590,10 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	public void setOp(boolean b) {
 		//TODO: Adjust for usage with Spout!
 	}
+
+	@Override
+	public boolean isBlocking() {
+		return false;
+		//TODO Again...Vanilla will eventually provide the answer here.
+	}
 }
