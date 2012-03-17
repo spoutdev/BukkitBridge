@@ -32,6 +32,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 
 public class BridgeBlock implements Block {
@@ -45,22 +46,24 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getData() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return (byte) this.chunk.getBlockData(getX(), getY(), getZ());
 	}
 
 	@Override
-	public Block getRelative(int i, int i1, int i2) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getRelative(int modX, int modY, int modZ) {
+		org.spout.api.geo.cuboid.Block handle = this.block.getWorld().getBlock(this.block.getX() + modX, this.block.getY() + modY, this.block.getZ() + modZ);
+		org.spout.api.geo.cuboid.Chunk chunk = handle.getWorld().getChunk(handle.getX(), handle.getY(), handle.getZ());
+		return new BridgeBlock(chunk, handle);
 	}
 
 	@Override
 	public Block getRelative(BlockFace blockFace) {
-		return null;  //TODO: Adjust for usage with Spout!
+		 return getRelative(blockFace, 1);
 	}
 
 	@Override
-	public Block getRelative(BlockFace blockFace, int i) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getRelative(BlockFace blockFace, int distance) {
+		return getRelative(blockFace.getModX() * distance, blockFace.getModY() * distance, blockFace.getModZ() * distance);
 	}
 
 	@Override
@@ -115,7 +118,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Chunk getChunk() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new BridgeChunk(this.chunk);
 	}
 
 	@Override
@@ -150,12 +153,47 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockFace getFace(Block block) {
-		return null;  //TODO: Adjust for usage with Spout!
+		 BlockFace[] values = BlockFace.values();
+
+	        for (BlockFace face : values) {
+	            if ((this.getX() + face.getModX() == block.getX()) &&
+	                (this.getY() + face.getModY() == block.getY()) &&
+	                (this.getZ() + face.getModZ() == block.getZ())
+	            ) {
+	                return face;
+	            }
+	        }
+
+	        return null;
 	}
 
 	@Override
 	public BlockState getState() {
-		return null;  //TODO: Adjust for usage with Spout!
+		Material material = getType();
+
+        switch (material) {
+        case SIGN:
+        case SIGN_POST:
+        case WALL_SIGN:
+            return new BridgeSign(this);
+        case CHEST:
+            return new BridgeChest(this);
+        case BURNING_FURNACE:
+        case FURNACE:
+            return new BridgeFurnace(this);
+        case DISPENSER:
+            return new BridgeDispenser(this);
+        case MOB_SPAWNER:
+            return new BridgeCreatureSpawner(this);
+        case NOTE_BLOCK:
+            return new BridgeNoteBlock(this);
+        case JUKEBOX:
+            return new BridgeJukebox(this);
+        case BREWING_STAND:
+            return new BridgeBrewingStand(this);
+        default:
+            return new BridgeBlockState(this);
+        }
 	}
 
 	@Override

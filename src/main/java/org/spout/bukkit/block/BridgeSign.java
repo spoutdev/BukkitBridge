@@ -16,9 +16,14 @@
  */
 package org.spout.bukkit.block;
 
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
+	
+	public BridgeSign(final Block block) {
+		super(block);
+	}
 	@Override
 	public String[] getLines() {
 		return new String[0];  //TODO: Adjust for usage with Spout!

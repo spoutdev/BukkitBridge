@@ -27,26 +27,58 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spout.bukkit.BridgeChunk;
+import org.spout.bukkit.BridgeWorld;
 
 public class BridgeBlockState implements BlockState {
+	private final BridgeWorld world;
+	private final BridgeChunk chunk;
+	private final int x;
+	private final int y;
+	private final int z;
+	protected int type;
+	protected MaterialData data;
+	protected byte light;
+	
+	public BridgeBlockState(final Block block) {
+		 this.world = (BridgeWorld) block.getWorld();
+	     this.x = block.getX();
+	     this.y = block.getY();
+	     this.z = block.getZ();
+	     this.type = block.getTypeId();
+	     this.light = block.getLightLevel();
+	     this.chunk = (BridgeChunk) block.getChunk();
+
+	     createData(block.getData());
+	}
+	
+	private void createData(final byte data) {
+        Material mat = getType();
+        if (mat == null || mat.getData() == null) {
+            this.data = new MaterialData(type, data);
+        } else {
+            this.data = mat.getNewData(data);
+        }
+    }
+	
 	@Override
 	public Block getBlock() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return this.world.getBlockAt(x, y, z);
 	}
 
 	@Override
 	public MaterialData getData() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return this.data;
 	}
 
 	@Override
 	public Material getType() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return Material.getMaterial(getTypeId());
 	}
 
 	@Override
 	public int getTypeId() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return type;
 	}
 
 	@Override
@@ -56,67 +88,97 @@ public class BridgeBlockState implements BlockState {
 
 	@Override
 	public World getWorld() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return world;
 	}
 
 	@Override
 	public int getX() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return x;
 	}
 
 	@Override
 	public int getY() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return y;
 	}
 
 	@Override
 	public int getZ() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return z;
 	}
 
 	@Override
 	public Location getLocation() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new Location(world, x, y, z);
 	}
 
 	@Override
 	public Chunk getChunk() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return this.chunk;
 	}
 
 	@Override
-	public void setData(MaterialData materialData) {
-		//TODO: Adjust for usage with Spout!
+	public void setData(final MaterialData data) {
+		  Material mat = getType();
+
+	        if ((mat == null) || (mat.getData() == null)) {
+	            this.data = data;
+	        } else {
+	            if ((data.getClass() == mat.getData()) || (data.getClass() == MaterialData.class)) {
+	                this.data = data;
+	            } else {
+	                throw new IllegalArgumentException("Provided data is not of type " + mat.getData().getName() + ", found " + data.getClass().getName());
+	            }
+	        }
 	}
 
 	@Override
-	public void setType(Material material) {
-		//TODO: Adjust for usage with Spout!
+	public void setType(final Material type) {
+		setTypeId(type.getId());
 	}
 
 	@Override
-	public boolean setTypeId(int i) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean setTypeId(int type) {
+		 if (this.type != type) {
+	            this.type = type;
+
+	            createData((byte) 0);
+	        }
+	    return true;
 	}
 
 	@Override
 	public boolean update() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return update(false);
 	}
 
 	@Override
-	public boolean update(boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean update(boolean force) {
+		Block block = getBlock();
+
+        synchronized (block) {
+            if (block.getType() != this.getType()) {
+                if (force) {
+                    block.setTypeId(this.getTypeId());
+                } else {
+                    return false;
+                }
+            }
+
+            block.setData(getRawData());
+            world.notify();
+        }
+
+        return true;
 	}
 
 	@Override
 	public byte getRawData() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return data.getData();
 	}
 
 	@Override
 	public void setRawData(byte b) {
-		//TODO: Adjust for usage with Spout!
+		this.data.setData(b);
 	}
 
 	@Override

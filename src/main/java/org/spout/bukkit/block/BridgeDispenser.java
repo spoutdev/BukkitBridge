@@ -16,10 +16,15 @@
  */
 package org.spout.bukkit.block;
 
+import org.bukkit.block.Block;
 import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeDispenser extends BridgeBlockState implements Dispenser {
+	public BridgeDispenser(Block block) {
+		super(block);
+	}
+
 	@Override
 	public boolean dispense() {
 		return false;  //TODO: Adjust for usage with Spout!
