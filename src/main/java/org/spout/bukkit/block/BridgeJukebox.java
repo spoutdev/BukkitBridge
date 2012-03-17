@@ -17,9 +17,14 @@
 package org.spout.bukkit.block;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 
 public class BridgeJukebox extends BridgeBlockState implements Jukebox {
+	public BridgeJukebox(Block block) {
+		super(block);
+	}
+
 	@Override
 	public Material getPlaying() {
 		return null;  //TODO: Adjust for usage with Spout!
