@@ -16,10 +16,15 @@
  */
 package org.spout.bukkit.block;
 
+import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
 
 public class BridgeFurnace extends BridgeBlockState implements Furnace {
+	public BridgeFurnace(Block block) {
+		super(block);
+	}
+
 	@Override
 	public short getBurnTime() {
 		return 0;  //TODO: Adjust for usage with Spout!

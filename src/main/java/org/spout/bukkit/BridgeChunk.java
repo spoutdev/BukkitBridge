@@ -22,26 +22,33 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
+import org.spout.bukkit.block.BridgeBlock;
 
 public class BridgeChunk implements Chunk {
+	private org.spout.api.geo.cuboid.Chunk handle;
+	
+	public BridgeChunk(org.spout.api.geo.cuboid.Chunk chunk) {
+		this.handle = chunk;
+	}
+	
 	@Override
 	public int getX() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return this.handle.getX();
 	}
 
 	@Override
 	public int getZ() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return this.handle.getZ();
 	}
 
 	@Override
 	public World getWorld() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new BridgeWorld(this.handle.getWorld());
 	}
 
 	@Override
-	public Block getBlock(int i, int i1, int i2) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getBlock(int x, int y, int z) {
+		return new BridgeBlock(this.handle.getWorld().getChunk(x, y, z), this.handle.getWorld().getBlock(x, y, z));
 	}
 
 	@Override
@@ -66,7 +73,7 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public boolean isLoaded() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return handle.isLoaded();
 	}
 
 	@Override

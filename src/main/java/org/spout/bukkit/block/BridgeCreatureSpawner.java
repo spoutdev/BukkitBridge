@@ -16,11 +16,16 @@
  */
 package org.spout.bukkit.block;
 
+import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
 
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
+	public BridgeCreatureSpawner(Block block) {
+		super(block);
+	}
+
 	@Override
 	public CreatureType getCreatureType() {
 		return null;  //TODO: Adjust for usage with Spout!

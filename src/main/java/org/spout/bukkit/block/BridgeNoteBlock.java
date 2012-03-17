@@ -18,9 +18,14 @@ package org.spout.bukkit.block;
 
 import org.bukkit.Instrument;
 import org.bukkit.Note;
+import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
 
 public class BridgeNoteBlock extends BridgeBlockState implements NoteBlock {
+	public BridgeNoteBlock(Block block) {
+		super(block);
+	}
+
 	@Override
 	public Note getNote() {
 		return null;  //TODO: Adjust for usage with Spout!

@@ -16,10 +16,15 @@
  */
 package org.spout.bukkit.block;
 
+import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeChest extends BridgeBlockState implements Chest {
+	public BridgeChest(final Block block) {
+		super(block);
+	}
+
 	@Override
 	public Inventory getInventory() {
 		return null;  //TODO: Adjust for usage with Spout!
