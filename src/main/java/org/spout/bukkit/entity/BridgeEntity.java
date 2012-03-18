@@ -32,7 +32,9 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.api.geo.discrete.Point;
 import org.spout.api.math.Vector3;
+import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.entity.VanillaEntity;
 
 public class BridgeEntity implements Entity {
@@ -44,7 +46,8 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public Location getLocation() {
-		return null;  //TODO: Adjust for usage with Spout!
+		Point localPos = spoutEntity.getParent().getPosition();
+		return new Location(new BridgeWorld(localPos.getWorld()), localPos.getX(), localPos.getY(), localPos.getZ());
 	}
 
 	@Override

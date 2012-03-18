@@ -100,23 +100,24 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public Chunk getChunkAt(int i, int i1) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Chunk getChunkAt(int x, int z) {
+		//TODO: Find another possibility than using hardcored Y value
+		return new BridgeChunk(this.spoutWorld.getChunk(x, 10, z));
 	}
 
 	@Override
 	public Chunk getChunkAt(Location location) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new BridgeChunk(this.spoutWorld.getChunk(location.getBlockX(), location.getBlockY(), location.getBlockZ()));
 	}
 
 	@Override
 	public Chunk getChunkAt(Block block) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getChunkAt(block.getLocation());
 	}
 
 	@Override
 	public boolean isChunkLoaded(Chunk chunk) {
-		return false;  //TODO: Adjust for usage with Spout!
+		return chunk.isLoaded();
 	}
 
 	@Override
@@ -130,12 +131,12 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean isChunkLoaded(int i, int i1) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean isChunkLoaded(int x, int z) {
+		return isChunkLoaded(getChunkAt(x, z));
 	}
 
 	@Override
-	public void loadChunk(int i, int i1) {
+	public void loadChunk(int x, int z) {
 		//TODO: Adjust for usage with Spout!
 	}
 
@@ -566,5 +567,9 @@ public class BridgeWorld implements World {
 	@Override
 	public Set<String> getListeningPluginChannels() {
 		return null;  //TODO: Adjust for usage with Spout!
+	}
+	
+	public org.spout.api.geo.World getHandle() {
+		return spoutWorld;
 	}
 }

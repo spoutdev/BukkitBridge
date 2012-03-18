@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 import com.avaje.ebean.config.ServerConfig;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -82,6 +83,9 @@ public class BridgeServer implements Server {
 		this.server = server;
 		loadPlugins();
 		//TODO: Enable all plugins based on load orders
+		//TODO: Put this enablePlugins methods to the right position (see CraftBukkit)
+		enablePlugins(PluginLoadOrder.STARTUP);
+		enablePlugins(PluginLoadOrder.POSTWORLD);
 	}
 
 	private void loadPlugins() {
@@ -99,7 +103,7 @@ public class BridgeServer implements Server {
 				}
 			}
 		} else {
-			pluginFolder.mkdir();
+			pluginFolder.mkdirs();
 		}
 	}
 
@@ -549,4 +553,5 @@ public class BridgeServer implements Server {
 		return true;
 		//TODO Implement from Vanilla
 	}
+	
 }
