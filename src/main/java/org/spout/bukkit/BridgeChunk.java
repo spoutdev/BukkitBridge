@@ -87,7 +87,7 @@ public class BridgeChunk implements Chunk {
 	}
 
 	@Override
-	public boolean unload(boolean b, boolean b1) {
+	public boolean unload(boolean save, boolean safe) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 

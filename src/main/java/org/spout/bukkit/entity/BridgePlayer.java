@@ -48,7 +48,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;
 
 	public BridgePlayer(org.spout.api.player.Player spoutPlayer) {
-		super((VanillaPlayer) spoutPlayer.getEntity());
+		super((VanillaPlayer) spoutPlayer.getEntity().getController());
 		this.spoutPlayer = spoutPlayer;
 	}
 

@@ -24,6 +24,7 @@ import org.bukkit.Server;
 
 import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
+import org.spout.bukkit.event.BridgeEventListener;
 
 public class BukkitBridge extends CommonPlugin {
 	private final BridgeServer bridgeServer = new BridgeServer(this);
@@ -37,13 +38,15 @@ public class BukkitBridge extends CommonPlugin {
 			this.getPluginLoader().disablePlugin(this);
 			this.getLogger().log(Level.SEVERE, "Unable to load BukkitBridge. Could not detect a Spout server!");
 		}
+		Spout.getEventManager().registerEvents(new BridgeEventListener(), this);
 		bridgeServer.init((org.spout.api.Server) Spout.getGame());
 		Bukkit.setServer(bridgeServer);
+		getLogger().info("loaded");
 	}
 
 	@Override
 	public void onDisable() {
-		//TODO: Adjust for usage with Spout!
+		getLogger().info("unloaded");
 	}
 
 	public Server getServer() {
