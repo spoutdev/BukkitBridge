@@ -32,27 +32,29 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
-	private final org.spout.vanilla.entity.LivingEntity spoutEntity;
+import org.spout.vanilla.controller.living.Living;
 
-	public BridgeLivingEntity(org.spout.vanilla.entity.LivingEntity spoutEntity) {
-		super(spoutEntity);
-		this.spoutEntity = spoutEntity;
+public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
+	private final Living spout;
+
+	public BridgeLivingEntity(Living spout) {
+		super(spout);
+		this.spout = spout;
 	}
 
 	@Override
 	public int getHealth() {
-		return spoutEntity.getHealth();
+		return spout.getParent().getHealth();
 	}
 
 	@Override
 	public void setHealth(int health) {
-		spoutEntity.setHealth(health);
+		spout.getParent().setHealth(health);
 	}
 
 	@Override
 	public int getMaxHealth() {
-		return spoutEntity.getMaxHealth();
+		return spout.getParent().getMaxHealth();
 	}
 
 	@Override
@@ -127,7 +129,7 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 
 	@Override
 	public void damage(int damage) {
-		spoutEntity.damage(damage);
+		spout.damage(damage, true);
 	}
 
 	@Override

@@ -33,13 +33,14 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import org.spout.api.math.Vector3;
-import org.spout.vanilla.entity.VanillaEntity;
+
+import org.spout.vanilla.controller.VanillaController;
 
 public class BridgeEntity implements Entity {
-	private final VanillaEntity spoutEntity;
+	private final VanillaController spoutController;
 
-	public BridgeEntity(VanillaEntity spoutEntity) {
-		this.spoutEntity = spoutEntity;
+	public BridgeEntity(VanillaController spoutController) {
+		this.spoutController = spoutController;
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public Vector getVelocity() {
-		Vector3 v = spoutEntity.getVelocity();
+		Vector3 v = spoutController.getVelocity();
 		return new Vector(v.getX(), v.getY(), v.getZ());
 	}
 
@@ -95,7 +96,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public int getFireTicks() {
-		return spoutEntity.getFireTicks();
+		return spoutController.getFireTicks();
 	}
 
 	@Override
@@ -105,7 +106,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public void setFireTicks(int fireTicks) {
-		spoutEntity.setFireTicks(fireTicks);
+		spoutController.setFireTicks(fireTicks);
 	}
 
 	@Override

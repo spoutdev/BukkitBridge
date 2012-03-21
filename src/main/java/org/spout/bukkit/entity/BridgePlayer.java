@@ -42,7 +42,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-import org.spout.vanilla.entity.living.player.VanillaPlayer;
+import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;

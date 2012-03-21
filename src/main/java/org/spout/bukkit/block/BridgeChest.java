@@ -29,4 +29,9 @@ public class BridgeChest extends BridgeBlockState implements Chest {
 	public Inventory getInventory() {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
+
+	@Override
+	public Inventory getBlockInventory() {
+		return null;  //TODO: Adjust for usage with Spout!
+	}
 }
