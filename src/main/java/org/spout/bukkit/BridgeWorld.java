@@ -71,7 +71,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getBlockTypeIdAt(int x, int y, int z) {
-		return spoutWorld.getBlockId(x, y, z);
+		return spoutWorld.getBlock(x, y, z).getMaterial().getId();
 	}
 
 	@Override

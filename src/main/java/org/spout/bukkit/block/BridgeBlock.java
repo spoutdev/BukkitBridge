@@ -32,6 +32,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.api.material.BlockMaterial;
+
 import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 
@@ -68,17 +70,17 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Material getType() {
-		return Material.getMaterial(block.getBlockId());
+		return Material.getMaterial(block.getMaterial().getId());
 	}
 
 	@Override
 	public int getTypeId() {
-		return block.getBlockId();
+		return block.getMaterial().getId();
 	}
 
 	@Override
 	public byte getLightLevel() {
-		return (byte) block.getBlockMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
+		return (byte) block.getMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
 	}
 
 	@Override
@@ -143,12 +145,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean setTypeId(int i, boolean physics) {
-		return chunk.setBlockId(getX(), getY(), getZ(), (short) i, physics, chunk.getWorld());
+		return chunk.setBlockMaterial(getX(), getY(), getZ(), BlockMaterial.get((short) i), (short) 0, physics, chunk.getWorld());
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int i, byte data, boolean physics) {
-		return chunk.setBlockIdAndData(getX(), getY(), getZ(), (short) i, data, physics, chunk.getWorld());
+		return chunk.setBlockMaterial(getX(), getY(), getZ(), BlockMaterial.get((short) i), (short) data, physics, chunk.getWorld());
 	}
 
 	@Override
@@ -238,7 +240,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isEmpty() {
-		return block.getBlockId() == 0;
+		return block.getMaterial().getId() == 0;
 	}
 
 	@Override
