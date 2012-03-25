@@ -55,8 +55,8 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public Vector getVelocity() {
-		Vector3 v = spoutController.getVelocity();
-		return new Vector(v.getX(), v.getY(), v.getZ());
+		//TODO VanillaController no longer sets velocity and instead simply moves...need a new way to figure this out.
+		return null;
 	}
 
 	@Override
