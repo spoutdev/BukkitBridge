@@ -135,6 +135,7 @@
                                     <includes>
                                         <include>org/bukkit/**</include>
                                         <include>com/avaje/**</include>
+                                        <include>org/apache/**</include>
                                         <include>META-INF/maven/org.bukkit/bukkit/pom.properties</include>
                                     </includes>
                                 </filter>
