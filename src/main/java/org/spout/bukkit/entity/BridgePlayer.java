@@ -367,6 +367,16 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	@Override
+	public boolean isFlying() {
+		return false; //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public void setFlying(boolean b) {
+		//TODO Adjust for usage with Spout!
+	}
+
+	@Override
 	public void sendMessage(String s) {
 		spoutPlayer.sendMessage(s);
 	}

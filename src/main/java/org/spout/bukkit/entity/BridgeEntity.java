@@ -32,7 +32,6 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import org.spout.api.math.Vector3;
 
 import org.spout.vanilla.controller.VanillaController;
 

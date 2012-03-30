@@ -240,6 +240,11 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
+	public long getConnectionThrottle() {
+		return 0;
+	}
+
+	@Override
 	public int getTicksPerAnimalSpawns() {
 		return 0;  //TODO: Adjust for usage with Spout!
 	}
