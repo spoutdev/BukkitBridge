@@ -33,11 +33,11 @@ public class BukkitBridge extends CommonPlugin {
 	public void onEnable() {
 		//This makes us load plugins from spout/bukkitplugins/
 		this.pluginFolder = new File(this.getGame().getDataFolder() + File.separator + "bukkitplugins");
-		if (!(Spout.getGame() instanceof org.spout.api.Server)) {
+		if (!(Spout.getEngine() instanceof org.spout.api.Server)) {
 			this.getPluginLoader().disablePlugin(this);
 			this.getLogger().log(Level.SEVERE, "Unable to load BukkitBridge. Could not detect a Spout server!");
 		}
-		bridgeServer.init((org.spout.api.Server) Spout.getGame());
+		bridgeServer.init((org.spout.api.Server) Spout.getEngine());
 		Bukkit.setServer(bridgeServer);
 	}
 
