@@ -157,13 +157,13 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getMaxPlayers() {
-		return Spout.getGame().getMaxPlayers();
+		return Spout.getEngine().getMaxPlayers();
 	}
 
 	@Override
 	public int getPort() {
-		if (Spout.getGame().getAddress().split(":").length > 1) {
-			return Integer.parseInt(Spout.getGame().getAddress().split(":")[1]);
+		if (Spout.getEngine().getAddress().split(":").length > 1) {
+			return Integer.parseInt(Spout.getEngine().getAddress().split(":")[1]);
 		}
 		return 25565; //If there's no port in address, then we assume it's Vanilla's default, 25565.
 	}
@@ -175,12 +175,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getIp() {
-		return Spout.getGame().getAddress().split(":")[0];
+		return Spout.getEngine().getAddress().split(":")[0];
 	}
 
 	@Override
 	public String getServerName() {
-		return Spout.getGame().getName();
+		return Spout.getEngine().getName();
 	}
 
 	@Override
@@ -225,8 +225,8 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int broadcastMessage(String message) {
-		Spout.getGame().broadcastMessage(message);
-		return Spout.getGame().getOnlinePlayers().length;
+		Spout.getEngine().broadcastMessage(message);
+		return Spout.getEngine().getOnlinePlayers().length;
 	}
 
 	@Override
