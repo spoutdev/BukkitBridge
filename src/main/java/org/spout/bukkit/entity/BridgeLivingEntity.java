@@ -50,7 +50,7 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 
 	@Override
 	public void setHealth(int health) {
-		spout.getParent().setHealth(health);
+		spout.getParent().setHealth(health, null);
 	}
 
 	@Override
