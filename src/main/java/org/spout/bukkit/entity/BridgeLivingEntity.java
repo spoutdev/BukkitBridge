@@ -131,7 +131,7 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	@Override
 	public void damage(int damage) {
 		spout.damage(damage);
-		spout.sendMessage(spout.getParent().getWorld().getPlayers(), new EntityStatusMessage(spout.getParent().getId(), EntityStatusMessage.ENTITY_HURT));
+		spout.broadcastPacket(new EntityStatusMessage(spout.getParent().getId(), EntityStatusMessage.ENTITY_HURT));
 	}
 
 	@Override
