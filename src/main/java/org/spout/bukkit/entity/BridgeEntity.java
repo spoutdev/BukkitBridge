@@ -32,7 +32,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import org.spout.vanilla.controller.VanillaController;
+import org.spout.vanilla.controller.VanillaActionController;
 
 public class BridgeEntity implements Entity {
 	private final VanillaActionController spoutController;
