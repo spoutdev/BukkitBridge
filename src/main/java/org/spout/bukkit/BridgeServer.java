@@ -525,6 +525,21 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
+	public int getMonsterSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public int getAnimalSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public int getWaterAnimalSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
 		StandardMessenger.validatePluginMessage(getMessenger(), source, channel, message);
 

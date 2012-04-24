@@ -539,6 +539,36 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
+	public int getMonsterSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public void setMonsterSpawnLimit(int i) {
+		//TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public int getAnimalSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public void setAnimalSpawnLimit(int i) {
+		//TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public int getWaterAnimalSpawnLimit() {
+		return 0;  //TODO Adjust for usage with Spout!
+	}
+
+	@Override
+	public void setWaterAnimalSpawnLimit(int i) {
+		//TODO Adjust for usage with Spout!
+	}
+
+	@Override
 	public void setMetadata(String s, MetadataValue metadataValue) {
 		//TODO: Adjust for usage with Spout!
 	}
