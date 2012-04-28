@@ -205,7 +205,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void setWhitelist(boolean b) {
-		server.setWhitelist(true);
+		server.setWhitelist(b);
 	}
 
 	@Override
