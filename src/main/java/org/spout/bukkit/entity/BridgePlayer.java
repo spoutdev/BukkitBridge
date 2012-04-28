@@ -118,7 +118,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void kickPlayer(String s) {
-		spoutPlayer.kick(s);
+		spoutPlayer.kick(s, false);
 	}
 
 	@Override
