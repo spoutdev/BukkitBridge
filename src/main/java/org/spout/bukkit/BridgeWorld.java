@@ -597,4 +597,8 @@ public class BridgeWorld implements World {
 	public Set<String> getListeningPluginChannels() {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
+
+	public org.spout.api.geo.World getSpoutWorld() {
+		return spoutWorld;
+	}
 }

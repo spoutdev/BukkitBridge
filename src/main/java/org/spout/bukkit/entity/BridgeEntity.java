@@ -32,6 +32,8 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.bukkit.BridgeUtil;
+import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.controller.VanillaActionController;
 
 public class BridgeEntity implements Entity {
@@ -41,14 +43,18 @@ public class BridgeEntity implements Entity {
 		this.spoutController = spoutController;
 	}
 
+	public VanillaActionController getSpoutController() {
+		return spoutController;
+	}
+
 	@Override
 	public Location getLocation() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return BridgeUtil.toLocation(spoutController.getParent().getTransform());
 	}
 
 	@Override
 	public void setVelocity(Vector vector) {
-		//TODO: Adjust for usage with Spout!
+		spoutController.setVelocity(BridgeUtil.toVector(vector));
 	}
 
 	@Override
@@ -59,7 +65,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public World getWorld() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new BridgeWorld(spoutController.getParent().getWorld());
 	}
 
 	@Override
@@ -89,7 +95,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public int getEntityId() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return spoutController.getParent().getId();
 	}
 
 	@Override
@@ -109,12 +115,12 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public void remove() {
-		//TODO: Adjust for usage with Spout!
+		spoutController.getParent().kill();
 	}
 
 	@Override
 	public boolean isDead() {
-		return false;
+		return spoutController.getParent().isDead();
 	}
 
 	@Override

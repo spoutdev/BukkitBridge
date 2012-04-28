@@ -42,6 +42,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.bukkit.BridgeUtil;
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
@@ -50,6 +51,10 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	public BridgePlayer(org.spout.api.player.Player spoutPlayer) {
 		super((VanillaPlayer) spoutPlayer.getEntity());
 		this.spoutPlayer = spoutPlayer;
+	}
+
+	public VanillaPlayer getSpoutController() {
+		return (VanillaPlayer)super.getSpoutController();
 	}
 
 	@Override
@@ -74,7 +79,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void setCompassTarget(Location location) {
-		//TODO: Adjust for usage with Spout!
+		getSpoutController().setCompassTarget(BridgeUtil.toPoint(location));
 	}
 
 	@Override
@@ -118,7 +123,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void kickPlayer(String s) {
-		spoutPlayer.kick(s, false);
+		spoutPlayer.kick(s);
 	}
 
 	@Override
@@ -138,7 +143,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void setSneaking(boolean b) {
-		//TODO: Adjust for usage with Spout!
+
 	}
 
 	@Override

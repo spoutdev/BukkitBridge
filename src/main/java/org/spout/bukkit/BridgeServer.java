@@ -63,6 +63,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import org.spout.api.Spout;
 import org.spout.bukkit.entity.BridgePlayer;
+import org.spout.bukkit.scheduler.BridgeScheduler;
 import org.spout.bukkit.util.Versioning;
 
 public class BridgeServer implements Server {
@@ -73,6 +74,7 @@ public class BridgeServer implements Server {
 	private final PluginManager pluginManager = new SimplePluginManager(this, commandMap);
 	private final StandardMessenger messenger = new StandardMessenger();
 	private final BukkitBridge plugin;
+	private BridgeScheduler scheduler;
 
 	public BridgeServer(BukkitBridge plugin) {
 		this.plugin = plugin;
@@ -80,6 +82,7 @@ public class BridgeServer implements Server {
 
 	public void init(org.spout.api.Server server) {
 		this.server = server;
+		scheduler = new BridgeScheduler(server.getScheduler());
 		loadPlugins();
 		//TODO: Enable all plugins based on load orders
 	}
@@ -283,7 +286,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public BukkitScheduler getScheduler() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return scheduler;
 	}
 
 	@Override
