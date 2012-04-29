@@ -16,6 +16,7 @@
  */
 package org.spout.bukkit.block;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,26 +37,24 @@ import org.spout.api.material.BlockMaterial;
 
 import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
+import org.spout.vanilla.material.block.generic.Liquid;
+import org.spout.vanilla.material.block.generic.VanillaBlockMaterial;
 
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
-	private final org.spout.api.geo.cuboid.Chunk chunk;
 
-	public BridgeBlock(org.spout.api.geo.cuboid.Chunk chunk, org.spout.api.geo.cuboid.Block block) {
+	public BridgeBlock(org.spout.api.geo.cuboid.Block block) {
 		this.block = block;
-		this.chunk = chunk;
 	}
 
 	@Override
 	public byte getData() {
-		return (byte) this.chunk.getBlockData(getX(), getY(), getZ());
+		return (byte) this.block.getData();
 	}
 
 	@Override
 	public Block getRelative(int modX, int modY, int modZ) {
-		org.spout.api.geo.cuboid.Block handle = this.block.getWorld().getBlock(this.block.getX() + modX, this.block.getY() + modY, this.block.getZ() + modZ);
-		org.spout.api.geo.cuboid.Chunk chunk = handle.getWorld().getChunk(handle.getX(), handle.getY(), handle.getZ());
-		return new BridgeBlock(chunk, handle);
+		return new BridgeBlock(this.block.translate(modX, modY, modZ));
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Material getType() {
-		return Material.getMaterial(block.getMaterial().getId());
+		return Material.getMaterial(this.getTypeId());
 	}
 
 	@Override
@@ -80,22 +79,22 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getLightLevel() {
-		return (byte) block.getMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
+		return block.getMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
 	}
 
 	@Override
 	public byte getLightFromSky() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return this.block.getSkyLight();
 	}
 
 	@Override
 	public byte getLightFromBlocks() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return this.block.getLight();
 	}
 
 	@Override
 	public World getWorld() {
-		return new BridgeWorld(chunk.getWorld());
+		return new BridgeWorld(block.getWorld());
 	}
 
 	@Override
@@ -120,7 +119,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Chunk getChunk() {
-		return new BridgeChunk(this.chunk);
+		return new BridgeChunk(this.block.getChunk());
 	}
 
 	@Override
@@ -130,7 +129,10 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public void setData(byte data, boolean updatePhysics) {
-		chunk.setBlockData(block.getX(), block.getY(), block.getZ(), data, true, chunk.getWorld());
+		block.setData(data);
+		if (updatePhysics) {
+			block.update();
+		}
 	}
 
 	@Override
@@ -145,12 +147,20 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean setTypeId(int i, boolean physics) {
-		return chunk.setBlockMaterial(getX(), getY(), getZ(), BlockMaterial.get((short) i), (short) 0, physics, chunk.getWorld());
+		block.setMaterial(BlockMaterial.get((short) i));
+		if (physics) {
+			block.update();
+		}
+		return true;
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int i, byte data, boolean physics) {
-		return chunk.setBlockMaterial(getX(), getY(), getZ(), BlockMaterial.get((short) i), (short) data, physics, chunk.getWorld());
+		block.setMaterial(BlockMaterial.get((short) i), data);
+		if (physics) {
+			block.update();
+		}
+		return true;
 	}
 
 	@Override
@@ -245,7 +255,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isLiquid() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return block.getMaterial() instanceof Liquid;
 	}
 
 	@Override
@@ -265,22 +275,35 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean breakNaturally() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return this.breakNaturally(null);
 	}
 
 	@Override
 	public boolean breakNaturally(ItemStack itemStack) {
-		return false;  //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout! (pass in itemstack)
+		this.block.getMaterial().onDestroy(this.block);
+		return true;
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return this.getDrops(null);
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack itemStack) {
-		return null;  //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout! (pass in itemstack)
+		BlockMaterial mat = this.block.getMaterial();
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>(1);
+		if (mat instanceof VanillaBlockMaterial) {
+			VanillaBlockMaterial vmat = (VanillaBlockMaterial) mat;
+			org.spout.api.material.Material dmat = vmat.getDrop();
+			if (dmat != null) {
+				Material bmat = Material.getMaterial(dmat.getId());
+				drops.add(new ItemStack(bmat, vmat.getDropCount(), dmat.getData()));
+			}
+		}
+		return drops;
 	}
 
 	@Override

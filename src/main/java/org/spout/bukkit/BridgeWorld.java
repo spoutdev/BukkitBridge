@@ -61,7 +61,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		return new BridgeBlock(spoutWorld.getChunkFromBlock(x, y, z), spoutWorld.getBlock(x, y, z));
+		return new BridgeBlock(spoutWorld.getBlock(x, y, z));
 	}
 
 	@Override

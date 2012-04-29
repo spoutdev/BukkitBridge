@@ -48,7 +48,7 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		return new BridgeBlock(this.handle.getWorld().getChunk(x, y, z), this.handle.getWorld().getBlock(x, y, z));
+		return new BridgeBlock(this.handle.getBlock(x, y, z));
 	}
 
 	@Override
