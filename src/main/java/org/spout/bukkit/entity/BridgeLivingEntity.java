@@ -34,6 +34,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.spout.vanilla.controller.living.Living;
 import org.spout.vanilla.protocol.msg.EntityStatusMessage;
+import static org.spout.vanilla.protocol.VanillaNetworkSynchronizer.broadcastPacket;
 
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	private final Living spout;
@@ -131,7 +132,7 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	@Override
 	public void damage(int damage) {
 		spout.damage(damage);
-		spout.broadcastPacket(new EntityStatusMessage(spout.getParent().getId(), EntityStatusMessage.ENTITY_HURT));
+		broadcastPacket(new EntityStatusMessage(spout.getParent().getId(), EntityStatusMessage.ENTITY_HURT));
 	}
 
 	@Override
