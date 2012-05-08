@@ -89,7 +89,7 @@
 	</dependencies>
 
 	<build>
-		<defaultGoal>clean package install</defaultGoal>
+		<defaultGoal>clean package</defaultGoal>
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -119,8 +119,7 @@
 				<version>1.10.b1</version>
 				<executions>
 					<execution>
-						<id>format-headers</id>
-						<phase>verify</phase>
+						<phase>clean</phase>
 						<goals>
 							<goal>format</goal>
 						</goals>
