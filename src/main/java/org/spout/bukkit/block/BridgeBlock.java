@@ -1,5 +1,8 @@
 /*
- * This file is part of BukkitBridge (http://www.spout.org/).
+ * This file is part of BukkitBridge.
+ *
+ * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -167,45 +170,45 @@ public class BridgeBlock implements Block {
 	public BlockFace getFace(Block block) {
 		 BlockFace[] values = BlockFace.values();
 
-	        for (BlockFace face : values) {
-	            if ((this.getX() + face.getModX() == block.getX()) &&
-	                (this.getY() + face.getModY() == block.getY()) &&
-	                (this.getZ() + face.getModZ() == block.getZ())
-	            ) {
-	                return face;
-	            }
-	        }
+			for (BlockFace face : values) {
+				if ((this.getX() + face.getModX() == block.getX()) &&
+					(this.getY() + face.getModY() == block.getY()) &&
+					(this.getZ() + face.getModZ() == block.getZ())
+				) {
+					return face;
+				}
+			}
 
-	        return null;
+			return null;
 	}
 
 	@Override
 	public BlockState getState() {
 		Material material = getType();
 
-        switch (material) {
-        case SIGN:
-        case SIGN_POST:
-        case WALL_SIGN:
-            return new BridgeSign(this);
-        case CHEST:
-            return new BridgeChest(this);
-        case BURNING_FURNACE:
-        case FURNACE:
-            return new BridgeFurnace(this);
-        case DISPENSER:
-            return new BridgeDispenser(this);
-        case MOB_SPAWNER:
-            return new BridgeCreatureSpawner(this);
-        case NOTE_BLOCK:
-            return new BridgeNoteBlock(this);
-        case JUKEBOX:
-            return new BridgeJukebox(this);
-        case BREWING_STAND:
-            return new BridgeBrewingStand(this);
-        default:
-            return new BridgeBlockState(this);
-        }
+		switch (material) {
+		case SIGN:
+		case SIGN_POST:
+		case WALL_SIGN:
+			return new BridgeSign(this);
+		case CHEST:
+			return new BridgeChest(this);
+		case BURNING_FURNACE:
+		case FURNACE:
+			return new BridgeFurnace(this);
+		case DISPENSER:
+			return new BridgeDispenser(this);
+		case MOB_SPAWNER:
+			return new BridgeCreatureSpawner(this);
+		case NOTE_BLOCK:
+			return new BridgeNoteBlock(this);
+		case JUKEBOX:
+			return new BridgeJukebox(this);
+		case BREWING_STAND:
+			return new BridgeBrewingStand(this);
+		default:
+			return new BridgeBlockState(this);
+		}
 	}
 
 	@Override

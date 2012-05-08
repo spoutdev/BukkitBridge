@@ -1,5 +1,8 @@
 /*
- * This file is part of BukkitBridge (http://www.spout.org/).
+ * This file is part of BukkitBridge.
+ *
+ * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +30,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 
@@ -39,28 +43,28 @@ public class BridgeBlockState implements BlockState {
 	protected int type;
 	protected MaterialData data;
 	protected byte light;
-	
-	public BridgeBlockState(final Block block) {
-		 this.world = (BridgeWorld) block.getWorld();
-	     this.x = block.getX();
-	     this.y = block.getY();
-	     this.z = block.getZ();
-	     this.type = block.getTypeId();
-	     this.light = block.getLightLevel();
-	     this.chunk = (BridgeChunk) block.getChunk();
 
-	     createData(block.getData());
+	public BridgeBlockState(final Block block) {
+		this.world = (BridgeWorld) block.getWorld();
+		this.x = block.getX();
+		this.y = block.getY();
+		this.z = block.getZ();
+		this.type = block.getTypeId();
+		this.light = block.getLightLevel();
+		this.chunk = (BridgeChunk) block.getChunk();
+
+		createData(block.getData());
 	}
-	
+
 	private void createData(final byte data) {
-        Material mat = getType();
-        if (mat == null || mat.getData() == null) {
-            this.data = new MaterialData(type, data);
-        } else {
-            this.data = mat.getNewData(data);
-        }
-    }
-	
+		Material mat = getType();
+		if (mat == null || mat.getData() == null) {
+			this.data = new MaterialData(type, data);
+		} else {
+			this.data = mat.getNewData(data);
+		}
+	}
+
 	@Override
 	public Block getBlock() {
 		return this.world.getBlockAt(x, y, z);
@@ -118,17 +122,17 @@ public class BridgeBlockState implements BlockState {
 
 	@Override
 	public void setData(final MaterialData data) {
-		  Material mat = getType();
+		Material mat = getType();
 
-	        if ((mat == null) || (mat.getData() == null)) {
-	            this.data = data;
-	        } else {
-	            if ((data.getClass() == mat.getData()) || (data.getClass() == MaterialData.class)) {
-	                this.data = data;
-	            } else {
-	                throw new IllegalArgumentException("Provided data is not of type " + mat.getData().getName() + ", found " + data.getClass().getName());
-	            }
-	        }
+			if ((mat == null) || (mat.getData() == null)) {
+				this.data = data;
+			} else {
+				if ((data.getClass() == mat.getData()) || (data.getClass() == MaterialData.class)) {
+					this.data = data;
+				} else {
+					throw new IllegalArgumentException("Provided data is not of type " + mat.getData().getName() + ", found " + data.getClass().getName());
+				}
+			}
 	}
 
 	@Override
@@ -139,11 +143,11 @@ public class BridgeBlockState implements BlockState {
 	@Override
 	public boolean setTypeId(int type) {
 		 if (this.type != type) {
-	            this.type = type;
+				this.type = type;
 
-	            createData((byte) 0);
-	        }
-	    return true;
+				createData((byte) 0);
+			}
+		return true;
 	}
 
 	@Override
@@ -155,20 +159,20 @@ public class BridgeBlockState implements BlockState {
 	public boolean update(boolean force) {
 		Block block = getBlock();
 
-        synchronized (block) {
-            if (block.getType() != this.getType()) {
-                if (force) {
-                    block.setTypeId(this.getTypeId());
-                } else {
-                    return false;
-                }
-            }
+		synchronized (block) {
+			if (block.getType() != this.getType()) {
+				if (force) {
+					block.setTypeId(this.getTypeId());
+				} else {
+					return false;
+				}
+			}
 
-            block.setData(getRawData());
-            world.notify();
-        }
+			block.setData(getRawData());
+			world.notify();
+		}
 
-        return true;
+		return true;
 	}
 
 	@Override

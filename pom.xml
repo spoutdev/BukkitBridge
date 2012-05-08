@@ -1,7 +1,7 @@
 <!--
 	Maven build file for BukkitBridge
 
-	Copyright (c) 2011-2012 SpoutDev <http://www.spout.org>
+	Copyright (c) 2012, SpoutDev <http://www.spout.org/>
 	BukkitBridge is licensed under GNU GENERAL PUBLIC LICENSE Version 3.
 -->
 
@@ -11,18 +11,16 @@
 	<!-- Project information -->
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>dev-SNAPSHOT</version>
+	<version>1.2.5-R1.4-SNAPSHOT</version>
 	<name>BukkitBridge</name>
 	<url>http://www.spout.org</url>
-	<description>BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.
-	</description>
+	<description>BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bukkit.version>1.2.5-R1.2-SNAPSHOT</bukkit.version>
-		<vanilla.version>dev-SNAPSHOT</vanilla.version>
-		<api.version>dev-SNAPSHOT</api.version>
-		<build.number>Unknown</build.number>
+		<spoutVersion>dev-SNAPSHOT</spoutVersion>
+		<vanillaVersion>1.2.5-SNAPSHOT</vanillaVersion>
+		<buildNumber>0</buildNumber>
 	</properties>
 
 	<!-- License -->
@@ -36,15 +34,15 @@
 
 	<!-- Source code -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:SpoutDev/${project.name}.git</developerConnection>
-		<connection>scm:git:git://github.com/SpoutDev/${project.name}.git</connection>
-		<url>https://github.com/SpoutDev/${project.name}</url>
+		<developerConnection>scm:git:git@github.com:SpoutDev/BukkitBridge.git</developerConnection>
+		<connection>scm:git:git://github.com/SpoutDev/BukkitBridge.git</connection>
+		<url>https://github.com/SpoutDev/BukkitBridge</url>
 	</scm>
 
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
-		<url>http://ci.spout.org</url>
+		<url>http://build.spout.org</url>
 	</ciManagement>
 
 	<!-- Repository locations -->
@@ -60,19 +58,19 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>${bukkit.version}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>spoutapi</artifactId>
-			<version>${api.version}</version>
+			<version>${spoutVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>vanilla</artifactId>
-			<version>${vanilla.version}</version>
+			<version>${vanillaVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -108,11 +106,67 @@
 		</resources>
 		<!-- Plugins -->
 		<plugins>
+			<!-- License headers check plugin -->
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.10.b1</version>
+				<executions>
+					<execution>
+						<id>format-headers</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<quiet>true</quiet>
+					<encoding>UTF-8</encoding>
+					<strictCheck>true</strictCheck>
+					<header>${basedir}/HEADER.txt</header>
+					<keywords>
+						<keyword>${project.name}</keyword>
+						<keyword>license</keyword>
+					</keywords>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<name>${project.name}</name>
+						<url>${project.url}</url>
+						<licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+						<copyright>Copyright (c) 2012, SpoutDev</copyright>
+					</properties>
+					<includes>
+						<include>src/main/java/**</include>
+						<include>src/test/java/**</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<!-- Version plugin -->
+			<plugin>
+				<groupId>com.sourcesense.maven</groupId>
+				<artifactId>maven-nosnapshot-plugin</artifactId>
+				<version>0.0.7-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>strip</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<version>${project.version}</version>
+					<propertyName>releaseVersion</propertyName>
+				</configuration>
+			</plugin>
 			<!-- Compile plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>2.4</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -130,12 +184,19 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<minimizeJar>true</minimizeJar>
+							<artifactSet>
+								<includes>
+									<include>org.bukkit:bukkit</include>
+								</includes>
+							</artifactSet>
 							<filters>
 								<filter>
 									<artifact>org.bukkit:bukkit</artifact>
 									<includes>
 										<include>org/bukkit/**</include>
 										<include>org/apache/**</include>
+										<include>com/avaje/**</include>
 										<include>META-INF/maven/org.bukkit/bukkit/pom.properties</include>
 									</includes>
 								</filter>

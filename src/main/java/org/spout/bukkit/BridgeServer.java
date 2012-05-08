@@ -1,5 +1,8 @@
 /*
- * This file is part of BukkitBridge (http://www.spout.org/).
+ * This file is part of BukkitBridge.
+ *
+ * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

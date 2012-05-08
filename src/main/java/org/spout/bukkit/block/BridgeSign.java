@@ -1,5 +1,8 @@
 /*
- * This file is part of BukkitBridge (http://www.spout.org/).
+ * This file is part of BukkitBridge.
+ *
+ * Copyright (c) 2012, SpoutDev <http://www.spout.org/>
+ * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,10 +23,10 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
-	
 	public BridgeSign(final Block block) {
 		super(block);
 	}
+
 	@Override
 	public String[] getLines() {
 		return new String[0];  //TODO: Adjust for usage with Spout!

@@ -1,5 +1,5 @@
 name: BukkitBridge
-version: ${build.number}
+version: ${releaseVersion} b${buildNumber}
 description: BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.
 author: SpoutDev
 website: http://www.spout.org
