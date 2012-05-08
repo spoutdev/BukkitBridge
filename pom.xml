@@ -2,7 +2,7 @@
 	Maven build file for BukkitBridge
 
 	Copyright (c) 2012, SpoutDev <http://www.spout.org/>
-	BukkitBridge is licensed under GNU GENERAL PUBLIC LICENSE Version 3.
+	BukkitBridge is licensed under GNU General Public License Version 3.
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -27,7 +27,7 @@
 	<!-- License -->
 	<licenses>
 		<license>
-			<name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+			<name>GNU General Public License Version 3</name>
 			<url>http://www.gnu.org/licenses/gpl.html</url>
 			<distribution>repo</distribution>
 		</license>
@@ -140,7 +140,8 @@
 					<properties>
 						<name>${project.name}</name>
 						<url>${project.url}</url>
-						<licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+						<license>GNU General Public License</license>
+						<licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
 						<copyright>Copyright (c) 2012, SpoutDev</copyright>
 					</properties>
 					<includes>
