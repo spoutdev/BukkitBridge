@@ -18,6 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<bukkitVersion>1.2.5-R1.4-SNAPSHOT</bukkitVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 		<vanillaVersion>1.2.5-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
@@ -64,7 +65,7 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>${project.version}</version>
+			<version>${bukkitVersion}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -89,7 +90,6 @@
 
 	<build>
 		<defaultGoal>clean package install</defaultGoal>
-		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -105,7 +105,7 @@
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
-					<include>plugin.yml</include>
+					<include>spoutplugin.yml</include>
 					<include>bukkit.yml</include>
 				</includes>
 			</resource>
