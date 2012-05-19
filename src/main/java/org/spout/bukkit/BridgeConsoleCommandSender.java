@@ -19,6 +19,8 @@
  */
 package org.spout.bukkit;
 
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -28,9 +30,8 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.spout.api.command.CommandSource;
 
-import java.util.Set;
+import org.spout.api.command.CommandSource;
 
 /**
  * @author zml2008

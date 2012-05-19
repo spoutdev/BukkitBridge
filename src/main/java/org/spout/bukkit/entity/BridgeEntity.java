@@ -37,6 +37,7 @@ import org.bukkit.util.Vector;
 
 import org.spout.bukkit.BridgeUtil;
 import org.spout.bukkit.BridgeWorld;
+
 import org.spout.vanilla.controller.VanillaActionController;
 
 public class BridgeEntity implements Entity {

@@ -25,6 +25,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
+
 import org.spout.bukkit.block.BridgeBlock;
 
 public class BridgeChunk implements Chunk {

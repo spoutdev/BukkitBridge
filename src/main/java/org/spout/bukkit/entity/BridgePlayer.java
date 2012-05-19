@@ -46,6 +46,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
 import org.spout.bukkit.BridgeUtil;
+
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
 public class BridgePlayer extends BridgeLivingEntity implements Player {
@@ -57,7 +58,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	}
 
 	public VanillaPlayer getSpoutController() {
-		return (VanillaPlayer)super.getSpoutController();
+		return (VanillaPlayer) super.getSpoutController();
 	}
 
 	@Override

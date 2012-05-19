@@ -37,6 +37,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import org.spout.vanilla.controller.living.Living;
 import org.spout.vanilla.protocol.msg.EntityStatusMessage;
+
 import static org.spout.vanilla.protocol.VanillaNetworkSynchronizer.broadcastPacket;
 
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
