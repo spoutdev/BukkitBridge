@@ -18,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bukkitVersion>1.2.5-R1.4-SNAPSHOT</bukkitVersion>
+		<bukkitVersion>1.2.5-R2.0</bukkitVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 		<vanillaVersion>1.2.5-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>

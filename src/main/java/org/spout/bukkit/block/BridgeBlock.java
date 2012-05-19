@@ -21,6 +21,7 @@ package org.spout.bukkit.block;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.bukkit.Chunk;
@@ -41,7 +42,7 @@ import org.spout.api.material.BlockMaterial;
 import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.material.VanillaBlockMaterial;
-import org.spout.vanilla.material.block.Liquid;
+import org.spout.vanilla.material.block.liquid.Liquid;
 
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
@@ -283,7 +284,6 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean breakNaturally(ItemStack itemStack) {
-		//TODO: Adjust for usage with Spout! (pass in itemstack)
 		this.block.getMaterial().onDestroy(this.block);
 		return true;
 	}
@@ -295,18 +295,21 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack itemStack) {
-		//TODO: Adjust for usage with Spout! (pass in itemstack)
-		BlockMaterial mat = this.block.getMaterial();
-		ArrayList<ItemStack> drops = new ArrayList<ItemStack>(1);
-		if (mat instanceof VanillaBlockMaterial) {
-			VanillaBlockMaterial vmat = (VanillaBlockMaterial) mat;
-			org.spout.api.material.Material dmat = vmat.getDrop();
-			if (dmat != null) {
-				Material bmat = Material.getMaterial(dmat.getId());
-				drops.add(new ItemStack(bmat, vmat.getDropCount(), dmat.getData()));
+		ArrayList<ItemStack> bukkitDrops = new ArrayList<ItemStack>();
+		if (block.getMaterial() instanceof VanillaBlockMaterial) {
+			List<org.spout.api.inventory.ItemStack> drops = ((VanillaBlockMaterial) block.getMaterial()).getDrops(block);
+
+			if (drops == null || drops.isEmpty() || drops.size() == 0) {
+				return null;
+			}
+
+			for (org.spout.api.inventory.ItemStack item : drops) {
+				Material material = Material.getMaterial(item.getMaterial().getId());
+				//TODO Need someway to get itemstack damage
+				bukkitDrops.add(new ItemStack(material, item.getAmount(), item.getData()));
 			}
 		}
-		return drops;
+		return bukkitDrops;
 	}
 
 	@Override
