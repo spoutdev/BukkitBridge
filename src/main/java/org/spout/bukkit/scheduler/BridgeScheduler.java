@@ -30,10 +30,8 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
 
 import org.spout.api.scheduler.Scheduler;
+import org.spout.api.scheduler.TaskPriority;
 
-/**
- * @author zml2008
- */
 public class BridgeScheduler implements BukkitScheduler {
 	private final Scheduler scheduler;
 
@@ -42,7 +40,7 @@ public class BridgeScheduler implements BukkitScheduler {
 	}
 
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable runnable, long l) {
-		return scheduler.scheduleSyncDelayedTask(plugin, runnable, l);
+		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, l, TaskPriority.HIGH);
 	}
 
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable runnable) {
@@ -50,23 +48,23 @@ public class BridgeScheduler implements BukkitScheduler {
 	}
 
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable runnable, long l, long l1) {
-		return scheduler.scheduleSyncRepeatingTask(plugin, runnable, l, l1);
+		return scheduler.scheduleSyncRepeatingTask(plugin, runnable, l, l1, TaskPriority.HIGH);
 	}
 
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable runnable, long l) {
-		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, l);
+		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, l, TaskPriority.HIGH);
 	}
 
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable runnable) {
-		return scheduler.scheduleAsyncDelayedTask(plugin, runnable);
+		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, TaskPriority.HIGH);
 	}
 
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable runnable, long l, long l1) {
-		return scheduler.scheduleAsyncRepeatingTask(plugin, runnable, l, l1);
+		return scheduler.scheduleAsyncRepeatingTask(plugin, runnable, l, l1, TaskPriority.HIGH);
 	}
 
 	public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> tCallable) {
-		return scheduler.callSyncMethod(plugin, tCallable);
+		return scheduler.callSyncMethod(plugin, tCallable, TaskPriority.HIGH);
 	}
 
 	public void cancelTask(int i) {
