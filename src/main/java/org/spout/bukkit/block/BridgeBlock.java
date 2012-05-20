@@ -43,7 +43,7 @@ import org.spout.bukkit.BridgeWorld;
 
 import org.spout.vanilla.inventory.VanillaItemStack;
 import org.spout.vanilla.material.VanillaBlockMaterial;
-import org.spout.vanilla.material.block.liquid.Liquid;
+import org.spout.vanilla.material.block.Liquid;
 
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
@@ -298,13 +298,13 @@ public class BridgeBlock implements Block {
 	public Collection<ItemStack> getDrops(ItemStack itemStack) {
 		ArrayList<ItemStack> bukkitDrops = new ArrayList<ItemStack>();
 		if (block.getMaterial() instanceof VanillaBlockMaterial) {
-			List<VanillaItemStack> drops = ((VanillaBlockMaterial) block.getMaterial()).getDrops(block);
+			List<org.spout.api.inventory.ItemStack> drops = ((VanillaBlockMaterial) block.getMaterial()).getDrops(block);
 
 			if (drops == null || drops.isEmpty() || drops.size() == 0) {
 				return null;
 			}
 
-			for (VanillaItemStack item : drops) {
+			for (org.spout.api.inventory.ItemStack item : drops) {
 				Material material = Material.getMaterial(item.getMaterial().getId());
 				//TODO Need someway to get itemstack damage
 				bukkitDrops.add(new ItemStack(material, item.getAmount(), item.getData()));
