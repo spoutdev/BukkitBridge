@@ -41,7 +41,6 @@ import org.spout.api.material.BlockMaterial;
 import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 
-import org.spout.vanilla.inventory.VanillaItemStack;
 import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
 
