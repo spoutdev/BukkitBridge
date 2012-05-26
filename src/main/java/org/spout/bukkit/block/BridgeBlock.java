@@ -43,6 +43,8 @@ import org.spout.bukkit.BridgeWorld;
 
 import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
+import org.spout.vanilla.util.RedstonePowerMode;
+import org.spout.vanilla.util.RedstoneUtil;
 
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
@@ -83,7 +85,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getLightLevel() {
-		return block.getMaterial().getLightLevel(); //TODO: Light not fully implemented in Spout
+		return block.getMaterial().getLightLevel(block.getData());
 	}
 
 	@Override
@@ -224,12 +226,22 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isBlockPowered() {
-		return false;  //TODO: Adjust for usage with Spout!
+		BlockMaterial mat = this.block.getSubMaterial();
+		if (mat instanceof VanillaBlockMaterial) {
+			return ((VanillaBlockMaterial) mat).hasRedstonePower(this.block, RedstonePowerMode.ALLEXCEPTWIRE);
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		return false;  //TODO: Adjust for usage with Spout!
+		BlockMaterial mat = this.block.getSubMaterial();
+		if (mat instanceof VanillaBlockMaterial) {
+			return ((VanillaBlockMaterial) mat).hasRedstonePower(this.block, RedstonePowerMode.ALL);
+		} else {
+			return false;
+		}
 	}
 
 	@Override
