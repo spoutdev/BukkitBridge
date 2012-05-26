@@ -1,19 +1,13 @@
-<!--
-	Maven build file for BukkitBridge
-
-	Copyright (c) 2012, SpoutDev <http://www.spout.org/>
-	BukkitBridge is licensed under GNU General Public License Version 3.
--->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
+	<name>BukkitBridge</name>
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>1.2.5-R2.1-SNAPSHOT</version>
-	<name>BukkitBridge</name>
+	<version>1.2.5-R3.1-SNAPSHOT</version>
 	<url>http://www.spout.org</url>
+	<inceptionYear>2012</inceptionYear>
 	<description>BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
 
 	<properties>
@@ -35,9 +29,9 @@
 
 	<!-- Source code -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:SpoutDev/BukkitBridge.git</developerConnection>
-		<connection>scm:git:git://github.com/SpoutDev/BukkitBridge.git</connection>
-		<url>https://github.com/SpoutDev/BukkitBridge</url>
+		<developerConnection>scm:git:git@github.com:VanillaDev/BukkitBridge.git</developerConnection>
+		<connection>scm:git:git://github.com/VanillaDev/BukkitBridge.git</connection>
+		<url>https://github.com/VanillaDev/BukkitBridge</url>
 	</scm>
 
 	<!-- Continuous integration -->
@@ -45,6 +39,12 @@
 		<system>jenkins</system>
 		<url>http://build.spout.org</url>
 	</ciManagement>
+
+	<!-- Issue management -->
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://issues.spout.org</url>
+	</issueManagement>
 
 	<!-- Repository locations -->
 	<repositories>
@@ -88,6 +88,7 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Build settings -->
 	<build>
 		<defaultGoal>clean package</defaultGoal>
 		<!-- Resources -->
@@ -105,8 +106,7 @@
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
-					<include>spoutplugin.yml</include>
-					<include>bukkit.yml</include>
+					<include>*.yml</include>
 				</includes>
 			</resource>
 		</resources>
@@ -142,7 +142,7 @@
 						<url>${project.url}</url>
 						<license>GNU General Public License</license>
 						<licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
-						<copyright>Copyright (c) 2012, SpoutDev</copyright>
+						<copyright>Copyright (c) ${project.inceptionYear}, VanillaDev</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>
@@ -232,7 +232,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute />
+										<execute/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
