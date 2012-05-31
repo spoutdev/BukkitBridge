@@ -8,11 +8,12 @@
 	<version>1.2.5-R3.1-SNAPSHOT</version>
 	<url>http://www.spout.org</url>
 	<inceptionYear>2012</inceptionYear>
-	<description>BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
+	<description>Bridges SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bukkitVersion>${project.version}</bukkitVersion>
+		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 		<vanillaVersion>1.2.5-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
@@ -69,6 +70,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.getspout</groupId>
+			<artifactId>spoutplugin</artifactId>
+			<version>${spoutpluginVersion}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>spoutapi</artifactId>
 			<version>${spoutVersion}</version>
@@ -90,7 +97,7 @@
 
 	<!-- Build settings -->
 	<build>
-		<defaultGoal>clean package</defaultGoal>
+		<defaultGoal>clean install</defaultGoal>
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -191,11 +198,6 @@
 						</goals>
 						<configuration>
 							<minimizeJar>true</minimizeJar>
-							<artifactSet>
-								<includes>
-									<include>org.bukkit:bukkit</include>
-								</includes>
-							</artifactSet>
 							<filters>
 								<filter>
 									<artifact>org.bukkit:bukkit</artifact>
@@ -204,6 +206,12 @@
 										<include>org/apache/**</include>
 										<include>com/avaje/**</include>
 										<include>META-INF/maven/org.bukkit/bukkit/pom.properties</include>
+									</includes>
+								</filter>
+								<filter>
+									<artifact>org.getspout:spoutplugin</artifact>
+									<includes>
+										<include>org/getspout/spoutapi/**</include>
 									</includes>
 								</filter>
 							</filters>

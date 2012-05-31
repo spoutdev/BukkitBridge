@@ -1,11 +1,9 @@
 [![Spout][Project Logo]][Website]
 What is BukkitBridge?
 ---------------------
-BukkitBridge implements the Bukkit API to allow Bukkit plugins to be used on the Spout server.
+BukkitBridge implements both SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.
 
 Copyright (c) 2011-2012, VanillaDev <http://www.spout.org>
-
-BukkitBridge is licensed under [GNU GENERAL PUBLIC LICENSE Version 3][License].
 
 Who is VanillaDev?
 ------------------------
@@ -20,7 +18,11 @@ Track and submit issues and bugs on our [issue tracker][Issues].
 Source
 ------
 The latest and greatest source can be found on [GitHub].  
-Download the latest builds from [Jenkins].  
+Download the latest builds from [Jenkins].
+
+License
+-------
+BukkitBridge is licensed under [GNU General Public License Version 3][License].
 
 Compiling
 ---------
