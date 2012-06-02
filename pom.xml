@@ -12,12 +12,19 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mainClass>org.spout.bukkit.BukkitBridge</mainClass>
 		<bukkitVersion>${project.version}</bukkitVersion>
 		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
 		<vanillaVersion>1.2.5-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
 	</properties>
+
+	<!-- Organization -->
+	<organization>
+		<name>VanillaDev</name>
+		<url>http://www.spout.org</url>
+	</organization>
 
 	<!-- License -->
 	<licenses>
@@ -146,10 +153,10 @@
 					</mapping>
 					<properties>
 						<name>${project.name}</name>
-						<url>${project.url}</url>
+						<url>${project.organization.url}</url>
 						<license>GNU General Public License</license>
 						<licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
-						<copyright>Copyright (c) ${project.inceptionYear}, VanillaDev</copyright>
+						<copyright>Copyright (c) ${project.inceptionYear}, ${project.organization.name}</copyright>
 					</properties>
 					<includes>
 						<include>src/main/java/**</include>
@@ -157,7 +164,7 @@
 					</includes>
 				</configuration>
 			</plugin>
-			<!-- Version plugin -->
+			<!-- Version strip plugin -->
 			<plugin>
 				<groupId>com.sourcesense.maven</groupId>
 				<artifactId>maven-nosnapshot-plugin</artifactId>
@@ -175,7 +182,7 @@
 					<propertyName>releaseVersion</propertyName>
 				</configuration>
 			</plugin>
-			<!-- Compile plugin -->
+			<!-- Compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -183,6 +190,12 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<compilerArguments>
+						<O>-Xlint:all</O>
+						<O>-Xlint:-path</O>
+					</compilerArguments>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
 			<!-- JAR dependency addition plugin -->
@@ -240,7 +253,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute/>
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

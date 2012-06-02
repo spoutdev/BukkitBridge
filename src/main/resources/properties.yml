@@ -1,8 +1,8 @@
-name: BukkitBridge
+name: ${project.name}
 version: ${releaseVersion} b${buildNumber}
-description: Bridges SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.
-author: SpoutDev
-website: http://www.spout.org
+description: ${project.description}
+author: ${project.organization.name}
+website: ${project.organization.url}
 
-main: org.spout.bukkit.BukkitBridge
-platform: BOTH
+main: ${mainClass}
+platform: SERVER
