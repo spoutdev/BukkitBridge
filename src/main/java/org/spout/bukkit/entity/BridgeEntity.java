@@ -35,8 +35,8 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import org.spout.bukkit.BridgeUtil;
 import org.spout.bukkit.BridgeWorld;
+import org.spout.bukkit.util.BridgeUtil;
 
 import org.spout.vanilla.controller.VanillaActionController;
 

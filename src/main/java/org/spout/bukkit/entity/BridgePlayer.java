@@ -45,7 +45,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-import org.spout.bukkit.BridgeUtil;
+import org.spout.bukkit.util.BridgeUtil;
 
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 

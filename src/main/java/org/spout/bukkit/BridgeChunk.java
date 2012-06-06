@@ -19,6 +19,8 @@
  */
 package org.spout.bukkit;
 
+import java.util.ArrayList;
+
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -26,48 +28,63 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
+import org.spout.api.entity.Controller;
+import org.spout.api.geo.LoadOption;
 import org.spout.bukkit.block.BridgeBlock;
+import org.spout.bukkit.entity.BridgeEntity;
+import org.spout.vanilla.controller.VanillaActionController;
 
 public class BridgeChunk implements Chunk {
-	private org.spout.api.geo.cuboid.Chunk handle;
+	private org.spout.api.geo.cuboid.Chunk[] handle;
 
-	public BridgeChunk(org.spout.api.geo.cuboid.Chunk chunk) {
+	public BridgeChunk(org.spout.api.geo.cuboid.Chunk[] chunk) {
 		this.handle = chunk;
 	}
 
 	@Override
 	public int getX() {
-		return this.handle.getX();
+		return this.handle[0].getX();
 	}
 
 	@Override
 	public int getZ() {
-		return this.handle.getZ();
+		return this.handle[0].getZ();
 	}
 
 	@Override
 	public World getWorld() {
-		return new BridgeWorld(this.handle.getWorld());
+		return new BridgeWorld(this.handle[0].getWorld());
 	}
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		return new BridgeBlock(this.handle.getBlock(x, y, z));
+		return new BridgeBlock(this.handle[y/16].getBlock(x, y, z));
 	}
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getChunkSnapshot(true, false, false);
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(boolean b, boolean b1, boolean b2) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome,  boolean includeBiomeTempRain) {
+		org.spout.api.geo.cuboid.ChunkSnapshot[] cs = new org.spout.api.geo.cuboid.ChunkSnapshot[handle.length];
+		for(int i = 0; i < handle.length; i++) {
+			cs[i] = handle[i].getSnapshot(true);
+		}
+		return new BridgeChunkSnapshot(cs, includeMaxblocky, includeBiome, includeBiomeTempRain);
 	}
 
 	@Override
 	public Entity[] getEntities() {
-		return new Entity[0];  //TODO: Adjust for usage with Spout!
+		ArrayList<Entity> entities = new ArrayList<Entity>();
+		for(org.spout.api.geo.cuboid.Chunk h : handle) {
+			for(org.spout.api.entity.Entity e : h.getEntities()) {
+				Controller c = e.getController();
+				if(c instanceof VanillaActionController) entities.add(new BridgeEntity((VanillaActionController) e.getController()));
+			}
+		}
+		return entities.toArray(new Entity[0]);
 	}
 
 	@Override
@@ -77,31 +94,58 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public boolean isLoaded() {
-		return handle.isLoaded();
+		for(org.spout.api.geo.cuboid.Chunk c : handle) if(!c.isLoaded()) return false;
+		return true;
 	}
 
 	@Override
-	public boolean load(boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean load(boolean generate) {
+		boolean success = true;
+		for(int i = 0; i < handle.length; i++) {
+			if(!handle[i].isLoaded()) {
+				try {
+					handle[i] = handle[i].getWorld().getChunk(handle[i].getX(), handle[i].getY(), handle[i].getZ(), generate ? LoadOption.LOAD_GEN : LoadOption.LOAD_ONLY);
+				} catch(Exception e) {
+					success = false;
+					continue;
+				}
+				success &= handle[i].isLoaded();
+			}
+		}
+		return success;
 	}
 
 	@Override
 	public boolean load() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return load(true);
 	}
 
 	@Override
-	public boolean unload(boolean b, boolean b1) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean unload(boolean save, boolean safe) {
+		//TODO Cancel unload if it is too close to a player
+		// and safe param is true.
+		boolean success = true;
+		for(int i = 0; i < handle.length; i++) {
+			if(!handle[i].isLoaded()) {
+				try {
+					handle[i].unload(save);
+				} catch(Exception e) {
+					success = false;
+					continue;
+				}
+				success &= !handle[i].isLoaded();
+			}
+		}
+		return success;
 	}
 
 	@Override
-	public boolean unload(boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean unload(boolean save) {
+		return unload(save, false);
 	}
 
 	@Override
 	public boolean unload() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return unload(true);
 	}
 }
