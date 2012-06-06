@@ -125,7 +125,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Chunk getChunk() {
-		return new BridgeChunk(this.block.getChunk());
+		return getWorld().getChunkAt(this);
 	}
 
 	@Override
