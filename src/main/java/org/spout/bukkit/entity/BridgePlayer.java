@@ -49,6 +49,7 @@ import org.spout.bukkit.util.BridgeUtil;
 
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
+@SuppressWarnings("deprecation")
 public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;
 

@@ -68,6 +68,7 @@ import org.spout.vanilla.controller.world.VanillaSky;
 import org.spout.vanilla.util.explosion.ExplosionModelSpherical;
 import org.spout.vanilla.world.Weather;
 
+@SuppressWarnings("deprecation")
 public class BridgeWorld implements World {
 	private final org.spout.api.geo.World spoutWorld;
 

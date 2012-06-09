@@ -24,6 +24,7 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
 
+@SuppressWarnings("deprecation")
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
 	public BridgeCreatureSpawner(Block block) {
 		super(block);

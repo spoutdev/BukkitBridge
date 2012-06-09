@@ -44,6 +44,7 @@ import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
 import org.spout.vanilla.util.RedstonePowerMode;
 
+@SuppressWarnings("deprecation")
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
 
