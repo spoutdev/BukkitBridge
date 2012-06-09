@@ -56,7 +56,7 @@ public class BridgeScheduler implements BukkitScheduler {
 	}
 
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable runnable) {
-		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, (long) 0, TaskPriority.HIGH);
+		return scheduler.scheduleAsyncDelayedTask(plugin, runnable, 0, TaskPriority.HIGH);
 	}
 
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable runnable, long l, long l1) {

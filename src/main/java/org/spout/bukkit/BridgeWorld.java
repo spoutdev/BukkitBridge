@@ -98,15 +98,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		// Spout does not have any set world height; only an infinite loop will do.
-		// This could be potentially dangerous for worlds that generate infinitely upwards.
-		int y = 0;
-		do {
-			y++;
-			if (spoutWorld.getBlock(x, y, z) == null) {
-				return y - 1;
+		for (int y = getMaxHeight(); y >= 0; y--) {
+			if (spoutWorld.getBlock(x, y, z) != null) {
+				return y;
 			}
-		} while (true);
+		}
+		return 0;
 	}
 
 	@Override
@@ -510,7 +507,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getMaxHeight() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return 256;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
