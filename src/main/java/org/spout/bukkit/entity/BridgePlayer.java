@@ -118,6 +118,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent conversationAbandonedEvent) {
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -277,7 +278,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void giveExp(int i) {
-		//TODO: Adjust for usage with Spout!
+		setExp(getExp() + i);
 	}
 
 	@Override

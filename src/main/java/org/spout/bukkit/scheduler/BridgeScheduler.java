@@ -84,7 +84,7 @@ public class BridgeScheduler implements BukkitScheduler {
 	}
 
 	public boolean isQueued(int i) {
-		return false; //TODO: Adjust for usage with Spout!
+		return scheduler.getPendingTasks().contains(i);
 	}
 
 	public List<BukkitWorker> getActiveWorkers() {
