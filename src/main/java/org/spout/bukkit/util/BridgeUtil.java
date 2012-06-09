@@ -25,6 +25,9 @@ import org.bukkit.util.Vector;
 
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
+import org.spout.api.inventory.ItemStack;
+import org.spout.api.material.Material;
+import org.spout.api.material.MaterialRegistry;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 import org.spout.bukkit.BridgeWorld;
@@ -66,6 +69,11 @@ public class BridgeUtil {
 
 	public static Vector toVector(Vector3 vec) {
 		return new Vector(vec.getX(), vec.getY(), vec.getZ());
+	}
+
+	public static ItemStack toItemStack(org.bukkit.inventory.ItemStack itemStack) {
+		Material material = MaterialRegistry.get(itemStack.getType().name());
+		return new ItemStack(material, itemStack.getAmount());
 	}
 	
 	public static Biome toBiome(org.spout.api.generator.biome.Biome biome) {

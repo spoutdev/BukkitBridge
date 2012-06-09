@@ -52,8 +52,21 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.api.geo.discrete.Point;
+import org.spout.api.math.Vector3;
+
 import org.spout.bukkit.block.BridgeBlock;
+import org.spout.bukkit.entity.BridgeEntity;
+import org.spout.bukkit.entity.BridgeItem;
+import org.spout.bukkit.entity.BridgeLivingEntity;
 import org.spout.bukkit.entity.BridgePlayer;
+import org.spout.bukkit.util.BridgeUtil;
+
+import org.spout.vanilla.controller.VanillaActionController;
+import org.spout.vanilla.controller.living.Living;
+import org.spout.vanilla.controller.world.VanillaSky;
+import org.spout.vanilla.util.explosion.ExplosionModelSpherical;
+import org.spout.vanilla.world.Weather;
 
 public class BridgeWorld implements World {
 	private final org.spout.api.geo.World spoutWorld;
@@ -84,87 +97,99 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		return 0;  //TODO: Adjust for usage with Spout!
+		// Spout does not have any set world height; only an infinite loop will do.
+		// This could be potentially dangerous for worlds that generate infinitely upwards.
+		int y = 0;
+		do {
+			y++;
+			if (spoutWorld.getBlock(x, y, z) == null) {
+				return y - 1;
+			}
+		} while (true);
 	}
 
 	@Override
 	public int getHighestBlockYAt(Location location) {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return getHighestBlockYAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
-	public Block getHighestBlockAt(int i, int i1) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Block getHighestBlockAt(int x, int z) {
+		return new BridgeBlock(spoutWorld.getBlock(x, getHighestBlockYAt(x, z), z));
 	}
 
 	@Override
 	public Block getHighestBlockAt(Location location) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getHighestBlockAt(location.getBlockX(), location.getBlockY());
 	}
 
 	@Override
-	public Chunk getChunkAt(int i, int i1) {
-		return null;  //TODO: Adjust for usage with Spout!
+	public Chunk getChunkAt(int x, int z) {
+		List<org.spout.api.geo.cuboid.Chunk> chunks = new ArrayList<org.spout.api.geo.cuboid.Chunk>();
+		for (int y = getHighestBlockYAt(x, z); y >= 0; y--) {
+			chunks.add(spoutWorld.getChunk(x, y, z));
+		}
+		return new BridgeChunk(chunks.toArray(new org.spout.api.geo.cuboid.Chunk[chunks.size()]));
 	}
 
 	@Override
 	public Chunk getChunkAt(Location location) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getChunkAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
 	public Chunk getChunkAt(Block block) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getChunkAt(block.getLocation());
+	}
+
+	@Override
+	public boolean isChunkLoaded(int x, int z) {
+		return getChunkAt(x, z).isLoaded();
 	}
 
 	@Override
 	public boolean isChunkLoaded(Chunk chunk) {
-		return false;  //TODO: Adjust for usage with Spout!
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public Chunk[] getLoadedChunks() {
-		return new Chunk[0];  //TODO: Adjust for usage with Spout!
+		return null;
+	}
+
+	@Override
+	public boolean loadChunk(int x, int z, boolean generate) {
+		return getChunkAt(x, z).load(generate);
+	}
+
+	@Override
+	public void loadChunk(int x, int z) {
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public void loadChunk(Chunk chunk) {
-		//TODO: Adjust for usage with Spout!
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
-	public boolean isChunkLoaded(int i, int i1) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
+		return getChunkAt(x, z).unload(save, safe);
 	}
 
 	@Override
-	public void loadChunk(int i, int i1) {
-		//TODO: Adjust for usage with Spout!
+	public boolean unloadChunk(int x, int z, boolean save) {
+		return unloadChunk(x, z, save, true);
 	}
 
 	@Override
-	public boolean loadChunk(int i, int i1, boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean unloadChunk(int x, int z) {
+		return unloadChunk(x, z, true, true);
 	}
 
 	@Override
 	public boolean unloadChunk(Chunk chunk) {
-		return false;  //TODO: Adjust for usage with Spout!
-	}
-
-	@Override
-	public boolean unloadChunk(int i, int i1) {
-		return false;  //TODO: Adjust for usage with Spout!
-	}
-
-	@Override
-	public boolean unloadChunk(int i, int i1, boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
-	}
-
-	@Override
-	public boolean unloadChunk(int i, int i1, boolean b, boolean b1) {
-		return false;  //TODO: Adjust for usage with Spout!
+		return unloadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -178,7 +203,7 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean regenerateChunk(int i, int i1) {
+	public boolean regenerateChunk(int x, int z) {
 		return false;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -189,12 +214,15 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Item dropItem(Location location, ItemStack itemStack) {
-		return null;  //TODO: Adjust for usage with Spout!
+		Point point = new Point(spoutWorld, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+		org.spout.api.inventory.ItemStack spoutItemStack = BridgeUtil.toItemStack(itemStack);
+		org.spout.vanilla.controller.object.moving.Item item = new org.spout.vanilla.controller.object.moving.Item(spoutItemStack, Vector3.ZERO);
+		return new BridgeItem((org.spout.vanilla.controller.object.moving.Item) spoutWorld.createAndSpawnEntity(point, item).getController());
 	}
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack itemStack) {
-		return null;  //TODO: Adjust for usage with Spout!
+		return dropItem(location, itemStack);
 	}
 
 	@Override
@@ -234,12 +262,20 @@ public class BridgeWorld implements World {
 
 	@Override
 	public List<Entity> getEntities() {
-		return null;  //TODO: Adjust for usage with Spout!
+		List<Entity> entities = new ArrayList<Entity>();
+		for (org.spout.api.entity.Entity entity : spoutWorld.getAll(VanillaActionController.class)) {
+			entities.add(new BridgeEntity((VanillaActionController) entity.getController()));
+		}
+		return entities;
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		return null;  //TODO: Adjust for usage with Spout!
+		List<LivingEntity> entities = new ArrayList<LivingEntity>();
+		for (org.spout.api.entity.Entity entity : spoutWorld.getAll(Living.class)) {
+			entities.add(new BridgeLivingEntity((Living) entity.getController()));
+		}
+		return entities;
 	}
 
 	@Override
@@ -278,7 +314,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Location getSpawnLocation() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return BridgeUtil.toLocation(spoutWorld.getSpawnPoint());
 	}
 
 	@Override
@@ -288,37 +324,38 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getTime() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return VanillaSky.getSky(spoutWorld).getTime();
 	}
 
 	@Override
-	public void setTime(long l) {
-		//TODO: Adjust for usage with Spout!
+	public void setTime(long time) {
+		VanillaSky.getSky(spoutWorld).setTime(time);
 	}
 
 	@Override
 	public long getFullTime() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return getTime();
 	}
 
 	@Override
-	public void setFullTime(long l) {
-		//TODO: Adjust for usage with Spout!
+	public void setFullTime(long time) {
+		setTime(time);
 	}
 
 	@Override
 	public boolean hasStorm() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return VanillaSky.getSky(spoutWorld).getWeather() == Weather.RAIN;
 	}
 
 	@Override
-	public void setStorm(boolean b) {
-		//TODO: Adjust for usage with Spout!
+	public void setStorm(boolean storm) {
+		Weather weather = storm ? Weather.RAIN : Weather.CLEAR;
+		VanillaSky.getSky(spoutWorld).setWeather(weather);
 	}
 
 	@Override
 	public int getWeatherDuration() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return 0;
 	}
 
 	@Override
@@ -328,12 +365,13 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean isThundering() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return VanillaSky.getSky(spoutWorld).getWeather() == Weather.THUNDERSTORM;
 	}
 
 	@Override
-	public void setThundering(boolean b) {
-		//TODO: Adjust for usage with Spout!
+	public void setThundering(boolean thunder) {
+		Weather weather = thunder ? Weather.THUNDERSTORM : Weather.CLEAR;
+		VanillaSky.getSky(spoutWorld).setWeather(weather);
 	}
 
 	@Override
@@ -347,23 +385,26 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power) {
-		return false;  //TODO: Adjust for usage with Spout!
-	}
-
-	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		return false;  //TODO: Adjust for usage with Spout!
+		// TODO: Set fire
+		ExplosionModelSpherical explosionModel = new ExplosionModelSpherical();
+		explosionModel.execute(new Point(spoutWorld, (float) x, (float) y, (float) z), power);
+		return true;
 	}
 
 	@Override
-	public boolean createExplosion(Location location, float v) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean createExplosion(Location location, float power, boolean setFire) {
+		return createExplosion(location.getX(), location.getY(), location.getZ(), power, setFire);
 	}
 
 	@Override
-	public boolean createExplosion(Location location, float v, boolean b) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean createExplosion(double x, double y, double z, float power) {
+		return createExplosion(x, y, z, power, false);
+	}
+
+	@Override
+	public boolean createExplosion(Location location, float power) {
+		return createExplosion(location.getX(), location.getY(), location.getZ(), power);
 	}
 
 	@Override
@@ -373,7 +414,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getSeed() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return spoutWorld.getSeed();
 	}
 
 	@Override
