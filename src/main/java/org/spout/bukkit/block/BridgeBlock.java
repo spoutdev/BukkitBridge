@@ -38,13 +38,11 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.api.material.BlockMaterial;
 
-import org.spout.bukkit.BridgeChunk;
 import org.spout.bukkit.BridgeWorld;
 
 import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
 import org.spout.vanilla.util.RedstonePowerMode;
-import org.spout.vanilla.util.RedstoneUtil;
 
 public class BridgeBlock implements Block {
 	private final org.spout.api.geo.cuboid.Block block;
