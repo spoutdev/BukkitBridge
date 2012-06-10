@@ -28,7 +28,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
-import org.spout.api.entity.Controller;
+import org.spout.api.entity.component.Controller;
 import org.spout.api.geo.LoadOption;
 import org.spout.bukkit.block.BridgeBlock;
 import org.spout.bukkit.entity.BridgeEntity;
