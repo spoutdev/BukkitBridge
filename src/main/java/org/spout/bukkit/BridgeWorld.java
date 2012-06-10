@@ -152,7 +152,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Chunk[] getLoadedChunks() {
-		return null;
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
