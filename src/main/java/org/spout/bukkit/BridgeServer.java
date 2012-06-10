@@ -69,6 +69,8 @@ import org.spout.api.Spout;
 import org.spout.bukkit.entity.BridgePlayer;
 import org.spout.bukkit.scheduler.BridgeScheduler;
 import org.spout.bukkit.util.Versioning;
+import org.spout.bukkit.wgen.BridgeWorldGenerator;
+import org.spout.vanilla.configuration.VanillaConfiguration;
 
 public class BridgeServer implements Server {
 	private org.spout.api.Server server;
@@ -310,7 +312,8 @@ public class BridgeServer implements Server {
 
 	@Override
 	public World createWorld(WorldCreator worldCreator) {
-		return null;  //TODO: Adjust for usage with Spout!
+		org.spout.api.geo.World w = server.loadWorld(worldCreator.name(), new BridgeWorldGenerator(worldCreator));
+		return new BridgeWorld(w);
 	}
 
 	@Override
@@ -367,7 +370,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void savePlayers() {
-		//TODO: Adjust for usage with Spout!
+		Spout.getEngine().save(false, true);
 	}
 
 	@Override
@@ -426,7 +429,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getOnlineMode() {
-		return true;  //TODO: Vanilla only allows online mode
+		return VanillaConfiguration.ONLINE_MODE.getBoolean();
 	}
 
 	@Override
@@ -445,8 +448,15 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public int broadcast(String s, String s1) {
-		return 0;  //TODO: Adjust for usage with Spout!
+	public int broadcast(String message, String permission) {
+		int count = 0;
+		for(Player p : getOnlinePlayers()) {
+			if(p.hasPermission(permission)) {
+				p.sendMessage(message);
+				count++;
+			}
+		}
+		return count;
 	}
 
 	@Override
@@ -461,12 +471,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		//server.ban(address);
+		server.banIp(address);
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		//server.unban(address);
+		server.unbanIp(address);
 	}
 
 	@Override
@@ -482,7 +492,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		//TODO Removed Gamemode Implementation from Vanilla...will need another way to get this.
+		//TODO Removed Gamemode Implementation from Vanilla...will need another way to get this. <-- are you sure?
 		return null;
 	}
 
@@ -498,7 +508,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public File getWorldContainer() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return Spout.getEngine().getWorldFolder();
 	}
 
 	@Override
@@ -567,8 +577,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getWorldType() {
-		return "";
-		//TODO Implement from Vanilla
+		return ""; //TODO This is different for each world, need to think of another way to do this.
 	}
 
 	@Override

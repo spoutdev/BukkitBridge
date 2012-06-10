@@ -32,6 +32,8 @@ import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.world.generator.VanillaBiome;
+import org.spout.vanilla.world.generator.VanillaBiomes;
+import org.spout.vanilla.world.generator.nether.biome.NetherrackBiome;
 import org.spout.vanilla.world.generator.normal.biome.BeachBiome;
 import org.spout.vanilla.world.generator.normal.biome.DesertBiome;
 import org.spout.vanilla.world.generator.normal.biome.ForestBiome;
@@ -84,6 +86,7 @@ public class BridgeUtil {
 		if(biome instanceof JungleBiome) return Biome.JUNGLE;
 		if(biome instanceof MountainsBiome) return Biome.EXTREME_HILLS;
 		if(biome instanceof MushroomBiome) return Biome.MUSHROOM_ISLAND;
+		if(biome instanceof NetherrackBiome) return Biome.HELL;
 		if(biome instanceof OceanBiome) return Biome.OCEAN;
 		if(biome instanceof PlainBiome) return Biome.PLAINS;
 		if(biome instanceof RiverBiome) return Biome.RIVER;
@@ -92,5 +95,54 @@ public class BridgeUtil {
 		if(biome instanceof TaigaBiome) return Biome.TAIGA;
 		if(biome instanceof TundraBiome) return Biome.TUNDRA;
 		return null;
+	}
+	
+	public static org.spout.api.generator.biome.Biome toVanillaBiome(Biome biome) {
+		switch(biome) {
+		case BEACH:
+			return VanillaBiomes.BEACH;
+		case ICE_DESERT:
+		case DESERT: 
+		case SAVANNA:
+		case DESERT_HILLS:
+			return VanillaBiomes.DESERT;
+		case EXTREME_HILLS:
+			return VanillaBiomes.MOUNTAINS;
+		case FOREST: 
+		case FOREST_HILLS:
+		case RAINFOREST:
+		case SEASONAL_FOREST: 
+			return VanillaBiomes.FOREST;
+		case FROZEN_OCEAN: 
+		case OCEAN:
+			return VanillaBiomes.OCEAN;
+		case FROZEN_RIVER:
+		case RIVER:
+			return VanillaBiomes.RIVER;
+		case HELL:
+			return VanillaBiomes.NETHERRACK;
+		case ICE_PLAINS:
+		case PLAINS:
+		case SHRUBLAND:
+			return VanillaBiomes.PLAIN;
+		case JUNGLE:
+		case JUNGLE_HILLS:
+			return VanillaBiomes.JUNGLE;
+		case MUSHROOM_ISLAND:
+		case MUSHROOM_SHORE:
+			return VanillaBiomes.MUSHROOM;
+		case ICE_MOUNTAINS: 
+		case SMALL_MOUNTAINS:
+			return VanillaBiomes.SMALL_MOUNTAINS;
+		case SWAMPLAND:
+			return VanillaBiomes.SWAMP;
+		case TAIGA:
+		case TAIGA_HILLS:
+			return VanillaBiomes.TAIGA;
+		case TUNDRA:
+			return VanillaBiomes.TUNDRA;
+		default:
+			return null;
+		}
 	}
 }
