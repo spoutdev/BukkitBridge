@@ -122,6 +122,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public void recalculatePermissions() {
+		//TODO: Adjust for usage with Spout!
 	}
 
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
@@ -129,7 +130,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public boolean isOp() {
-		return false;
+		return false; //TODO: Adjust for usage with Spout!
 	}
 
 	public void setOp(boolean b) {

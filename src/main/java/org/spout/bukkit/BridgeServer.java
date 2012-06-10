@@ -219,7 +219,7 @@ public class BridgeServer implements Server {
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
 		Set<OfflinePlayer> whitelisted = new HashSet<OfflinePlayer>();
 		for (String player : server.getWhitelistedPlayers()) {
-			// whitelisted.add(new BridgeOfflinePlayer(somedata));
+			//whitelisted.add(new BridgeOfflinePlayer(somedata));
 			//TODO: Construct & add OfflinePlayer objects to Set
 		}
 		return whitelisted;
@@ -431,7 +431,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getAllowFlight() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return server.allowFlight();  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -461,17 +461,21 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		//server.ban(address);
+		server.banIp(address);
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		//server.unban(address);
+		server.unbanIp(address);
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		return null;  //TODO: Adjust for usage with Spout!
+		Set<OfflinePlayer> banned = new HashSet<OfflinePlayer>();
+		for (String playerName : server.getBannedPlayers()) {
+			banned.add(getOfflinePlayer(playerName));
+		}
+		return banned;
 	}
 
 	@Override
@@ -482,7 +486,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		//TODO Removed Gamemode Implementation from Vanilla...will need another way to get this.
+		//TODO: Removed Gamemode Implementation from Vanilla...will need another way to get this.
 		return null;
 	}
 

@@ -219,7 +219,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public void setBiome(Biome biome) {
-
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override

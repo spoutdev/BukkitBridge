@@ -313,12 +313,12 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public float getExhaustion() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return getSpoutController().getExhaustion();
 	}
 
 	@Override
 	public void setExhaustion(float v) {
-		//TODO: Adjust for usage with Spout!
+		getSpoutController().setExhaustion(v);
 	}
 
 	@Override
@@ -423,12 +423,12 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public boolean isWhitelisted() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return getServer().getWhitelistedPlayers().contains(this);
 	}
 
 	@Override
 	public void setWhitelisted(boolean b) {
-		//TODO: Adjust for usage with Spout!
+		getServer().getWhitelistedPlayers().add(this);
 	}
 
 	@Override
@@ -523,12 +523,21 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public GameMode getGameMode() {
-		return null;  //TODO: Adjust for usage with Spout!
+		if (getSpoutController().getGameMode() == org.spout.vanilla.controller.living.player.GameMode.CREATIVE)
+			return GameMode.CREATIVE;
+		else
+			return GameMode.SURVIVAL;
 	}
 
 	@Override
 	public void setGameMode(GameMode gameMode) {
-		//TODO: Adjust for usage with Spout!
+		if (gameMode == GameMode.CREATIVE)
+			getSpoutController().setGameMode(org.spout.vanilla.controller.living.player.GameMode.CREATIVE);
+		else if (gameMode == GameMode.SURVIVAL)
+			getSpoutController().setGameMode(org.spout.vanilla.controller.living.player.GameMode.SURVIVAL);
+		else if (gameMode == null) {
+			// gameMode shouldn't be null :(
+		}
 	}
 
 	@Override
