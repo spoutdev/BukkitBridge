@@ -31,7 +31,7 @@ public class BridgeBiomeGridSelector extends VanillaBiomeSelector {
 	private Map<Vector3, Biome> overrides = new HashMap<Vector3, Biome>();
 
 	public BridgeBiomeGridSelector() {
-		super(2.0, 2.0, 0.35, 0.05, false);
+		super(2); //TODO check this class
 	}
 	
 	public Biome pickBiome(int x, int y, int z, long seed) {

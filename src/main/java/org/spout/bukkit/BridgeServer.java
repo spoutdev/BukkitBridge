@@ -557,6 +557,11 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
+	public boolean isPrimaryThread() {
+		return false; //TODO Adjust for usage with Spout!
+	}
+
+	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
 		StandardMessenger.validatePluginMessage(getMessenger(), source, channel, message);
 

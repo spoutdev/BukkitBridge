@@ -34,19 +34,19 @@ import org.spout.bukkit.BridgeWorld;
 import org.spout.vanilla.world.generator.VanillaBiome;
 import org.spout.vanilla.world.generator.VanillaBiomes;
 import org.spout.vanilla.world.generator.nether.biome.NetherrackBiome;
-import org.spout.vanilla.world.generator.normal.biome.BeachBiome;
-import org.spout.vanilla.world.generator.normal.biome.DesertBiome;
-import org.spout.vanilla.world.generator.normal.biome.ForestBiome;
-import org.spout.vanilla.world.generator.normal.biome.JungleBiome;
-import org.spout.vanilla.world.generator.normal.biome.MountainsBiome;
-import org.spout.vanilla.world.generator.normal.biome.MushroomBiome;
-import org.spout.vanilla.world.generator.normal.biome.OceanBiome;
-import org.spout.vanilla.world.generator.normal.biome.PlainBiome;
-import org.spout.vanilla.world.generator.normal.biome.RiverBiome;
-import org.spout.vanilla.world.generator.normal.biome.SmallMountainsBiome;
-import org.spout.vanilla.world.generator.normal.biome.SwampBiome;
-import org.spout.vanilla.world.generator.normal.biome.TaigaBiome;
-import org.spout.vanilla.world.generator.normal.biome.TundraBiome;
+import org.spout.vanilla.world.generator.normal.biome.shore.BeachBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.DesertBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.ForestBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.JungleBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.MountainsBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.MushroomBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.OceanBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.PlainBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.RiverBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.SmallMountainsBiome;
+import org.spout.vanilla.world.generator.normal.biome.shore.SwampBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.TaigaBiome;
+import org.spout.vanilla.world.generator.normal.biome.basic.TundraBiome;
 
 public class BridgeUtil {
 	public static Location toLocation(Point p) {
