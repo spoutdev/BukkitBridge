@@ -35,7 +35,7 @@ public class BukkitBridge extends CommonPlugin {
 	@Override
 	public void onEnable() {
 		//This makes us load plugins from spout/bukkitplugins/
-		this.pluginFolder = new File(this.getGame().getDataFolder() + File.separator + "bukkitplugins");
+		this.pluginFolder = new File(this.getEngine().getDataFolder() + File.separator + "bukkitplugins");
 		if (!(Spout.getEngine() instanceof org.spout.api.Server)) {
 			this.getPluginLoader().disablePlugin(this);
 			this.getLogger().log(Level.SEVERE, "Unable to load BukkitBridge. Could not detect a Spout server!");
