@@ -37,6 +37,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
 import org.spout.api.material.BlockMaterial;
+import org.spout.api.material.range.EffectRange;
 
 import org.spout.bukkit.BridgeWorld;
 
@@ -136,7 +137,7 @@ public class BridgeBlock implements Block {
 	public void setData(byte data, boolean updatePhysics) {
 		block.setData(data);
 		if (updatePhysics) {
-			block.update();
+			block.queueUpdate(EffectRange.THIS_AND_NEIGHBORS);
 		}
 	}
 
@@ -154,7 +155,7 @@ public class BridgeBlock implements Block {
 	public boolean setTypeId(int i, boolean physics) {
 		block.setMaterial(BlockMaterial.get((short) i));
 		if (physics) {
-			block.update();
+			block.queueUpdate(EffectRange.THIS_AND_NEIGHBORS);
 		}
 		return true;
 	}
@@ -163,7 +164,7 @@ public class BridgeBlock implements Block {
 	public boolean setTypeIdAndData(int i, byte data, boolean physics) {
 		block.setMaterial(BlockMaterial.get((short) i), data);
 		if (physics) {
-			block.update();
+			block.queueUpdate(EffectRange.THIS_AND_NEIGHBORS);
 		}
 		return true;
 	}
