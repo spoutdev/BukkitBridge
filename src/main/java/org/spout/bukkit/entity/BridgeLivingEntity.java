@@ -209,4 +209,9 @@ public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	public Collection<PotionEffect> getActivePotionEffects() {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
+
+	@Override
+	public boolean hasLineOfSight(Entity entity) {
+		return false;  //TODO: Adjust for usage with Spout!
+	}
 }

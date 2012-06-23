@@ -239,6 +239,11 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
+	public Entity spawnEntity(Location location, EntityType entityType) {
+		return null;  //TODO: Adjust for usage with Spout!
+	}
+
+	@Override
 	public LivingEntity spawnCreature(Location location, EntityType entityType) {
 		return null;  //TODO: Adjust for usage with Spout!
 	}
