@@ -24,8 +24,11 @@ import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeDispenser extends BridgeBlockState implements Dispenser {
-	public BridgeDispenser(Block block) {
+	private final org.spout.vanilla.controller.block.Dispenser dispenser;
+
+	public BridgeDispenser(Block block, org.spout.vanilla.controller.block.Dispenser dispenser) {
 		super(block);
+		this.dispenser = dispenser;
 	}
 
 	@Override

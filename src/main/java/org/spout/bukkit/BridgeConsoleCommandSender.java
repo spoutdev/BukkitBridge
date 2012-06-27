@@ -58,7 +58,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public String getName() {
-		return commandSource.getName();
+		return "CONSOLE"; // This is necessary for plugins, which use this to identify the CommandSender as Console
 	}
 
 	public boolean isConversing() {
@@ -122,6 +122,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public void recalculatePermissions() {
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
@@ -129,10 +130,10 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public boolean isOp() {
-		return false;
+		return true;
 	}
 
 	public void setOp(boolean b) {
-		//TODO: Adjust for usage with Spout!
+		throw new UnsupportedOperationException("Cannot set the op status for the console");
 	}
 }

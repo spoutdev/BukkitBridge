@@ -41,7 +41,7 @@ public class BridgeBiomeGrid implements BiomeGrid {
 
 	@Override
 	public void setBiome(int x, int z, Biome biome) {
-		sel.setBiome(new Point(world, x, 0, z), BridgeUtil.toVanillaBiome(biome));
+		sel.setBiome(new Point(world, x, 0, z), BridgeUtil.toSpoutBiome(biome));
 	}
 
 	public org.spout.api.generator.biome.Biome getVanillaBiome(int x, int z) {

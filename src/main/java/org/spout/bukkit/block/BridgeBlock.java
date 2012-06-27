@@ -35,12 +35,10 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.material.range.EffectRange;
-
 import org.spout.bukkit.BridgeWorld;
-
+import org.spout.bukkit.util.BridgeUtil;
 import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
 import org.spout.vanilla.util.RedstonePowerMode;
@@ -193,22 +191,22 @@ public class BridgeBlock implements Block {
 			case SIGN:
 			case SIGN_POST:
 			case WALL_SIGN:
-				return new BridgeSign(this);
+				return new BridgeSign(this, (org.spout.vanilla.controller.block.Sign) block.getController());
 			case CHEST:
-				return new BridgeChest(this);
+				return new BridgeChest(this, (org.spout.vanilla.controller.block.Chest) block.getController());
 			case BURNING_FURNACE:
 			case FURNACE:
-				return new BridgeFurnace(this);
+				return new BridgeFurnace(this, (org.spout.vanilla.controller.block.Furnace) block.getController());
 			case DISPENSER:
-				return new BridgeDispenser(this);
+				return new BridgeDispenser(this, (org.spout.vanilla.controller.block.Dispenser) block.getController());
 			case MOB_SPAWNER:
-				return new BridgeCreatureSpawner(this);
+				return new BridgeCreatureSpawner(this, (org.spout.vanilla.controller.block.MonsterSpawner) block.getController());
 			case NOTE_BLOCK:
-				return new BridgeNoteBlock(this);
+				return new BridgeNoteBlock(this, (org.spout.vanilla.controller.block.NoteBlock) block.getController());
 			case JUKEBOX:
-				return new BridgeJukebox(this);
+				return new BridgeJukebox(this, (org.spout.vanilla.controller.block.Jukebox) block.getController());
 			case BREWING_STAND:
-				return new BridgeBrewingStand(this);
+				return new BridgeBrewingStand(this, (org.spout.vanilla.controller.block.BrewingStand) block.getController());
 			default:
 				return new BridgeBlockState(this);
 		}
@@ -216,12 +214,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Biome getBiome() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return BridgeUtil.toBiome(block.getBiomeType());
 	}
 
 	@Override
 	public void setBiome(Biome biome) {
-
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -311,14 +309,12 @@ public class BridgeBlock implements Block {
 		if (block.getMaterial() instanceof VanillaBlockMaterial) {
 			List<org.spout.api.inventory.ItemStack> drops = ((VanillaBlockMaterial) block.getMaterial()).getDrops(block);
 
-			if (drops == null || drops.isEmpty() || drops.size() == 0) {
+			if (drops == null || drops.isEmpty()) {
 				return null;
 			}
 
 			for (org.spout.api.inventory.ItemStack item : drops) {
-				Material material = Material.getMaterial(item.getMaterial().getId());
-				//TODO Need someway to get itemstack damage
-				bukkitDrops.add(new ItemStack(material, item.getAmount(), item.getData()));
+				bukkitDrops.add(BridgeUtil.toItemStack(item));
 			}
 		}
 		return bukkitDrops;
