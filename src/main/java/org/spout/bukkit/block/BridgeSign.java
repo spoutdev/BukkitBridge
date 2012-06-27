@@ -23,22 +23,25 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
-	public BridgeSign(final Block block) {
+	private final org.spout.vanilla.controller.block.Sign sign;
+
+	public BridgeSign(Block block, org.spout.vanilla.controller.block.Sign sign) {
 		super(block);
+		this.sign = sign;
 	}
 
 	@Override
 	public String[] getLines() {
-		return new String[0];  //TODO: Adjust for usage with Spout!
+		return sign.getText();
 	}
 
 	@Override
 	public String getLine(int i) throws IndexOutOfBoundsException {
-		return null;  //TODO: Adjust for usage with Spout!
+		return sign.getLine(i);
 	}
 
 	@Override
 	public void setLine(int i, String s) throws IndexOutOfBoundsException {
-		//TODO: Adjust for usage with Spout!
+		sign.setLine(s, i);
 	}
 }

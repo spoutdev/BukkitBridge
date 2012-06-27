@@ -20,47 +20,62 @@
 package org.spout.bukkit.block;
 
 import org.bukkit.Instrument;
+import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
+import org.spout.vanilla.util.VanillaNetworkUtil;
 
 public class BridgeNoteBlock extends BridgeBlockState implements NoteBlock {
-	public BridgeNoteBlock(Block block) {
+	private final org.spout.vanilla.controller.block.NoteBlock noteBlock;
+
+	public BridgeNoteBlock(Block block, org.spout.vanilla.controller.block.NoteBlock noteBlock) {
 		super(block);
+		this.noteBlock = noteBlock;
 	}
 
 	@Override
 	public Note getNote() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return new Note(noteBlock.getNote());
 	}
 
 	@Override
 	public byte getRawNote() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return (byte) noteBlock.getNote();
 	}
 
 	@Override
 	public void setNote(Note note) {
-		//TODO: Adjust for usage with Spout!
+		noteBlock.setNote(note.getId());
 	}
 
 	@Override
 	public void setRawNote(byte b) {
-		//TODO: Adjust for usage with Spout!
+		noteBlock.setNote(b);
 	}
 
 	@Override
 	public boolean play() {
-		return false;  //TODO: Adjust for usage with Spout!
+		if (getBlock().getType() == Material.NOTE_BLOCK) {
+			noteBlock.play();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean play(byte b, byte b1) {
-		return false;  //TODO: Adjust for usage with Spout!
+	public boolean play(byte instrumentType, byte noteId) {
+		if (getBlock().getType() == Material.NOTE_BLOCK) {
+			VanillaNetworkUtil.playBlockAction(noteBlock.getBlock(), instrumentType, noteId);  // NoteBlock doesn't offer something like this
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean play(Instrument instrument, Note note) {
-		return false;  //TODO: Adjust for usage with Spout!
+		return play(instrument.getType(), note.getId());
 	}
 }

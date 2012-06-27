@@ -26,8 +26,11 @@ import org.bukkit.entity.EntityType;
 
 @SuppressWarnings("deprecation")
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
-	public BridgeCreatureSpawner(Block block) {
+	private final org.spout.vanilla.controller.block.MonsterSpawner monsterSpawner;
+
+	public BridgeCreatureSpawner(Block block, org.spout.vanilla.controller.block.MonsterSpawner monsterSpawner) {
 		super(block);
+		this.monsterSpawner = monsterSpawner;
 	}
 
 	@Override
@@ -57,12 +60,12 @@ public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureS
 
 	@Override
 	public void setCreatureTypeByName(String s) {
-		//TODO: Adjust for usage with Spout!
+		setCreatureType(CreatureType.fromName(s));
 	}
 
 	@Override
 	public String getCreatureTypeName() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return getCreatureType().getName();
 	}
 
 	@Override

@@ -22,6 +22,7 @@ package org.spout.bukkit.entity;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -35,6 +36,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spout.bukkit.util.BridgeUtil;
 
 public class BridgeItem implements Item {
 	private final org.spout.vanilla.controller.object.moving.Item spoutItem;
@@ -45,201 +47,201 @@ public class BridgeItem implements Item {
 
 	@Override
 	public ItemStack getItemStack() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setItemStack(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public int getPickupDelay() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setPickupDelay(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public Location getLocation() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return BridgeUtil.toLocation(spoutItem.getParent().getPosition());
 	}
 
 	@Override
 	public void setVelocity(Vector vector) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public Vector getVelocity() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public World getWorld() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean teleport(Location location) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean teleport(Location location, PlayerTeleportEvent.TeleportCause teleportCause) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean teleport(Entity entity) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean teleport(Entity entity, PlayerTeleportEvent.TeleportCause teleportCause) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public List<Entity> getNearbyEntities(double v, double v1, double v2) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public int getEntityId() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public int getFireTicks() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public int getMaxFireTicks() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setFireTicks(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void remove() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean isDead() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public Server getServer() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return Bukkit.getServer();
 	}
 
 	@Override
 	public Entity getPassenger() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean setPassenger(Entity entity) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean eject() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public float getFallDistance() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setFallDistance(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent entityDamageEvent) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public UUID getUniqueId() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public int getTicksLived() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setTicksLived(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void playEffect(EntityEffect entityEffect) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public EntityType getType() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean isInsideVehicle() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean leaveVehicle() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public Entity getVehicle() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setMetadata(String s, MetadataValue metadataValue) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String s) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean hasMetadata(String s) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void removeMetadata(String s, Plugin plugin) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		 //TODO: Adjust for usage with Spout!
 	}
 }

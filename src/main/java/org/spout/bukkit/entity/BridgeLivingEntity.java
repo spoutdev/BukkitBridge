@@ -40,7 +40,6 @@ import org.spout.vanilla.protocol.msg.EntityStatusMessage;
 
 import static org.spout.vanilla.util.VanillaNetworkUtil.broadcastPacket;
 
-@SuppressWarnings("deprecation")
 public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	private final Living spout;
 

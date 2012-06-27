@@ -22,29 +22,43 @@ package org.spout.bukkit.block;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
+import org.bukkit.inventory.ItemStack;
+import org.spout.bukkit.util.BridgeUtil;
 
 public class BridgeJukebox extends BridgeBlockState implements Jukebox {
-	public BridgeJukebox(Block block) {
+	private final org.spout.vanilla.controller.block.Jukebox jukebox;
+
+	public BridgeJukebox(Block block, org.spout.vanilla.controller.block.Jukebox jukebox) {
 		super(block);
+		this.jukebox = jukebox;
 	}
 
 	@Override
 	public Material getPlaying() {
-		return null;  //TODO: Adjust for usage with Spout!
+		if (!isPlaying())
+			return Material.AIR;
+		return BridgeUtil.toMaterial(jukebox.getInventory().getMusicSlot().getMaterial());
 	}
 
 	@Override
 	public void setPlaying(Material material) {
-		//TODO: Adjust for usage with Spout!
+		if (material == null || material == Material.AIR){
+			jukebox.stopMusic();
+		} else {
+			jukebox.getInventory().setMusicSlot(BridgeUtil.toSpoutItemStack(new ItemStack(material)));
+			jukebox.update();
+		}
 	}
 
 	@Override
 	public boolean isPlaying() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return jukebox.getBlock().getData() == 1;
 	}
 
 	@Override
 	public boolean eject() {
-		return false;  //TODO: Adjust for usage with Spout!
+		boolean wasPlaying = isPlaying();
+		jukebox.eject();
+		return wasPlaying;
 	}
 }
