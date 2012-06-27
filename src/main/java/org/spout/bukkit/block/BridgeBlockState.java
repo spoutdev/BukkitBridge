@@ -87,7 +87,7 @@ public class BridgeBlockState implements BlockState {
 
 	@Override
 	public byte getLightLevel() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return light;
 	}
 
 	@Override

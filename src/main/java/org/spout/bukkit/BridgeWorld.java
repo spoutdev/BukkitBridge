@@ -213,7 +213,7 @@ public class BridgeWorld implements World {
 	@Override
 	public Item dropItem(Location location, ItemStack itemStack) {
 		Point point = new Point(spoutWorld, location.getBlockX(), location.getBlockY(), location.getBlockZ());
-		org.spout.api.inventory.ItemStack spoutItemStack = BridgeUtil.toItemStack(itemStack);
+		org.spout.api.inventory.ItemStack spoutItemStack = BridgeUtil.toSpoutItemStack(itemStack);
 		org.spout.vanilla.controller.object.moving.Item item = new org.spout.vanilla.controller.object.moving.Item(spoutItemStack, Vector3.ZERO);
 		return new BridgeItem((org.spout.vanilla.controller.object.moving.Item) spoutWorld.createAndSpawnEntity(point, item).getController());
 	}
@@ -358,7 +358,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getWeatherDuration() {
-		return 0;
+		return 0;  //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -552,7 +552,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public File getWorldFolder() {
-		return null;  //TODO: Adjust for usage with Spout!
+		return spoutWorld.getDirectory();
 	}
 
 	@Override

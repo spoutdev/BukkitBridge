@@ -37,11 +37,12 @@ public class BukkitBridge extends CommonPlugin {
 		//This makes us load plugins from spout/bukkitplugins/
 		this.pluginFolder = new File(this.getEngine().getDataFolder() + File.separator + "bukkitplugins");
 		if (!(Spout.getEngine() instanceof org.spout.api.Server)) {
-			this.getPluginLoader().disablePlugin(this);
 			this.getLogger().log(Level.SEVERE, "Unable to load BukkitBridge. Could not detect a Spout server!");
+			this.getPluginLoader().disablePlugin(this);
+			return;
 		}
-		bridgeServer.init((org.spout.api.Server) Spout.getEngine());
 		Bukkit.setServer(bridgeServer);
+		bridgeServer.init((org.spout.api.Server) Spout.getEngine());
 	}
 
 	@Override

@@ -19,37 +19,54 @@
  */
 package org.spout.bukkit.util;
 
-import org.bukkit.Location;
-import org.bukkit.block.Biome;
-import org.bukkit.util.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Biome;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
-import org.spout.api.inventory.ItemStack;
-import org.spout.api.material.Material;
 import org.spout.api.material.MaterialRegistry;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 import org.spout.bukkit.BridgeWorld;
-import org.spout.vanilla.world.generator.VanillaBiome;
 import org.spout.vanilla.world.generator.VanillaBiomes;
-import org.spout.vanilla.world.generator.nether.biome.NetherrackBiome;
-import org.spout.vanilla.world.generator.normal.biome.shore.BeachBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.DesertBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.ForestBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.JungleBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.MountainsBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.MushroomBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.OceanBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.PlainBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.RiverBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.SmallMountainsBiome;
-import org.spout.vanilla.world.generator.normal.biome.shore.SwampBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.TaigaBiome;
-import org.spout.vanilla.world.generator.normal.biome.basic.TundraBiome;
 
 public class BridgeUtil {
+	private static final Map<org.spout.api.generator.biome.Biome, Biome> spoutBiomeMap = new HashMap<org.spout.api.generator.biome.Biome, Biome>();
+	static {
+		spoutBiomeMap.put(VanillaBiomes.OCEAN, Biome.OCEAN);
+		spoutBiomeMap.put(VanillaBiomes.PLAIN, Biome.PLAINS);
+		spoutBiomeMap.put(VanillaBiomes.DESERT, Biome.DESERT);
+		spoutBiomeMap.put(VanillaBiomes.DESERT_HILLS, Biome.DESERT_HILLS);
+		spoutBiomeMap.put(VanillaBiomes.MOUNTAINS, Biome.EXTREME_HILLS);
+		spoutBiomeMap.put(VanillaBiomes.FOREST, Biome.FOREST);
+		spoutBiomeMap.put(VanillaBiomes.FOREST_HILLS, Biome.FOREST_HILLS);
+		spoutBiomeMap.put(VanillaBiomes.TAIGA, Biome.TAIGA);
+		spoutBiomeMap.put(VanillaBiomes.TAIGA_HILLS, Biome.TAIGA_HILLS);
+		spoutBiomeMap.put(VanillaBiomes.SWAMP, Biome.SWAMPLAND);
+		spoutBiomeMap.put(VanillaBiomes.RIVER, Biome.RIVER);
+		spoutBiomeMap.put(VanillaBiomes.FROZEN_RIVER, Biome.FROZEN_OCEAN);
+		spoutBiomeMap.put(VanillaBiomes.NETHERRACK, Biome.HELL);
+		spoutBiomeMap.put(VanillaBiomes.TUNDRA, Biome.TUNDRA);
+		spoutBiomeMap.put(VanillaBiomes.TUNDRA_HILLS, Biome.TUNDRA);
+		spoutBiomeMap.put(VanillaBiomes.MUSHROOM, Biome.MUSHROOM_ISLAND);
+		spoutBiomeMap.put(VanillaBiomes.MUSHROOM_SHORE, Biome.MUSHROOM_SHORE);
+		spoutBiomeMap.put(VanillaBiomes.BEACH, Biome.BEACH);
+		spoutBiomeMap.put(VanillaBiomes.SMALL_MOUNTAINS, Biome.SMALL_MOUNTAINS);
+		spoutBiomeMap.put(VanillaBiomes.JUNGLE, Biome.JUNGLE);
+		spoutBiomeMap.put(VanillaBiomes.JUNGLE_HILLS, Biome.JUNGLE_HILLS);
+		spoutBiomeMap.put(VanillaBiomes.FROZEN_OCEAN, Biome.FROZEN_OCEAN);
+		spoutBiomeMap.put(VanillaBiomes.ENDSTONE, Biome.SKY);
+	}
+
 	public static Location toLocation(Point p) {
+		Bukkit.getWorld(p.getWorld().getName());
 		return new Location(new BridgeWorld(p.getWorld()), p.getX(), p.getY(), p.getZ());
 	}
 
@@ -73,74 +90,101 @@ public class BridgeUtil {
 		return new Vector(vec.getX(), vec.getY(), vec.getZ());
 	}
 
-	public static ItemStack toItemStack(org.bukkit.inventory.ItemStack itemStack) {
-		Material material = MaterialRegistry.get(itemStack.getType().name());
-		return new ItemStack(material, itemStack.getAmount());
+	public static ItemStack toItemStack(org.spout.api.inventory.ItemStack itemStack) {
+		return new ItemStack(toMaterial(itemStack.getMaterial()), itemStack.getAmount());  //TODO: Implement durability/damage and data
 	}
-	
+
+	public static org.spout.api.inventory.ItemStack toSpoutItemStack(ItemStack itemStack) {
+		return new org.spout.api.inventory.ItemStack(toSpoutMaterial(itemStack.getType()), itemStack.getAmount());  //TODO: Implement durability/damage and data
+	}
+
+	public static Material toMaterial(org.spout.api.material.Material material) {
+		return Material.getMaterial(material.getName());
+	}
+
+	public static org.spout.api.material.Material toSpoutMaterial(Material material) {
+		return MaterialRegistry.get(material.name());
+	}
+
 	public static Biome toBiome(org.spout.api.generator.biome.Biome biome) {
-		if(!(biome instanceof VanillaBiome)) return null;
-		if(biome instanceof BeachBiome) return Biome.BEACH;
-		if(biome instanceof DesertBiome) return Biome.DESERT;
-		if(biome instanceof ForestBiome) return Biome.FOREST;
-		if(biome instanceof JungleBiome) return Biome.JUNGLE;
-		if(biome instanceof MountainsBiome) return Biome.EXTREME_HILLS;
-		if(biome instanceof MushroomBiome) return Biome.MUSHROOM_ISLAND;
-		if(biome instanceof NetherrackBiome) return Biome.HELL;
-		if(biome instanceof OceanBiome) return Biome.OCEAN;
-		if(biome instanceof PlainBiome) return Biome.PLAINS;
-		if(biome instanceof RiverBiome) return Biome.RIVER;
-		if(biome instanceof SmallMountainsBiome) return Biome.SMALL_MOUNTAINS;
-		if(biome instanceof SwampBiome) return Biome.SWAMPLAND;
-		if(biome instanceof TaigaBiome) return Biome.TAIGA;
-		if(biome instanceof TundraBiome) return Biome.TUNDRA;
-		return null;
+		return spoutBiomeMap.get(biome);
 	}
-	
-	public static org.spout.api.generator.biome.Biome toVanillaBiome(Biome biome) {
-		switch(biome) {
-		case BEACH:
-			return VanillaBiomes.BEACH;
-		case ICE_DESERT:
-		case DESERT: 
-		case SAVANNA:
-		case DESERT_HILLS:
-			return VanillaBiomes.DESERT;
-		case EXTREME_HILLS:
-			return VanillaBiomes.MOUNTAINS;
-		case FOREST: 
-		case FOREST_HILLS:
+
+	public static org.spout.api.generator.biome.Biome toSpoutBiome(Biome biome) {
+		switch (biome) {
+		case FOREST:
 		case RAINFOREST:
-		case SEASONAL_FOREST: 
+		case SEASONAL_FOREST:
 			return VanillaBiomes.FOREST;
-		case FROZEN_OCEAN: 
-		case OCEAN:
-			return VanillaBiomes.OCEAN;
-		case FROZEN_RIVER:
-		case RIVER:
-			return VanillaBiomes.RIVER;
-		case HELL:
-			return VanillaBiomes.NETHERRACK;
+		case SWAMPLAND:
+			return VanillaBiomes.SWAMP;
+		case ICE_DESERT:
+		case DESERT:
+		case SAVANNA:
+			return VanillaBiomes.DESERT;
 		case ICE_PLAINS:
 		case PLAINS:
 		case SHRUBLAND:
 			return VanillaBiomes.PLAIN;
-		case JUNGLE:
-		case JUNGLE_HILLS:
-			return VanillaBiomes.JUNGLE;
-		case MUSHROOM_ISLAND:
-		case MUSHROOM_SHORE:
-			return VanillaBiomes.MUSHROOM;
-		case ICE_MOUNTAINS: 
-		case SMALL_MOUNTAINS:
-			return VanillaBiomes.SMALL_MOUNTAINS;
-		case SWAMPLAND:
-			return VanillaBiomes.SWAMP;
 		case TAIGA:
-		case TAIGA_HILLS:
 			return VanillaBiomes.TAIGA;
 		case TUNDRA:
 			return VanillaBiomes.TUNDRA;
+		case HELL:
+			return VanillaBiomes.NETHERRACK;
+		case SKY:
+			return VanillaBiomes.ENDSTONE;
+		case OCEAN:
+			return VanillaBiomes.OCEAN;
+		case RIVER:
+			return VanillaBiomes.RIVER;
+		case EXTREME_HILLS:
+			return VanillaBiomes.MOUNTAINS;
+		case FROZEN_OCEAN:
+			return VanillaBiomes.FROZEN_OCEAN;
+		case FROZEN_RIVER:
+			return VanillaBiomes.FROZEN_RIVER;
+		case ICE_MOUNTAINS:
+		case SMALL_MOUNTAINS:
+			return VanillaBiomes.SMALL_MOUNTAINS;
+		case MUSHROOM_ISLAND:
+			return VanillaBiomes.MUSHROOM;
+		case MUSHROOM_SHORE:
+			return VanillaBiomes.MUSHROOM_SHORE;
+		case BEACH:
+			return VanillaBiomes.BEACH;
+		case DESERT_HILLS:
+			return VanillaBiomes.DESERT_HILLS;
+		case FOREST_HILLS:
+			return VanillaBiomes.FOREST_HILLS;
+		case TAIGA_HILLS:
+			return VanillaBiomes.TAIGA_HILLS;
+		case JUNGLE:
+			return VanillaBiomes.JUNGLE;
+		case JUNGLE_HILLS:
+			return VanillaBiomes.JUNGLE_HILLS;
+		default:
+			return null;
+		}
+	}
+
+	public static GameMode toGameMode(org.spout.vanilla.data.GameMode gameMode) {
+		switch (gameMode) {
+		case SURVIVAL:
+			return GameMode.SURVIVAL;
+		case CREATIVE:
+			return GameMode.CREATIVE;
+		default:
+			return null;
+		}
+	}
+
+	public static org.spout.vanilla.data.GameMode toVanillaGameMode(GameMode gameMode) {
+		switch (gameMode) {
+		case SURVIVAL:
+			return org.spout.vanilla.data.GameMode.SURVIVAL;
+		case CREATIVE:
+			return org.spout.vanilla.data.GameMode.CREATIVE;
 		default:
 			return null;
 		}

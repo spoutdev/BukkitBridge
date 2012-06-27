@@ -21,6 +21,7 @@ package org.spout.bukkit;
 
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -58,7 +59,9 @@ public class BridgeOfflinePlayer implements OfflinePlayer {
 
 	@Override
 	public Player getPlayer() {
-		return null;  //TODO: Adjust for usage with Spout!
+		if (isOnline())
+			return Bukkit.getPlayer(getName());
+		return null;
 	}
 
 	@Override

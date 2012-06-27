@@ -24,8 +24,11 @@ import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 
 public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand {
-	public BridgeBrewingStand(Block block) {
+	private final org.spout.vanilla.controller.block.BrewingStand brewingStand;
+
+	public BridgeBrewingStand(Block block, org.spout.vanilla.controller.block.BrewingStand brewingStand) {
 		super(block);
+		this.brewingStand = brewingStand;
 	}
 
 	@Override

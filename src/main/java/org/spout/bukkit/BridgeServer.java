@@ -73,13 +73,14 @@ import org.spout.bukkit.wgen.BridgeWorldGenerator;
 import org.spout.vanilla.configuration.VanillaConfiguration;
 
 public class BridgeServer implements Server {
-	private org.spout.api.Server server;
+	private static org.spout.api.Server server;
+
+	private final BukkitBridge plugin;
 	private final String bukkitVersion = Versioning.getBukkitVersion();
 	private final ServicesManager servicesManager = new SimpleServicesManager();
 	private final SimpleCommandMap commandMap = new SimpleCommandMap(this);
 	private final PluginManager pluginManager = new SimplePluginManager(this, commandMap);
 	private final StandardMessenger messenger = new StandardMessenger();
-	private final BukkitBridge plugin;
 	private BridgeScheduler scheduler;
 
 	public BridgeServer(BukkitBridge plugin) {
@@ -87,7 +88,7 @@ public class BridgeServer implements Server {
 	}
 
 	public void init(org.spout.api.Server server) {
-		this.server = server;
+		BridgeServer.server = server;
 		scheduler = new BridgeScheduler(server.getScheduler());
 		loadPlugins();
 		//TODO: Enable all plugins based on load orders
@@ -142,7 +143,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getName() {
-		return server.getName();
+		return server.getName(); //TODO: Add an option whether we should pretend to be CraftBukkit?
 	}
 
 	@Override
@@ -220,9 +221,8 @@ public class BridgeServer implements Server {
 	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
 		Set<OfflinePlayer> whitelisted = new HashSet<OfflinePlayer>();
-		for (String player : server.getWhitelistedPlayers()) {
-			// whitelisted.add(new BridgeOfflinePlayer(somedata));
-			//TODO: Construct & add OfflinePlayer objects to Set
+		for (String playerName : server.getWhitelistedPlayers()) {
+			whitelisted.add(getOfflinePlayer(playerName));
 		}
 		return whitelisted;
 	}
@@ -419,12 +419,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getSpawnRadius() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return VanillaConfiguration.SPAWN_RADIUS.getInt();
 	}
 
 	@Override
 	public void setSpawnRadius(int i) {
-		//TODO: Adjust for usage with Spout!
+		VanillaConfiguration.SPAWN_RADIUS.setValue(i);
 	}
 
 	@Override
@@ -434,7 +434,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getAllowFlight() {
-		return false;  //TODO: Adjust for usage with Spout!
+		return server.allowFlight();
 	}
 
 	@Override
@@ -449,18 +449,13 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int broadcast(String message, String permission) {
-		int count = 0;
-		for(Player p : getOnlinePlayers()) {
-			if(p.hasPermission(permission)) {
-				p.sendMessage(message);
-				count++;
-			}
-		}
-		return count;
+		server.broadcastMessage(message, permission);
+		return server.getOnlinePlayers().length;
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String s) {
+		//TODO: Should we decide between Player and OfflinePlayer, or just return a BridgePlayer in any case?
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 
@@ -481,13 +476,23 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		return null;  //TODO: Adjust for usage with Spout!
+		Set<OfflinePlayer> banned = new HashSet<OfflinePlayer>();
+		for (String playerName : server.getBannedPlayers()) {
+			banned.add(getOfflinePlayer(playerName));
+		}
+		return banned;
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
 		Set<OfflinePlayer> ops = new HashSet<OfflinePlayer>();
-		return null;  //TODO: Adjust for usage with Spout!
+		for (String playerName : server.getAllPlayers()) {
+			OfflinePlayer offlinePlayer = getOfflinePlayer(playerName);
+			if (offlinePlayer.isOp()) {
+				ops.add(offlinePlayer);
+			}
+		}
+		return ops;
 	}
 
 	@Override
@@ -513,7 +518,11 @@ public class BridgeServer implements Server {
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		return new OfflinePlayer[0];  //TODO: Adjust for usage with Spout!
+		OfflinePlayer[] offlinePlayers =  new OfflinePlayer[server.getAllPlayers().size()];
+		for (int i = 0; i < server.getAllPlayers().size(); i++) {
+			offlinePlayers[i] = getOfflinePlayer(server.getAllPlayers().get(i));
+		}
+		return offlinePlayers;
 	}
 
 	@Override
@@ -589,5 +598,9 @@ public class BridgeServer implements Server {
 	public boolean getGenerateStructures() {
 		return true;
 		//TODO Implement from Vanilla
+	}
+
+	public static org.spout.api.Server getSpoutServer() {
+		return server;
 	}
 }
