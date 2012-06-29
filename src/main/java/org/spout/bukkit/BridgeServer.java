@@ -113,7 +113,8 @@ public class BridgeServer implements Server {
 		}
 	}
 
-	private void enablePlugins(PluginLoadOrder type) {
+	@SuppressWarnings("unused")
+    private void enablePlugins(PluginLoadOrder type) {
 		Plugin[] plugins = pluginManager.getPlugins();
 
 		for (Plugin plugin : plugins) {
