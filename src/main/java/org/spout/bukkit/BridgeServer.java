@@ -449,13 +449,19 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int broadcast(String message, String permission) {
-		server.broadcastMessage(message, permission);
-		return server.getOnlinePlayers().length;
+		int count = 0;
+		for (Player p : getOnlinePlayers()) {
+			if (p.hasPermission(permission)) {
+				p.sendMessage(message);
+				count++;
+			}
+		}
+		return count;
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String s) {
-		//TODO: Should we decide between Player and OfflinePlayer, or just return a BridgePlayer in any case?
+		//TODO: Should we differentiate between Player and OfflinePlayer, or just return a BridgePlayer in any case?
 		return null;  //TODO: Adjust for usage with Spout!
 	}
 

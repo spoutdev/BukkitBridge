@@ -22,7 +22,6 @@ package org.spout.bukkit.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -66,7 +65,6 @@ public class BridgeUtil {
 	}
 
 	public static Location toLocation(Point p) {
-		Bukkit.getWorld(p.getWorld().getName());
 		return new Location(new BridgeWorld(p.getWorld()), p.getX(), p.getY(), p.getZ());
 	}
 
