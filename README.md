@@ -1,14 +1,15 @@
-[![Spout][Project Logo]][Website]
+[![BukkitBridge][Project Logo]][Website]
+
 What is BukkitBridge?
 ---------------------
 BukkitBridge implements both SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.
 
-Copyright (c) 2011-2012, VanillaDev <http://www.spout.org>
+Copyright (c) 2011-2012, VanillaDev <<http://www.spout.org/>>
 
 Who is VanillaDev?
 ------------------------
 VanillaDev is the team behind the Vanilla and BukkitBridge projects.  
-[![Zidane](https://secure.gravatar.com/avatar/99532c7f117c8dac751422376116fb38?d=mm&r=pg&s=48)](http://forums.spout.org/members/zidane.7/) [![ZNickq](https://secure.gravatar.com/avatar/3833e68b8029636a843d436c06fb8434?d=mm&r=pg&s=48)](http://forums.spout.org/members/znickq.72/) [![Windwaker](https://secure.gravatar.com/avatar/942913bba29c93344d8a2e4da56c6bf1?d=mm&r=pg&s=48)](http://forums.spout.org/members/windwaker.47/) [![bergerkiller](https://secure.gravatar.com/avatar/231ba19298225157537674cbeb7a9f7f?s=mm&r=pg&s=48)](http://forums.spout.org/members/bergerkiller.3753/) [![DDoSQc](https://secure.gravatar.com/avatar/ec0cc434d9c9b34670d4c8845fe6bebc?s=mm&r=pg&s=48)](http://forums.spout.org/members/ddos.5524/) 
+[![Zidane](https://secure.gravatar.com/avatar/99532c7f117c8dac751422376116fb38?d=mm&r=pg&s=48)](http://forums.spout.org/members/zidane.7/) [![ZNickq](https://secure.gravatar.com/avatar/2d9c36328b81d872ba0c5b9cb82bbfe8?d=mm&r=pg&s=48)](http://forums.spout.org/members/znickq.72/) [![Windwaker](https://secure.gravatar.com/avatar/942913bba29c93344d8a2e4da56c6bf1?d=mm&r=pg&s=48)](http://forums.spout.org/members/windwaker.47/) [![bergerkiller](https://secure.gravatar.com/avatar/231ba19298225157537674cbeb7a9f7f?s=mm&r=pg&s=48)](http://forums.spout.org/members/bergerkiller.3753/) [![DDoSQc](https://secure.gravatar.com/avatar/ec0cc434d9c9b34670d4c8845fe6bebc?s=mm&r=pg&s=48)](http://forums.spout.org/members/ddos.5524/) [![Pamelloes](https://secure.gravatar.com/avatar/a48c6394ae3408c5da63b4a5fc2ad3c6?s=mm&r=pg&s=48)](http://forums.spout.org/members/pamelloes/) 
 
 Visit our [website][Website] or get support on our [forums][Forums].  
 Track and submit issues and bugs on our [issue tracker][Issues].
@@ -18,11 +19,11 @@ Track and submit issues and bugs on our [issue tracker][Issues].
 Source
 ------
 The latest and greatest source can be found on [GitHub].  
-Download the latest builds from [Jenkins].
+Download the latest builds from [Jenkins].  [![Build Status](http://build.spout.org/job/BukkitBridge/badge/icon)][Jenkins]
 
 License
 -------
-BukkitBridge is licensed under [GNU General Public License Version 3][License].
+BukkitBridge is licensed under the [GNU General Public License Version 3][License].
 
 Compiling
 ---------
@@ -52,7 +53,7 @@ Coding and Pull Request Formatting
 [Forums]: http://forums.spout.org
 [GitHub]: https://github.com/VanillaDev/BukkitBridge
 [Jenkins]: http://build.spout.org/job/BukkitBridge
-[Issues]: http://issues.spout.org
+[Issues]: http://issues.spout.org/browse/BukkitBridge
 [Twitter]: http://spout.in/twitter
 [Twitter Logo]: http://cdn.spout.org/img/button/twitter_follow_us.png
 [Facebook]: http://spout.in/facebook

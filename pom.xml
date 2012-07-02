@@ -45,13 +45,13 @@
 	<!-- Continuous integration -->
 	<ciManagement>
 		<system>jenkins</system>
-		<url>http://build.spout.org</url>
+		<url>http://build.spout.org/job/BukkitBridge</url>
 	</ciManagement>
 
 	<!-- Issue management -->
 	<issueManagement>
-		<system>JIRA</system>
-		<url>http://issues.spout.org</url>
+		<system>jira</system>
+		<url>http://issues.spout.org/browse/BukkitBridge</url>
 	</issueManagement>
 
 	<!-- Repository locations -->
@@ -63,7 +63,7 @@
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>spout-plugins</id>
+			<id>spout-repo</id>
 			<url>http://repo.spout.org</url>
 		</pluginRepository>
 	</pluginRepositories>
@@ -105,6 +105,7 @@
 	<!-- Build settings -->
 	<build>
 		<defaultGoal>clean install</defaultGoal>
+
 		<!-- Resources -->
 		<resources>
 			<resource>
@@ -124,6 +125,7 @@
 				</includes>
 			</resource>
 		</resources>
+
 		<!-- Plugins -->
 		<plugins>
 			<!-- License headers check plugin -->
@@ -233,6 +235,8 @@
 				</executions>
 			</plugin>
 		</plugins>
+
+		<!-- Plugin management -->
 		<pluginManagement>
 			<plugins>
 				<!-- Eclipse exclusions -->
