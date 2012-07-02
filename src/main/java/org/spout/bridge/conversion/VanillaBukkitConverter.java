@@ -1,4 +1,4 @@
-package org.spout.bukkitbridge.bridge;
+package org.spout.bridge.conversion;
 
 public class VanillaBukkitConverter {
 

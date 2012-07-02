@@ -1,4 +1,4 @@
-package org.spout.bukkitbridge.bukkit;
+package org.spout.bridge.bukkit;
 
 import java.util.Collection;
 import java.util.List;
