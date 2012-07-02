@@ -70,11 +70,11 @@ import org.spout.bukkit.entity.BridgePlayer;
 import org.spout.bukkit.scheduler.BridgeScheduler;
 import org.spout.bukkit.util.Versioning;
 import org.spout.bukkit.wgen.BridgeWorldGenerator;
+
 import org.spout.vanilla.configuration.VanillaConfiguration;
 
 public class BridgeServer implements Server {
 	private static org.spout.api.Server server;
-
 	private final BukkitBridge plugin;
 	private final String bukkitVersion = Versioning.getBukkitVersion();
 	private final ServicesManager servicesManager = new SimpleServicesManager();
@@ -524,7 +524,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		OfflinePlayer[] offlinePlayers =  new OfflinePlayer[server.getAllPlayers().size()];
+		OfflinePlayer[] offlinePlayers = new OfflinePlayer[server.getAllPlayers().size()];
 		for (int i = 0; i < server.getAllPlayers().size(); i++) {
 			offlinePlayers[i] = getOfflinePlayer(server.getAllPlayers().get(i));
 		}

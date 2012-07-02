@@ -21,28 +21,35 @@ package org.spout.bukkit;
 
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Biome;
+
 import org.spout.api.material.BlockMaterial;
+
 import org.spout.bukkit.util.BridgeUtil;
+
 import org.spout.vanilla.material.VanillaBlockMaterial;
 
 public class BridgeChunkSnapshot implements ChunkSnapshot {
 	private org.spout.api.geo.cuboid.ChunkSnapshot[] handle;
 	private int[] highesty = new int[256];
-	
+
 	public BridgeChunkSnapshot(org.spout.api.geo.cuboid.ChunkSnapshot[] handle, boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain) {
 		this.handle = handle;
-		
-		if(includeMaxblocky) {
-			for(int i = 0; i < 16; i++) {
-				for(int j = 0; j < 16; j++) {
+
+		if (includeMaxblocky) {
+			for (int i = 0; i < 16; i++) {
+				for (int j = 0; j < 16; j++) {
 					int y = 0;
-					for(y = handle[handle.length].getY() * 16 + 15; y > 0; y--) if(handle[y/16].getBlockMaterial(i, y, j).equals(BlockMaterial.AIR)) break;
+					for (y = handle[handle.length].getY() * 16 + 15; y > 0; y--) {
+						if (handle[y / 16].getBlockMaterial(i, y, j).equals(BlockMaterial.AIR)) {
+							break;
+						}
+					}
 					highesty[i * 16 + j] = y;
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public int getX() {
 		return handle[0].getX();
@@ -60,26 +67,32 @@ public class BridgeChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public int getBlockTypeId(int x, int y, int z) {
-		BlockMaterial mat =  handle[y/16].getBlockMaterial(x, y, z);
-		if(mat instanceof VanillaBlockMaterial) return ((VanillaBlockMaterial) mat).getMinecraftId();
-		else return mat.isSolid() ? 1 : 0;
+		BlockMaterial mat = handle[y / 16].getBlockMaterial(x, y, z);
+		if (mat instanceof VanillaBlockMaterial) {
+			return ((VanillaBlockMaterial) mat).getMinecraftId();
+		} else {
+			return mat.isSolid() ? 1 : 0;
+		}
 	}
 
 	@Override
 	public int getBlockData(int x, int y, int z) {
-		BlockMaterial mat =  handle[y/16].getBlockMaterial(x, y, z);
-		if(mat instanceof VanillaBlockMaterial) return ((VanillaBlockMaterial) mat).getData();
-		else return 0;
+		BlockMaterial mat = handle[y / 16].getBlockMaterial(x, y, z);
+		if (mat instanceof VanillaBlockMaterial) {
+			return ((VanillaBlockMaterial) mat).getData();
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
 	public int getBlockSkyLight(int x, int y, int z) {
-		return handle[y/16].getBlockSkyLight(x, y, z);
+		return handle[y / 16].getBlockSkyLight(x, y, z);
 	}
 
 	@Override
 	public int getBlockEmittedLight(int x, int y, int z) {
-		return handle[y/16].getBlockLight(x, y, z);
+		return handle[y / 16].getBlockLight(x, y, z);
 	}
 
 	@Override

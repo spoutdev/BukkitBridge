@@ -33,9 +33,6 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.api.command.CommandSource;
 
-/**
- * @author zml2008
- */
 public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	private final CommandSource commandSource;
 
@@ -122,7 +119,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	public void recalculatePermissions() {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {

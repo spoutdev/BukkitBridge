@@ -23,6 +23,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 import org.bukkit.inventory.ItemStack;
+
 import org.spout.bukkit.util.BridgeUtil;
 
 public class BridgeJukebox extends BridgeBlockState implements Jukebox {
@@ -35,14 +36,15 @@ public class BridgeJukebox extends BridgeBlockState implements Jukebox {
 
 	@Override
 	public Material getPlaying() {
-		if (!isPlaying())
+		if (!isPlaying()) {
 			return Material.AIR;
+		}
 		return BridgeUtil.toMaterial(jukebox.getInventory().getMusicSlot().getMaterial());
 	}
 
 	@Override
 	public void setPlaying(Material material) {
-		if (material == null || material == Material.AIR){
+		if (material == null || material == Material.AIR) {
 			jukebox.stopMusic();
 		} else {
 			jukebox.getInventory().setMusicSlot(BridgeUtil.toSpoutItemStack(new ItemStack(material)));

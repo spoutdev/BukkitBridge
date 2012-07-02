@@ -24,6 +24,7 @@ import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
+
 import org.spout.vanilla.util.VanillaNetworkUtil;
 
 public class BridgeNoteBlock extends BridgeBlockState implements NoteBlock {

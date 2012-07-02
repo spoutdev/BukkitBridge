@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import org.bukkit.Material;
 import org.bukkit.WorldCreator;
 import org.bukkit.generator.ChunkGenerator;
+
 import org.spout.api.generator.Populator;
 import org.spout.api.generator.WorldGenerator;
 import org.spout.api.generator.WorldGeneratorUtils;
@@ -33,25 +34,30 @@ import org.spout.api.generator.biome.Simple2DBiomeManager;
 import org.spout.api.geo.World;
 import org.spout.api.geo.cuboid.Chunk;
 import org.spout.api.util.cuboid.CuboidShortBuffer;
+
 import org.spout.bukkit.BridgeWorld;
 
 public class BridgeWorldGenerator implements WorldGenerator {
 	private final WorldCreator backing;
 	private final ChunkGenerator generator;
 	private BridgeBiomeGrid bbg;
-	
+
 	public BridgeWorldGenerator(WorldCreator wc) {
 		backing = wc;
 		ChunkGenerator temp = wc.generator();
-		if(temp == null) ;
+		if (temp == null) {
+			;
+		}
 		generator = temp;
 	}
-	
+
 	@Override
 	public BiomeManager generate(CuboidShortBuffer buffer, int chunkX, int chunkY, int chunkZ) {
-		if(bbg == null) bbg = new BridgeBiomeGrid(buffer.getWorld());
+		if (bbg == null) {
+			bbg = new BridgeBiomeGrid(buffer.getWorld());
+		}
 		generator.generateExtBlockSections(new BridgeWorld(buffer.getWorld()), WorldGeneratorUtils.getRandom(buffer.getWorld(), chunkX, chunkY, chunkZ, 0), chunkX, chunkZ, bbg);
-		
+
 		Method m = null;
 		try {
 			m = Biome.class.getDeclaredMethod("getId");
@@ -59,7 +65,7 @@ public class BridgeWorldGenerator implements WorldGenerator {
 			throw new RuntimeException(e);
 		}
 		m.setAccessible(true);
-		
+
 		int x = chunkX << Chunk.BLOCKS.BITS;
 		int z = chunkZ << Chunk.BLOCKS.BITS;
 		Simple2DBiomeManager biomeManager = new Simple2DBiomeManager(chunkX, chunkY, chunkZ);
@@ -94,11 +100,14 @@ public class BridgeWorldGenerator implements WorldGenerator {
 		for (int x = 0; x < Chunk.BLOCKS.SIZE; x++) {
 			for (int z = 0; z < Chunk.BLOCKS.SIZE; z++) {
 				int y = 0;
-				for(int i = 256; i > 0; i--) if(w.getBlockMaterial(x + (chunkX * Chunk.BLOCKS.SIZE), y, z + (chunkX * Chunk.BLOCKS.SIZE)).equals(Material.AIR)) break;
+				for (int i = 256; i > 0; i--) {
+					if (w.getBlockMaterial(x + (chunkX * Chunk.BLOCKS.SIZE), y, z + (chunkX * Chunk.BLOCKS.SIZE)).equals(Material.AIR)) {
+						break;
+					}
+				}
 				heights[x][z] = y;
 			}
 		}
 		return heights;
 	}
-
 }

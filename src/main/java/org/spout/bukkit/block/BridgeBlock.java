@@ -35,10 +35,13 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.api.material.BlockMaterial;
 import org.spout.api.material.range.EffectRange;
+
 import org.spout.bukkit.BridgeWorld;
 import org.spout.bukkit.util.BridgeUtil;
+
 import org.spout.vanilla.material.VanillaBlockMaterial;
 import org.spout.vanilla.material.block.Liquid;
 import org.spout.vanilla.util.RedstonePowerMode;
@@ -219,7 +222,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public void setBiome(Biome biome) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override

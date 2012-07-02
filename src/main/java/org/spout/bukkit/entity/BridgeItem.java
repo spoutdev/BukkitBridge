@@ -36,6 +36,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
 import org.spout.bukkit.util.BridgeUtil;
 
 public class BridgeItem implements Item {
@@ -52,7 +53,7 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setItemStack(ItemStack itemStack) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setPickupDelay(int i) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setVelocity(Vector vector) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -127,17 +128,22 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setFireTicks(int i) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void remove() {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public boolean isDead() {
 		return false;  //TODO: Adjust for usage with Spout!
+	}
+
+	@Override
+	public boolean isValid() {
+		return true;//TODO Adjust for usage with Spout!
 	}
 
 	@Override
@@ -172,12 +178,12 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setFallDistance(float v) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent entityDamageEvent) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -197,12 +203,12 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setTicksLived(int i) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
 	public void playEffect(EntityEffect entityEffect) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -227,7 +233,7 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void setMetadata(String s, MetadataValue metadataValue) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -242,6 +248,6 @@ public class BridgeItem implements Item {
 
 	@Override
 	public void removeMetadata(String s, Plugin plugin) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 }

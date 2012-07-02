@@ -28,16 +28,20 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.material.MaterialRegistry;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
+
 import org.spout.bukkit.BridgeWorld;
+
 import org.spout.vanilla.world.generator.VanillaBiomes;
 
 public class BridgeUtil {
 	private static final Map<org.spout.api.generator.biome.Biome, Biome> spoutBiomeMap = new HashMap<org.spout.api.generator.biome.Biome, Biome>();
+
 	static {
 		spoutBiomeMap.put(VanillaBiomes.OCEAN, Biome.OCEAN);
 		spoutBiomeMap.put(VanillaBiomes.PLAIN, Biome.PLAINS);
@@ -110,81 +114,81 @@ public class BridgeUtil {
 
 	public static org.spout.api.generator.biome.Biome toSpoutBiome(Biome biome) {
 		switch (biome) {
-		case FOREST:
-		case RAINFOREST:
-		case SEASONAL_FOREST:
-			return VanillaBiomes.FOREST;
-		case SWAMPLAND:
-			return VanillaBiomes.SWAMP;
-		case ICE_DESERT:
-		case DESERT:
-		case SAVANNA:
-			return VanillaBiomes.DESERT;
-		case ICE_PLAINS:
-		case PLAINS:
-		case SHRUBLAND:
-			return VanillaBiomes.PLAIN;
-		case TAIGA:
-			return VanillaBiomes.TAIGA;
-		case TUNDRA:
-			return VanillaBiomes.TUNDRA;
-		case HELL:
-			return VanillaBiomes.NETHERRACK;
-		case SKY:
-			return VanillaBiomes.ENDSTONE;
-		case OCEAN:
-			return VanillaBiomes.OCEAN;
-		case RIVER:
-			return VanillaBiomes.RIVER;
-		case EXTREME_HILLS:
-			return VanillaBiomes.MOUNTAINS;
-		case FROZEN_OCEAN:
-			return VanillaBiomes.FROZEN_OCEAN;
-		case FROZEN_RIVER:
-			return VanillaBiomes.FROZEN_RIVER;
-		case ICE_MOUNTAINS:
-		case SMALL_MOUNTAINS:
-			return VanillaBiomes.SMALL_MOUNTAINS;
-		case MUSHROOM_ISLAND:
-			return VanillaBiomes.MUSHROOM;
-		case MUSHROOM_SHORE:
-			return VanillaBiomes.MUSHROOM_SHORE;
-		case BEACH:
-			return VanillaBiomes.BEACH;
-		case DESERT_HILLS:
-			return VanillaBiomes.DESERT_HILLS;
-		case FOREST_HILLS:
-			return VanillaBiomes.FOREST_HILLS;
-		case TAIGA_HILLS:
-			return VanillaBiomes.TAIGA_HILLS;
-		case JUNGLE:
-			return VanillaBiomes.JUNGLE;
-		case JUNGLE_HILLS:
-			return VanillaBiomes.JUNGLE_HILLS;
-		default:
-			return null;
+			case FOREST:
+			case RAINFOREST:
+			case SEASONAL_FOREST:
+				return VanillaBiomes.FOREST;
+			case SWAMPLAND:
+				return VanillaBiomes.SWAMP;
+			case ICE_DESERT:
+			case DESERT:
+			case SAVANNA:
+				return VanillaBiomes.DESERT;
+			case ICE_PLAINS:
+			case PLAINS:
+			case SHRUBLAND:
+				return VanillaBiomes.PLAIN;
+			case TAIGA:
+				return VanillaBiomes.TAIGA;
+			case TUNDRA:
+				return VanillaBiomes.TUNDRA;
+			case HELL:
+				return VanillaBiomes.NETHERRACK;
+			case SKY:
+				return VanillaBiomes.ENDSTONE;
+			case OCEAN:
+				return VanillaBiomes.OCEAN;
+			case RIVER:
+				return VanillaBiomes.RIVER;
+			case EXTREME_HILLS:
+				return VanillaBiomes.MOUNTAINS;
+			case FROZEN_OCEAN:
+				return VanillaBiomes.FROZEN_OCEAN;
+			case FROZEN_RIVER:
+				return VanillaBiomes.FROZEN_RIVER;
+			case ICE_MOUNTAINS:
+			case SMALL_MOUNTAINS:
+				return VanillaBiomes.SMALL_MOUNTAINS;
+			case MUSHROOM_ISLAND:
+				return VanillaBiomes.MUSHROOM;
+			case MUSHROOM_SHORE:
+				return VanillaBiomes.MUSHROOM_SHORE;
+			case BEACH:
+				return VanillaBiomes.BEACH;
+			case DESERT_HILLS:
+				return VanillaBiomes.DESERT_HILLS;
+			case FOREST_HILLS:
+				return VanillaBiomes.FOREST_HILLS;
+			case TAIGA_HILLS:
+				return VanillaBiomes.TAIGA_HILLS;
+			case JUNGLE:
+				return VanillaBiomes.JUNGLE;
+			case JUNGLE_HILLS:
+				return VanillaBiomes.JUNGLE_HILLS;
+			default:
+				return null;
 		}
 	}
 
 	public static GameMode toGameMode(org.spout.vanilla.data.GameMode gameMode) {
 		switch (gameMode) {
-		case SURVIVAL:
-			return GameMode.SURVIVAL;
-		case CREATIVE:
-			return GameMode.CREATIVE;
-		default:
-			return null;
+			case SURVIVAL:
+				return GameMode.SURVIVAL;
+			case CREATIVE:
+				return GameMode.CREATIVE;
+			default:
+				return null;
 		}
 	}
 
 	public static org.spout.vanilla.data.GameMode toVanillaGameMode(GameMode gameMode) {
 		switch (gameMode) {
-		case SURVIVAL:
-			return org.spout.vanilla.data.GameMode.SURVIVAL;
-		case CREATIVE:
-			return org.spout.vanilla.data.GameMode.CREATIVE;
-		default:
-			return null;
+			case SURVIVAL:
+				return org.spout.vanilla.data.GameMode.SURVIVAL;
+			case CREATIVE:
+				return org.spout.vanilla.data.GameMode.CREATIVE;
+			default:
+				return null;
 		}
 	}
 }

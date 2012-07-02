@@ -128,6 +128,11 @@ public class BridgeEntity implements Entity {
 	}
 
 	@Override
+	public boolean isValid() {
+		return true;  //TODO Check this
+	}
+
+	@Override
 	public Server getServer() {
 		return Bukkit.getServer();
 	}

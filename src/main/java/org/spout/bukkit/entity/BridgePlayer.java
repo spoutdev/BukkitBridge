@@ -44,8 +44,10 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.bukkit.BridgeServer;
 import org.spout.bukkit.util.BridgeUtil;
+
 import org.spout.vanilla.controller.living.Living;
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
@@ -78,7 +80,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void setPlayerListName(String s) {
-		 //TODO: Adjust for usage with Spout!
+		//TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -634,5 +636,10 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	public boolean isBlocking() {
 		return false;
 		//TODO Again...Vanilla will eventually provide the answer here.
+	}
+
+	@Override
+	public boolean isValid() {
+		return true;  //TODO Um, not sure exactly what this means 100% but TODO :p
 	}
 }

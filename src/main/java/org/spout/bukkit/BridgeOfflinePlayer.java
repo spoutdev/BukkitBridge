@@ -59,8 +59,9 @@ public class BridgeOfflinePlayer implements OfflinePlayer {
 
 	@Override
 	public Player getPlayer() {
-		if (isOnline())
+		if (isOnline()) {
 			return Bukkit.getPlayer(getName());
+		}
 		return null;
 	}
 
