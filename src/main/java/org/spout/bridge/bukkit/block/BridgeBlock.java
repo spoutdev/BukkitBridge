@@ -1,4 +1,4 @@
-package org.spout.bukkitbridge.bukkit;
+package org.spout.bridge.bukkit.block;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +13,8 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spout.bridge.bukkit.BridgeChunk;
+import org.spout.bridge.bukkit.BridgeWorld;
 
 /**
  * BridgeBlock is an implementation of Block. It delegates all method calls to its corresponding BridgeChunk.

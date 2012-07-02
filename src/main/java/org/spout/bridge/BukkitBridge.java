@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.spout.bukkitbridge;
+package org.spout.bridge;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -27,7 +27,7 @@ import org.bukkit.Server;
 
 import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
-import org.spout.bukkitbridge.bukkit.BridgeServer;
+import org.spout.bridge.bukkit.BridgeServer;
 
 public class BukkitBridge extends CommonPlugin {
 	private final BridgeServer bridgeServer = new BridgeServer();
