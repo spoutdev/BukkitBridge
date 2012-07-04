@@ -57,472 +57,406 @@ import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
+import org.spout.bridge.bukkit.delegate.ServerDelegate;
 
 import com.avaje.ebean.config.ServerConfig;
 
 @SuppressWarnings("deprecation")
 public class BridgeServer implements Server {
-
+	private ServerDelegate delegate;
+	
+	public BridgeServer() {
+		delegate = new ServerDelegate();
+		delegate.setDelegator(this);
+	}
+	
+	public ServerDelegate getDelegate() {
+		return delegate;
+	}
+	
 	@Override
-	public boolean addRecipe(Recipe arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addRecipe(Recipe recipe) {
+		return getDelegate().addRecipe(recipe);
 	}
 
 	@Override
-	public void banIP(String arg0) {
-		// TODO Auto-generated method stub
-		
+	public void banIP(String ip) {
+		getDelegate().banIP(ip);
 	}
 
 	@Override
-	public int broadcast(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int broadcast(String msg, String perm) {
+		return getDelegate().broadcast(msg, perm);
 	}
 
 	@Override
-	public int broadcastMessage(String arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int broadcastMessage(String msg) {
+		return getDelegate().broadcast(msg);
 	}
 
 	@Override
 	public void clearRecipes() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().clearRecipes();
 	}
 
 	@Override
-	public void configureDbConfig(ServerConfig arg0) {
-		// TODO Auto-generated method stub
-		
+	public void configureDbConfig(ServerConfig config) {
+		getDelegate().configureDbConfig(config);
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder arg0, InventoryType arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
+		return getDelegate().createInventory(owner, type);
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Inventory createInventory(InventoryHolder owner, int size) {
+		return getDelegate().createInventory(owner, size);
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder arg0, int arg1, String arg2) {
-		// TODO Auto-generated method stub
-		return null;
+	public Inventory createInventory(InventoryHolder owner, int size, String title) {
+		return getDelegate().createInventory(owner, size, title);
 	}
 
 	@Override
-	public MapView createMap(World arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapView createMap(World world) {
+		return getDelegate().createMap(world);
 	}
 
 	@Override
-	public World createWorld(WorldCreator arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public World createWorld(WorldCreator creator) {
+		return getDelegate().createWorld(creator);
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender arg0, String arg1) throws CommandException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean dispatchCommand(CommandSender source, String commandline) throws CommandException {
+		return getDelegate().dispatchCommand(source, commandline);
 	}
 
 	@Override
 	public boolean getAllowEnd() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().getAllowEnd();
 	}
 
 	@Override
 	public boolean getAllowFlight() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().getAllowFlight();
 	}
 
 	@Override
 	public boolean getAllowNether() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().getAllowNether();
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getAnimalSpawnLimit();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getBannedPlayers();
 	}
 
 	@Override
 	public String getBukkitVersion() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getBukkitVersion();
 	}
 
 	@Override
 	public Map<String, String[]> getCommandAliases() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getCommandAliases();
 	}
 
 	@Override
 	public long getConnectionThrottle() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getConnectionThrottle();
 	}
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getConsoleSender();
 	}
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getDefaultGameMode();
 	}
 
 	@Override
 	public boolean getGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().getGenerateStructures();
 	}
 
 	@Override
 	public HelpMap getHelpMap() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getHelpMap();
 	}
 
 	@Override
 	public Set<String> getIPBans() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getIPBans();
 	}
 
 	@Override
 	public String getIp() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getIp();
 	}
 
 	@Override
 	public Logger getLogger() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getLogger();
 	}
 
 	@Override
-	public MapView getMap(short arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public MapView getMap(short id) {
+		return getDelegate().getMap(id);
 	}
 
 	@Override
 	public int getMaxPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getMaxPlayers();
 	}
 
 	@Override
 	public Messenger getMessenger() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getMessenger();
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getMosterSpawnLimit();
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getName();
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public OfflinePlayer getOfflinePlayer(String name) {
+		return getDelegate().getOfflinePlayer(name);
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getOfflinePlayers();
 	}
 
 	@Override
 	public boolean getOnlineMode() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().getOnlineMode();
 	}
 
 	@Override
 	public Player[] getOnlinePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getOnlinePlayers();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getOperators();
 	}
 
 	@Override
-	public Player getPlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Player getPlayer(String name) {
+		return getDelegate().getPlayer(name);
 	}
 
 	@Override
-	public Player getPlayerExact(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public Player getPlayerExact(String name) {
+		return getDelegate().getPlayerExact(name);
 	}
 
 	@Override
-	public PluginCommand getPluginCommand(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public PluginCommand getPluginCommand(String name) {
+		return getDelegate().getPluginCommand(name);
 	}
 
 	@Override
 	public PluginManager getPluginManager() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getPluginManager();
 	}
 
 	@Override
 	public int getPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getPort();
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(ItemStack arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Recipe> getRecipesFor(ItemStack result) {
+		return getDelegate().getRecipesFor(result);
 	}
 
 	@Override
 	public BukkitScheduler getScheduler() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getScheduler();
 	}
 
 	@Override
 	public String getServerId() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getServerId();
 	}
 
 	@Override
 	public String getServerName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getServerName();
 	}
 
 	@Override
 	public ServicesManager getServicesManager() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getServicesManager();
 	}
 
 	@Override
 	public int getSpawnRadius() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getSpawnRadius();
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getTicksPerAnimalSpawns();
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getTicksPerMonsterSpawns();
 	}
 
 	@Override
 	public String getUpdateFolder() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getUpdateFolder();
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getUpdateFolderFile();
 	}
 
 	@Override
 	public String getVersion() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getVersion();
 	}
 
 	@Override
 	public int getViewDistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getViewDistance();
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getWaterAnimalSpawnLimit();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getWhitelistedPlayers();
 	}
 
 	@Override
-	public World getWorld(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public World getWorld(String name) {
+		return getDelegate().getWorld(name);
 	}
 
 	@Override
-	public World getWorld(UUID arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public World getWorld(UUID id) {
+		return getDelegate().getWorld(id);
 	}
 
 	@Override
 	public File getWorldContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getWorldContainer();
 	}
 
 	@Override
 	public String getWorldType() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getWorldType();
 	}
 
 	@Override
 	public List<World> getWorlds() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getWorlds();
 	}
 
 	@Override
 	public boolean hasWhitelist() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().hasWhitelist();
 	}
 
 	@Override
 	public boolean isPrimaryThread() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isPrimaryThread();
 	}
 
 	@Override
-	public List<Player> matchPlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Player> matchPlayer(String name) {
+		return getDelegate().matchPlayer(name);
 	}
 
 	@Override
 	public Iterator<Recipe> recipeIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().recipeIterator();
 	}
 
 	@Override
 	public void reload() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().reload();
 	}
 
 	@Override
 	public void reloadWhitelist() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().reloadWhitelist();
 	}
 
 	@Override
 	public void resetRecipes() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().resetRecipes();
 	}
 
 	@Override
 	public void savePlayers() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().savePlayers();
 	}
 
 	@Override
-	public void setDefaultGameMode(GameMode arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setDefaultGameMode(GameMode mode) {
+		getDelegate().setDefaultGameMode(mode);
 	}
 
 	@Override
-	public void setSpawnRadius(int arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setSpawnRadius(int value) {
+		getDelegate().setSpawnRadius(value);
 	}
 
 	@Override
-	public void setWhitelist(boolean arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setWhitelist(boolean enable) {
+		getDelegate().setWhitelist(enable);
 	}
 
 	@Override
 	public void shutdown() {
-		// TODO Auto-generated method stub
-		
+		getDelegate().shutdown();
 	}
 
 	@Override
-	public void unbanIP(String arg0) {
-		// TODO Auto-generated method stub
-		
+	public void unbanIP(String ip) {
+		getDelegate().unbanIp(ip);
 	}
 
 	@Override
-	public boolean unloadWorld(String arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadWorld(String name, boolean save) {
+		return getDelegate().unloadWorld(name, save);
 	}
 
 	@Override
-	public boolean unloadWorld(World arg0, boolean arg1) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadWorld(World world, boolean save) {
+		return getDelegate().unloadWorld(world, save);
 	}
 
 	@Override
 	public boolean useExactLoginLocation() {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().useExactLoginLocation();
 	}
 
 //----------------------------------------------------------------------//
