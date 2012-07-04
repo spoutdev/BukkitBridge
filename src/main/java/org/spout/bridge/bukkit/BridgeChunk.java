@@ -46,8 +46,8 @@ public class BridgeChunk implements Chunk {
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome, boolean inlcudeBiomeTempRain) {
-		return getWorld().getChunkSnapshot(getX(), getZ(), includeMaxBlockY, includeBiome, inlcudeBiomeTempRain);
+	public ChunkSnapshot getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
+		return getWorld().getChunkSnapshot(getX(), getZ(), includeMaxBlockY, includeBiome, includeBiomeTempRain);
 	}
 
 	@Override
@@ -111,36 +111,36 @@ public class BridgeChunk implements Chunk {
 //----------------------------------------------------------------------//
 //----------------------------------------------------------------------//
 	
-	public List<MetadataValue> getMetadata(Block b, String key) {
-		return getMetadata(b.getX(), b.getY(), b.getZ(), key);
+	public List<MetadataValue> getBlockMetadata(Block b, String key) {
+		return getBlockMetadata(b.getX(), b.getY(), b.getZ(), key);
 	}
 	
-	public List<MetadataValue> getMetadata(int x, int y, int z, String key) {
-		return getWorld().getMetadata(x, y, z, key);
+	public List<MetadataValue> getBlockMetadata(int x, int y, int z, String key) {
+		return getWorld().getBlockMetadata(x, y, z, key);
 	}
 
-	public boolean hasMetadata(Block b, String key) {
-		return hasMetadata(b.getX(), b.getY(), b.getZ(), key);
+	public boolean hasBlockMetadata(Block b, String key) {
+		return hasBlockMetadata(b.getX(), b.getY(), b.getZ(), key);
 	}
 	
-	public boolean hasMetadata(int x, int y, int z, String key) {
-		return getWorld().hasMetadata(x, y, z, key);
+	public boolean hasBlockMetadata(int x, int y, int z, String key) {
+		return getWorld().hasBlockMetadata(x, y, z, key);
 	}
 
-	public void removeMetadata(Block b, String key, Plugin owner) {
-		removeMetadata(b.getX(), b.getY(), b.getZ(), key, owner);
+	public void removeBlockMetadata(Block b, String key, Plugin owner) {
+		removeBlockMetadata(b.getX(), b.getY(), b.getZ(), key, owner);
 	}
 	
-	public void removeMetadata(int x, int y, int z, String key, Plugin owner) {
-		getWorld().removeMetadata(x, y, z, key, owner);
+	public void removeBlockMetadata(int x, int y, int z, String key, Plugin owner) {
+		getWorld().removeBlockMetadata(x, y, z, key, owner);
 	}
 
-	public void setMetadata(Block b, String key, MetadataValue val) {
-		setMetadata(b.getX(), b.getY(), b.getZ(), key, val);
+	public void setBlockMetadata(Block b, String key, MetadataValue val) {
+		setBlockMetadata(b.getX(), b.getY(), b.getZ(), key, val);
 	}
 	
-	public void setMetadata(int x, int y, int z, String key, MetadataValue val) {
-		getWorld().setMetadata(x, y, z, key, val);
+	public void setBlockMetadata(int x, int y, int z, String key, MetadataValue val) {
+		getWorld().setBlockMetadata(x, y, z, key, val);
 	}
 
 	public boolean breakNaturally(Block b) {
