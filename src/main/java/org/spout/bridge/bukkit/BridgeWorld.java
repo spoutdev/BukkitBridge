@@ -36,563 +36,485 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+/**
+ * BridgeWorld is Bridge's implementation of Bukkit's World. It is delegated to by
+ * BridgeChunk and BridgeBlock. It delegates to BridgeServer.
+ */
 @SuppressWarnings("deprecation")
 public class BridgeWorld implements World {
+	private final BridgeServer server;
+	private final UUID id;
+	
+	public BridgeWorld(BridgeServer server, UUID id) {
+		this.server = server;
+		this.id = id;
+	}
+	
+	public BridgeServer getServer() {
+		return server;
+	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getListeningPluginChannels();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		// TODO Auto-generated method stub
-		
+		getServer().sendPluginMessage(source, channel, message);
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getWorldMetadata(this, metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().hasWorldMetdata(this, metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
-		
+		getServer().removeWorldMetadata(this, metadataKey, owningPlugin);
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
-		
+		getServer().setWorldMetadata(this, metadataKey, newMetadataValue);
 	}
 
 	@Override
 	public boolean canGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().canGenerateStructures(this);
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().createExplosion(this, loc, power);
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().createExplosion(this, loc, power, setFire);
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().createExplosion(this, x, y, z, power);
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().createExplosion(this, x, y, z, power, setFire);
 	}
 
 	@Override
 	public Item dropItem(Location location, ItemStack item) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().dropItem(this, location, item);
 	}
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack item) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().dropItemNaturally(this, location, item);
 	}
 
 	@Override
 	public boolean generateTree(Location location, TreeType type) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().generateTree(this, location, type);
 	}
 
 	@Override
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().generateTree(this, loc, type, delegate);
 	}
 
 	@Override
 	public boolean getAllowAnimals() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().getAllowAnimals(this);
 	}
 
 	@Override
 	public boolean getAllowMonsters() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().getAllowMonsters(this);
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getAnimalSpawnLimit(this);
 	}
 
 	@Override
 	public Chunk getChunkAt(Location location) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getChunkAt(this, location);
 	}
 
 	@Override
 	public Chunk getChunkAt(Block block) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getChunkAt(this, block);
 	}
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getChunkAt(this, x, z);
 	}
 
 	@Override
 	public Difficulty getDifficulty() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getDifficulty(this);
 	}
 
 	@Override
 	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEmptyChunkSnapshot(this, x, z, includeBiome, includeBiomeTempRain);
 	}
 
 	@Override
 	public List<Entity> getEntities() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEntities(this);
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEntitiesByClass(this, classes);
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEntitiesByClass(this, cls);
 	}
 
 	@Override
 	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEntitiesByClasses(this, classes);
 	}
 
 	@Override
 	public Environment getEnvironment() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEnvironment(this);
 	}
 
 	@Override
 	public long getFullTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getFullTime(this);
 	}
 
 	@Override
 	public ChunkGenerator getGenerator() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getGenerator(this);
 	}
 
 	@Override
 	public Block getHighestBlockAt(Location location) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getHighestBlockAt(this, location);
 	}
 
 	@Override
 	public Block getHighestBlockAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getHighestBlockAt(this, x, z);
 	}
 
 	@Override
 	public int getHighestBlockYAt(Location location) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getHighestBlockYAt(this, location);
 	}
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getHighestBlockYAt(this, x, z);
 	}
 
 	@Override
 	public boolean getKeepSpawnInMemory() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().getKeepSpawnInMemory(this);
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getLivingEntities(this);
 	}
 
 	@Override
 	public Chunk[] getLoadedChunks() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getLoadedChunks(this);
 	}
 
 	@Override
 	public int getMaxHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getMaxHeight(this);
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getMonsterSpawnLimit(this);
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getName(this);
 	}
 
 	@Override
 	public boolean getPVP() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().getPVP(this);
 	}
 
 	@Override
 	public List<Player> getPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getPlayers(this);
 	}
 
 	@Override
 	public List<BlockPopulator> getPopulators() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getPopulators(this);
 	}
 
 	@Override
 	public int getSeaLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getSeaLevel(this);
 	}
 
 	@Override
 	public long getSeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getSeed(this);
 	}
 
 	@Override
 	public Location getSpawnLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getSpawnLocation(this);
 	}
 
 	@Override
 	public int getThunderDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getThunderDuration(this);
 	}
 
 	@Override
 	public long getTicksPerAnimalSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getTicksPerAnimalSpawns(this);
 	}
 
 	@Override
 	public long getTicksPerMonsterSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getTicksPerMonsterSpawns(this);
 	}
 
 	@Override
 	public long getTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getTime(this);
 	}
 
 	@Override
 	public UUID getUID() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getWaterAnimalSpawnLimit(this);
 	}
 
 	@Override
 	public int getWeatherDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getWeatherDuration(this);
 	}
 
 	@Override
 	public File getWorldFolder() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getWorldFolder(this);
 	}
 
 	@Override
 	public WorldType getWorldType() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getWorldType(this);
 	}
 
 	@Override
 	public boolean hasStorm() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().hasStorm(this);
 	}
 
 	@Override
 	public boolean isAutoSave() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isAutoSave(this);
 	}
 
 	@Override
 	public boolean isThundering() {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isThundering(this);
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data) {
-		// TODO Auto-generated method stub
-		
+		getServer().playEffect(this, location, effect, data);
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data) {
-		// TODO Auto-generated method stub
-		
+		getServer().playEffect(this, location, effect, data);
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data, int radius) {
-		// TODO Auto-generated method stub
-		
+		getServer().playEffect(this, location, effect, data, radius);
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-		// TODO Auto-generated method stub
-		
+		getServer().playEffect(this, location, effect, data, radius);
 	}
 
 	@Override
 	public boolean refreshChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().refreshChunk(this, x, z);
 	}
 
 	@Override
 	public boolean regenerateChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().regenerateChunk(this, x, z);
 	}
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-		
+		getServer().save(this);
 	}
 
 	@Override
-	public void setAnimalSpawnLimit(int arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setAnimalSpawnLimit(int limit) {
+		getServer().setAnimalSpawnLimit(this, limit);
 	}
 
 	@Override
 	public void setAutoSave(boolean value) {
-		// TODO Auto-generated method stub
-		
+		getServer().setAutoSave(this, value);
 	}
 
 	@Override
 	public void setDifficulty(Difficulty difficulty) {
-		// TODO Auto-generated method stub
-		
+		getServer().setDifficuly(this, difficulty);
 	}
 
 	@Override
 	public void setFullTime(long time) {
-		// TODO Auto-generated method stub
-		
+		getServer().setFullTime(this, time);
 	}
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded) {
-		// TODO Auto-generated method stub
-		
+		getServer().setKeepSpawnInMemory(this, keepLoaded);
 	}
 
 	@Override
-	public void setMonsterSpawnLimit(int arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setMonsterSpawnLimit(int limit) {
+		getServer().setMonsterSpawnLimit(this, limit);
 	}
 
 	@Override
 	public void setPVP(boolean pvp) {
-		// TODO Auto-generated method stub
-		
+		getServer().setPVP(this, pvp);
 	}
 
 	@Override
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
-		// TODO Auto-generated method stub
-		
+		getServer().setSpawnFlags(this, allowMonsters, allowAnimals);
 	}
 
 	@Override
 	public boolean setSpawnLocation(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().setSpawnLocation(this, x, y, z);
 	}
 
 	@Override
 	public void setStorm(boolean hasStorm) {
-		// TODO Auto-generated method stub
-		
+		getServer().setStorm(this, hasStorm);
 	}
 
 	@Override
 	public void setThunderDuration(int duration) {
-		// TODO Auto-generated method stub
-		
+		getServer().setThunderDuration(this, duration);
 	}
 
 	@Override
 	public void setThundering(boolean thundering) {
-		// TODO Auto-generated method stub
-		
+		getServer().setThundering(this, thundering);
 	}
 
 	@Override
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
-		// TODO Auto-generated method stub
-		
+		getServer().setTicksPerAnimalSpawns(this, ticksPerAnimalSpawns);
 	}
 
 	@Override
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
-		// TODO Auto-generated method stub
-		
+		getServer().setTicksPerMonsterSpawns(this, ticksPerMonsterSpawns);
 	}
 
 	@Override
 	public void setTime(long time) {
-		// TODO Auto-generated method stub
-		
+		getServer().setTime(this, time);
 	}
 
 	@Override
-	public void setWaterAnimalSpawnLimit(int arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setWaterAnimalSpawnLimit(int limit) {
+		getServer().setWaterAnimalSpawnLimit(this, limit);
 	}
 
 	@Override
 	public void setWeatherDuration(int duration) {
-		// TODO Auto-generated method stub
-		
+		getServer().setWeatherDuration(this, duration);
 	}
 
 	@Override
 	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().spawn(this, location, clazz);
 	}
 
 	@Override
 	public Arrow spawnArrow(Location location, Vector velocity, float speed, float spread) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().spawnArrow(this, location, velocity, speed, spread);
 	}
 
 	@Override
 	public LivingEntity spawnCreature(Location loc, EntityType type) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().spawnCreature(this, loc, type);
 	}
 
 	@Override
 	public LivingEntity spawnCreature(Location loc, CreatureType type) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().spawnCreature(this, loc ,type);
 	}
 
 	@Override
-	public Entity spawnEntity(Location arg0, EntityType arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Entity spawnEntity(Location loc, EntityType type) {
+		return getServer().spawnEntity(this, loc, type);
 	}
 
 	@Override
 	public LightningStrike strikeLightning(Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().strikeLightning(this, loc);
 	}
 
 	@Override
 	public LightningStrike strikeLightningEffect(Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().strikeLightningEffect(this, loc);
 	}
 
 	@Override
 	public boolean unloadChunkRequest(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().unloadChunkRequest(this, x, z);
 	}
 
 	@Override
 	public boolean unloadChunkRequest(int x, int z, boolean safe) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().unloadChunkRequest(this, x, z, safe);
 	}
 
 	public ChunkSnapshot getChunkSnapshot(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getChunkSnapshot(this, chunk);
 	}
 
 	public ChunkSnapshot getChunkSnapshot(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getChunkSnapshot(this, x, z);
 	}
 
 //----------------------------------------------------------------------//
@@ -603,93 +525,77 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(Location location) {
-		// TODO Auto-generated method stub
-		return null;
+		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getBlockAt(this, x, y, z);
 	}
 
 	@Override
 	public void loadChunk(Chunk chunk) {
-		// TODO Auto-generated method stub
-		
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public void loadChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isChunkLoaded(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isChunkLoaded(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean unloadChunk(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z, boolean save) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
-		// TODO Auto-generated method stub
-		return false;
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().loadChunk(this, x, z, generate);
 	}
 
-	public ChunkSnapshot getChunkSnapshot(int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean inlcudeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public boolean isChunkLoaded(Chunk chunk) {
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
+	}
+
+	@Override
+	public boolean isChunkLoaded(int x, int z) {
+		return getServer().isChunkLoaded(this, x, z);
+	}
+
+	@Override
+	public boolean unloadChunk(Chunk chunk) {
+		return unloadChunk(chunk.getX(), chunk.getZ());
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z) {
+		return unloadChunk(x, z, true);
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z, boolean save) {
+		return unloadChunk(x, z, save, false);
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
+		return getServer().unloadChunk(this, x, z, save, safe);
+	}
+
+	public ChunkSnapshot getChunkSnapshot(int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
+		return getServer().getChunkSnapshot(this, x, z, includeMaxBlockY, includeBiome, includeBiomeTempRain);
 	}
 
 	public Entity[] getEntitiesAt(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return null;
+		return getEntitiesAt(chunk.getX(), chunk.getZ());
 	}
 
 	public Entity[] getEntitiesAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getEntitiesAt(this, x, z);
 	}
 
 	public BlockState[] getTileEntitiesAt(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return null;
+		return getTileEntitiesAt(chunk.getX(), chunk.getZ());
 	}
 
 	public BlockState[] getTileEntitiesAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getTileEntitiesAt(this, x, z);
 	}
 
 //----------------------------------------------------------------------//
@@ -700,173 +606,140 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getBiome(this, x, z);
 	}
 
 	@Override
 	public double getHumidity(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getHumidity(this, x, z);
 	}
 
 	@Override
 	public double getTemperature(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getTemperature(this, x, z);
 	}
 
 	@Override
 	public void setBiome(int x, int z, Biome bio) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getBlockTypeIdAt(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		getServer().setBiome(this, x, z, bio);
 	}
 
 	@Override
 	public int getBlockTypeIdAt(Location location) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getBlockTypeIdAt((int) location.getX(), (int) location.getY(), (int) location.getZ());
 	}
 
-	public List<MetadataValue> getMetadata(int x, int y, int z, String key) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public int getBlockTypeIdAt(int x, int y, int z) {
+		return getServer().getBlockTypeIdAt(this, x, y, z);
 	}
 
-	public boolean hasMetadata(int x, int y, int z, String key) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<MetadataValue> getBlockMetadata(int x, int y, int z, String key) {
+		return getServer().getBlockMetadata(this, x, y, z, key);
 	}
 
-	public void removeMetadata(int x, int y, int z, String key, Plugin owner) {
-		// TODO Auto-generated method stub
-		
+	public boolean hasBlockMetadata(int x, int y, int z, String key) {
+		return getServer().hasBlockMetadata(this, x, y, z, key);
 	}
 
-	public void setMetadata(int x, int y, int z, String key, MetadataValue val) {
-		// TODO Auto-generated method stub
-		
+	public void removeBlockMetadata(int x, int y, int z, String key, Plugin owner) {
+		getServer().removeBlockMetadata(this, x, y, z, key, owner);
+	}
+
+	public void setBlockMetadata(int x, int y, int z, String key, MetadataValue val) {
+		getServer().setBlockMetadata(this, x, y, z, key, val);
 	}
 
 	public boolean breakNaturally(int x, int y, int z, ItemStack tool) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().breakNaturally(this, x, y, z, tool);
 	}
 
 	public int getBlockPower(int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getBlockPower(this, x, y, z, face);
 	}
 
 	public byte getData(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getData(this, x, y, z);
 	}
 
 	public Collection<ItemStack> getDrops(int x, int y, int z, ItemStack tool) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getDrops(this, x, y, z, tool);
 	}
 
 	public BlockFace getFace(int x, int y, int z, int x2, int y2, int z2) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getFace(this, x, y, z, x2, y2, z2);
 	}
 
 	public byte getLightFromBlocks(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getLightFromBlocks(this, x, y, z);
 	}
 
 	public byte getLightFromSky(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getLightFromSky(this, x, y, z);
 	}
 
 	public byte getLightLevel(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getServer().getLightLevel(this, x, y, z);
 	}
 
 	public Location getLocation(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getLocation(this, x, y, z);
 	}
 
 	public PistonMoveReaction getPistonMoveReaction(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getPistonMoveReaction(this, x, y, z);
 	}
 
 	public Block getRelative(int x, int y, int z, int modX, int modY, int modZ) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getRelative(this, x, y, z, modX, modY, modZ);
 	}
 
 	public BlockState getState(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getState(this, x, y, z);
 	}
 
 	public Material getType(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getType(this, x, y, z);
 	}
 
 	public boolean isBlockFaceIndirectlyPowered(int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isBlockFaceIndirectlyPowered(this, x, y, z, face);
 	}
 
 	public boolean isBlockFacePowered(int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isBlockFacePowered(this, x, y, z, face);
 	}
 
 	public boolean isBlockIndirectlyPowered(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isBlockIndirectlyPowered(this, x, y, z);
 	}
 
 	public boolean isBlockPowered(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isBlockPowered(this, x, y, z);
 	}
 
 	public boolean isEmpty(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isEmpty(this, x, y, z);
 	}
 
 	public boolean isLiquid(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().isLiquid(this, x, y, z);
 	}
 
 	public void setData(int x, int y, int z, byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		
+		getServer().setData(this, x, y, z, data, applyPhysics);
 	}
 
 	public void setType(int x, int y, int z, Material type) {
-		// TODO Auto-generated method stub
-		
+		getServer().setType(this, x, y, z, type);
 	}
 
 	public boolean setTypeId(int x, int y, int z, int id, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().setTypeId(this, x, y, z, id, applyPhysics);
 	}
 
 	public boolean setTypeIdAndData(int x, int y, int z, int type, byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		return false;
+		return getServer().setTypeIdAndData(this, x, y, z, type, data, applyPhysics);
 	}
 
 }

@@ -32,22 +32,22 @@ public class BridgeBlock implements Block {
 	
 	@Override
 	public List<MetadataValue> getMetadata(String key) {
-		return getChunk().getMetadata(getX(), getY(), getZ(), key);
+		return getChunk().getBlockMetadata(getX(), getY(), getZ(), key);
 	}
 
 	@Override
 	public boolean hasMetadata(String key) {
-		return getChunk().hasMetadata(getX(), getY(), getZ(), key);
+		return getChunk().hasBlockMetadata(getX(), getY(), getZ(), key);
 	}
 
 	@Override
 	public void removeMetadata(String key, Plugin owner) {
-		getChunk().removeMetadata(getX(), getY(), getZ(), key, owner);
+		getChunk().removeBlockMetadata(getX(), getY(), getZ(), key, owner);
 	}
 
 	@Override
 	public void setMetadata(String key, MetadataValue val) {
-		getChunk().setMetadata(getX(), getY(), getZ(), key, val);
+		getChunk().setBlockMetadata(getX(), getY(), getZ(), key, val);
 	}
 
 	@Override

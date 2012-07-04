@@ -26,4 +26,9 @@ public interface Module {
 	 * @return A bidirectional converter for the two types, or null if none exists.
 	 */
 	public <T,R> BidiConverter<T,R> getBidiConverter(Class<T> from, Class<R> to);
+	
+	/**
+	 * Called when the module is loaded.
+	 */
+	public void init();
 }
