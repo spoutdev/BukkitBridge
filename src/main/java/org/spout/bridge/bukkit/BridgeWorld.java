@@ -71,7 +71,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return getServer().hasWorldMetdata(this, metadataKey);
+		return getServer().hasWorldMetadata(this, metadataKey);
 	}
 
 	@Override
