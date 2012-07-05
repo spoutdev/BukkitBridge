@@ -1,6 +1,7 @@
 package org.spout.bridge.bukkit.delegate;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -8,26 +9,49 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.bukkit.BlockChangeDelegate;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.TreeType;
 import org.bukkit.World;
+import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.LightningStrike;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.generator.BlockPopulator;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.util.Vector;
 import org.spout.bridge.bukkit.BridgeServer;
+import org.spout.bridge.bukkit.BridgeWorld;
 
 import com.avaje.ebean.config.ServerConfig;
 
@@ -35,6 +59,7 @@ import com.avaje.ebean.config.ServerConfig;
  * The ServerDelegate is delegated to by BridgeServer. It is indirectly delegated to by
  * BridgeWorld, BridgeChunk, and BridgeBlock.
  */
+@SuppressWarnings("deprecation")
 public class ServerDelegate extends Delegate<BridgeServer> {
 
 	public void banIP(String ip) {
@@ -421,4 +446,419 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 		return false;
 	}
 
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+//----//				BridgeWorld Delegations					 //-----//
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+
+	public Set<String> getListeningPluginChannels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void sendPluginMessage(Plugin plugin, String channel, byte[] message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<MetadataValue> getWorldMetadata(BridgeWorld world, String metadataKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean hasWorldMetadata(BridgeWorld world, String metadataKey) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void removeWorldMetadata(BridgeWorld world, String metadataKey, Plugin owningPlugin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setWorldMetadata(BridgeWorld world, String metadataKey, MetadataValue newMetadataValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean canGenerateStructures(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean createExplosion(BridgeWorld world, double x, double y, double z, float power, boolean setFire) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Item dropItem(BridgeWorld world, Location location, ItemStack item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Item dropItemNaturally(BridgeWorld world, Location location, ItemStack item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean generateTree(BridgeWorld world, Location loc, TreeType type, BlockChangeDelegate delegate) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getAllowAnimals(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getAllowMonsters(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int getAnimalSpawnLimit(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Chunk getChunkAt(BridgeWorld world, Location location) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Chunk getChunkAt(BridgeWorld world, Block block) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Chunk getChunkAt(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Difficulty getDifficulty(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ChunkSnapshot getEmptyChunkSnapshot(BridgeWorld world, int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Entity> getEntities(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> ...classes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> cls) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Collection<Entity> getEntitiesByClasses(BridgeWorld world, Class<?>... classes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Environment getEnvironment(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public long getFullTime(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ChunkGenerator getGenerator(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Block getHighestBlockAt(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getHighestBlockYAt(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean getKeepSpawnInMemory(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public List<LivingEntity> getLivingEntities(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Chunk[] getLoadedChunks(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getMaxHeight(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getName(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean getPVP(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int getMonsterSpawnLimit(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public List<Player> getPlayers(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<BlockPopulator> getPopulators(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getSeaLevel(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public long getSeed(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Location getSpawnLocation(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getThunderDuration(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public long getTicksPerAnimalSpawns(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public long getTicksPerMonsterSpawns(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public long getTime(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getWaterAnimalSpawnLimit(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getWeatherDuration(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public File getWorldFolder(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public WorldType getWorldType(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean hasStorm(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isAutoSave(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isThundering(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, int data, int radius) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, T data, int radius) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean refreshChunk(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean regenerateChunk(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void save(BridgeWorld world) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setAnimalSpawnLimit(BridgeWorld world, int limit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setAutoSave(BridgeWorld world, boolean value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setDifficulty(BridgeWorld world, Difficulty difficulty) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setFullTime(BridgeWorld world, long time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setKeepSpawnInMemory(BridgeWorld world, boolean keepLoaded) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setMonsterSpawnLimit(BridgeWorld world, int limit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPVP(BridgeWorld world, boolean pvp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setSpawnFlags(BridgeWorld world, boolean allowMonsters, boolean allowAnimals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean setSpawnLocation(BridgeWorld world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setStorm(BridgeWorld world, boolean hasStorm) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setThunderDuration(BridgeWorld world, int duration) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setThundering(BridgeWorld world, boolean thundering) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTicksPerAnimalSpawns(BridgeWorld world, int ticksPerAnimalSpawns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTicksPerMonsterSpawns(BridgeWorld world, int ticksPerMonsterSpawns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTime(BridgeWorld world, long time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setWaterAnimalSpawnLimit(BridgeWorld world, int limit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setWeatherDuration(BridgeWorld world, int duration) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public <T extends Entity> T spawn(BridgeWorld world, Location location, Class<T> clazz) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Arrow spawnArrow(BridgeWorld world, Location location, Vector velocity, float speed, float spread) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LivingEntity spawnCreature(BridgeWorld world, Location loc, EntityType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LivingEntity spawnCreature(BridgeWorld world, Location loc, CreatureType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Entity spawnEntity(BridgeWorld world, Location loc, EntityType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LightningStrike strikeLightning(BridgeWorld world, Location loc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LightningStrike strikeLightningEffect(BridgeWorld world, Location loc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean unloadChunkRequest(BridgeWorld world, int x, int z, boolean safe) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

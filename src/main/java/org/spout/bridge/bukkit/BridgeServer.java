@@ -467,464 +467,372 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getListeningPluginChannels();
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2) {
-		// TODO Auto-generated method stub
-		
+	public void sendPluginMessage(Plugin plugin, String channel, byte[] message) {
+		getDelegate().sendPluginMessage(plugin, channel, message);
 	}
 
-	public List<MetadataValue> getWorldMetadata(BridgeWorld bridgeWorld, String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MetadataValue> getWorldMetadata(BridgeWorld world, String metadataKey) {
+		return getDelegate().getWorldMetadata(world, metadataKey);
 	}
 
-	public boolean hasWorldMetdata(BridgeWorld bridgeWorld, String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasWorldMetadata(BridgeWorld world, String metadataKey) {
+		return getDelegate().hasWorldMetadata(world, metadataKey);
 	}
 
-	public void removeWorldMetadata(BridgeWorld bridgeWorld, String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
-		
+	public void removeWorldMetadata(BridgeWorld world, String metadataKey, Plugin owningPlugin) {
+		getDelegate().removeWorldMetadata(world, metadataKey, owningPlugin);
 	}
 
-	public void setWorldMetadata(BridgeWorld bridgeWorld, String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
-		
+	public void setWorldMetadata(BridgeWorld world, String metadataKey, MetadataValue newMetadataValue) {
+		getDelegate().setWorldMetadata(world, metadataKey, newMetadataValue);
 	}
 
-	public boolean canGenerateStructures(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean canGenerateStructures(BridgeWorld world) {
+		return getDelegate().canGenerateStructures(world);
 	}
 
-	public boolean createExplosion(BridgeWorld bridgeWorld, Location loc, float power) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createExplosion(BridgeWorld world, Location loc, float power) {
+		return createExplosion(world, loc.getX(), loc.getY(), loc.getZ(), power);
 	}
 
-	public boolean createExplosion(BridgeWorld bridgeWorld, Location loc, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createExplosion(BridgeWorld world, Location loc, float power, boolean setFire) {
+		return createExplosion(world, loc.getX(), loc.getY(), loc.getZ(), power, setFire);
 	}
 
-	public boolean createExplosion(BridgeWorld bridgeWorld, double x, double y, double z, float power) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createExplosion(BridgeWorld world, double x, double y, double z, float power) {
+		return createExplosion(world, x, y, z, power, false);
 	}
 
-	public boolean createExplosion(BridgeWorld bridgeWorld, double x, double y, double z, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createExplosion(BridgeWorld world, double x, double y, double z, float power, boolean setFire) {
+		return getDelegate().createExplosion(world, x, y, z, power, setFire);
 	}
 
-	public Item dropItem(BridgeWorld bridgeWorld, Location location, ItemStack item) {
-		// TODO Auto-generated method stub
-		return null;
+	public Item dropItem(BridgeWorld world, Location location, ItemStack item) {
+		return getDelegate().dropItem(world, location, item);
 	}
 
-	public Item dropItemNaturally(BridgeWorld bridgeWorld, Location location, ItemStack item) {
-		// TODO Auto-generated method stub
-		return null;
+	public Item dropItemNaturally(BridgeWorld world, Location location, ItemStack item) {
+		return getDelegate().dropItemNaturally(world, location, item);
 	}
 
-	public boolean generateTree(BridgeWorld bridgeWorld, Location location, TreeType type) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean generateTree(BridgeWorld world, Location location, TreeType type) {
+		return generateTree(world, location, type, null);
 	}
 
-	public boolean generateTree(BridgeWorld bridgeWorld, Location loc, TreeType type, BlockChangeDelegate delegate) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean generateTree(BridgeWorld world, Location loc, TreeType type, BlockChangeDelegate delegate) {
+		return getDelegate().generateTree(world, loc, type, delegate);
 	}
 
-	public boolean getAllowAnimals(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getAllowAnimals(BridgeWorld world) {
+		return getDelegate().getAllowAnimals(world);
 	}
 
-	public boolean getAllowMonsters(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getAllowMonsters(BridgeWorld world) {
+		return getDelegate().getAllowMonsters(world);
 	}
 
-	public int getAnimalSpawnLimit(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getAnimalSpawnLimit(BridgeWorld world) {
+		return getDelegate().getAnimalSpawnLimit(world);
 	}
 
-	public Chunk getChunkAt(BridgeWorld bridgeWorld, Location location) {
-		// TODO Auto-generated method stub
-		return null;
+	public Chunk getChunkAt(BridgeWorld world, Location location) {
+		return getDelegate().getChunkAt(world, location);
 	}
 
-	public Chunk getChunkAt(BridgeWorld bridgeWorld, Block block) {
-		// TODO Auto-generated method stub
-		return null;
+	public Chunk getChunkAt(BridgeWorld world, Block block) {
+		return getDelegate().getChunkAt(world, block);
 	}
 
-	public Chunk getChunkAt(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+	public Chunk getChunkAt(BridgeWorld world, int x, int z) {
+		return getDelegate().getChunkAt(world, x, z);
 	}
 
-	public Difficulty getDifficulty(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public Difficulty getDifficulty(BridgeWorld world) {
+		return getDelegate().getDifficulty(world);
 	}
 
-	public ChunkSnapshot getEmptyChunkSnapshot(BridgeWorld bridgeWorld, int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChunkSnapshot getEmptyChunkSnapshot(BridgeWorld world, int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+		return getDelegate().getEmptyChunkSnapshot(world, x, z, includeBiome, includeBiomeTempRain);
 	}
 
-	public List<Entity> getEntities(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Entity> getEntities(BridgeWorld world) {
+		return getDelegate().getEntities(world);
 	}
 
-	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld bridgeWorld, Class<T> ...classes) {
-		// TODO Auto-generated method stub
-		return null;
+	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> ...classes) {
+		return getDelegate().getEntitiesByClass(world, classes);
 	}
 
-	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld bridgeWorld, Class<T> cls) {
-		// TODO Auto-generated method stub
-		return null;
+	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> cls) {
+		return getDelegate().getEntitiesByClass(world, cls);
 	}
 
-	public Collection<Entity> getEntitiesByClasses(BridgeWorld bridgeWorld, Class<?>[] classes) {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Entity> getEntitiesByClasses(BridgeWorld world, Class<?>... classes) {
+		return getDelegate().getEntitiesByClasses(world, classes);
 	}
 
-	public Environment getEnvironment(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public Environment getEnvironment(BridgeWorld world) {
+		return getDelegate().getEnvironment(world);
 	}
 
-	public long getFullTime(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getFullTime(BridgeWorld world) {
+		return getDelegate().getFullTime(world);
 	}
 
-	public ChunkGenerator getGenerator(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChunkGenerator getGenerator(BridgeWorld world) {
+		return getDelegate().getGenerator(world);
 	}
 
-	public Block getHighestBlockAt(BridgeWorld bridgeWorld, Location location) {
-		// TODO Auto-generated method stub
-		return null;
+	public Block getHighestBlockAt(BridgeWorld world, Location location) {
+		return getHighestBlockAt(world, (int) location.getX(), (int) location.getZ());
 	}
 
-	public Block getHighestBlockAt(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+	public Block getHighestBlockAt(BridgeWorld world, int x, int z) {
+		return getDelegate().getHighestBlockAt(world, x, z);
 	}
 
-	public int getHighestBlockYAt(BridgeWorld bridgeWorld, Location location) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getHighestBlockYAt(BridgeWorld world, Location location) {
+		return getHighestBlockYAt(world, (int) location.getX(), (int) location.getZ());
 	}
 
-	public int getHighestBlockYAt(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getHighestBlockYAt(BridgeWorld world, int x, int z) {
+		return getDelegate().getHighestBlockYAt(world, x, z);
 	}
 
-	public boolean getKeepSpawnInMemory(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getKeepSpawnInMemory(BridgeWorld world) {
+		return getDelegate().getKeepSpawnInMemory(world);
 	}
 
-	public List<LivingEntity> getLivingEntities(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LivingEntity> getLivingEntities(BridgeWorld world) {
+		return getDelegate().getLivingEntities(world);
 	}
 
-	public Chunk[] getLoadedChunks(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public Chunk[] getLoadedChunks(BridgeWorld world) {
+		return getDelegate().getLoadedChunks(world);
 	}
 
-	public int getMaxHeight(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getMaxHeight(BridgeWorld world) {
+		return getDelegate().getMaxHeight(world);
 	}
 
-	public String getName(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getName(BridgeWorld world) {
+		return getDelegate().getName(world);
 	}
 
-	public boolean getPVP(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getPVP(BridgeWorld world) {
+		return getDelegate().getPVP(world);
 	}
 
-	public int getMonsterSpawnLimit(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getMonsterSpawnLimit(BridgeWorld world) {
+		return getDelegate().getMonsterSpawnLimit(world);
 	}
 
-	public List<Player> getPlayers(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Player> getPlayers(BridgeWorld world) {
+		return getDelegate().getPlayers(world);
 	}
 
-	public List<BlockPopulator> getPopulators(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BlockPopulator> getPopulators(BridgeWorld world) {
+		return getDelegate().getPopulators(world);
 	}
 
-	public int getSeaLevel(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getSeaLevel(BridgeWorld world) {
+		return getDelegate().getSeaLevel(world);
 	}
 
-	public long getSeed(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getSeed(BridgeWorld world) {
+		return getDelegate().getSeed(world);
 	}
 
-	public Location getSpawnLocation(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public Location getSpawnLocation(BridgeWorld world) {
+		return getDelegate().getSpawnLocation(world);
 	}
 
-	public int getThunderDuration(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getThunderDuration(BridgeWorld world) {
+		return getDelegate().getThunderDuration(world);
 	}
 
-	public long getTicksPerAnimalSpawns(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getTicksPerAnimalSpawns(BridgeWorld world) {
+		return getDelegate().getTicksPerAnimalSpawns(world);
 	}
 
-	public long getTicksPerMonsterSpawns(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getTicksPerMonsterSpawns(BridgeWorld world) {
+		return getDelegate().getTicksPerMonsterSpawns(world);
 	}
 
-	public long getTime(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getTime(BridgeWorld world) {
+		return getDelegate().getTime(world);
 	}
 
-	public int getWaterAnimalSpawnLimit(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getWaterAnimalSpawnLimit(BridgeWorld world) {
+		return getDelegate().getWaterAnimalSpawnLimit(world);
 	}
 
-	public int getWeatherDuration(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getWeatherDuration(BridgeWorld world) {
+		return getDelegate().getWeatherDuration(world);
 	}
 
-	public File getWorldFolder(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public File getWorldFolder(BridgeWorld world) {
+		return getDelegate().getWorldFolder(world);
 	}
 
-	public WorldType getWorldType(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return null;
+	public WorldType getWorldType(BridgeWorld world) {
+		return getDelegate().getWorldType(world);
 	}
 
-	public boolean hasStorm(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasStorm(BridgeWorld world) {
+		return getDelegate().hasStorm(world);
 	}
 
-	public boolean isAutoSave(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isAutoSave(BridgeWorld world) {
+		return getDelegate().isAutoSave(world);
 	}
 
-	public void playEffect(BridgeWorld bridgeWorld, Location location, Effect effect, int data) {
-		// TODO Auto-generated method stub
-		
+	public boolean isThundering(BridgeWorld world) {
+		return getDelegate().isThundering(world);
 	}
 
-	public <T> void playEffect(BridgeWorld bridgeWorld, Location location, Effect effect, T data) {
-		// TODO Auto-generated method stub
-		
+	public void playEffect(BridgeWorld world, Location location, Effect effect, int data) {
+		playEffect(world, location, effect, data, -1);
 	}
 
-	public void playEffect(BridgeWorld bridgeWorld, Location location, Effect effect, int data, int radius) {
-		// TODO Auto-generated method stub
-		
+	public void playEffect(BridgeWorld world, Location location, Effect effect, int data, int radius) {
+		getDelegate().playEffect(world, location, effect, data, radius);
 	}
 
-	public boolean isThundering(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		return false;
+	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, T data) {
+		playEffect(world, location, effect, data, -1);
 	}
 	
-	public <T> void playEffect(BridgeWorld bridgeWorld, Location location, Effect effect, T data, int radius) {
-		// TODO Auto-generated method stub
-		
+	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, T data, int radius) {
+		getDelegate().playEffect(world, location, effect, data, radius);
 	}
 
-	public boolean refreshChunk(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean refreshChunk(BridgeWorld world, int x, int z) {
+		return getDelegate().refreshChunk(world, x, z);
 	}
 
-	public boolean regenerateChunk(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean regenerateChunk(BridgeWorld world, int x, int z) {
+		return getDelegate().regenerateChunk(world, x, z);
 	}
 
-	public void save(BridgeWorld bridgeWorld) {
-		// TODO Auto-generated method stub
-		
+	public void save(BridgeWorld world) {
+		getDelegate().save(world);
 	}
 
-	public void setAnimalSpawnLimit(BridgeWorld bridgeWorld, int limit) {
-		// TODO Auto-generated method stub
-		
+	public void setAnimalSpawnLimit(BridgeWorld world, int limit) {
+		getDelegate().setAnimalSpawnLimit(world, limit);
 	}
 
-	public void setAutoSave(BridgeWorld bridgeWorld, boolean value) {
-		// TODO Auto-generated method stub
-		
+	public void setAutoSave(BridgeWorld world, boolean value) {
+		getDelegate().setAutoSave(world, value);
 	}
 
-	public void setDifficuly(BridgeWorld bridgeWorld, Difficulty difficulty) {
-		// TODO Auto-generated method stub
-		
+	public void setDifficuly(BridgeWorld world, Difficulty difficulty) {
+		getDelegate().setDifficulty(world, difficulty);
 	}
 
-	public void setFullTime(BridgeWorld bridgeWorld, long time) {
-		// TODO Auto-generated method stub
-		
+	public void setFullTime(BridgeWorld world, long time) {
+		getDelegate().setFullTime(world, time);
 	}
 
-	public void setKeepSpawnInMemory(BridgeWorld bridgeWorld, boolean keepLoaded) {
-		// TODO Auto-generated method stub
-		
+	public void setKeepSpawnInMemory(BridgeWorld world, boolean keepLoaded) {
+		getDelegate().setKeepSpawnInMemory(world, keepLoaded);
 	}
 
-	public void setMonsterSpawnLimit(BridgeWorld bridgeWorld, int limit) {
-		// TODO Auto-generated method stub
-		
+	public void setMonsterSpawnLimit(BridgeWorld world, int limit) {
+		getDelegate().setMonsterSpawnLimit(world, limit);
 	}
 
-	public void setPVP(BridgeWorld bridgeWorld, boolean pvp) {
-		// TODO Auto-generated method stub
-		
+	public void setPVP(BridgeWorld world, boolean pvp) {
+		getDelegate().setPVP(world, pvp);
 	}
 
-	public void setSpawnFlags(BridgeWorld bridgeWorld, boolean allowMonsters, boolean allowAnimals) {
-		// TODO Auto-generated method stub
-		
+	public void setSpawnFlags(BridgeWorld world, boolean allowMonsters, boolean allowAnimals) {
+		getDelegate().setSpawnFlags(world, allowMonsters, allowAnimals);
 	}
 
-	public boolean setSpawnLocation(BridgeWorld bridgeWorld, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean setSpawnLocation(BridgeWorld world, int x, int y, int z) {
+		return getDelegate().setSpawnLocation(world, x, y, z);
 	}
 
-	public void setStorm(BridgeWorld bridgeWorld, boolean hasStorm) {
-		// TODO Auto-generated method stub
-		
+	public void setStorm(BridgeWorld world, boolean hasStorm) {
+		getDelegate().setStorm(world, hasStorm);
 	}
 
-	public void setThunderDuration(BridgeWorld bridgeWorld, int duration) {
-		// TODO Auto-generated method stub
-		
+	public void setThunderDuration(BridgeWorld world, int duration) {
+		getDelegate().setThunderDuration(world, duration);
 	}
 
-	public void setThundering(BridgeWorld bridgeWorld, boolean thundering) {
-		// TODO Auto-generated method stub
-		
+	public void setThundering(BridgeWorld world, boolean thundering) {
+		getDelegate().setThundering(world, thundering);
 	}
 
-	public void setTicksPerAnimalSpawns(BridgeWorld bridgeWorld, int ticksPerAnimalSpawns) {
-		// TODO Auto-generated method stub
-		
+	public void setTicksPerAnimalSpawns(BridgeWorld world, int ticksPerAnimalSpawns) {
+		getDelegate().setTicksPerAnimalSpawns(world, ticksPerAnimalSpawns);
 	}
 
-	public void setTicksPerMonsterSpawns(BridgeWorld bridgeWorld, int ticksPerMonsterSpawns) {
-		// TODO Auto-generated method stub
-		
+	public void setTicksPerMonsterSpawns(BridgeWorld world, int ticksPerMonsterSpawns) {
+		getDelegate().setTicksPerMonsterSpawns(world, ticksPerMonsterSpawns);
 	}
 
-	public void setTime(BridgeWorld bridgeWorld, long time) {
-		// TODO Auto-generated method stub
-		
+	public void setTime(BridgeWorld world, long time) {
+		getDelegate().setTime(world, time);
 	}
 
-	public void setWaterAnimalSpawnLimit(BridgeWorld bridgeWorld, int limit) {
-		// TODO Auto-generated method stub
-		
+	public void setWaterAnimalSpawnLimit(BridgeWorld world, int limit) {
+		getDelegate().setWaterAnimalSpawnLimit(world, limit);
 	}
 
-	public void setWeatherDuration(BridgeWorld bridgeWorld, int duration) {
-		// TODO Auto-generated method stub
-		
+	public void setWeatherDuration(BridgeWorld world, int duration) {
+		getDelegate().setWeatherDuration(world, duration);
 	}
 	
-	public <T extends Entity> T spawn(BridgeWorld bridgeWorld, Location location, Class<T> clazz) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+	public <T extends Entity> T spawn(BridgeWorld world, Location location, Class<T> clazz) throws IllegalArgumentException {
+		return getDelegate().spawn(world, location, clazz);
 	}
 
-	public Arrow spawnArrow(BridgeWorld bridgeWorld, Location location, Vector velocity, float speed, float spread) {
-		// TODO Auto-generated method stub
-		return null;
+	public Arrow spawnArrow(BridgeWorld world, Location location, Vector velocity, float speed, float spread) {
+		return getDelegate().spawnArrow(world, location, velocity, speed, spread);
 	}
 
-	public LivingEntity spawnCreature(BridgeWorld bridgeWorld, Location loc, EntityType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public LivingEntity spawnCreature(BridgeWorld world, Location loc, EntityType type) {
+		return getDelegate().spawnCreature(world, loc, type);
 	}
 
-	public LivingEntity spawnCreature(BridgeWorld bridgeWorld, Location loc, CreatureType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public LivingEntity spawnCreature(BridgeWorld world, Location loc, CreatureType type) {
+		return getDelegate().spawnCreature(world, loc, type);
 	}
 
-	public Entity spawnEntity(BridgeWorld bridgeWorld, Location loc, EntityType type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Entity spawnEntity(BridgeWorld world, Location loc, EntityType type) {
+		return getDelegate().spawnEntity(world, loc, type);
 	}
 
-	public LightningStrike strikeLightning(BridgeWorld bridgeWorld, Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+	public LightningStrike strikeLightning(BridgeWorld world, Location loc) {
+		return getDelegate().strikeLightning(world, loc);
 	}
 
-	public LightningStrike strikeLightningEffect(BridgeWorld bridgeWorld, Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+	public LightningStrike strikeLightningEffect(BridgeWorld world, Location loc) {
+		return getDelegate().strikeLightningEffect(world, loc);
 	}
 
-	public boolean unloadChunkRequest(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadChunkRequest(BridgeWorld world, int x, int z) {
+		return unloadChunkRequest(world, x, z, true);
 	}
 
-	public boolean unloadChunkRequest(BridgeWorld bridgeWorld, int x, int z, boolean safe) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadChunkRequest(BridgeWorld world, int x, int z, boolean safe) {
+		return getDelegate().unloadChunkRequest(world, x, z, safe);
 	}
 
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld bridgeWorld, Chunk chunk) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, Chunk chunk) {
+		return getChunkSnapshot(world, chunk.getX(), chunk.getZ());
 	}
 
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld bridgeWorld, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z) {
+		return getDelegate().getChunkSnapshot(world, x, z);
 	}
 
 //----------------------------------------------------------------------//
@@ -933,37 +841,37 @@ public class BridgeServer implements Server {
 //----------------------------------------------------------------------//
 //----------------------------------------------------------------------//
 
-	public Block getBlockAt(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public Block getBlockAt(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean loadChunk(BridgeWorld bridgeWorld, int x, int z, boolean generate) {
+	public boolean loadChunk(BridgeWorld world, int x, int z, boolean generate) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isChunkLoaded(BridgeWorld bridgeWorld, int x, int z) {
+	public boolean isChunkLoaded(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean unloadChunk(BridgeWorld bridgeWorld, int x, int z, boolean save, boolean safe) {
+	public boolean unloadChunk(BridgeWorld world, int x, int z, boolean save, boolean safe) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld bridgeWorld, int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
+	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Entity[] getEntitiesAt(BridgeWorld bridgeWorld, int x, int z) {
+	public Entity[] getEntitiesAt(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BlockState[] getTileEntitiesAt(BridgeWorld bridgeWorld, int x, int z) {
+	public BlockState[] getTileEntitiesAt(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -974,162 +882,162 @@ public class BridgeServer implements Server {
 //----------------------------------------------------------------------//
 //----------------------------------------------------------------------//
 
-	public Biome getBiome(BridgeWorld bridgeWorld, int x, int z) {
+	public Biome getBiome(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public double getHumidity(BridgeWorld bridgeWorld, int x, int z) {
+	public double getHumidity(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public double getTemperature(BridgeWorld bridgeWorld, int x, int z) {
+	public double getTemperature(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public void setBiome(BridgeWorld bridgeWorld, int x, int z, Biome bio) {
+	public void setBiome(BridgeWorld world, int x, int z, Biome bio) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public int getBlockTypeIdAt(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public int getBlockTypeIdAt(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public List<MetadataValue> getBlockMetadata(BridgeWorld bridgeWorld, int x, int y, int z, String key) {
+	public List<MetadataValue> getBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean hasBlockMetadata(BridgeWorld bridgeWorld, int x, int y, int z, String key) {
+	public boolean hasBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void removeBlockMetadata(BridgeWorld bridgeWorld, int x, int y, int z, String key, Plugin owner) {
+	public void removeBlockMetadata(BridgeWorld world, int x, int y, int z, String key, Plugin owner) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void setBlockMetadata(BridgeWorld bridgeWorld, int x, int y, int z, String key, MetadataValue val) {
+	public void setBlockMetadata(BridgeWorld world, int x, int y, int z, String key, MetadataValue val) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public boolean breakNaturally(BridgeWorld bridgeWorld, int x, int y, int z, ItemStack tool) {
+	public boolean breakNaturally(BridgeWorld world, int x, int y, int z, ItemStack tool) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public int getBlockPower(BridgeWorld bridgeWorld, int x, int y, int z, BlockFace face) {
+	public int getBlockPower(BridgeWorld world, int x, int y, int z, BlockFace face) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public byte getData(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public byte getData(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public Collection<ItemStack> getDrops(BridgeWorld bridgeWorld, int x, int y, int z, ItemStack tool) {
+	public Collection<ItemStack> getDrops(BridgeWorld world, int x, int y, int z, ItemStack tool) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BlockFace getFace(BridgeWorld bridgeWorld, int x, int y, int z, int x2, int y2, int z2) {
+	public BlockFace getFace(BridgeWorld world, int x, int y, int z, int x2, int y2, int z2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public byte getLightFromBlocks(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public byte getLightFromBlocks(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public byte getLightFromSky(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public byte getLightFromSky(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public byte getLightLevel(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public byte getLightLevel(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public Location getLocation(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public Location getLocation(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public PistonMoveReaction getPistonMoveReaction(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public PistonMoveReaction getPistonMoveReaction(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Block getRelative(BridgeWorld bridgeWorld, int x, int y, int z, int modX, int modY, int modZ) {
+	public Block getRelative(BridgeWorld world, int x, int y, int z, int modX, int modY, int modZ) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BlockState getState(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public BlockState getState(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Material getType(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public Material getType(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean isBlockFaceIndirectlyPowered(BridgeWorld bridgeWorld, int x, int y, int z, BlockFace face) {
+	public boolean isBlockFaceIndirectlyPowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isBlockFacePowered(BridgeWorld bridgeWorld, int x, int y, int z, BlockFace face) {
+	public boolean isBlockFacePowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isBlockIndirectlyPowered(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public boolean isBlockIndirectlyPowered(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isBlockPowered(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public boolean isBlockPowered(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isEmpty(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public boolean isEmpty(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean isLiquid(BridgeWorld bridgeWorld, int x, int y, int z) {
+	public boolean isLiquid(BridgeWorld world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void setData(BridgeWorld bridgeWorld, int x, int y, int z, byte data, boolean applyPhysics) {
+	public void setData(BridgeWorld world, int x, int y, int z, byte data, boolean applyPhysics) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setType(BridgeWorld bridgeWorld, int x, int y, int z, Material type) {
+	public void setType(BridgeWorld world, int x, int y, int z, Material type) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public boolean setTypeId(BridgeWorld bridgeWorld, int x, int y, int z, int id, boolean applyPhysics) {
+	public boolean setTypeId(BridgeWorld world, int x, int y, int z, int id, boolean applyPhysics) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean setTypeIdAndData(BridgeWorld bridgeWorld, int x, int y, int z, int type, byte data, boolean applyPhysics) {
+	public boolean setTypeIdAndData(BridgeWorld world, int x, int y, int z, int type, byte data, boolean applyPhysics) {
 		// TODO Auto-generated method stub
 		return false;
 	}
