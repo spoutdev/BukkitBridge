@@ -61,6 +61,11 @@ import org.spout.bridge.bukkit.delegate.ServerDelegate;
 
 import com.avaje.ebean.config.ServerConfig;
 
+/**
+ * BridgeServer is the "focus" of the Bukkit module. The entire API delegates its method calls
+ * here (eventually). BridgeServer then delegates the method calls to ServerDelegate for further
+ * processing.
+ */
 @SuppressWarnings("deprecation")
 public class BridgeServer implements Server {
 	private ServerDelegate delegate;
@@ -459,6 +464,11 @@ public class BridgeServer implements Server {
 		return getDelegate().useExactLoginLocation();
 	}
 
+	@Override
+	public String getMotd() {
+		return getDelegate().getMotd();
+	}
+
 //----------------------------------------------------------------------//
 //----------------------------------------------------------------------//
 //----//				BridgeWorld Delegations					 //-----//
@@ -842,38 +852,31 @@ public class BridgeServer implements Server {
 //----------------------------------------------------------------------//
 
 	public Block getBlockAt(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getBlockAt(world, x, y, z);
 	}
 
 	public boolean loadChunk(BridgeWorld world, int x, int z, boolean generate) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().loadChunk(world, x, z, generate);
 	}
 
 	public boolean isChunkLoaded(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isChunkLoaded(world, x, z);
 	}
 
 	public boolean unloadChunk(BridgeWorld world, int x, int z, boolean save, boolean safe) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().unloadChunk(world, x, z, save, safe);
 	}
 
 	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getChunkSnapshot(world, x, z, includeMaxBlockY, includeBiome, includeBiomeTempRain);
 	}
 
 	public Entity[] getEntitiesAt(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getEntitiesAt(world, x, z);
 	}
 
 	public BlockState[] getTileEntitiesAt(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getTileEntitiesAt(world, x, z);
 	}
 
 //----------------------------------------------------------------------//

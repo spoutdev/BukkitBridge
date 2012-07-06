@@ -12,6 +12,8 @@ public interface BidiConverter<T, R> extends Converter<T, R> {
 	/**
 	 * Converts an object of type R into type T. Used
 	 * for bridging APIs.
+	 * 
+	 * @throws IllegalArgumentException If o is not of type T.
 	 */
-	public T convertResult(R source);
+	public T convertResult(Object o);
 }

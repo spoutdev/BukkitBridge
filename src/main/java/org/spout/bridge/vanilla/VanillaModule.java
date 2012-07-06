@@ -1,4 +1,4 @@
-package org.spout.bridge.bukkit;
+package org.spout.bridge.vanilla;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.spout.bridge.module.Converter;
 import org.spout.bridge.module.Hook;
 import org.spout.bridge.module.Module;
 
-public class BukkitModule implements Module {
+public class VanillaModule implements Module {
 
 	@Override
 	public void onLoad() {
@@ -37,4 +37,5 @@ public class BukkitModule implements Module {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -23,6 +23,7 @@ import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
@@ -56,8 +57,11 @@ import org.spout.bridge.bukkit.BridgeWorld;
 import com.avaje.ebean.config.ServerConfig;
 
 /**
- * The ServerDelegate is delegated to by BridgeServer. It is indirectly delegated to by
- * BridgeWorld, BridgeChunk, and BridgeBlock.
+ * The ServerDelegate is delegated to by BridgeServer. Meaning it is indirectly
+ * delegated to by the entire API. The ServerDelegate is supposed to write as many
+ * of the given functions as possible in terms of other functions. Functions that
+ * can not be written in terms of other functions will be handed off to hook delegates
+ * which will call hooks to get the necessary data from another API.
  */
 @SuppressWarnings("deprecation")
 public class ServerDelegate extends Delegate<BridgeServer> {
@@ -444,6 +448,11 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	public boolean useExactLoginLocation() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public String getMotd() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //----------------------------------------------------------------------//
@@ -858,6 +867,47 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+//----//				BridgeChunk Delegations					 //-----//
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+
+	public Block getBlockAt(BridgeWorld world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean loadChunk(BridgeWorld world, int x, int z, boolean generate) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isChunkLoaded(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean unloadChunk(BridgeWorld world, int x, int z, boolean save, boolean safe) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Entity[] getEntitiesAt(BridgeWorld world, int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BlockState[] getTileEntitiesAt(BridgeWorld world, int x, int z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
