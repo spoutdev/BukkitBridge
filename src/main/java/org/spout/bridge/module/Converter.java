@@ -12,6 +12,12 @@ public interface Converter<T,R> {
 	/**
 	 * Converts an object of type T into type R. Used
 	 * for bridging APIs.
+	 * 
+	 * @throws IllegalArgumentException If o is not of type T.
 	 */
-	public R convertType(T source);
+	public R convertType(Object o);
+	
+	public Class<T> getType();
+	
+	public Class<R> getResult();
 }

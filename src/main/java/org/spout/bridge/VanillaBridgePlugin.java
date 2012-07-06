@@ -19,43 +19,16 @@
  */
 package org.spout.bridge;
 
-import java.io.File;
-import java.util.logging.Level;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Server;
-
-import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
-import org.spout.bridge.bukkit.BridgeServer;
 
-public class BukkitBridge extends CommonPlugin {
-	private final BridgeServer bridgeServer = new BridgeServer();
-	private File pluginFolder;
-
+public class VanillaBridgePlugin extends CommonPlugin {
 	@Override
 	public void onEnable() {
-		//This makes us load plugins from spout/bukkitplugins/
-		this.pluginFolder = new File(this.getEngine().getDataFolder() + File.separator + "bukkitplugins");
-		if (!(Spout.getEngine() instanceof org.spout.api.Server)) {
-			this.getLogger().log(Level.SEVERE, "Unable to load BukkitBridge. Could not detect a Spout server!");
-			this.getPluginLoader().disablePlugin(this);
-			return;
-		}
-		Bukkit.setServer(bridgeServer);
-		//bridgeServer.init((org.spout.api.Server) Spout.getEngine());
+		Bridge.start();
 	}
 
 	@Override
 	public void onDisable() {
-		//TODO: Adjust for usage with Spout!
-	}
-
-	public Server getServer() {
-		return bridgeServer;
-	}
-
-	public File getPluginFolder() {
-		return pluginFolder;
+		Bridge.stop();
 	}
 }
