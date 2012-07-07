@@ -1,8 +1,8 @@
 package org.spout.bridge;
 
-import org.spout.bridge.module.ConversionManager;
-import org.spout.bridge.module.HookManager;
 import org.spout.bridge.module.ModuleManager;
+import org.spout.bridge.module.conversion.ConversionManager;
+import org.spout.bridge.module.hook.HookManager;
 
 public class Bridge {
 	/**

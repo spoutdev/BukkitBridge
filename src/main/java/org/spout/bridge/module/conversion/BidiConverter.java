@@ -1,4 +1,4 @@
-package org.spout.bridge.module;
+package org.spout.bridge.module.conversion;
 
 /**
  * A BidiConverter is used to perform a two-way ("A" can be converted to "B" and "B"

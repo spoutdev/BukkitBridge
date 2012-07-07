@@ -3,8 +3,15 @@ package org.spout.bridge.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.spout.bridge.module.conversion.BidiConverter;
+import org.spout.bridge.module.conversion.ConversionManager;
+import org.spout.bridge.module.conversion.Converter;
+import org.spout.bridge.module.hook.Hook;
+import org.spout.bridge.module.hook.HookManager;
+
 public class ModuleManager {
 	private static List<Module> modules;
+	private static MainModule main = null;
 	
 	public static void init() {
 		modules = new ArrayList<Module>();
@@ -22,6 +29,15 @@ public class ModuleManager {
 				e.printStackTrace();
 			}
 			if (m == null) continue;
+			
+			if(m instanceof MainModule) {
+				if(main == null) {
+					main = (MainModule) m;
+				} else {
+					System.err.println("There can not be multiple MainModules. Skipping MainModule " + clazz.getName() + "!");
+					continue;
+				}
+			}
 			
 			m.onLoad();
 			List<Hook<?>> hooks = m.getHooks();
@@ -53,6 +69,7 @@ public class ModuleManager {
 				}
 			}
 		}
+		if(main == null) throw new IllegalStateException("There must be a MainModule!");
 	}
 	
 	public static void start() {
