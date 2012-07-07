@@ -2,6 +2,9 @@ package org.spout.bridge.module;
 
 import java.util.List;
 
+import org.spout.bridge.module.conversion.Converter;
+import org.spout.bridge.module.hook.Hook;
+
 /**
  * A module in the bridge.
  */

@@ -1,4 +1,4 @@
-package org.spout.bridge.module;
+package org.spout.bridge.module.hook;
 
 /**
  * A hook represents a cross-api event.

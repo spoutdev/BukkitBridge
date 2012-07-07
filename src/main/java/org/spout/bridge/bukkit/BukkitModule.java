@@ -2,9 +2,9 @@ package org.spout.bridge.bukkit;
 
 import java.util.List;
 
-import org.spout.bridge.module.Converter;
-import org.spout.bridge.module.Hook;
 import org.spout.bridge.module.Module;
+import org.spout.bridge.module.conversion.Converter;
+import org.spout.bridge.module.hook.Hook;
 
 public class BukkitModule implements Module {
 

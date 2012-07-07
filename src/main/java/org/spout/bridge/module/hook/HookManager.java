@@ -1,11 +1,12 @@
-package org.spout.bridge.module;
+package org.spout.bridge.module.hook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.spout.bridge.module.ConversionManager.Conversion;
+import org.spout.bridge.module.conversion.ConversionManager;
+import org.spout.bridge.module.conversion.ConversionManager.Conversion;
 
 public class HookManager {
 	private static Map<String, List<Hook<?>>> hooks;

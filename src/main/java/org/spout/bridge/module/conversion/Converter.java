@@ -1,4 +1,4 @@
-package org.spout.bridge.module;
+package org.spout.bridge.module.conversion;
 
 /**
  * A Converter is used to perform a one-way ("A" can be converted to "B" but "B"

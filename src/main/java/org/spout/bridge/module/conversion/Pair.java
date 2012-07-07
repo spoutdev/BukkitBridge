@@ -1,4 +1,4 @@
-package org.spout.bridge.module;
+package org.spout.bridge.module.conversion;
 
 public class Pair<A, B> {
 	private A a;
