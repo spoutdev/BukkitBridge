@@ -80,6 +80,10 @@ public class ModuleManager {
 		for(Module m : modules) m.onDisable();
 	}
 	
+	public static MainModule getMainModule() {
+		return main;
+	}
+	
 	private static List<Class<? extends Module>> getClasses() {
 		@SuppressWarnings("serial")
 		//TODO Get a list of the module names. A configuration that contains these needs to be written.

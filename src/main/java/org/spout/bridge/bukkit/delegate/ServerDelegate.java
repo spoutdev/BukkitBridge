@@ -126,23 +126,19 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public boolean getAllowEnd() {
-		// TODO Auto-generated method stub
-		return false;
+		return ConfigurationManager.getAllowEnd(getDelegator());
 	}
 
 	public boolean getAllowFlight() {
-		// TODO Auto-generated method stub
-		return false;
+		return ConfigurationManager.getAllowFlight(getDelegator());
 	}
 
 	public boolean getAllowNether() {
-		// TODO Auto-generated method stub
-		return false;
+		return ConfigurationManager.getAllowNether(getDelegator());
 	}
 
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ConfigurationManager.getAnimalSpawnLimit(getDelegator());
 	}
 
 	public Set<OfflinePlayer> getBannedPlayers() {
@@ -161,8 +157,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public long getConnectionThrottle() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ConfigurationManager.getConnectionThrottle(getDelegator());
 	}
 
 	public ConsoleCommandSender getConsoleSender() {
