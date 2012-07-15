@@ -8,7 +8,8 @@ import org.spout.bridge.module.hook.Hook;
 import org.spout.bridge.module.query.Query;
 
 public class VanillaModule implements MainModule {
-
+	private final VanillaQueryHandler query = new VanillaQueryHandler(this);
+	
 	public void onLoad() {
 		// TODO Auto-generated method stub
 		
@@ -36,8 +37,7 @@ public class VanillaModule implements MainModule {
 
 	@Override
 	public <T> void processQuery(Query<T> query) {
-		// TODO Auto-generated method stub
-		
+		this.query.processQuery(query);
 	}
 
 }

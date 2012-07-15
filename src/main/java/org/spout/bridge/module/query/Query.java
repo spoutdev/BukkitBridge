@@ -1,7 +1,13 @@
 package org.spout.bridge.module.query;
 
 /**
- * A query represents a request for data to the main module.
+ * A query represents a request for data to the main module. Queries are identified
+ * by their name. The name starts with a prefix, which identifies the type of query.
+ * The rest of the information is query-specific. The valid queries are as follows:
+ * <ul>
+ * <li>Configuration:^</li>
+ * </ul>
+ * Note that "^" is used to represent a space.
  * 
  * @param <T> The return type of the query.
  */

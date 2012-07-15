@@ -2,7 +2,9 @@ package org.spout.bridge;
 
 import org.spout.bridge.module.ModuleManager;
 import org.spout.bridge.module.conversion.ConversionManager;
+import org.spout.bridge.module.conversion.ConversionManager.Conversion;
 import org.spout.bridge.module.hook.HookManager;
+import org.spout.bridge.module.query.Query;
 
 public class Bridge {
 	/**
@@ -28,5 +30,29 @@ public class Bridge {
 	 */
 	public static void stop() {
 		ModuleManager.stop();
+	}
+	
+	/**
+	 * Executes the given query.
+	 */
+	public static <T> T callQuery(Query<T> q) {
+		ModuleManager.getMainModule().processQuery(q);
+		return q.getResult();
+	}
+	
+	/**
+	 * Executes the given hook.
+	 */
+	public static void callHook(String name, Object parameter) {
+		HookManager.callHook(name, parameter);
+	}
+	
+	/**
+	 * Converts the given object to the given class.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T convert(Object obj, Class<T> to) {
+		Conversion<? extends Object, T> c = ConversionManager.getConversion(obj.getClass(), to);
+		return (T) (c == null ? null : c.convert(obj));
 	}
 }
