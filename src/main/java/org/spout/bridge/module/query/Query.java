@@ -18,6 +18,10 @@ public class Query<T> {
 	private T result = null;
 	
 	public Query(String name, Object...args) {
+		configure(name, args);
+	}
+
+	public void configure(String name, Object ...args) {
 		this.name = name;
 		this.args = args;
 	}
