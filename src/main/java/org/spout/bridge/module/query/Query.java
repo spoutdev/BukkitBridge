@@ -6,6 +6,7 @@ package org.spout.bridge.module.query;
  * The rest of the information is query-specific. The valid queries are as follows:
  * <ul>
  * <li>Configuration:^</li>
+ * <li>Block:^</li>
  * </ul>
  * Note that "^" is used to represent a space.
  * 

@@ -6,10 +6,12 @@ public class VanillaQueryHandler {
 	@SuppressWarnings("unused")
 	private final VanillaModule module;
 	private final VanillaConfigurationQueryHandler config;
+	private final VanillaBlockQueryHandler block;
 	
 	public VanillaQueryHandler(VanillaModule module) {
 		this.module = module;
 		config = new VanillaConfigurationQueryHandler(module);
+		block = new VanillaBlockQueryHandler(module);
 	}
 	
 	public <T> void processQuery(Query<T> query) {
@@ -17,6 +19,7 @@ public class VanillaQueryHandler {
 		String prefix = findPrefix(name);
 		String body = findBody(name);
 		if(prefix.equals("Configuration")) config.processQuery(query, body);
+		else if(prefix.equals("Block")) block.processQuery(query, body);
 		else throw new IllegalArgumentException("The given prefix \"" + prefix + "\" is invalid.");
 	}
 	

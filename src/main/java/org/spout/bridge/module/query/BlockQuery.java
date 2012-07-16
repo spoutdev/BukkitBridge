@@ -1,9 +1,9 @@
 package org.spout.bridge.module.query;
 
 /**
- * A ConfigurationQuery is used to get info about the Configuration
- * of various elements within the game. Note that if using "*" for an
- * element, the type parameter <strong>must</strong> be List&lt;Object&gt;
+ * A BlokcQuery is used to get info about blocks within the server.
+ * Note that if using "*" for an element, the type parameter
+ * <strong>must</strong> be List&lt;Object&gt;
  * <br />
  * <br />
  * The configuration data requested is determined by the specified node
@@ -26,15 +26,15 @@ package org.spout.bridge.module.query;
  * 
  * @param <T> The result type of this query.
  */
-public class ConfigurationQuery<T> extends Query<T> {
+public class BlockQuery<T> extends Query<T> {
 	private final String node;
 	
 	/**
-	 * Creates a ConfigurationQuery for the given node with the
+	 * Creates a BlockQuery for the given node with the
 	 * given arguments.
 	 */
-	public ConfigurationQuery(String node, Object ...args) {
-		super("Configuration: " + node, args);
+	public BlockQuery(String node, Object ...args) {
+		super("Block: " + node, args);
 		this.node = node;
 	}
 	
