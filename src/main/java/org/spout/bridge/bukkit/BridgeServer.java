@@ -886,162 +886,130 @@ public class BridgeServer implements Server {
 //----------------------------------------------------------------------//
 
 	public Biome getBiome(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getBiome(world, x, z);
 	}
 
 	public double getHumidity(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getHumidity(world, x, z);
 	}
 
 	public double getTemperature(BridgeWorld world, int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getTemperature(world, x, z);
 	}
 
 	public void setBiome(BridgeWorld world, int x, int z, Biome bio) {
-		// TODO Auto-generated method stub
-		
+		getDelegate().setBiome(world, x, z);
 	}
 
 	public int getBlockTypeIdAt(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getBlockTypeIdAt(world, x, y, z);
 	}
 
 	public List<MetadataValue> getBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getBlockMetadata(world, x, y, z, key);
 	}
 
 	public boolean hasBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().hasBlockMetadata(world, x, y, z, key);
 	}
 
 	public void removeBlockMetadata(BridgeWorld world, int x, int y, int z, String key, Plugin owner) {
-		// TODO Auto-generated method stub
-		
+		getDelegate().removeBlockMetadata(world, x, y, z, key, owner);
 	}
 
 	public void setBlockMetadata(BridgeWorld world, int x, int y, int z, String key, MetadataValue val) {
-		// TODO Auto-generated method stub
-		
+		getDelegate().setBlockMetadata(world, x, y, z, key, val);
 	}
 
 	public boolean breakNaturally(BridgeWorld world, int x, int y, int z, ItemStack tool) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().breakNaturally(world, x, y, z, tool);
 	}
 
 	public int getBlockPower(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getBlockPower(world, x, y, z, face);
 	}
 
 	public byte getData(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getData(world, x, y, z);
 	}
 
 	public Collection<ItemStack> getDrops(BridgeWorld world, int x, int y, int z, ItemStack tool) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getDrops(world, x, y, z, tool);
 	}
 
 	public BlockFace getFace(BridgeWorld world, int x, int y, int z, int x2, int y2, int z2) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getFace(world, x, y, z, x2, y2, z2);
 	}
 
 	public byte getLightFromBlocks(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getLightFromBlocks(world, x, y, z);
 	}
 
 	public byte getLightFromSky(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getLightFromSky(world, x, y, z);
 	}
 
 	public byte getLightLevel(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getDelegate().getLightLevel(world, x, y, z);
 	}
 
 	public Location getLocation(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getLocation(world, x, y, z);
 	}
 
 	public PistonMoveReaction getPistonMoveReaction(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getPistonMoveReaction(world, x, y, z);
 	}
 
 	public Block getRelative(BridgeWorld world, int x, int y, int z, int modX, int modY, int modZ) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getRelative(world, x, y, z, modX, modY, modZ);
 	}
 
 	public BlockState getState(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getState(world, x, y, z);
 	}
 
 	public Material getType(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return getDelegate().getType(world, x, y, z);
 	}
 
 	public boolean isBlockFaceIndirectlyPowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isBlockFaceIndirectlyPowered(world, x, y, z, face);
 	}
 
 	public boolean isBlockFacePowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isBlockFacePowered(world, x, y, z, face);
 	}
 
 	public boolean isBlockIndirectlyPowered(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isBlockIndirectlyPowered(world, x, y, z);
 	}
 
 	public boolean isBlockPowered(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isBlockPowered(world, x, y, z);
 	}
 
 	public boolean isEmpty(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isEmpty(world, x, y, z);
 	}
 
 	public boolean isLiquid(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().isLiquid(world, x, y, z);
 	}
 
 	public void setData(BridgeWorld world, int x, int y, int z, byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-
+		getDelegate().setData(world, x, y, z, data, applyPhysics);
 	}
 
 	public void setType(BridgeWorld world, int x, int y, int z, Material type) {
-		// TODO Auto-generated method stub
-		
+		getDelegate().setType(world, x, y, z, type);
 	}
 
 	public boolean setTypeId(BridgeWorld world, int x, int y, int z, int id, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().setTypeId(world, x, y, z, id, applyPhysics);
 	}
 
 	public boolean setTypeIdAndData(BridgeWorld world, int x, int y, int z, int type, byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		return false;
+		return getDelegate().setTypeIdAndData(world, x, y, z, type, data, applyPhysics);
 	}
 }
