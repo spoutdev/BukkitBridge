@@ -2,6 +2,7 @@ package org.spout.bridge.bukkit.delegate;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,9 @@ import org.spout.bridge.bukkit.BridgeWorld;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 
 import com.avaje.ebean.config.ServerConfig;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
 
 /**
  * The ServerDelegate is delegated to by BridgeServer. Meaning it is indirectly
@@ -72,7 +76,32 @@ import com.avaje.ebean.config.ServerConfig;
  */
 @SuppressWarnings("deprecation")
 public class ServerDelegate extends Delegate<BridgeServer> {
-
+	private final Map<UUID, BridgeWorld> uworlds = new HashMap<UUID, BridgeWorld>(); //cache worlds via name and uuid for efficiency.
+	private final Map<String, BridgeWorld> sworlds = new HashMap<String, BridgeWorld>();
+	private final Cache<ChunkKey,BridgeChunk> chunks;
+	private final Cache<BlockKey,BridgeBlock> blocks;
+	
+	private final ChunkKey ckey = new ChunkKey();
+	private final BlockKey bkey = new BlockKey();
+	
+	public ServerDelegate() {
+		chunks = CacheBuilder.newBuilder().maximumSize(256 * 256 * 256).build(new CacheLoader<ChunkKey,BridgeChunk>() {
+			@Override
+			public BridgeChunk load(ChunkKey key) {
+				BridgeWorld w = getWorld(key.getUUID());
+				return new BridgeChunk(w, key.getX(), key.getZ());
+			}
+		});
+		
+		blocks = CacheBuilder.newBuilder().maximumSize(256 * 256 * 256).build(new CacheLoader<BlockKey,BridgeBlock>() {
+			@Override
+			public BridgeBlock load(BlockKey key) {
+				BridgeChunk c = getChunkAt(getWorld(key.getUUID()), key.getX() >> 4, key.getZ() >> 4);
+				return new BridgeBlock(c, key.getX(), key.getY(), key.getZ());
+			}
+		});
+	}
+	
 	public void banIP(String ip) {
 		// TODO Auto-generated method stub
 		
@@ -344,14 +373,14 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 		return null;
 	}
 
-	public World getWorld(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public BridgeWorld getWorld(String name) {
+		if(sworlds.containsKey(name)) return sworlds.get(name);
+		return null;//TODO check for new world.
 	}
 
-	public World getWorld(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+	public BridgeWorld getWorld(UUID id) {
+		if(uworlds.containsKey(id)) return uworlds.get(id);
+		return null;//TODO check for new world.
 	}
 
 	public File getWorldContainer() {
@@ -539,7 +568,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public BridgeChunk getChunkAt(BridgeWorld world, int x, int z) {
-		return new BridgeChunk(world, x, z);//TODO reuse existing instances.
+		return chunks.getUnchecked(ckey.configure(world.getUID().getMostSignificantBits(), world.getUID().getLeastSignificantBits(), x, z));
 	}
 
 	public Difficulty getDifficulty(BridgeWorld world) {
@@ -873,7 +902,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 //----------------------------------------------------------------------//
 
 	public BridgeBlock getBlockAt(BridgeWorld world, int x, int y, int z) {
-		return new BridgeBlock(this.getChunkAt(world, x, z), x, y, z);//TODO reuse existing instances.
+		return blocks.getUnchecked(bkey.configure(world.getUID().getMostSignificantBits(), world.getUID().getLeastSignificantBits(), x, y, z));
 	}
 
 	public boolean loadChunk(BridgeWorld world, int x, int z, boolean generate) {
@@ -1116,5 +1145,70 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	public boolean setTypeIdAndData(BridgeWorld world, int x, int y, int z, int type, byte data, boolean applyPhysics) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+//----//						Keys							 //-----//
+//----------------------------------------------------------------------//
+//----------------------------------------------------------------------//
+	
+	private class ChunkKey {
+		private long high;
+		private long low;
+		
+		private int x, z;
+		
+		public ChunkKey configure(long high, long low, int x, int z) {
+			this.high = high;
+			this.low = low;
+			this.x = x;
+			this.z = z;
+			return this;
+		}
+		
+		public UUID getUUID() {
+			return new UUID(high, low);
+		}
+		
+		public int getX() {
+			return x;
+		}
+		
+		public int getZ() {
+			return z;
+		}
+	}
+	
+	private class BlockKey {
+		private long high;
+		private long low;
+		
+		private int x, y, z;
+		
+		public BlockKey configure(long high, long low, int x, int y, int z) {
+			this.high = high;
+			this.low = low;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			return this;
+		}
+		
+		public UUID getUUID() {
+			return new UUID(high, low);
+		}
+		
+		public int getX() {
+			return x;
+		}
+		
+		public int getY() {
+			return y;
+		}
+		
+		public int getZ() {
+			return z;
+		}
 	}
 }

@@ -1,5 +1,8 @@
 package org.spout.bridge.module.query;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A BlokcQuery is used to get info about blocks within the server.
  * Note that if using "*" for an element, the type parameter
@@ -13,29 +16,48 @@ package org.spout.bridge.module.query;
  * is as follows:
  * <ul>
  * 
- * <li>server.nether.allow</li>
- * <li>server.end.allow</li>
- * <li>server.online</li>
- * <li>server.throttle</li>
- * 
- * <li>server.default.flight</li>
- * <li>server.default.spawnlimit.animal</li>
- * <li>server.default.gamemode</li>
+ * <li></li>
  * 
  * </ul>
  * 
  * @param <T> The result type of this query.
  */
-public class BlockQuery<T> extends Query<T> {
-	private final String node;
+public class BlockQuery<T> extends Query<T> implements Cloneable {
+	private static final Map<Thread, BlockQuery<?>> map = new HashMap<Thread, BlockQuery<?>>();
 	
 	/**
-	 * Creates a BlockQuery for the given node with the
+	 * Gets and configures the query for the current thread. Note that this query is reused, so if it needs
+	 * to be preserved for later, use the clone method.
+	 */
+	public static <U> BlockQuery<U> getInstance(String node, Object ...args) {
+		Thread t = Thread.currentThread();
+		@SuppressWarnings("unchecked")
+		BlockQuery<U> conf = (BlockQuery<U>) map.get(t);//Because generics data isn't stored at runtime,
+																		//a ConfigurationQuery<Boolean> can magically become
+																		//a ConfigurationQuery<Integer>. :D
+		if(conf == null) conf = new BlockQuery<U>(node, args);
+		else conf.configure(node, args);
+		return conf;
+		
+	}
+	
+	private String node;
+	
+	/**
+	 * Creates a BlockWuery for the given node with the
 	 * given arguments.
 	 */
-	public BlockQuery(String node, Object ...args) {
-		super("Block: " + node, args);
+	private BlockQuery(String node, Object ...args) {
+		super("Configuration: " + node, args);
 		this.node = node;
+	}
+	
+	/**
+	 * Changes the query to match the new state.
+	 */
+	public void configure(String node, Object ...args) {
+		this.node = node;
+		super.configure("Configuration: " + node, args);
 	}
 	
 	/**
@@ -44,5 +66,10 @@ public class BlockQuery<T> extends Query<T> {
 	public String getNode() {
 		return node;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public ConfigurationQuery<T> clone() throws CloneNotSupportedException {
+		return (ConfigurationQuery<T>) super.clone();
+	}
 }
