@@ -22,7 +22,7 @@ public class VanillaConfigurationQueryHandler extends VanillaNodeQueryHandler {
 //////////////////////////////////////////////////
 	
 	public void queryServerAllowEnd(Query<Boolean> q) {
-		q.setResult(WorldConfiguration.NETHER.LOAD.getBoolean());
+		q.setResult(WorldConfiguration.END.LOAD.getBoolean());
 	}
 	
 	public void queryServerAllowNether(Query<Boolean> q) {
