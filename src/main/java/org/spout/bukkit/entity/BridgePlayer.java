@@ -45,9 +45,11 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.api.chat.ChatArguments;
 import org.spout.bukkit.BridgeServer;
 import org.spout.bukkit.util.BridgeUtil;
 
+import org.spout.vanilla.chat.style.VanillaStyleHandler;
 import org.spout.vanilla.controller.living.Living;
 import org.spout.vanilla.controller.living.player.VanillaPlayer;
 
@@ -55,7 +57,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	private final org.spout.api.player.Player spoutPlayer;
 
 	public BridgePlayer(org.spout.api.player.Player spoutPlayer) {
-		super((Living) spoutPlayer.getEntity().getController());
+		super((Living) spoutPlayer);
 		this.spoutPlayer = spoutPlayer;
 	}
 
@@ -135,7 +137,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public void chat(String s) {
-		spoutPlayer.chat(s);
+		spoutPlayer.processCommand("say", ChatArguments.fromString(s, VanillaStyleHandler.ID));
 	}
 
 	@Override
@@ -285,7 +287,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public float getExp() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return 0;
 	}
 
 	@Override
@@ -295,7 +297,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public int getLevel() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return 0; //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -305,7 +307,7 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 
 	@Override
 	public int getTotalExperience() {
-		return 0;  //TODO: Adjust for usage with Spout!
+		return 0; //TODO: Adjust for usage with Spout!
 	}
 
 	@Override
@@ -641,5 +643,35 @@ public class BridgePlayer extends BridgeLivingEntity implements Player {
 	@Override
 	public boolean isValid() {
 		return true;  //TODO Um, not sure exactly what this means 100% but TODO :p
+	}
+
+	@Override
+	public int getExpToLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getFlySpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getWalkSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setFlySpeed(float arg0) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWalkSpeed(float arg0) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		
 	}
 }
