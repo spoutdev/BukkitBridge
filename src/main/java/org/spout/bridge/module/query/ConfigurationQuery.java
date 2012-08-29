@@ -20,10 +20,17 @@ import java.util.Map;
  * <li>server.end.allow</li>
  * <li>server.online</li>
  * <li>server.throttle</li>
+ * <li>server.ip</li>
+ * <li>server.port</li>
  * 
  * <li>server.default.flight</li>
  * <li>server.default.spawnlimit.animal</li>
+ * <li>server.default.spawnlimit.monster</li>
  * <li>server.default.gamemode</li>
+ * 
+ * <li>server.wgen.genstructures</li>
+ * 
+ * <li>server.player.max</li>
  * 
  * </ul>
  * 

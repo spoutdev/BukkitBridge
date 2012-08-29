@@ -61,6 +61,7 @@ import org.spout.bridge.bukkit.BridgeChunkSnapshot;
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
 import org.spout.bridge.bukkit.block.BridgeBlock;
+import org.spout.bridge.bukkit.command.BridgeConsoleCommandSender;
 
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.cache.Cache;
@@ -80,6 +81,8 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	private final Map<String, BridgeWorld> sworlds = new HashMap<String, BridgeWorld>();
 	private final Cache<ChunkKey,BridgeChunk> chunks;
 	private final Cache<BlockKey,BridgeBlock> blocks;
+	
+	private final BridgeConsoleCommandSender console = new BridgeConsoleCommandSender(getDelegator());
 	
 	private final ChunkKey ckey = new ChunkKey();
 	private final BlockKey bkey = new BlockKey();
@@ -103,8 +106,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 	
 	public void banIP(String ip) {
-		// TODO Auto-generated method stub
-		
+		BanManager.banIP(getDelegator(), ip);
 	}
 
 	public int broadcast(String msg) {
@@ -178,8 +180,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public Set<OfflinePlayer> getBannedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return BanManager.getBannedPlayers(getDelegator());
 	}
 
 	public String getBukkitVersion() {
@@ -196,8 +197,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public ConsoleCommandSender getConsoleSender() {
-		// TODO Auto-generated method stub
-		return null;
+		return console;
 	}
 
 	public GameMode getDefaultGameMode() {
@@ -205,8 +205,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public boolean getGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		return ConfigurationManager.getGenerateStructures(getDelegator());
 	}
 
 	public HelpMap getHelpMap() {
@@ -215,13 +214,11 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public Set<String> getIPBans() {
-		// TODO Auto-generated method stub
-		return null;
+		return BanManager.getIPBans(getDelegator());
 	}
 
 	public String getIp() {
-		// TODO Auto-generated method stub
-		return null;
+		return ConfigurationManager.getIp(getDelegator());
 	}
 
 	public Logger getLogger() {
@@ -235,18 +232,15 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public int getMaxPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ConfigurationManager.getMaxPlayers(getDelegator());
 	}
 
 	public int getMosterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ConfigurationManager.getMonsterSpawnLimit(getDelegator());
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServerName();
 	}
 
 	public Messenger getMessenger() {
@@ -299,8 +293,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public int getPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ConfigurationManager.getPort(getDelegator());
 	}
 
 	public List<Recipe> getRecipesFor(ItemStack result) {

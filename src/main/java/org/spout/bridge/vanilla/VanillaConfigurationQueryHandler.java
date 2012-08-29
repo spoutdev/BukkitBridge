@@ -1,5 +1,7 @@
 package org.spout.bridge.vanilla;
 
+import org.spout.api.Server;
+import org.spout.api.Spout;
 import org.spout.bridge.module.query.Query;
 import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.configuration.WorldConfiguration;
@@ -37,6 +39,14 @@ public class VanillaConfigurationQueryHandler extends VanillaNodeQueryHandler {
 		q.setResult(0l); //TODO Find a way of getting this.
 	}
 	
+	public void queryServerIp(Query<String> q) {
+		q.setResult(((Server) Spout.getEngine()).getBoundAddresses().get(0).getAddress().toString()); //TODO Figure out a better method here.
+	}
+	
+	public void queryServerPort(Query<Integer> q) {
+		q.setResult(0); //TODO Find a way of getting this.
+	}
+	
 	//server.default.*
 	
 	public void queryServerDefaultFlight(Query<Boolean> q) {
@@ -47,8 +57,23 @@ public class VanillaConfigurationQueryHandler extends VanillaNodeQueryHandler {
 		q.setResult((int) GameMode.SURVIVAL.getId()); //TODO Find a way of getting this.
 	}
 	
-	public void queryDefaultSpawnlimitAnimal(Query<Integer> q) {
+	public void queryServerDefaultSpawnlimitAnimal(Query<Integer> q) {
 		q.setResult(0); //TODO Find a way of getting this.
 	}
 	
+	public void queryServerDefaultSpawnlimitMonster(Query<Integer> q) {
+		q.setResult(0); //TODO Find a way of getting this.
+	}
+	
+	//server.wgen.*
+	
+	public void queryServerWgenGenstructures(Query<Boolean> q) {
+		q.setResult(false); //TODO Find a way of getting this.
+	}
+	
+	//server.player.*
+	
+	public void queryServerPlayerMax(Query<Integer> q) {
+		q.setResult(((Server) Spout.getEngine()).getMaxPlayers());
+	}
 }
