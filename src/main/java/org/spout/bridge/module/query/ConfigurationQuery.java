@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  * @param <T> The result type of this query.
  */
-public class ConfigurationQuery<T> extends Query<T> implements Cloneable {
+public class ConfigurationQuery<T> extends NodedQuery<T> implements Cloneable {
 	private static final Map<Thread, ConfigurationQuery<?>> map = new HashMap<Thread, ConfigurationQuery<?>>();
 	
 	/**
@@ -48,33 +48,14 @@ public class ConfigurationQuery<T> extends Query<T> implements Cloneable {
 		
 	}
 	
-	private String node;
-	
 	/**
 	 * Creates a ConfigurationQuery for the given node with the
 	 * given arguments.
 	 */
 	private ConfigurationQuery(String node, Object ...args) {
-		super("Configuration: " + node, args);
-		this.node = node;
+		super("Configuration", node, args);
 	}
 	
-	/**
-	 * Changes the query to match the new state.
-	 */
-	public void configure(String node, Object ...args) {
-		this.node = node;
-		super.configure("Configuration: " + node, args);
-	}
-	
-	/**
-	 * Gets the node being requested.
-	 */
-	public String getNode() {
-		return node;
-	}
-	
-	@SuppressWarnings("unchecked")
 	@Override
 	public ConfigurationQuery<T> clone() throws CloneNotSupportedException {
 		return (ConfigurationQuery<T>) super.clone();

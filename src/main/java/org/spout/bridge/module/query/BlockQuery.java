@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A BlokcQuery is used to get info about blocks within the server.
+ * A BlockQuery is used to get info about blocks within the server.
  * Note that if using "*" for an element, the type parameter
  * <strong>must</strong> be List&lt;Object&gt;
  * <br />
@@ -22,7 +22,7 @@ import java.util.Map;
  * 
  * @param <T> The result type of this query.
  */
-public class BlockQuery<T> extends Query<T> implements Cloneable {
+public class BlockQuery<T> extends NodedQuery<T> {
 	private static final Map<Thread, BlockQuery<?>> map = new HashMap<Thread, BlockQuery<?>>();
 	
 	/**
@@ -41,35 +41,16 @@ public class BlockQuery<T> extends Query<T> implements Cloneable {
 		
 	}
 	
-	private String node;
-	
 	/**
-	 * Creates a BlockWuery for the given node with the
+	 * Creates a BlockQuery for the given node with the
 	 * given arguments.
 	 */
 	private BlockQuery(String node, Object ...args) {
-		super("Configuration: " + node, args);
-		this.node = node;
+		super("Block", node, args);
 	}
 	
-	/**
-	 * Changes the query to match the new state.
-	 */
-	public void configure(String node, Object ...args) {
-		this.node = node;
-		super.configure("Configuration: " + node, args);
-	}
-	
-	/**
-	 * Gets the node being requested.
-	 */
-	public String getNode() {
-		return node;
-	}
-	
-	@SuppressWarnings("unchecked")
 	@Override
-	public ConfigurationQuery<T> clone() throws CloneNotSupportedException {
-		return (ConfigurationQuery<T>) super.clone();
+	public BlockQuery<T> clone() throws CloneNotSupportedException {
+		return (BlockQuery<T>) super.clone();
 	}
 }
