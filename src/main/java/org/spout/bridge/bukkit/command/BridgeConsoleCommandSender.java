@@ -56,14 +56,12 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public boolean hasPermission(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean hasPermission(Permission paramPermission) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -110,14 +108,11 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public boolean isOp() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void setOp(boolean paramBoolean) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
