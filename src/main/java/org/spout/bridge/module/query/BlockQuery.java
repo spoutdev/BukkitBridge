@@ -22,7 +22,7 @@ import java.util.Map;
  * 
  * @param <T> The result type of this query.
  */
-public class BlockQuery<T> extends NodedQuery<T> {
+public class BlockQuery<T> extends NodeQuery<T> {
 	private static final Map<Thread, BlockQuery<?>> map = new HashMap<Thread, BlockQuery<?>>();
 	
 	/**

@@ -36,7 +36,7 @@ import java.util.Map;
  * 
  * @param <T> The result type of this query.
  */
-public class ConfigurationQuery<T> extends NodedQuery<T> implements Cloneable {
+public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
 	private static final Map<Thread, ConfigurationQuery<?>> map = new HashMap<Thread, ConfigurationQuery<?>>();
 	
 	/**

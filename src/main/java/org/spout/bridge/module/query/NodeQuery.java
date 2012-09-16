@@ -5,7 +5,7 @@ package org.spout.bridge.module.query;
  * id, and then a path. The base is used for identifying the type e.g. "Block"
  * and the path is used for determining the actual information (e.g. "block.position.x")
  */
-public class NodedQuery<T> extends Query<T> implements Cloneable {
+public class NodeQuery<T> extends Query<T> implements Cloneable {
 	private String base;
 	private String node;
 	
@@ -13,7 +13,7 @@ public class NodedQuery<T> extends Query<T> implements Cloneable {
 	 * Creates a NodedQuery for the given node with the
 	 * given arguments.
 	 */
-	public NodedQuery(String base, String node, Object ...args) {
+	public NodeQuery(String base, String node, Object ...args) {
 		super(base + ": " + node, args);
 		this.node = node;
 		this.base = base;
@@ -43,8 +43,8 @@ public class NodedQuery<T> extends Query<T> implements Cloneable {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public NodedQuery<T> clone() throws CloneNotSupportedException {
-		return (NodedQuery<T>) super.clone();
+	public NodeQuery<T> clone() throws CloneNotSupportedException {
+		return (NodeQuery<T>) super.clone();
 	}
 
 }
