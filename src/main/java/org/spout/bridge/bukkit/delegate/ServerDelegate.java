@@ -81,11 +81,13 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	private final Map<String, BridgeWorld> sworlds = new HashMap<String, BridgeWorld>();
 	private final Cache<ChunkKey,BridgeChunk> chunks;
 	private final Cache<BlockKey,BridgeBlock> blocks;
+	private final Cache<LocationKey,Location> locations;
 	
 	private final BridgeConsoleCommandSender console = new BridgeConsoleCommandSender(getDelegator());
 	
 	private final ChunkKey ckey = new ChunkKey();
 	private final BlockKey bkey = new BlockKey();
+	private final LocationKey lkey = new LocationKey();
 	
 	public ServerDelegate() {
 		chunks = CacheBuilder.newBuilder().maximumSize(256 * 256 * 256).build(new CacheLoader<ChunkKey,BridgeChunk>() {
@@ -101,6 +103,14 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 			public BridgeBlock load(BlockKey key) {
 				BridgeChunk c = getChunkAt(getWorld(key.getUUID()), key.getX() >> 4, key.getZ() >> 4);
 				return new BridgeBlock(c, key.getX(), key.getY(), key.getZ());
+			}
+		});
+		
+		locations = CacheBuilder.newBuilder().maximumSize(256 * 256 * 256).build(new CacheLoader<LocationKey,Location>() {
+			@Override
+			public Location load(LocationKey key) {
+				BridgeWorld w = getWorld(key.getUUID());
+				return new Location(w, key.getX(), key.getY(), key.getZ());
 			}
 		});
 	}
@@ -1050,7 +1060,13 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public BlockFace getFace(BridgeWorld world, int x, int y, int z, int x2, int y2, int z2) {
-		// TODO Auto-generated method stub
+		//faster method maybe?
+		int modx = x2-x;
+		int mody = y2-y;
+		int modz = z2-z;
+		for(BlockFace f : BlockFace.values()) {
+			if(f.getModX() == modx && f.getModY() == mody && f.getModZ() == modz) return f;
+		}
 		return null;
 	}
 
@@ -1070,7 +1086,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public Location getLocation(BridgeWorld world, int x, int y, int z) {
-		return new Location(world, x, y, z);
+		return locations.getUnchecked(lkey.configure(world.getUID().getMostSignificantBits(), world.getUID().getLeastSignificantBits(), x, y, z));
 	}
 
 	public PistonMoveReaction getPistonMoveReaction(BridgeWorld world, int x, int y, int z) {
@@ -1079,8 +1095,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public Block getRelative(BridgeWorld world, int x, int y, int z, int modX, int modY, int modZ) {
-		// TODO Auto-generated method stub
-		return null;
+		return getBlockAt(world, x + modX, y + modY, z + modZ);
 	}
 
 	public BlockState getState(BridgeWorld world, int x, int y, int z) {
@@ -1089,8 +1104,7 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 	}
 
 	public Material getType(BridgeWorld world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		return Material.getMaterial(getBlockTypeIdAt(world, x, y, z));
 	}
 
 	public boolean isBlockFaceIndirectlyPowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
@@ -1180,6 +1194,38 @@ public class ServerDelegate extends Delegate<BridgeServer> {
 		private int x, y, z;
 		
 		public BlockKey configure(long high, long low, int x, int y, int z) {
+			this.high = high;
+			this.low = low;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+			return this;
+		}
+		
+		public UUID getUUID() {
+			return new UUID(high, low);
+		}
+		
+		public int getX() {
+			return x;
+		}
+		
+		public int getY() {
+			return y;
+		}
+		
+		public int getZ() {
+			return z;
+		}
+	}
+	
+	private class LocationKey {
+		private long high;
+		private long low;
+		
+		private int x, y, z;
+		
+		public LocationKey configure(long high, long low, int x, int y, int z) {
 			this.high = high;
 			this.low = low;
 			this.x = x;

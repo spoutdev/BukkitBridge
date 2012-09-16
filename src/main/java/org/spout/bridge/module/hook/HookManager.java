@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.spout.bridge.Bridge;
-
 public class HookManager {
 	private static Map<String, List<Hook<?>>> hooks;
 	
@@ -23,6 +21,6 @@ public class HookManager {
 	
 	public static void callHook(String name, Object parameter) {
 		List<Hook<?>> call = hooks.get(name);
-		for(Hook<?> h : call) h.invoke(Bridge.convert(parameter, h.getType()));
+		for(Hook<?> h : call) h.invoke(parameter);
 	}
 }

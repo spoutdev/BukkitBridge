@@ -2,7 +2,6 @@ package org.spout.bridge.module;
 
 import java.util.List;
 
-import org.spout.bridge.module.conversion.Converter;
 import org.spout.bridge.module.hook.Hook;
 
 /**
@@ -22,12 +21,6 @@ public interface Module {
 	 * for no hooks.
 	 */
 	public List<Hook<?>> getHooks();
-	
-	/**
-	 * Gets a list of converters this module uses. Can contain
-	 * BidiConverters. Can be null for no hooks.
-	 */
-	public List<Converter<?,?>> getConverters();
 	
 	/**
 	 * Called when everything has been set up and the module can initialize

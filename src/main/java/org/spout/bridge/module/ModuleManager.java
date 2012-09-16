@@ -3,9 +3,6 @@ package org.spout.bridge.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.spout.bridge.module.conversion.BidiConverter;
-import org.spout.bridge.module.conversion.ConversionManager;
-import org.spout.bridge.module.conversion.Converter;
 import org.spout.bridge.module.hook.Hook;
 import org.spout.bridge.module.hook.HookManager;
 
@@ -17,7 +14,6 @@ public class ModuleManager {
 		modules = new ArrayList<Module>();
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void load() {
 		List<Class<? extends Module>> classes = getClasses();
 		for (Class<? extends Module> clazz : classes) {
@@ -42,32 +38,6 @@ public class ModuleManager {
 			m.onLoad();
 			List<Hook<?>> hooks = m.getHooks();
 			if (hooks != null) for (Hook<?> h : hooks) if (h != null) HookManager.addHook(h);
-			
-			List<Converter<?, ?>> converters = m.getConverters();
-			if (converters != null) for (Converter<?, ?> c : converters) {
-				if (c == null) continue;
-				ConversionManager.addConverter(c);
-				if (c instanceof BidiConverter) {
-					final BidiConverter<?, ?> bc = (BidiConverter<?, ?>) c;
-					ConversionManager.addConverter(new Converter() {
-						@Override
-						public Object convertType(Object o) {
-							return bc.convertResult(o);
-						}
-
-						@Override
-						public Class getType() {
-							return bc.getResult();
-						}
-
-						@Override
-						public Class getResult() {
-							return bc.getType();
-						}
-
-					});
-				}
-			}
 		}
 		if(main == null) throw new IllegalStateException("There must be a MainModule!");
 	}

@@ -3,7 +3,6 @@ package org.spout.bridge.vanilla;
 import java.util.List;
 
 import org.spout.bridge.module.MainModule;
-import org.spout.bridge.module.conversion.Converter;
 import org.spout.bridge.module.hook.Hook;
 import org.spout.bridge.module.query.Query;
 
@@ -16,11 +15,6 @@ public class VanillaModule implements MainModule {
 	}
 
 	public List<Hook<?>> getHooks() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public List<Converter<?, ?>> getConverters() {
 		// TODO Auto-generated method stub
 		return null;
 	}
