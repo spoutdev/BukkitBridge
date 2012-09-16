@@ -19,8 +19,9 @@ public class HookManager {
 		hooks.put(hook.getName(), list);
 	}
 	
-	public static void callHook(String name, Object parameter) {
+	@SuppressWarnings("unchecked")
+	public static <T> void callHook(String name, T parameter) {
 		List<Hook<?>> call = hooks.get(name);
-		for(Hook<?> h : call) h.invoke(parameter);
+		for(Hook<?> h : call) ((Hook<T>) h).invoke(parameter);//Generics trickery ftw. May cause a ClassCastException at runtime, though...
 	}
 }

@@ -1,11 +1,16 @@
 package org.spout.bridge.module.query;
 
+/**
+ * A Query identified by a node. A node is essentially a string with a base
+ * id, and then a path. The base is used for identifying the type e.g. "Block"
+ * and the path is used for determining the actual information (e.g. "block.position.x")
+ */
 public class NodedQuery<T> extends Query<T> implements Cloneable {
 	private String base;
 	private String node;
 	
 	/**
-	 * Creates a BlockWuery for the given node with the
+	 * Creates a NodedQuery for the given node with the
 	 * given arguments.
 	 */
 	public NodedQuery(String base, String node, Object ...args) {
@@ -30,7 +35,7 @@ public class NodedQuery<T> extends Query<T> implements Cloneable {
 	}
 	
 	/**
-	 * Gets this configuration's base.
+	 * Gets this query's base.
 	 */
 	public String getBase() {
 		return base;

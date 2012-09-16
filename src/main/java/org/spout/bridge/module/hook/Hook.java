@@ -6,15 +6,6 @@ package org.spout.bridge.module.hook;
  * @param <T> The type of the object being passed.
  */
 public abstract class Hook<T> {
-	private final Class<T> type;
-	
-	public Hook(Class<T> type) {
-		this.type = type;
-	}
-	
-	public Class<T> getType() {
-		return type;
-	}
 	
 	public abstract String getName();
 	
@@ -29,5 +20,5 @@ public abstract class Hook<T> {
 	 * and calls "onEvent(T arg)". Then, the subclass of EventHook would use
 	 * the hook. Note that this subclass will be module specific (e.g. BukkitEventHook).
 	 */
-	public abstract void invoke(Object arg);
+	public abstract void invoke(T arg);
 }
