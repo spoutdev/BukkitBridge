@@ -13,7 +13,7 @@ import java.util.Map;
  * &lt;prefix&gt;ThisIsATestNode(). Note that the method needs to have only one argument.
  */
 public class NodeHandler {
-	private final Map<String, Method> nodes;
+	protected final Map<String, Method> nodes;
 	
 	public NodeHandler(String prefix) {
 		nodes = resolveMethods(prefix);

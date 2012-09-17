@@ -16,12 +16,12 @@ public class HookManager {
 		List<Hook<?>> list = hooks.get(hook.getName());
 		if(list == null) list = new ArrayList<Hook<?>>();
 		list.add(hook);
-		hooks.put(hook.getName(), list);
+		hooks.put(hook.getName().toUpperCase(), list);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T> void callHook(String name, T parameter) {
-		List<Hook<?>> call = hooks.get(name);
+		List<Hook<?>> call = hooks.get(name.toUpperCase());
 		for(Hook<?> h : call) ((Hook<T>) h).invoke(parameter);//Generics trickery ftw. May cause a ClassCastException at runtime, though...
 	}
 }
