@@ -27,7 +27,6 @@ public class VanillaModule implements MainModule {
 		this.query.processQuery(query);
 	}
 
-	@Override
 	public void processHook(Hook h) {
 		// TODO Auto-generated method stub
 		

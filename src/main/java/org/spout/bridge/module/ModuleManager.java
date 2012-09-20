@@ -49,6 +49,10 @@ public class ModuleManager {
 		return main;
 	}
 	
+	public static List<Module> getModules() {
+		return modules;
+	}
+	
 	private static List<Class<? extends Module>> getClasses() {
 		@SuppressWarnings("serial")
 		//TODO Get a list of the module names. A configuration that contains these needs to be written.

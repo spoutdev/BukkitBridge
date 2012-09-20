@@ -23,57 +23,57 @@ public class VanillaConfigurationQueryHandler extends NodeQueryHandler {
 //			  QUERY IMPLEMENTATIONS				//
 //////////////////////////////////////////////////
 	
-	public void queryServerAllowEnd(Query<Boolean> q) {
-		q.setResult(WorldConfiguration.END.LOAD.getBoolean());
+	public boolean queryServerAllowEnd(Query<Boolean> q) {
+		return WorldConfiguration.END.LOAD.getBoolean();
 	}
 	
-	public void queryServerAllowNether(Query<Boolean> q) {
-		q.setResult(WorldConfiguration.NETHER.LOAD.getBoolean());
+	public boolean queryServerAllowNether(Query<Boolean> q) {
+		return WorldConfiguration.NETHER.LOAD.getBoolean();
 	}
 	
-	public void queryServerOnline(Query<Boolean> q) {
-		q.setResult(VanillaConfiguration.ONLINE_MODE.getBoolean());
+	public boolean queryServerOnline(Query<Boolean> q) {
+		return VanillaConfiguration.ONLINE_MODE.getBoolean();
 	}
 	
-	public void queryServerThrottle(Query<Long> q) {
-		q.setResult(0l); //TODO Find a way of getting this.
+	public long queryServerThrottle(Query<Long> q) {
+		return 0l; //TODO Find a way of getting this.
 	}
 	
-	public void queryServerIp(Query<String> q) {
-		q.setResult(((Server) Spout.getEngine()).getBoundAddresses().get(0).getAddress().toString()); //TODO Figure out a better method here.
+	public String queryServerIp(Query<String> q) {
+		return ((Server) Spout.getEngine()).getBoundAddresses().get(0).getAddress().toString(); //TODO Figure out a better method here.
 	}
 	
-	public void queryServerPort(Query<Integer> q) {
-		q.setResult(0); //TODO Find a way of getting this.
+	public int queryServerPort(Query<Integer> q) {
+		return 0; //TODO Find a way of getting this.
 	}
 	
 	//server.default.*
 	
-	public void queryServerDefaultFlight(Query<Boolean> q) {
-		q.setResult(false); //TODO Find a way of getting this.
+	public boolean queryServerDefaultFlight(Query<Boolean> q) {
+		return false; //TODO Find a way of getting this.
 	}
 	
-	public void queryServerDefaultGamemode(Query<Integer> q) {
-		q.setResult((int) GameMode.SURVIVAL.getId()); //TODO Find a way of getting this.
+	public int queryServerDefaultGamemode(Query<Integer> q) {
+		return (int) GameMode.SURVIVAL.getId(); //TODO Find a way of getting this.
 	}
 	
-	public void queryServerDefaultSpawnlimitAnimal(Query<Integer> q) {
-		q.setResult(0); //TODO Find a way of getting this.
+	public int queryServerDefaultSpawnlimitAnimal(Query<Integer> q) {
+		return 0; //TODO Find a way of getting this.
 	}
 	
-	public void queryServerDefaultSpawnlimitMonster(Query<Integer> q) {
-		q.setResult(0); //TODO Find a way of getting this.
+	public int queryServerDefaultSpawnlimitMonster(Query<Integer> q) {
+		return 0; //TODO Find a way of getting this.
 	}
 	
 	//server.wgen.*
 	
-	public void queryServerWgenGenstructures(Query<Boolean> q) {
-		q.setResult(false); //TODO Find a way of getting this.
+	public boolean queryServerWgenGenstructures(Query<Boolean> q) {
+		return false; //TODO Find a way of getting this.
 	}
 	
 	//server.player.*
 	
-	public void queryServerPlayerMax(Query<Integer> q) {
-		q.setResult(((Server) Spout.getEngine()).getMaxPlayers());
+	public int queryServerPlayerMax(Query<Integer> q) {
+		return ((Server) Spout.getEngine()).getMaxPlayers();
 	}
 }

@@ -1,5 +1,7 @@
 package org.spout.bridge.module;
 
+import org.spout.bridge.module.hook.Hook;
+
 /**
  * A module in the bridge.
  */
@@ -25,4 +27,10 @@ public interface Module {
 	 * Called when the bridge is being shut down. This should shut down the API.
 	 */
 	public void onDisable();
+
+	
+	/**
+	 * Processes the given Hook.
+	 */
+	public void processHook(Hook h);
 }
