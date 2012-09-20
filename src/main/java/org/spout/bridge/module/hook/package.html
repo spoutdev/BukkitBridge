@@ -1,0 +1,11 @@
+<html>
+<body>
+<p>The hook package is used for the creation and processing of hooks. {@link org.spout.bridge.module.hook.Hook Hooks} are used
+to communicate between modules. The {@link org.spout.bridge.module.hook.Query Query} subclass of Hook can be used to retrieve
+information from a module, whereas the normal Hook class can only send it. Because of this, Hooks are used by modules to change
+data (set methods) and Queries are used to retrieve data (get methods). The {@link org.spout.bridge.module.hook.NodeQuery NodeQuery}
+class is used to deal with Queries based off of {@link org.spout.bridge.module.NodeHandler nodes} and is used by most of Bridge
+due to the organization provided by nodes. The {@link org.spout.bridge.module.hook.NodeQueryHandler NodeQueryHandler} class is
+a subclass provided to make parsing NodeQueries easier.
+</body>
+</html>

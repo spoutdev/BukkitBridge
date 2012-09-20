@@ -2,8 +2,8 @@ package org.spout.bridge.vanilla;
 
 import org.spout.api.Server;
 import org.spout.api.Spout;
-import org.spout.bridge.module.query.NodeQueryHandler;
-import org.spout.bridge.module.query.Query;
+import org.spout.bridge.module.hook.NodeQueryHandler;
+import org.spout.bridge.module.hook.Query;
 import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.configuration.WorldConfiguration;
 import org.spout.vanilla.data.GameMode;

@@ -1,4 +1,4 @@
-package org.spout.bridge.module.query;
+package org.spout.bridge.module.hook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +35,11 @@ import java.util.Map;
  * </ul>
  * 
  * @param <T> The result type of this query.
+ * @author Pamelloes
+ * @version 1.0
+ * @see Hook
+ * @see Query
+ * @see NodeQuery
  */
 public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
 	private static final Map<Thread, ConfigurationQuery<?>> map = new HashMap<Thread, ConfigurationQuery<?>>();
@@ -42,6 +47,10 @@ public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
 	/**
 	 * Gets and configures the query for the current thread. Note that this query is reused, so if it needs
 	 * to be preserved for later, use the clone method.
+	 * 
+	 * @param node The Query's node.
+	 * @param args The Query's arguments.
+	 * @return The current Thread's ConfigurationQuery configured for the specified parameters.
 	 */
 	public static <U> ConfigurationQuery<U> getInstance(String node, Object ...args) {
 		Thread t = Thread.currentThread();
@@ -58,6 +67,9 @@ public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
 	/**
 	 * Creates a ConfigurationQuery for the given node with the
 	 * given arguments.
+	 * 
+	 * @param node The Query's node.
+	 * @param args The Query's arguments.
 	 */
 	private ConfigurationQuery(String node, Object ...args) {
 		super("Configuration", node, args);

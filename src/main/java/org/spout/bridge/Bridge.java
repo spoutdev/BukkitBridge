@@ -1,16 +1,18 @@
 package org.spout.bridge;
 
 import org.spout.bridge.module.ModuleManager;
-import org.spout.bridge.module.hook.HookManager;
-import org.spout.bridge.module.query.Query;
+import org.spout.bridge.module.hook.Hook;
+import org.spout.bridge.module.hook.Query;
 
+/**
+ * Static utility class used for various high-level Bridge functions.
+ */
 public class Bridge {
 	/**
 	 * Starts Bridge. Called by a plugin.
 	 */
 	public static void start() {
 		//Setup managers.
-		HookManager.init();
 		ModuleManager.init();
 		
 		//Load the modules. This provides conversions and hooks for the respective managers.
@@ -38,7 +40,8 @@ public class Bridge {
 	/**
 	 * Executes the given hook.
 	 */
-	public static void callHook(String name, Object parameter) {
-		HookManager.callHook(name, parameter);
+	public static void callHook(Hook h) {
+		if(h instanceof Query) callQuery((Query<?>) h);
+		else ModuleManager.getMainModule().processHook(h);
 	}
 }

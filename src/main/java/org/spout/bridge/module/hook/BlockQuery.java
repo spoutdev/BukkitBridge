@@ -1,4 +1,4 @@
-package org.spout.bridge.module.query;
+package org.spout.bridge.module.hook;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +21,11 @@ import java.util.Map;
  * </ul>
  * 
  * @param <T> The result type of this query.
+ * @author Pamelloes
+ * @version 1.0
+ * @see Hook
+ * @see Query
+ * @see NodeQuery
  */
 public class BlockQuery<T> extends NodeQuery<T> {
 	private static final Map<Thread, BlockQuery<?>> map = new HashMap<Thread, BlockQuery<?>>();
@@ -28,6 +33,10 @@ public class BlockQuery<T> extends NodeQuery<T> {
 	/**
 	 * Gets and configures the query for the current thread. Note that this query is reused, so if it needs
 	 * to be preserved for later, use the clone method.
+	 * 
+	 * @param node The Query's node.
+	 * @param args The Query's arguments.
+	 * @return The current Thread's BlockQuery configured for the specified parameters.
 	 */
 	public static <U> BlockQuery<U> getInstance(String node, Object ...args) {
 		Thread t = Thread.currentThread();
@@ -44,6 +53,9 @@ public class BlockQuery<T> extends NodeQuery<T> {
 	/**
 	 * Creates a BlockQuery for the given node with the
 	 * given arguments.
+	 * 
+	 * @param node The Query's node.
+	 * @param args The Query's arguments.
 	 */
 	private BlockQuery(String node, Object ...args) {
 		super("Block", node, args);

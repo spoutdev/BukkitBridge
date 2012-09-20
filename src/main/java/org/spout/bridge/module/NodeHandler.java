@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The NodeHandler class will process the current instance's methods for ones that
+ * <p>The NodeHandler class will process the current instance's methods for ones that
  * match the node format. The subclass, can then use the processNode() method to
- * find a list of methods that match the given node.
- * <br />
- * <br />
- * A node is a period-separated list used to denote a hierarchical relationship in this
+ * find a list of methods that match the given node.</p>
+ * 
+ * <h2 id="node">Nodes</h2>
+ * <p>A node is a period-separated list used to denote a hierarchical relationship in this
  * case. In general it matches the format used to identify a Java class, for instance:
  * "this.is.a.node" is a node where the highest level segment is "this" and the subsequent
  * segments are of lesser significance as they specify more specific parts. Within Bridge,
@@ -24,29 +24,30 @@ import java.util.Map;
  * a default server value. After that, the "spawnlimit" node is found indicating that
  * the value being searched for. Finally, the last part of the node is "animal" indicating
  * it is the animal spawn limit the node is identifying, not the monster spawn limit. It is
- * important to note that <strong>nodes are not case sensitive</strong>.
- * <br />
- * <br />
- * The NodeHandler classes recognizes a method as a "node method" if the methods name starts
+ * important to note that <strong>nodes are not case sensitive</strong>.</p>
+ * 
+ * <h2>"Node Methods"</h2>
+ * <p>The NodeHandler classes recognizes a method as a "node-method" if the methods name starts
  * with the prefix given in the constructor, followed by the different parts of the node each
  * capitalized. For instance, if the prefix is "query", then the method "queryServerDefaultSpawnlimitAnimal"
  * would be mapped to the node "server.default.spawnlimit.animal". Then, if an object was to
  * invoke <em>processNode("server.default.spawnlimit.animal")</em>, that method would be among
- * the list returned.  It is important to note that <strong>methods must be public</strong>.
- * <br />
- * <br />
- * It is also important to realize that the NodeHandler class calculates the list of methods
+ * the list returned.  It is important to note that <strong>methods must be public</strong>.</p>
+ * 
+ * <p>It is also important to realize that the NodeHandler class calculates the list of methods
  * on a per-instance basis. This is beneficial because this means that you can subclass
  * NodeHandler and add a "node-method" and it will pick it up, however this also means
  * that you should try to avoid instantiating NodeHandlers whenever possible and try to re-use
  * instances instead. It is also important to note that the behavior under the event that
  * a method is overwritten in a subclass, that the way NodeHandler will treat the overwritten
- * method is undefined because each node can only have one method mapped to it.
+ * method is undefined because each node can only have one method mapped to it.</p>
  * 
  * @author Pamelloes
  * @version 1.0
+ * 
+ * @see org.spout.bridge.module.hook.NodeQueryHandler
  */
-public class NodeHandler {
+public abstract class NodeHandler {
 	/**
 	 * The map containing nodes and their corresponding methods.
 	 */
@@ -65,6 +66,7 @@ public class NodeHandler {
 	 * Finds all node methods.
 	 * 
 	 * @param prefix The prefix used to identify "node-methods"
+	 * @return A map of nodes to methods.
 	 */
 	private Map<String, Method> resolveMethods(String prefix) {
 		Map<String, Method> found = new HashMap<String, Method>();

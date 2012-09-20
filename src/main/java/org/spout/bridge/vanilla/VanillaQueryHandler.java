@@ -1,6 +1,6 @@
 package org.spout.bridge.vanilla;
 
-import org.spout.bridge.module.query.Query;
+import org.spout.bridge.module.hook.Query;
 
 public class VanillaQueryHandler {
 	@SuppressWarnings("unused")

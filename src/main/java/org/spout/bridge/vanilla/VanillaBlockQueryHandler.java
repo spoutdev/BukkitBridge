@@ -1,6 +1,6 @@
 package org.spout.bridge.vanilla;
 
-import org.spout.bridge.module.query.NodeQueryHandler;
+import org.spout.bridge.module.hook.NodeQueryHandler;
 
 /**
  * This class is used to handle requests for information about blocks..

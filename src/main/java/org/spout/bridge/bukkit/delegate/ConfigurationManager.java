@@ -3,7 +3,7 @@ package org.spout.bridge.bukkit.delegate;
 import org.bukkit.GameMode;
 import org.spout.bridge.Bridge;
 import org.spout.bridge.bukkit.BridgeServer;
-import org.spout.bridge.module.query.ConfigurationQuery;
+import org.spout.bridge.module.hook.ConfigurationQuery;
 
 public class ConfigurationManager {
 

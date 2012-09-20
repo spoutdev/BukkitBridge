@@ -1,26 +1,14 @@
 package org.spout.bridge.module;
 
-import java.util.List;
-
-import org.spout.bridge.module.hook.Hook;
-
 /**
  * A module in the bridge.
  */
 public interface Module {
 	
 	/**
-	 * Called when the module is loaded. This is called immediately
-	 * before getHooks() and getConverters(), so any processing for
-	 * them should (probably) be done here.
+	 * Called when the module is loaded.
 	 */
 	public void onLoad();
-	
-	/**
-	 * Gets a list of the hooks this module uses. Can be null
-	 * for no hooks.
-	 */
-	public List<Hook<?>> getHooks();
 	
 	/**
 	 * Called when everything has been set up and the module can initialize
@@ -29,7 +17,7 @@ public interface Module {
 	 * <br />
 	 * <br />
 	 * Some things that should probably be done here is loading and activating plugins,
-	 * registering for events, doing any intial configuration for the API, etc.
+	 * registering for events, doing any initial configuration for the API, etc.
 	 */
 	public void onEnable();
 	

@@ -1,10 +1,8 @@
 package org.spout.bridge.vanilla;
 
-import java.util.List;
-
 import org.spout.bridge.module.MainModule;
 import org.spout.bridge.module.hook.Hook;
-import org.spout.bridge.module.query.Query;
+import org.spout.bridge.module.hook.Query;
 
 public class VanillaModule implements MainModule {
 	private final VanillaQueryHandler query = new VanillaQueryHandler(this);
@@ -12,11 +10,6 @@ public class VanillaModule implements MainModule {
 	public void onLoad() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public List<Hook<?>> getHooks() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public void onEnable() {
@@ -32,6 +25,12 @@ public class VanillaModule implements MainModule {
 	@Override
 	public <T> void processQuery(Query<T> query) {
 		this.query.processQuery(query);
+	}
+
+	@Override
+	public void processHook(Hook h) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

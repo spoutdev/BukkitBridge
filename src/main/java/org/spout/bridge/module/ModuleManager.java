@@ -3,9 +3,6 @@ package org.spout.bridge.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.spout.bridge.module.hook.Hook;
-import org.spout.bridge.module.hook.HookManager;
-
 public class ModuleManager {
 	private static List<Module> modules;
 	private static MainModule main = null;
@@ -36,8 +33,6 @@ public class ModuleManager {
 			}
 			
 			m.onLoad();
-			List<Hook<?>> hooks = m.getHooks();
-			if (hooks != null) for (Hook<?> h : hooks) if (h != null) HookManager.addHook(h);
 		}
 		if(main == null) throw new IllegalStateException("There must be a MainModule!");
 	}
