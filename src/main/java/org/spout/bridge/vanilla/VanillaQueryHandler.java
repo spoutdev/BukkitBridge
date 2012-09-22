@@ -1,5 +1,6 @@
 package org.spout.bridge.vanilla;
 
+import org.spout.bridge.module.hook.NodeQuery;
 import org.spout.bridge.module.hook.Query;
 
 public class VanillaQueryHandler {
@@ -15,16 +16,11 @@ public class VanillaQueryHandler {
 	}
 	
 	public <T> void processQuery(Query<T> query) {
-		String name = query.getName();//All processing is done based off of the name, NOT the class.
-		String prefix = findPrefix(name);
-		if(prefix.equals("Configuration")) config.processQuery(query);
-		else if(prefix.equals("Block")) block.processQuery(query);
+		if(!(query instanceof NodeQuery)) return;
+		NodeQuery<T> nq = (NodeQuery<T>) query;
+		String prefix = nq.getBase();
+		if(prefix.equals("Configuration")) config.processQuery(nq);
+		else if(prefix.equals("Block")) block.processQuery(nq);
 		else throw new IllegalArgumentException("The given prefix \"" + prefix + "\" is invalid.");
-	}
-	
-	private String findPrefix(String name) {
-		int end = name.indexOf(": ");
-		if(end < 0) throw new IllegalArgumentException("The given query name \"" + name + "\" is invalid because it does not contain a prefix.");
-		return name.substring(0, end);
 	}
 }

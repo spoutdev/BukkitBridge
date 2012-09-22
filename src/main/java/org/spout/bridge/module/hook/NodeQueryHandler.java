@@ -29,15 +29,15 @@ public abstract class NodeQueryHandler extends NodeHandler {
 	}
 
 	/**
-	 * Processes the given Query. This method invokes all off the
-	 * relevant methods for the Query and then sets the result to
+	 * Processes the given NodeQuery. This method invokes all off the
+	 * relevant methods for the NodeQuery and then sets the result to
 	 * the result of the given methods (they are put into a list if
 	 * there is more than one).
 	 * 
-	 * @param q The query to process.
+	 * @param q The NodeQuery to process.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> void processQuery(Query<T> q) {
+	public <T> void processQuery(NodeQuery<T> q) {
 		String node = q.getName().substring(q.getName().indexOf(": ") + 2);
 		List<Method> methods = processNode(node);
 		if(methods.size() == 0) q.setResult(null);

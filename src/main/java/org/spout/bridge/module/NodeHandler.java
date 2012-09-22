@@ -73,7 +73,7 @@ public abstract class NodeHandler {
 		Class<?> c = getClass();
 		do {
 			for(Method m : c.getMethods()) {
-				if(!m.getName().startsWith(prefix.toLowerCase()) || m.getParameterTypes().length != 1) continue;
+				if(!m.getName().startsWith(prefix.toLowerCase())) continue;
 				String[] parts = m.getName().split("(?=\\p{Upper})");
 				if(parts.length <= 1) continue;
 				StringBuilder name = new StringBuilder();

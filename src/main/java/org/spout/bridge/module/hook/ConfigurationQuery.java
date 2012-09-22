@@ -38,10 +38,11 @@ import java.util.Map;
  * @author Pamelloes
  * @version 1.0
  * @see Hook
+ * @see NodeHook
  * @see Query
  * @see NodeQuery
  */
-public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
+public class ConfigurationQuery<T> extends GenericNodeQuery<T> implements Cloneable {
 	private static final Map<Thread, ConfigurationQuery<?>> map = new HashMap<Thread, ConfigurationQuery<?>>();
 	
 	/**
@@ -75,6 +76,7 @@ public class ConfigurationQuery<T> extends NodeQuery<T> implements Cloneable {
 		super("Configuration", node, args);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public ConfigurationQuery<T> clone() throws CloneNotSupportedException {
 		return (ConfigurationQuery<T>) super.clone();

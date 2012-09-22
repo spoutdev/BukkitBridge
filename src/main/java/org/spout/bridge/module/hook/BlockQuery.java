@@ -24,10 +24,11 @@ import java.util.Map;
  * @author Pamelloes
  * @version 1.0
  * @see Hook
+ * @see NodeHook
  * @see Query
  * @see NodeQuery
  */
-public class BlockQuery<T> extends NodeQuery<T> {
+public class BlockQuery<T> extends GenericNodeQuery<T> {
 	private static final Map<Thread, BlockQuery<?>> map = new HashMap<Thread, BlockQuery<?>>();
 	
 	/**
@@ -61,6 +62,7 @@ public class BlockQuery<T> extends NodeQuery<T> {
 		super("Block", node, args);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public BlockQuery<T> clone() throws CloneNotSupportedException {
 		return (BlockQuery<T>) super.clone();
