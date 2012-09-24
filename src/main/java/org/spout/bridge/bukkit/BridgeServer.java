@@ -1,7 +1,6 @@
 package org.spout.bridge.bukkit;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,1007 +8,440 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.bukkit.BlockChangeDelegate;
-import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
-import org.bukkit.TreeType;
 import org.bukkit.World;
-import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LightningStrike;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.generator.BlockPopulator;
-import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.util.Vector;
-import org.spout.bridge.bukkit.delegate.ServerDelegate;
+import org.spout.bridge.bukkit.manager.ServerManager;
+import org.spout.bridge.bukkit.manager.WorldManager;
 
 import com.avaje.ebean.config.ServerConfig;
 
 /**
- * BridgeServer is the "focus" of the Bukkit module. The entire API delegates its method calls
- * here (eventually). BridgeServer then delegates the method calls to ServerDelegate for further
- * processing.
+ * BridgeServer is Bridge's version of Bukkit's Server.
  */
-@SuppressWarnings("deprecation")
 public class BridgeServer implements Server {
-	private ServerDelegate delegate;
 	
 	public BridgeServer() {
-		delegate = new ServerDelegate();
-		delegate.setDelegator(this);
-	}
-	
-	public ServerDelegate getDelegate() {
-		return delegate;
 	}
 	
 	@Override
 	public boolean addRecipe(Recipe recipe) {
-		return getDelegate().addRecipe(recipe);
+		return ServerManager.addRecipe(recipe);
 	}
 
 	@Override
 	public void banIP(String ip) {
-		getDelegate().banIP(ip);
+		ServerManager.banIP(ip);
 	}
 
 	@Override
 	public int broadcast(String msg, String perm) {
-		return getDelegate().broadcast(msg, perm);
+		return ServerManager.broadcast(msg, perm);
 	}
 
 	@Override
 	public int broadcastMessage(String msg) {
-		return getDelegate().broadcast(msg);
+		return ServerManager.broadcast(msg);
 	}
 
 	@Override
 	public void clearRecipes() {
-		getDelegate().clearRecipes();
+		ServerManager.clearRecipes();
 	}
 
 	@Override
 	public void configureDbConfig(ServerConfig config) {
-		getDelegate().configureDbConfig(config);
+		ServerManager.configureDbConfig(config);
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
-		return getDelegate().createInventory(owner, type);
+		return ServerManager.createInventory(owner, type);
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size) {
-		return getDelegate().createInventory(owner, size);
+		return ServerManager.createInventory(owner, size);
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size, String title) {
-		return getDelegate().createInventory(owner, size, title);
+		return ServerManager.createInventory(owner, size, title);
 	}
 
 	@Override
 	public MapView createMap(World world) {
-		return getDelegate().createMap(world);
+		return ServerManager.createMap(world);
 	}
 
 	@Override
 	public World createWorld(WorldCreator creator) {
-		return getDelegate().createWorld(creator);
+		return ServerManager.createWorld(creator);
 	}
 
 	@Override
 	public boolean dispatchCommand(CommandSender source, String commandline) throws CommandException {
-		return getDelegate().dispatchCommand(source, commandline);
+		return ServerManager.dispatchCommand(source, commandline);
 	}
 
 	@Override
 	public boolean getAllowEnd() {
-		return getDelegate().getAllowEnd();
+		return ServerManager.getAllowEnd();
 	}
 
 	@Override
 	public boolean getAllowFlight() {
-		return getDelegate().getAllowFlight();
+		return ServerManager.getAllowFlight();
 	}
 
 	@Override
 	public boolean getAllowNether() {
-		return getDelegate().getAllowNether();
+		return ServerManager.getAllowNether();
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		return getDelegate().getAnimalSpawnLimit();
+		return ServerManager.getAnimalSpawnLimit();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		return getDelegate().getBannedPlayers();
+		return ServerManager.getBannedPlayers();
 	}
 
 	@Override
 	public String getBukkitVersion() {
-		return getDelegate().getBukkitVersion();
+		return ServerManager.getBukkitVersion();
 	}
 
 	@Override
 	public Map<String, String[]> getCommandAliases() {
-		return getDelegate().getCommandAliases();
+		return ServerManager.getCommandAliases();
 	}
 
 	@Override
 	public long getConnectionThrottle() {
-		return getDelegate().getConnectionThrottle();
+		return ServerManager.getConnectionThrottle();
 	}
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		return getDelegate().getConsoleSender();
+		return ServerManager.getConsoleSender();
 	}
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		return getDelegate().getDefaultGameMode();
+		return ServerManager.getDefaultGameMode();
 	}
 
 	@Override
 	public boolean getGenerateStructures() {
-		return getDelegate().getGenerateStructures();
+		return ServerManager.getGenerateStructures();
 	}
 
 	@Override
 	public HelpMap getHelpMap() {
-		return getDelegate().getHelpMap();
+		return ServerManager.getHelpMap();
 	}
 
 	@Override
 	public Set<String> getIPBans() {
-		return getDelegate().getIPBans();
+		return ServerManager.getIPBans();
 	}
 
 	@Override
 	public String getIp() {
-		return getDelegate().getIp();
+		return ServerManager.getIp();
 	}
 
 	@Override
 	public Logger getLogger() {
-		return getDelegate().getLogger();
+		return ServerManager.getLogger();
 	}
 
 	@Override
 	public MapView getMap(short id) {
-		return getDelegate().getMap(id);
+		return ServerManager.getMap(id);
 	}
 
 	@Override
 	public int getMaxPlayers() {
-		return getDelegate().getMaxPlayers();
+		return ServerManager.getMaxPlayers();
 	}
 
 	@Override
 	public Messenger getMessenger() {
-		return getDelegate().getMessenger();
+		return ServerManager.getMessenger();
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		return getDelegate().getMosterSpawnLimit();
+		return ServerManager.getMosterSpawnLimit();
 	}
 
 	@Override
 	public String getName() {
-		return getDelegate().getName();
+		return ServerManager.getName();
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name) {
-		return getDelegate().getOfflinePlayer(name);
+		return ServerManager.getOfflinePlayer(name);
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		return getDelegate().getOfflinePlayers();
+		return ServerManager.getOfflinePlayers();
 	}
 
 	@Override
 	public boolean getOnlineMode() {
-		return getDelegate().getOnlineMode();
+		return ServerManager.getOnlineMode();
 	}
 
 	@Override
 	public Player[] getOnlinePlayers() {
-		return getDelegate().getOnlinePlayers();
+		return ServerManager.getOnlinePlayers();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
-		return getDelegate().getOperators();
+		return ServerManager.getOperators();
 	}
 
 	@Override
 	public Player getPlayer(String name) {
-		return getDelegate().getPlayer(name);
+		return ServerManager.getPlayer(name);
 	}
 
 	@Override
 	public Player getPlayerExact(String name) {
-		return getDelegate().getPlayerExact(name);
+		return ServerManager.getPlayerExact(name);
 	}
 
 	@Override
 	public PluginCommand getPluginCommand(String name) {
-		return getDelegate().getPluginCommand(name);
+		return ServerManager.getPluginCommand(name);
 	}
 
 	@Override
 	public PluginManager getPluginManager() {
-		return getDelegate().getPluginManager();
+		return ServerManager.getPluginManager();
 	}
 
 	@Override
 	public int getPort() {
-		return getDelegate().getPort();
+		return ServerManager.getPort();
 	}
 
 	@Override
 	public List<Recipe> getRecipesFor(ItemStack result) {
-		return getDelegate().getRecipesFor(result);
+		return ServerManager.getRecipesFor(result);
 	}
 
 	@Override
 	public BukkitScheduler getScheduler() {
-		return getDelegate().getScheduler();
+		return ServerManager.getScheduler();
 	}
 
 	@Override
 	public String getServerId() {
-		return getDelegate().getServerId();
+		return ServerManager.getServerId();
 	}
 
 	@Override
 	public String getServerName() {
-		return getDelegate().getServerName();
+		return ServerManager.getServerName();
 	}
 
 	@Override
 	public ServicesManager getServicesManager() {
-		return getDelegate().getServicesManager();
+		return ServerManager.getServicesManager();
 	}
 
 	@Override
 	public int getSpawnRadius() {
-		return getDelegate().getSpawnRadius();
+		return ServerManager.getSpawnRadius();
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns() {
-		return getDelegate().getTicksPerAnimalSpawns();
+		return ServerManager.getTicksPerAnimalSpawns();
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns() {
-		return getDelegate().getTicksPerMonsterSpawns();
+		return ServerManager.getTicksPerMonsterSpawns();
 	}
 
 	@Override
 	public String getUpdateFolder() {
-		return getDelegate().getUpdateFolder();
+		return ServerManager.getUpdateFolder();
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
-		return getDelegate().getUpdateFolderFile();
+		return ServerManager.getUpdateFolderFile();
 	}
 
 	@Override
 	public String getVersion() {
-		return getDelegate().getVersion();
+		return ServerManager.getVersion();
 	}
 
 	@Override
 	public int getViewDistance() {
-		return getDelegate().getViewDistance();
+		return ServerManager.getViewDistance();
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		return getDelegate().getWaterAnimalSpawnLimit();
+		return ServerManager.getWaterAnimalSpawnLimit();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
-		return getDelegate().getWhitelistedPlayers();
+		return ServerManager.getWhitelistedPlayers();
 	}
 
 	@Override
 	public World getWorld(String name) {
-		return getDelegate().getWorld(name);
+		return WorldManager.getWorld(name);
 	}
 
 	@Override
 	public World getWorld(UUID id) {
-		return getDelegate().getWorld(id);
+		return WorldManager.getWorld(id);
 	}
 
 	@Override
 	public File getWorldContainer() {
-		return getDelegate().getWorldContainer();
+		return ServerManager.getWorldContainer();
 	}
 
 	@Override
 	public String getWorldType() {
-		return getDelegate().getWorldType();
+		return ServerManager.getWorldType();
 	}
 
 	@Override
 	public List<World> getWorlds() {
-		return getDelegate().getWorlds();
+		return ServerManager.getWorlds();
 	}
 
 	@Override
 	public boolean hasWhitelist() {
-		return getDelegate().hasWhitelist();
+		return ServerManager.hasWhitelist();
 	}
 
 	@Override
 	public boolean isPrimaryThread() {
-		return getDelegate().isPrimaryThread();
+		return ServerManager.isPrimaryThread();
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name) {
-		return getDelegate().matchPlayer(name);
+		return ServerManager.matchPlayer(name);
 	}
 
 	@Override
 	public Iterator<Recipe> recipeIterator() {
-		return getDelegate().recipeIterator();
+		return ServerManager.recipeIterator();
 	}
 
 	@Override
 	public void reload() {
-		getDelegate().reload();
+		ServerManager.reload();
 	}
 
 	@Override
 	public void reloadWhitelist() {
-		getDelegate().reloadWhitelist();
+		ServerManager.reloadWhitelist();
 	}
 
 	@Override
 	public void resetRecipes() {
-		getDelegate().resetRecipes();
+		ServerManager.resetRecipes();
 	}
 
 	@Override
 	public void savePlayers() {
-		getDelegate().savePlayers();
+		ServerManager.savePlayers();
 	}
 
 	@Override
 	public void setDefaultGameMode(GameMode mode) {
-		getDelegate().setDefaultGameMode(mode);
+		ServerManager.setDefaultGameMode(mode);
 	}
 
 	@Override
 	public void setSpawnRadius(int value) {
-		getDelegate().setSpawnRadius(value);
+		ServerManager.setSpawnRadius(value);
 	}
 
 	@Override
 	public void setWhitelist(boolean enable) {
-		getDelegate().setWhitelist(enable);
+		ServerManager.setWhitelist(enable);
 	}
 
 	@Override
 	public void shutdown() {
-		getDelegate().shutdown();
+		ServerManager.shutdown();
 	}
 
 	@Override
 	public void unbanIP(String ip) {
-		getDelegate().unbanIp(ip);
+		ServerManager.unbanIp(ip);
 	}
 
 	@Override
 	public boolean unloadWorld(String name, boolean save) {
-		return getDelegate().unloadWorld(name, save);
+		return ServerManager.unloadWorld(name, save);
 	}
 
 	@Override
 	public boolean unloadWorld(World world, boolean save) {
-		return getDelegate().unloadWorld(world, save);
+		return ServerManager.unloadWorld(world, save);
 	}
 
 	@Override
 	public boolean useExactLoginLocation() {
-		return getDelegate().useExactLoginLocation();
+		return ServerManager.useExactLoginLocation();
 	}
 
 	@Override
 	public String getMotd() {
-		return getDelegate().getMotd();
+		return ServerManager.getMotd();
 	}
-
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
-//----//				BridgeWorld Delegations					 //-----//
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return getDelegate().getListeningPluginChannels();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin plugin, String channel, byte[] message) {
-		getDelegate().sendPluginMessage(plugin, channel, message);
-	}
-
-	public List<MetadataValue> getWorldMetadata(BridgeWorld world, String metadataKey) {
-		return getDelegate().getWorldMetadata(world, metadataKey);
-	}
-
-	public boolean hasWorldMetadata(BridgeWorld world, String metadataKey) {
-		return getDelegate().hasWorldMetadata(world, metadataKey);
-	}
-
-	public void removeWorldMetadata(BridgeWorld world, String metadataKey, Plugin owningPlugin) {
-		getDelegate().removeWorldMetadata(world, metadataKey, owningPlugin);
-	}
-
-	public void setWorldMetadata(BridgeWorld world, String metadataKey, MetadataValue newMetadataValue) {
-		getDelegate().setWorldMetadata(world, metadataKey, newMetadataValue);
-	}
-
-	public boolean canGenerateStructures(BridgeWorld world) {
-		return getDelegate().canGenerateStructures(world);
-	}
-
-	public boolean createExplosion(BridgeWorld world, Location loc, float power) {
-		return createExplosion(world, loc.getX(), loc.getY(), loc.getZ(), power);
-	}
-
-	public boolean createExplosion(BridgeWorld world, Location loc, float power, boolean setFire) {
-		return createExplosion(world, loc.getX(), loc.getY(), loc.getZ(), power, setFire);
-	}
-
-	public boolean createExplosion(BridgeWorld world, double x, double y, double z, float power) {
-		return createExplosion(world, x, y, z, power, false);
-	}
-
-	public boolean createExplosion(BridgeWorld world, double x, double y, double z, float power, boolean setFire) {
-		return getDelegate().createExplosion(world, x, y, z, power, setFire);
-	}
-
-	public Item dropItem(BridgeWorld world, Location location, ItemStack item) {
-		return getDelegate().dropItem(world, location, item);
-	}
-
-	public Item dropItemNaturally(BridgeWorld world, Location location, ItemStack item) {
-		return getDelegate().dropItemNaturally(world, location, item);
-	}
-
-	public boolean generateTree(BridgeWorld world, Location location, TreeType type) {
-		return generateTree(world, location, type, null);
-	}
-
-	public boolean generateTree(BridgeWorld world, Location loc, TreeType type, BlockChangeDelegate delegate) {
-		return getDelegate().generateTree(world, loc, type, delegate);
-	}
-
-	public boolean getAllowAnimals(BridgeWorld world) {
-		return getDelegate().getAllowAnimals(world);
-	}
-
-	public boolean getAllowMonsters(BridgeWorld world) {
-		return getDelegate().getAllowMonsters(world);
-	}
-
-	public int getAnimalSpawnLimit(BridgeWorld world) {
-		return getDelegate().getAnimalSpawnLimit(world);
-	}
-
-	public Chunk getChunkAt(BridgeWorld world, Location location) {
-		return getDelegate().getChunkAt(world, location);
-	}
-
-	public Chunk getChunkAt(BridgeWorld world, Block block) {
-		return getDelegate().getChunkAt(world, block);
-	}
-
-	public Chunk getChunkAt(BridgeWorld world, int x, int z) {
-		return getDelegate().getChunkAt(world, x, z);
-	}
-
-	public Difficulty getDifficulty(BridgeWorld world) {
-		return getDelegate().getDifficulty(world);
-	}
-
-	public ChunkSnapshot getEmptyChunkSnapshot(BridgeWorld world, int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		return getDelegate().getEmptyChunkSnapshot(world, x, z, includeBiome, includeBiomeTempRain);
-	}
-
-	public List<Entity> getEntities(BridgeWorld world) {
-		return getDelegate().getEntities(world);
-	}
-
-	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> ...classes) {
-		return getDelegate().getEntitiesByClass(world, classes);
-	}
-
-	public <T extends Entity> Collection<T> getEntitiesByClass(BridgeWorld world, Class<T> cls) {
-		return getDelegate().getEntitiesByClass(world, cls);
-	}
-
-	public Collection<Entity> getEntitiesByClasses(BridgeWorld world, Class<?>... classes) {
-		return getDelegate().getEntitiesByClasses(world, classes);
-	}
-
-	public Environment getEnvironment(BridgeWorld world) {
-		return getDelegate().getEnvironment(world);
-	}
-
-	public long getFullTime(BridgeWorld world) {
-		return getDelegate().getFullTime(world);
-	}
-
-	public ChunkGenerator getGenerator(BridgeWorld world) {
-		return getDelegate().getGenerator(world);
-	}
-
-	public Block getHighestBlockAt(BridgeWorld world, Location location) {
-		return getHighestBlockAt(world, (int) location.getX(), (int) location.getZ());
-	}
-
-	public Block getHighestBlockAt(BridgeWorld world, int x, int z) {
-		return getDelegate().getHighestBlockAt(world, x, z);
-	}
-
-	public int getHighestBlockYAt(BridgeWorld world, Location location) {
-		return getHighestBlockYAt(world, (int) location.getX(), (int) location.getZ());
-	}
-
-	public int getHighestBlockYAt(BridgeWorld world, int x, int z) {
-		return getDelegate().getHighestBlockYAt(world, x, z);
-	}
-
-	public boolean getKeepSpawnInMemory(BridgeWorld world) {
-		return getDelegate().getKeepSpawnInMemory(world);
-	}
-
-	public List<LivingEntity> getLivingEntities(BridgeWorld world) {
-		return getDelegate().getLivingEntities(world);
-	}
-
-	public Chunk[] getLoadedChunks(BridgeWorld world) {
-		return getDelegate().getLoadedChunks(world);
-	}
-
-	public int getMaxHeight(BridgeWorld world) {
-		return getDelegate().getMaxHeight(world);
-	}
-
-	public String getName(BridgeWorld world) {
-		return getDelegate().getName(world);
-	}
-
-	public boolean getPVP(BridgeWorld world) {
-		return getDelegate().getPVP(world);
-	}
-
-	public int getMonsterSpawnLimit(BridgeWorld world) {
-		return getDelegate().getMonsterSpawnLimit(world);
-	}
-
-	public List<Player> getPlayers(BridgeWorld world) {
-		return getDelegate().getPlayers(world);
-	}
-
-	public List<BlockPopulator> getPopulators(BridgeWorld world) {
-		return getDelegate().getPopulators(world);
-	}
-
-	public int getSeaLevel(BridgeWorld world) {
-		return getDelegate().getSeaLevel(world);
-	}
-
-	public long getSeed(BridgeWorld world) {
-		return getDelegate().getSeed(world);
-	}
-
-	public Location getSpawnLocation(BridgeWorld world) {
-		return getDelegate().getSpawnLocation(world);
-	}
-
-	public int getThunderDuration(BridgeWorld world) {
-		return getDelegate().getThunderDuration(world);
-	}
-
-	public long getTicksPerAnimalSpawns(BridgeWorld world) {
-		return getDelegate().getTicksPerAnimalSpawns(world);
-	}
-
-	public long getTicksPerMonsterSpawns(BridgeWorld world) {
-		return getDelegate().getTicksPerMonsterSpawns(world);
-	}
-
-	public long getTime(BridgeWorld world) {
-		return getDelegate().getTime(world);
-	}
-
-	public int getWaterAnimalSpawnLimit(BridgeWorld world) {
-		return getDelegate().getWaterAnimalSpawnLimit(world);
-	}
-
-	public int getWeatherDuration(BridgeWorld world) {
-		return getDelegate().getWeatherDuration(world);
-	}
-
-	public File getWorldFolder(BridgeWorld world) {
-		return getDelegate().getWorldFolder(world);
-	}
-
-	public WorldType getWorldType(BridgeWorld world) {
-		return getDelegate().getWorldType(world);
-	}
-
-	public boolean hasStorm(BridgeWorld world) {
-		return getDelegate().hasStorm(world);
-	}
-
-	public boolean isAutoSave(BridgeWorld world) {
-		return getDelegate().isAutoSave(world);
-	}
-
-	public boolean isThundering(BridgeWorld world) {
-		return getDelegate().isThundering(world);
-	}
-
-	public void playEffect(BridgeWorld world, Location location, Effect effect, int data) {
-		playEffect(world, location, effect, data, -1);
-	}
-
-	public void playEffect(BridgeWorld world, Location location, Effect effect, int data, int radius) {
-		getDelegate().playEffect(world, location, effect, data, radius);
-	}
-
-	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, T data) {
-		playEffect(world, location, effect, data, -1);
-	}
-	
-	public <T> void playEffect(BridgeWorld world, Location location, Effect effect, T data, int radius) {
-		getDelegate().playEffect(world, location, effect, data, radius);
-	}
-
-	public boolean refreshChunk(BridgeWorld world, int x, int z) {
-		return getDelegate().refreshChunk(world, x, z);
-	}
-
-	public boolean regenerateChunk(BridgeWorld world, int x, int z) {
-		return getDelegate().regenerateChunk(world, x, z);
-	}
-
-	public void save(BridgeWorld world) {
-		getDelegate().save(world);
-	}
-
-	public void setAnimalSpawnLimit(BridgeWorld world, int limit) {
-		getDelegate().setAnimalSpawnLimit(world, limit);
-	}
-
-	public void setAutoSave(BridgeWorld world, boolean value) {
-		getDelegate().setAutoSave(world, value);
-	}
-
-	public void setDifficuly(BridgeWorld world, Difficulty difficulty) {
-		getDelegate().setDifficulty(world, difficulty);
-	}
-
-	public void setFullTime(BridgeWorld world, long time) {
-		getDelegate().setFullTime(world, time);
-	}
-
-	public void setKeepSpawnInMemory(BridgeWorld world, boolean keepLoaded) {
-		getDelegate().setKeepSpawnInMemory(world, keepLoaded);
-	}
-
-	public void setMonsterSpawnLimit(BridgeWorld world, int limit) {
-		getDelegate().setMonsterSpawnLimit(world, limit);
-	}
-
-	public void setPVP(BridgeWorld world, boolean pvp) {
-		getDelegate().setPVP(world, pvp);
-	}
-
-	public void setSpawnFlags(BridgeWorld world, boolean allowMonsters, boolean allowAnimals) {
-		getDelegate().setSpawnFlags(world, allowMonsters, allowAnimals);
-	}
-
-	public boolean setSpawnLocation(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().setSpawnLocation(world, x, y, z);
-	}
-
-	public void setStorm(BridgeWorld world, boolean hasStorm) {
-		getDelegate().setStorm(world, hasStorm);
-	}
-
-	public void setThunderDuration(BridgeWorld world, int duration) {
-		getDelegate().setThunderDuration(world, duration);
-	}
-
-	public void setThundering(BridgeWorld world, boolean thundering) {
-		getDelegate().setThundering(world, thundering);
-	}
-
-	public void setTicksPerAnimalSpawns(BridgeWorld world, int ticksPerAnimalSpawns) {
-		getDelegate().setTicksPerAnimalSpawns(world, ticksPerAnimalSpawns);
-	}
-
-	public void setTicksPerMonsterSpawns(BridgeWorld world, int ticksPerMonsterSpawns) {
-		getDelegate().setTicksPerMonsterSpawns(world, ticksPerMonsterSpawns);
-	}
-
-	public void setTime(BridgeWorld world, long time) {
-		getDelegate().setTime(world, time);
-	}
-
-	public void setWaterAnimalSpawnLimit(BridgeWorld world, int limit) {
-		getDelegate().setWaterAnimalSpawnLimit(world, limit);
-	}
-
-	public void setWeatherDuration(BridgeWorld world, int duration) {
-		getDelegate().setWeatherDuration(world, duration);
-	}
-	
-	public <T extends Entity> T spawn(BridgeWorld world, Location location, Class<T> clazz) throws IllegalArgumentException {
-		return getDelegate().spawn(world, location, clazz);
-	}
-
-	public Arrow spawnArrow(BridgeWorld world, Location location, Vector velocity, float speed, float spread) {
-		return getDelegate().spawnArrow(world, location, velocity, speed, spread);
-	}
-
-	public LivingEntity spawnCreature(BridgeWorld world, Location loc, EntityType type) {
-		return getDelegate().spawnCreature(world, loc, type);
-	}
-
-	public LivingEntity spawnCreature(BridgeWorld world, Location loc, CreatureType type) {
-		return getDelegate().spawnCreature(world, loc, type);
-	}
-
-	public Entity spawnEntity(BridgeWorld world, Location loc, EntityType type) {
-		return getDelegate().spawnEntity(world, loc, type);
-	}
-
-	public LightningStrike strikeLightning(BridgeWorld world, Location loc) {
-		return getDelegate().strikeLightning(world, loc);
-	}
-
-	public LightningStrike strikeLightningEffect(BridgeWorld world, Location loc) {
-		return getDelegate().strikeLightningEffect(world, loc);
-	}
-
-	public boolean unloadChunkRequest(BridgeWorld world, int x, int z) {
-		return unloadChunkRequest(world, x, z, true);
-	}
-
-	public boolean unloadChunkRequest(BridgeWorld world, int x, int z, boolean safe) {
-		return getDelegate().unloadChunkRequest(world, x, z, safe);
-	}
-
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, Chunk chunk) {
-		return getChunkSnapshot(world, chunk.getX(), chunk.getZ());
-	}
-
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z) {
-		return getDelegate().getChunkSnapshot(world, x, z);
-	}
-
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
-//----//				BridgeChunk Delegations					 //-----//
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
-
-	public Block getBlockAt(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getBlockAt(world, x, y, z);
-	}
-
-	public boolean loadChunk(BridgeWorld world, int x, int z, boolean generate) {
-		return getDelegate().loadChunk(world, x, z, generate);
-	}
-
-	public boolean isChunkLoaded(BridgeWorld world, int x, int z) {
-		return getDelegate().isChunkLoaded(world, x, z);
-	}
-
-	public boolean unloadChunk(BridgeWorld world, int x, int z, boolean save, boolean safe) {
-		return getDelegate().unloadChunk(world, x, z, save, safe);
-	}
-
-	public ChunkSnapshot getChunkSnapshot(BridgeWorld world, int x, int z, boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain) {
-		return getDelegate().getChunkSnapshot(world, x, z, includeMaxBlockY, includeBiome, includeBiomeTempRain);
-	}
-
-	public Entity[] getEntitiesAt(BridgeWorld world, int x, int z) {
-		return getDelegate().getEntitiesAt(world, x, z);
-	}
-
-	public BlockState[] getTileEntitiesAt(BridgeWorld world, int x, int z) {
-		return getDelegate().getTileEntitiesAt(world, x, z);
-	}
-
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
-//----//				BridgeBlock Delegations					 //-----//
-//----------------------------------------------------------------------//
-//----------------------------------------------------------------------//
-
-	public Biome getBiome(BridgeWorld world, int x, int z) {
-		return getDelegate().getBiome(world, x, z);
-	}
-
-	public double getHumidity(BridgeWorld world, int x, int z) {
-		return getDelegate().getHumidity(world, x, z);
-	}
-
-	public double getTemperature(BridgeWorld world, int x, int z) {
-		return getDelegate().getTemperature(world, x, z);
-	}
-
-	public void setBiome(BridgeWorld world, int x, int z, Biome bio) {
-		getDelegate().setBiome(world, x, z);
-	}
-
-	public int getBlockTypeIdAt(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getBlockTypeIdAt(world, x, y, z);
-	}
-
-	public List<MetadataValue> getBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
-		return getDelegate().getBlockMetadata(world, x, y, z, key);
-	}
-
-	public boolean hasBlockMetadata(BridgeWorld world, int x, int y, int z, String key) {
-		return getDelegate().hasBlockMetadata(world, x, y, z, key);
-	}
-
-	public void removeBlockMetadata(BridgeWorld world, int x, int y, int z, String key, Plugin owner) {
-		getDelegate().removeBlockMetadata(world, x, y, z, key, owner);
-	}
-
-	public void setBlockMetadata(BridgeWorld world, int x, int y, int z, String key, MetadataValue val) {
-		getDelegate().setBlockMetadata(world, x, y, z, key, val);
-	}
-
-	public boolean breakNaturally(BridgeWorld world, int x, int y, int z, ItemStack tool) {
-		return getDelegate().breakNaturally(world, x, y, z, tool);
-	}
-
-	public int getBlockPower(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		return getDelegate().getBlockPower(world, x, y, z, face);
-	}
-
-	public byte getData(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getData(world, x, y, z);
-	}
-
-	public Collection<ItemStack> getDrops(BridgeWorld world, int x, int y, int z, ItemStack tool) {
-		return getDelegate().getDrops(world, x, y, z, tool);
-	}
-
-	public BlockFace getFace(BridgeWorld world, int x, int y, int z, int x2, int y2, int z2) {
-		return getDelegate().getFace(world, x, y, z, x2, y2, z2);
-	}
-
-	public byte getLightFromBlocks(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getLightFromBlocks(world, x, y, z);
-	}
-
-	public byte getLightFromSky(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getLightFromSky(world, x, y, z);
-	}
-
-	public byte getLightLevel(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getLightLevel(world, x, y, z);
-	}
-
-	public Location getLocation(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getLocation(world, x, y, z);
-	}
-
-	public PistonMoveReaction getPistonMoveReaction(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getPistonMoveReaction(world, x, y, z);
-	}
-
-	public Block getRelative(BridgeWorld world, int x, int y, int z, int modX, int modY, int modZ) {
-		return getDelegate().getRelative(world, x, y, z, modX, modY, modZ);
-	}
-
-	public BlockState getState(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getState(world, x, y, z);
-	}
-
-	public Material getType(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().getType(world, x, y, z);
-	}
-
-	public boolean isBlockFaceIndirectlyPowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		return getDelegate().isBlockFaceIndirectlyPowered(world, x, y, z, face);
-	}
-
-	public boolean isBlockFacePowered(BridgeWorld world, int x, int y, int z, BlockFace face) {
-		return getDelegate().isBlockFacePowered(world, x, y, z, face);
-	}
-
-	public boolean isBlockIndirectlyPowered(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().isBlockIndirectlyPowered(world, x, y, z);
-	}
-
-	public boolean isBlockPowered(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().isBlockPowered(world, x, y, z);
-	}
-
-	public boolean isEmpty(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().isEmpty(world, x, y, z);
-	}
-
-	public boolean isLiquid(BridgeWorld world, int x, int y, int z) {
-		return getDelegate().isLiquid(world, x, y, z);
-	}
-
-	public void setData(BridgeWorld world, int x, int y, int z, byte data, boolean applyPhysics) {
-		getDelegate().setData(world, x, y, z, data, applyPhysics);
-	}
-
-	public void setType(BridgeWorld world, int x, int y, int z, Material type) {
-		getDelegate().setType(world, x, y, z, type);
-	}
-
-	public boolean setTypeId(BridgeWorld world, int x, int y, int z, int id, boolean applyPhysics) {
-		return getDelegate().setTypeId(world, x, y, z, id, applyPhysics);
-	}
-
-	public boolean setTypeIdAndData(BridgeWorld world, int x, int y, int z, int type, byte data, boolean applyPhysics) {
-		return getDelegate().setTypeIdAndData(world, x, y, z, type, data, applyPhysics);
+	public void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2) {
+		// TODO Auto-generated method stub
+		
 	}
 }
