@@ -56,7 +56,7 @@ public class ModuleManager {
 	private static List<Class<? extends Module>> getClasses() {
 		@SuppressWarnings("serial")
 		//TODO Get a list of the module names. A configuration that contains these needs to be written.
-		List<String> classnames = new ArrayList<String>() {{ add("org.spout.bridge.bukkit.BukkitModule"); add("org.spout.bridge.vanilla.VanillaModule");}};
+		List<String> classnames = new ArrayList<String>() {{ add("org.spout.bridge.bukkit.BukkitModule"); add("org.spout.bridge.vanilla.VanillaModule"); add("org.spout.bridge.workbench.WorkbenchModule");}};
 		
 		List<Class<? extends Module>> classes = new ArrayList<Class<? extends Module>>();
 		for(String s : classnames) {
