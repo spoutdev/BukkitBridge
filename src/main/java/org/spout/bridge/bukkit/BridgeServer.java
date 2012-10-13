@@ -1,6 +1,7 @@
 package org.spout.bridge.bukkit;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
+import org.bukkit.Warning.WarningState;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.CommandException;
@@ -28,10 +30,15 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.spout.bridge.bukkit.manager.ServerManager;
-import org.spout.bridge.bukkit.manager.WorldManager;
+import org.spout.api.util.access.BanType;
+import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.scheduler.BridgeScheduler;
+import org.spout.vanilla.configuration.VanillaConfiguration;
+import org.spout.vanilla.configuration.WorldConfiguration;
+import org.spout.vanilla.inventory.recipe.VanillaRecipes;
 
 import com.avaje.ebean.config.ServerConfig;
 
@@ -39,398 +46,13 @@ import com.avaje.ebean.config.ServerConfig;
  * BridgeServer is Bridge's version of Bukkit's Server.
  */
 public class BridgeServer implements Server {
-	
-	public BridgeServer() {
-	}
-	
-	@Override
-	public boolean addRecipe(Recipe recipe) {
-		return ServerManager.addRecipe(recipe);
-	}
-
-	@Override
-	public void banIP(String ip) {
-		ServerManager.banIP(ip);
-	}
-
-	@Override
-	public int broadcast(String msg, String perm) {
-		return ServerManager.broadcast(msg, perm);
-	}
-
-	@Override
-	public int broadcastMessage(String msg) {
-		return ServerManager.broadcast(msg);
-	}
-
-	@Override
-	public void clearRecipes() {
-		ServerManager.clearRecipes();
-	}
-
-	@Override
-	public void configureDbConfig(ServerConfig config) {
-		ServerManager.configureDbConfig(config);
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
-		return ServerManager.createInventory(owner, type);
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, int size) {
-		return ServerManager.createInventory(owner, size);
-	}
-
-	@Override
-	public Inventory createInventory(InventoryHolder owner, int size, String title) {
-		return ServerManager.createInventory(owner, size, title);
-	}
-
-	@Override
-	public MapView createMap(World world) {
-		return ServerManager.createMap(world);
-	}
-
-	@Override
-	public World createWorld(WorldCreator creator) {
-		return ServerManager.createWorld(creator);
-	}
-
-	@Override
-	public boolean dispatchCommand(CommandSender source, String commandline) throws CommandException {
-		return ServerManager.dispatchCommand(source, commandline);
-	}
-
-	@Override
-	public boolean getAllowEnd() {
-		return ServerManager.getAllowEnd();
-	}
-
-	@Override
-	public boolean getAllowFlight() {
-		return ServerManager.getAllowFlight();
-	}
-
-	@Override
-	public boolean getAllowNether() {
-		return ServerManager.getAllowNether();
-	}
-
-	@Override
-	public int getAnimalSpawnLimit() {
-		return ServerManager.getAnimalSpawnLimit();
-	}
-
-	@Override
-	public Set<OfflinePlayer> getBannedPlayers() {
-		return ServerManager.getBannedPlayers();
-	}
-
-	@Override
-	public String getBukkitVersion() {
-		return ServerManager.getBukkitVersion();
-	}
-
-	@Override
-	public Map<String, String[]> getCommandAliases() {
-		return ServerManager.getCommandAliases();
-	}
-
-	@Override
-	public long getConnectionThrottle() {
-		return ServerManager.getConnectionThrottle();
-	}
-
-	@Override
-	public ConsoleCommandSender getConsoleSender() {
-		return ServerManager.getConsoleSender();
-	}
-
-	@Override
-	public GameMode getDefaultGameMode() {
-		return ServerManager.getDefaultGameMode();
-	}
-
-	@Override
-	public boolean getGenerateStructures() {
-		return ServerManager.getGenerateStructures();
-	}
-
-	@Override
-	public HelpMap getHelpMap() {
-		return ServerManager.getHelpMap();
-	}
-
-	@Override
-	public Set<String> getIPBans() {
-		return ServerManager.getIPBans();
-	}
-
-	@Override
-	public String getIp() {
-		return ServerManager.getIp();
-	}
-
-	@Override
-	public Logger getLogger() {
-		return ServerManager.getLogger();
-	}
-
-	@Override
-	public MapView getMap(short id) {
-		return ServerManager.getMap(id);
-	}
-
-	@Override
-	public int getMaxPlayers() {
-		return ServerManager.getMaxPlayers();
-	}
-
-	@Override
-	public Messenger getMessenger() {
-		return ServerManager.getMessenger();
-	}
-
-	@Override
-	public int getMonsterSpawnLimit() {
-		return ServerManager.getMosterSpawnLimit();
-	}
-
-	@Override
-	public String getName() {
-		return ServerManager.getName();
-	}
-
-	@Override
-	public OfflinePlayer getOfflinePlayer(String name) {
-		return ServerManager.getOfflinePlayer(name);
-	}
-
-	@Override
-	public OfflinePlayer[] getOfflinePlayers() {
-		return ServerManager.getOfflinePlayers();
-	}
-
-	@Override
-	public boolean getOnlineMode() {
-		return ServerManager.getOnlineMode();
-	}
-
-	@Override
-	public Player[] getOnlinePlayers() {
-		return ServerManager.getOnlinePlayers();
-	}
-
-	@Override
-	public Set<OfflinePlayer> getOperators() {
-		return ServerManager.getOperators();
-	}
-
-	@Override
-	public Player getPlayer(String name) {
-		return ServerManager.getPlayer(name);
-	}
-
-	@Override
-	public Player getPlayerExact(String name) {
-		return ServerManager.getPlayerExact(name);
-	}
-
-	@Override
-	public PluginCommand getPluginCommand(String name) {
-		return ServerManager.getPluginCommand(name);
-	}
-
-	@Override
-	public PluginManager getPluginManager() {
-		return ServerManager.getPluginManager();
-	}
-
-	@Override
-	public int getPort() {
-		return ServerManager.getPort();
-	}
-
-	@Override
-	public List<Recipe> getRecipesFor(ItemStack result) {
-		return ServerManager.getRecipesFor(result);
-	}
-
-	@Override
-	public BukkitScheduler getScheduler() {
-		return ServerManager.getScheduler();
-	}
-
-	@Override
-	public String getServerId() {
-		return ServerManager.getServerId();
-	}
-
-	@Override
-	public String getServerName() {
-		return ServerManager.getServerName();
-	}
-
-	@Override
-	public ServicesManager getServicesManager() {
-		return ServerManager.getServicesManager();
-	}
-
-	@Override
-	public int getSpawnRadius() {
-		return ServerManager.getSpawnRadius();
-	}
-
-	@Override
-	public int getTicksPerAnimalSpawns() {
-		return ServerManager.getTicksPerAnimalSpawns();
-	}
-
-	@Override
-	public int getTicksPerMonsterSpawns() {
-		return ServerManager.getTicksPerMonsterSpawns();
-	}
-
-	@Override
-	public String getUpdateFolder() {
-		return ServerManager.getUpdateFolder();
-	}
-
-	@Override
-	public File getUpdateFolderFile() {
-		return ServerManager.getUpdateFolderFile();
-	}
-
-	@Override
-	public String getVersion() {
-		return ServerManager.getVersion();
-	}
-
-	@Override
-	public int getViewDistance() {
-		return ServerManager.getViewDistance();
-	}
-
-	@Override
-	public int getWaterAnimalSpawnLimit() {
-		return ServerManager.getWaterAnimalSpawnLimit();
-	}
-
-	@Override
-	public Set<OfflinePlayer> getWhitelistedPlayers() {
-		return ServerManager.getWhitelistedPlayers();
-	}
-
-	@Override
-	public World getWorld(String name) {
-		return WorldManager.getWorld(name);
-	}
-
-	@Override
-	public World getWorld(UUID id) {
-		return WorldManager.getWorld(id);
-	}
-
-	@Override
-	public File getWorldContainer() {
-		return ServerManager.getWorldContainer();
-	}
-
-	@Override
-	public String getWorldType() {
-		return ServerManager.getWorldType();
-	}
-
-	@Override
-	public List<World> getWorlds() {
-		return ServerManager.getWorlds();
-	}
-
-	@Override
-	public boolean hasWhitelist() {
-		return ServerManager.hasWhitelist();
-	}
-
-	@Override
-	public boolean isPrimaryThread() {
-		return ServerManager.isPrimaryThread();
-	}
-
-	@Override
-	public List<Player> matchPlayer(String name) {
-		return ServerManager.matchPlayer(name);
-	}
-
-	@Override
-	public Iterator<Recipe> recipeIterator() {
-		return ServerManager.recipeIterator();
-	}
-
-	@Override
-	public void reload() {
-		ServerManager.reload();
-	}
-
-	@Override
-	public void reloadWhitelist() {
-		ServerManager.reloadWhitelist();
-	}
-
-	@Override
-	public void resetRecipes() {
-		ServerManager.resetRecipes();
-	}
-
-	@Override
-	public void savePlayers() {
-		ServerManager.savePlayers();
-	}
-
-	@Override
-	public void setDefaultGameMode(GameMode mode) {
-		ServerManager.setDefaultGameMode(mode);
-	}
-
-	@Override
-	public void setSpawnRadius(int value) {
-		ServerManager.setSpawnRadius(value);
-	}
-
-	@Override
-	public void setWhitelist(boolean enable) {
-		ServerManager.setWhitelist(enable);
-	}
-
-	@Override
-	public void shutdown() {
-		ServerManager.shutdown();
-	}
-
-	@Override
-	public void unbanIP(String ip) {
-		ServerManager.unbanIp(ip);
-	}
-
-	@Override
-	public boolean unloadWorld(String name, boolean save) {
-		return ServerManager.unloadWorld(name, save);
-	}
-
-	@Override
-	public boolean unloadWorld(World world, boolean save) {
-		return ServerManager.unloadWorld(world, save);
-	}
-
-	@Override
-	public boolean useExactLoginLocation() {
-		return ServerManager.useExactLoginLocation();
-	}
-
-	@Override
-	public String getMotd() {
-		return ServerManager.getMotd();
+	private final VanillaBridgePlugin plugin;
+	private final org.spout.api.Server server;
+	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
+	private final BridgeScheduler scheduler = new BridgeScheduler();
+	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
+		this.server = server;
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -443,5 +65,471 @@ public class BridgeServer implements Server {
 	public void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean addRecipe(Recipe recipe) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void banIP(String ip) {
+		server.getAccessManager().ban(BanType.IP, ip);
+	}
+
+	@Override
+	public int broadcast(String perm, String message) {
+		server.broadcastMessage(perm, message);
+		return 0;
+	}
+
+	@Override
+	public int broadcastMessage(String message) {
+		server.broadcastMessage(message);
+		return 0;
+	}
+
+	@Override
+	public void clearRecipes() {
+		for (org.spout.api.inventory.recipe.Recipe r : server.getRecipeManager().getAllRecipes()) {
+			server.getRecipeManager().removeRecipe(r);
+		}
+	}
+
+	@Override
+	public void configureDbConfig(ServerConfig arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Inventory createInventory(InventoryHolder arg0, InventoryType arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Inventory createInventory(InventoryHolder arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Inventory createInventory(InventoryHolder arg0, int arg1, String arg2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MapView createMap(World arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public World createWorld(WorldCreator arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean dispatchCommand(CommandSender arg0, String arg1) throws CommandException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getAllowEnd() {
+		return WorldConfiguration.END.LOAD.getBoolean();
+	}
+
+	@Override
+	public boolean getAllowFlight() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getAllowNether() {
+		return WorldConfiguration.NETHER.LOAD.getBoolean();
+	}
+
+	@Override
+	public int getAnimalSpawnLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Set<OfflinePlayer> getBannedPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBukkitVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, String[]> getCommandAliases() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getConnectionThrottle() {
+		return 0;
+	}
+
+	@Override
+	public ConsoleCommandSender getConsoleSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GameMode getDefaultGameMode() {
+		return GameMode.valueOf(WorldConfiguration.NORMAL.GAMEMODE.getString().toUpperCase());
+	}
+
+	@Override
+	public boolean getGenerateStructures() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public HelpMap getHelpMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> getIPBans() {
+		throw new UnsupportedOperationException("Not supported");
+	}
+
+	@Override
+	public String getIp() {
+		return "";
+	}
+
+	@Override
+	public Logger getLogger() {
+		return server.getLogger();
+	}
+
+	@Override
+	public MapView getMap(short arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getMaxPlayers() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Messenger getMessenger() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getMonsterSpawnLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getMotd() {
+		return VanillaConfiguration.MOTD.getString();
+	}
+
+	@Override
+	public String getName() {
+		return server.getName();
+	}
+
+	@Override
+	public OfflinePlayer getOfflinePlayer(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OfflinePlayer[] getOfflinePlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getOnlineMode() {
+		return VanillaConfiguration.ONLINE_MODE.getBoolean();
+	}
+
+	@Override
+	public Player[] getOnlinePlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<OfflinePlayer> getOperators() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player getPlayer(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player getPlayerExact(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PluginCommand getPluginCommand(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PluginManager getPluginManager() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getPort() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Recipe> getRecipesFor(ItemStack arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BukkitScheduler getScheduler() {
+		return scheduler;
+	}
+
+	@Override
+	public String getServerId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getServerName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ServicesManager getServicesManager() {
+		return servicesManager;
+	}
+
+	@Override
+	public int getSpawnRadius() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTicksPerAnimalSpawns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTicksPerMonsterSpawns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getUpdateFolder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public File getUpdateFolderFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getVersion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getViewDistance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getWaterAnimalSpawnLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Set<OfflinePlayer> getWhitelistedPlayers() {
+		HashSet<OfflinePlayer> set = new HashSet<OfflinePlayer>();
+		for (String name : server.getAccessManager().getWhitelistedPlayers()) {
+			set.add(getOfflinePlayer(name));
+		}
+		return set;
+	}
+
+	@Override
+	public World getWorld(String name) {
+		for (World w : getWorlds()) {
+			if (w.getName().equals(name)) {
+				return w;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public World getWorld(UUID uid) {
+		for (World w : getWorlds()) {
+			if (w.getUID().equals(uid)) {
+				return w;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public File getWorldContainer() {
+		return server.getWorldFolder();
+	}
+
+	@Override
+	public String getWorldType() {
+		return "DEFAULT";
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<World> getWorlds() {
+		return (List<World>)(List)plugin.getWorldListener().getWorlds();
+	}
+
+	@Override
+	public boolean hasWhitelist() {
+		return server.getAccessManager().isWhitelistEnabled();
+	}
+
+	@Override
+	public boolean isPrimaryThread() {
+		return server.getMainThread() == Thread.currentThread();
+	}
+
+	@Override
+	public List<Player> matchPlayer(String arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterator<Recipe> recipeIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void reload() {
+	}
+
+	@Override
+	public void reloadWhitelist() {
+		server.getAccessManager().load();
+	}
+
+	@Override
+	public void resetRecipes() {
+		this.clearRecipes();
+		VanillaRecipes.initialize();
+	}
+
+	@Override
+	public void savePlayers() {
+		for (org.spout.api.entity.Player p : server.getOnlinePlayers()) {
+			p.save();
+		}
+	}
+
+	@Override
+	public void setDefaultGameMode(GameMode mode) {
+		WorldConfiguration.NORMAL.GAMEMODE.setValue(mode.name().toLowerCase());
+		WorldConfiguration.FLAT.GAMEMODE.setValue(mode.name().toLowerCase());
+		WorldConfiguration.NETHER.GAMEMODE.setValue(mode.name().toLowerCase());
+		WorldConfiguration.END.GAMEMODE.setValue(mode.name().toLowerCase());
+	}
+
+	@Override
+	public void setSpawnRadius(int r) {
+		VanillaConfiguration.SPAWN_PROTECTION_RADIUS.setValue(r);
+	}
+
+	@Override
+	public void setWhitelist(boolean whitelisted) {
+		server.getAccessManager().setWhitelistEnabled(whitelisted);
+	}
+
+	@Override
+	public void shutdown() {
+		server.stop();
+	}
+
+	@Override
+	public void unbanIP(String ip) {
+		server.getAccessManager().unban(BanType.IP, ip);
+	}
+
+	@Override
+	public boolean unloadWorld(String name, boolean save) {
+		return unloadWorld(getWorld(name), save);
+	}
+
+	@Override
+	public boolean unloadWorld(World world, boolean save) {
+		if (world != null) {
+			((BridgeWorld)world).getHandle().unload(save);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean useExactLoginLocation() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public WarningState getWarningState() {
+		return WarningState.DEFAULT;
 	}
 }

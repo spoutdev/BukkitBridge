@@ -15,10 +15,9 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
-import org.spout.bridge.bukkit.manager.BlockManager;
 
 /**
- * BridgeBlock is an implementation of Block. It delegates all method calls to its corresponding BridgeChunk.
+ * BridgeBlock is an implementation of Block.
  */
 public class BridgeBlock implements Block {
 	private final BridgeChunk chunk;
@@ -30,140 +29,10 @@ public class BridgeBlock implements Block {
 		this.y = y;
 		this.z = z;
 	}
-	
-	@Override
-	public List<MetadataValue> getMetadata(String key) {
-		return BlockManager.getBlockMetadata(getWorld(), getX(), getY(), getZ(), key);
-	}
-
-	@Override
-	public boolean hasMetadata(String key) {
-		return BlockManager.hasBlockMetadata(getWorld(), getX(), getY(), getZ(), key);
-	}
-
-	@Override
-	public void removeMetadata(String key, Plugin owner) {
-		BlockManager.removeBlockMetadata(getWorld(), getX(), getY(), getZ(), key, owner);
-	}
-
-	@Override
-	public void setMetadata(String key, MetadataValue val) {
-		BlockManager.setBlockMetadata(getWorld(), getX(), getY(), getZ(), key, val);
-	}
-
-	@Override
-	public boolean breakNaturally() {
-		return BlockManager.breakNaturally(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public boolean breakNaturally(ItemStack tool) {
-		return BlockManager.breakNaturally(getWorld(), getX(), getY(), getZ(), tool);
-	}
-
-	@Override
-	public Biome getBiome() {
-		return BlockManager.getBiome(getWorld(), getX(), getZ());
-	}
-
-	@Override
-	public int getBlockPower() {
-		return BlockManager.getBlockPower(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public int getBlockPower(BlockFace face) {
-		return BlockManager.getBlockPower(getWorld(), getX(), getY(), getZ(), face);
-	}
 
 	@Override
 	public BridgeChunk getChunk() {
 		return chunk;
-	}
-
-	@Override
-	public byte getData() {
-		return BlockManager.getData(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public Collection<ItemStack> getDrops() {
-		return BlockManager.getDrops(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool) {
-		return BlockManager.getDrops(getWorld(), getX(), getY(), getZ(), tool);
-	}
-
-	@Override
-	public BlockFace getFace(Block other) {
-		return BlockManager.getFace(getWorld(), getX(), getY(), getZ(), other.getX(), other.getY(), other.getZ());
-	}
-
-	@Override
-	public double getHumidity() {
-		return BlockManager.getHumidity(getWorld(), getX(), getZ());
-	}
-
-	@Override
-	public byte getLightFromBlocks() {
-		return BlockManager.getLightFromBlocks(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public byte getLightFromSky() {
-		return BlockManager.getLightFromSky(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public byte getLightLevel() {
-		return BlockManager.getLightLevel(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public Location getLocation() {
-		return BlockManager.getLocation(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public PistonMoveReaction getPistonMoveReaction() {
-		return BlockManager.getPistonMoveReaction(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public Block getRelative(BlockFace face) {
-		return BlockManager.getRelative(getWorld(), getX(), getY(), getZ(), face);
-	}
-
-	@Override
-	public Block getRelative(BlockFace face, int distance) {
-		return BlockManager.getRelative(getWorld(), getX(), getY(), getZ(), face, distance);
-	}
-
-	@Override
-	public Block getRelative(int modX, int modY, int modZ) {
-		return BlockManager.getRelative(getWorld(), getX(), getY(), getZ(), modX, modY, modZ);
-	}
-
-	@Override
-	public BlockState getState() {
-		return BlockManager.getState(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public double getTemperature() {
-		return BlockManager.getTemperature(getWorld(), getX(), getZ());
-	}
-
-	@Override
-	public Material getType() {
-		return BlockManager.getType(getWorld(), getX(), getY(), getZ());
-	}
-
-	@Override
-	public int getTypeId() {
-		return BlockManager.getBlockTypeIdAt(getWorld(), getX(), getY(), getZ());
 	}
 
 	@Override
@@ -187,68 +56,236 @@ public class BridgeBlock implements Block {
 	}
 
 	@Override
+	public List<MetadataValue> getMetadata(String metadataKey) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasMetadata(String metadataKey) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean breakNaturally() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean breakNaturally(ItemStack tool) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Biome getBiome() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getBlockPower() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBlockPower(BlockFace face) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public byte getData() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Collection<ItemStack> getDrops() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<ItemStack> getDrops(ItemStack tool) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BlockFace getFace(Block block) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getHumidity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public byte getLightFromBlocks() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public byte getLightFromSky() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public byte getLightLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Location getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PistonMoveReaction getPistonMoveReaction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getRelative(BlockFace face) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getRelative(BlockFace face, int distance) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getRelative(int modX, int modY, int modZ) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BlockState getState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double getTemperature() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Material getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getTypeId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-		return BlockManager.isBlockFaceIndirectlyPowered(getWorld(), getX(), getY(), getZ(), face);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean isBlockFacePowered(BlockFace face) {
-		return BlockManager.isBlockFacePowered(getWorld(), getX(), getY(), getZ(), face);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		return BlockManager.isBlockIndirectlyPowered(getWorld(), getX(), getY(), getZ());
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean isBlockPowered() {
-		return BlockManager.isBlockPowered(getWorld(), getX(), getY(), getZ());
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return BlockManager.isEmpty(getWorld(), getX(), getY(), getZ());
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean isLiquid() {
-		return BlockManager.isLiquid(getWorld(), getX(), getY(), getZ());
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public void setBiome(Biome biome) {
-		BlockManager.setBiome(getWorld(), getX(), getZ(), biome);
+	public void setBiome(Biome bio) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setData(byte data) {
-		BlockManager.setData(getWorld(), getX(), getY(), getZ(), data);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		BlockManager.setData(getWorld(), getX(), getY(), getZ(), data, applyPhysics);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setType(Material type) {
-		BlockManager.setType(getWorld(), getX(), getY(), getZ(), type);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public boolean setTypeId(int id) {
-		return BlockManager.setTypeId(getWorld(), getX(), getY(), getZ(), id);
+	public boolean setTypeId(int type) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public boolean setTypeId(int id, boolean applyPhysics) {
-		return BlockManager.setTypeId(getWorld(), getX(), getY(), getZ(), id, applyPhysics);
+	public boolean setTypeId(int type, boolean applyPhysics) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
-		return BlockManager.setTypeIdAndData(getWorld(), getX(), getY(), getZ(), type, data, applyPhysics);
+		// TODO Auto-generated method stub
+		return false;
 	}
-
 }

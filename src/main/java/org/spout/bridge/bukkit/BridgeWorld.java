@@ -2,6 +2,9 @@ package org.spout.bridge.bukkit;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -12,6 +15,8 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.Difficulty;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.WorldType;
@@ -21,6 +26,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.LivingEntity;
@@ -31,9 +37,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spout.bridge.bukkit.manager.BlockManager;
-import org.spout.bridge.bukkit.manager.ChunkManager;
-import org.spout.bridge.bukkit.manager.WorldManager;
+import org.spout.api.geo.LoadOption;
+import org.spout.api.geo.cuboid.Region;
+import org.spout.api.material.BlockMaterial;
+import org.spout.vanilla.configuration.WorldConfiguration;
+import org.spout.vanilla.material.VanillaMaterial;
+import org.spout.vanilla.world.generator.nether.NetherGenerator;
+import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 
 /**
  * BridgeWorld is Bridge's implementation of Bukkit's World.
@@ -41,562 +51,720 @@ import org.spout.bridge.bukkit.manager.WorldManager;
 @SuppressWarnings("deprecation")
 public class BridgeWorld implements World {
 	private final BridgeServer server;
-	private final UUID id;
+	private final org.spout.api.geo.World handle;
 	
-	public BridgeWorld(BridgeServer server, UUID id) {
+	public BridgeWorld(BridgeServer server, org.spout.api.geo.World handle) {
 		this.server = server;
-		this.id = id;
+		this.handle = handle;
 	}
 	
 	public BridgeServer getServer() {
 		return server;
 	}
+	
+	public org.spout.api.geo.World getHandle() {
+		return handle;
+	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return WorldManager.getListeningPluginChannels();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		WorldManager.sendPluginMessage(source, channel, message);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return WorldManager.getWorldMetadata(this, metadataKey);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return WorldManager.hasWorldMetadata(this, metadataKey);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		WorldManager.removeWorldMetadata(this, metadataKey, owningPlugin);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		WorldManager.setWorldMetadata(this, metadataKey, newMetadataValue);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public boolean canGenerateStructures() {
-		return WorldManager.canGenerateStructures(this);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power) {
-		return WorldManager.createExplosion(this, loc, power);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire) {
-		return WorldManager.createExplosion(this, loc, power, setFire);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power) {
-		return WorldManager.createExplosion(this, x, y, z, power);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		return WorldManager.createExplosion(this, x, y, z, power, setFire);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public Item dropItem(Location location, ItemStack item) {
-		return WorldManager.dropItem(this, location, item);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack item) {
-		return WorldManager.dropItemNaturally(this, location, item);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean generateTree(Location location, TreeType type) {
-		return WorldManager.generateTree(this, location, type);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
-		return WorldManager.generateTree(this, loc, type, delegate);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean getAllowAnimals() {
-		return WorldManager.getAllowAnimals(this);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean getAllowMonsters() {
-		return WorldManager.getAllowMonsters(this);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		return WorldManager.getAnimalSpawnLimit(this);
-	}
-
-	@Override
-	public Chunk getChunkAt(Location location) {
-		return ChunkManager.getChunkAt(this, location);
-	}
-
-	@Override
-	public Chunk getChunkAt(Block block) {
-		return ChunkManager.getChunkAt(this, block);
-	}
-
-	@Override
-	public Chunk getChunkAt(int x, int z) {
-		return ChunkManager.getChunkAt(this, x, z);
-	}
-
-	@Override
-	public Difficulty getDifficulty() {
-		return WorldManager.getDifficulty(this);
-	}
-
-	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		return WorldManager.getEmptyChunkSnapshot(this, x, z, includeBiome, includeBiomeTempRain);
-	}
-
-	@Override
-	public List<Entity> getEntities() {
-		return WorldManager.getEntities(this);
-	}
-
-	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		return WorldManager.getEntitiesByClass(this, classes);
-	}
-
-	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		return WorldManager.getEntitiesByClass(this, cls);
-	}
-
-	@Override
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		return WorldManager.getEntitiesByClasses(this, classes);
-	}
-
-	@Override
-	public Environment getEnvironment() {
-		return WorldManager.getEnvironment(this);
-	}
-
-	@Override
-	public long getFullTime() {
-		return WorldManager.getFullTime(this);
-	}
-
-	@Override
-	public ChunkGenerator getGenerator() {
-		return WorldManager.getGenerator(this);
-	}
-
-	@Override
-	public Block getHighestBlockAt(Location location) {
-		return WorldManager.getHighestBlockAt(this, location);
-	}
-
-	@Override
-	public Block getHighestBlockAt(int x, int z) {
-		return WorldManager.getHighestBlockAt(this, x, z);
-	}
-
-	@Override
-	public int getHighestBlockYAt(Location location) {
-		return WorldManager.getHighestBlockYAt(this, location);
-	}
-
-	@Override
-	public int getHighestBlockYAt(int x, int z) {
-		return WorldManager.getHighestBlockYAt(this, x, z);
-	}
-
-	@Override
-	public boolean getKeepSpawnInMemory() {
-		return WorldManager.getKeepSpawnInMemory(this);
-	}
-
-	@Override
-	public List<LivingEntity> getLivingEntities() {
-		return WorldManager.getLivingEntities(this);
-	}
-
-	@Override
-	public Chunk[] getLoadedChunks() {
-		return WorldManager.getLoadedChunks(this);
-	}
-
-	@Override
-	public int getMaxHeight() {
-		return WorldManager.getMaxHeight(this);
-	}
-
-	@Override
-	public int getMonsterSpawnLimit() {
-		return WorldManager.getMonsterSpawnLimit(this);
-	}
-
-	@Override
-	public String getName() {
-		return WorldManager.getName(this);
-	}
-
-	@Override
-	public boolean getPVP() {
-		return WorldManager.getPVP(this);
-	}
-
-	@Override
-	public List<Player> getPlayers() {
-		return WorldManager.getPlayers(this);
-	}
-
-	@Override
-	public List<BlockPopulator> getPopulators() {
-		return WorldManager.getPopulators(this);
-	}
-
-	@Override
-	public int getSeaLevel() {
-		return WorldManager.getSeaLevel(this);
-	}
-
-	@Override
-	public long getSeed() {
-		return WorldManager.getSeed(this);
-	}
-
-	@Override
-	public Location getSpawnLocation() {
-		return WorldManager.getSpawnLocation(this);
-	}
-
-	@Override
-	public int getThunderDuration() {
-		return WorldManager.getThunderDuration(this);
-	}
-
-	@Override
-	public long getTicksPerAnimalSpawns() {
-		return WorldManager.getTicksPerAnimalSpawns(this);
-	}
-
-	@Override
-	public long getTicksPerMonsterSpawns() {
-		return WorldManager.getTicksPerMonsterSpawns(this);
-	}
-
-	@Override
-	public long getTime() {
-		return WorldManager.getTime(this);
-	}
-
-	@Override
-	public UUID getUID() {
-		return id;
-	}
-
-	@Override
-	public int getWaterAnimalSpawnLimit() {
-		return WorldManager.getWaterAnimalSpawnLimit(this);
-	}
-
-	@Override
-	public int getWeatherDuration() {
-		return WorldManager.getWeatherDuration(this);
-	}
-
-	@Override
-	public File getWorldFolder() {
-		return WorldManager.getWorldFolder(this);
-	}
-
-	@Override
-	public WorldType getWorldType() {
-		return WorldManager.getWorldType(this);
-	}
-
-	@Override
-	public boolean hasStorm() {
-		return WorldManager.hasStorm(this);
-	}
-
-	@Override
-	public boolean isAutoSave() {
-		return WorldManager.isAutoSave(this);
-	}
-
-	@Override
-	public boolean isThundering() {
-		return WorldManager.isThundering(this);
-	}
-
-	@Override
-	public void playEffect(Location location, Effect effect, int data) {
-		WorldManager.playEffect(this, location, effect, data);
-	}
-
-	@Override
-	public <T> void playEffect(Location location, Effect effect, T data) {
-		WorldManager.playEffect(this, location, effect, data);
-	}
-
-	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius) {
-		WorldManager.playEffect(this, location, effect, data, radius);
-	}
-
-	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-		WorldManager.playEffect(this, location, effect, data, radius);
-	}
-
-	@Override
-	public boolean refreshChunk(int x, int z) {
-		return WorldManager.refreshChunk(this, x, z);
-	}
-
-	@Override
-	public boolean regenerateChunk(int x, int z) {
-		return WorldManager.regenerateChunk(this, x, z);
-	}
-
-	@Override
-	public void save() {
-		WorldManager.save(this);
-	}
-
-	@Override
-	public void setAnimalSpawnLimit(int limit) {
-		WorldManager.setAnimalSpawnLimit(this, limit);
-	}
-
-	@Override
-	public void setAutoSave(boolean value) {
-		WorldManager.setAutoSave(this, value);
-	}
-
-	@Override
-	public void setDifficulty(Difficulty difficulty) {
-		WorldManager.setDifficulty(this, difficulty);
-	}
-
-	@Override
-	public void setFullTime(long time) {
-		WorldManager.setFullTime(this, time);
-	}
-
-	@Override
-	public void setKeepSpawnInMemory(boolean keepLoaded) {
-		WorldManager.setKeepSpawnInMemory(this, keepLoaded);
-	}
-
-	@Override
-	public void setMonsterSpawnLimit(int limit) {
-		WorldManager.setMonsterSpawnLimit(this, limit);
-	}
-
-	@Override
-	public void setPVP(boolean pvp) {
-		WorldManager.setPVP(this, pvp);
-	}
-
-	@Override
-	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
-		WorldManager.setSpawnFlags(this, allowMonsters, allowAnimals);
-	}
-
-	@Override
-	public boolean setSpawnLocation(int x, int y, int z) {
-		return WorldManager.setSpawnLocation(this, x, y, z);
-	}
-
-	@Override
-	public void setStorm(boolean hasStorm) {
-		WorldManager.setStorm(this, hasStorm);
-	}
-
-	@Override
-	public void setThunderDuration(int duration) {
-		WorldManager.setThunderDuration(this, duration);
-	}
-
-	@Override
-	public void setThundering(boolean thundering) {
-		WorldManager.setThundering(this, thundering);
-	}
-
-	@Override
-	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
-		WorldManager.setTicksPerAnimalSpawns(this, ticksPerAnimalSpawns);
-	}
-
-	@Override
-	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
-		WorldManager.setTicksPerMonsterSpawns(this, ticksPerMonsterSpawns);
-	}
-
-	@Override
-	public void setTime(long time) {
-		WorldManager.setTime(this, time);
-	}
-
-	@Override
-	public void setWaterAnimalSpawnLimit(int limit) {
-		WorldManager.setWaterAnimalSpawnLimit(this, limit);
-	}
-
-	@Override
-	public void setWeatherDuration(int duration) {
-		WorldManager.setWeatherDuration(this, duration);
-	}
-
-	@Override
-	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
-		return WorldManager.spawn(this, location, clazz);
-	}
-
-	@Override
-	public Arrow spawnArrow(Location location, Vector velocity, float speed, float spread) {
-		return WorldManager.spawnArrow(this, location, velocity, speed, spread);
-	}
-
-	@Override
-	public LivingEntity spawnCreature(Location loc, EntityType type) {
-		return WorldManager.spawnCreature(this, loc, type);
-	}
-
-	@Override
-	public LivingEntity spawnCreature(Location loc, CreatureType type) {
-		return WorldManager.spawnCreature(this, loc ,type);
-	}
-
-	@Override
-	public Entity spawnEntity(Location loc, EntityType type) {
-		return WorldManager.spawnEntity(this, loc, type);
-	}
-
-	@Override
-	public LightningStrike strikeLightning(Location loc) {
-		return WorldManager.strikeLightning(this, loc);
-	}
-
-	@Override
-	public LightningStrike strikeLightningEffect(Location loc) {
-		return WorldManager.strikeLightningEffect(this, loc);
-	}
-
-	@Override
-	public boolean unloadChunkRequest(int x, int z) {
-		return WorldManager.unloadChunkRequest(this, x, z);
-	}
-
-	@Override
-	public boolean unloadChunkRequest(int x, int z, boolean safe) {
-		return WorldManager.unloadChunkRequest(this, x, z, safe);
-	}
-
-	public ChunkSnapshot getChunkSnapshot(Chunk chunk) {
-		return ChunkManager.getChunkSnapshot(this, chunk);
-	}
-
-	public ChunkSnapshot getChunkSnapshot(int x, int z) {
-		return ChunkManager.getChunkSnapshot(this, x, z);
-	}
-
-	@Override
-	public Block getBlockAt(Location location) {
-		return BlockManager.getBlockAt(this, location);
-	}
-
-	@Override
-	public Block getBlockAt(int x, int y, int z) {
-		return BlockManager.getBlockAt(this, x, y, z);
-	}
-
-	@Override
-	public void loadChunk(Chunk chunk) {
-		loadChunk(chunk.getX(), chunk.getZ());
-	}
-
-	@Override
-	public void loadChunk(int x, int z) {
-		ChunkManager.loadChunk(this, x, z);
-	}
-
-	@Override
-	public boolean loadChunk(int x, int z, boolean generate) {
-		return ChunkManager.loadChunk(this, x, z, generate);
-	}
-
-	@Override
-	public boolean isChunkLoaded(Chunk chunk) {
-		return ChunkManager.isChunkLoaded(this, chunk);
-	}
-
-	@Override
-	public boolean isChunkLoaded(int x, int z) {
-		return ChunkManager.isChunkLoaded(this, x, z);
-	}
-
-	@Override
-	public boolean unloadChunk(Chunk chunk) {
-		return ChunkManager.unloadChunk(this, chunk.getX(), chunk.getZ());
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z) {
-		return ChunkManager.unloadChunk(this, x, z);
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z, boolean save) {
-		return ChunkManager.unloadChunk(this, x, z, save);
-	}
-
-	@Override
-	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
-		return ChunkManager.unloadChunk(this, x, z, save, safe);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		return BlockManager.getBiome(this, x, z);
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getBlockAt(Location location) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getBlockAt(int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int getBlockTypeIdAt(Location location) {
-		return BlockManager.getBlockTypeIdAt(this, location);
+		return getBlockTypeIdAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
 	public int getBlockTypeIdAt(int x, int y, int z) {
-		return BlockManager.getBlockTypeIdAt(this, x, y, z);
+		BlockMaterial bm = getHandle().getBlockMaterial(x, y, z);
+		if (bm instanceof VanillaMaterial) {
+			return ((VanillaMaterial)bm).getMinecraftId();
+		}
+		return 0;
+	}
+
+	@Override
+	public Chunk getChunkAt(Location location) {
+		return getChunkAt(location.getBlockX() / 16, location.getBlockZ() / 16);
+	}
+
+	@Override
+	public Chunk getChunkAt(Block block) {
+		return getChunkAt(block.getX() / 16, block.getZ() / 16);
+	}
+
+	@Override
+	public Chunk getChunkAt(int x, int z) {
+		return getChunkAt(x, z, LoadOption.LOAD_GEN);
+	}
+
+	public Chunk getChunkAt(int x, int z, LoadOption opt) {
+		BridgeChunk chunk = new BridgeChunk(this, x, z);
+		chunk.getHandle(opt);
+		return chunk;
+	}
+
+	@Override
+	public Difficulty getDifficulty() {
+		switch(getEnvironment()) {
+			case NORMAL: return Difficulty.valueOf(WorldConfiguration.NORMAL.DIFFICULTY.getString().toUpperCase());
+			case NETHER: return Difficulty.valueOf(WorldConfiguration.NETHER.DIFFICULTY.getString().toUpperCase());
+			case THE_END: return Difficulty.valueOf(WorldConfiguration.END.DIFFICULTY.getString().toUpperCase());
+		}
+		return Difficulty.NORMAL;
+	}
+
+	@Override
+	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Entity> getEntities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@Deprecated
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Environment getEnvironment() {
+		if (getHandle().getGenerator() instanceof NetherGenerator) {
+			return Environment.NETHER;
+		} else if (getHandle().getGenerator() instanceof TheEndGenerator) {
+			return Environment.THE_END;
+		}
+		return Environment.NORMAL;
+	}
+
+	@Override
+	public long getFullTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ChunkGenerator getGenerator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getHighestBlockAt(Location location) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Block getHighestBlockAt(int x, int z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getHighestBlockYAt(Location location) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getHighestBlockYAt(int x, int z) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public double getHumidity(int x, int z) {
-		return BlockManager.getHumidity(this, x, z);
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getKeepSpawnInMemory() {
+		switch(getEnvironment()) {
+			case NORMAL: return WorldConfiguration.NORMAL.LOADED_SPAWN.getBoolean();
+			case NETHER: return WorldConfiguration.NETHER.LOADED_SPAWN.getBoolean();
+			case THE_END: return WorldConfiguration.END.LOADED_SPAWN.getBoolean();
+		}
+		throw new IllegalStateException("Unknown environment");
+	}
+
+	@Override
+	public List<LivingEntity> getLivingEntities() {
+		// TODO Auto-generated method stub
+		return Collections.emptyList();
+	}
+
+	@Override
+	public Chunk[] getLoadedChunks() {
+		HashSet<BridgeChunk> chunks = new HashSet<BridgeChunk>();
+		Iterator<Region> i = handle.getRegions().iterator();
+		while (i.hasNext()) {
+			Region next = i.next();
+			for (int cx = 0; cx < 16; cx++) {
+				for (int cz = 0; cz < 16; cz++) {
+					chunks.add(new BridgeChunk(this, next.getChunkX() + cx, next.getChunkZ() + cz));
+				}
+			}
+		}
+		return chunks.toArray(new BridgeChunk[chunks.size()]);
+	}
+
+	@Override
+	public int getMaxHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getMonsterSpawnLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getPVP() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Player> getPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BlockPopulator> getPopulators() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getSeaLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getSeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Location getSpawnLocation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public double getTemperature(int x, int z) {
-		return BlockManager.getTemperature(this, x, z);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public void setBiome(int x, int z, Biome biome) {
-		BlockManager.setBiome(this, x, z, biome);
+	public int getThunderDuration() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getTicksPerAnimalSpawns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getTicksPerMonsterSpawns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public long getTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public UUID getUID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getWaterAnimalSpawnLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getWeatherDuration() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public File getWorldFolder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public WorldType getWorldType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasStorm() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAutoSave() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isChunkInUse(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isChunkLoaded(Chunk chunk) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isChunkLoaded(int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isThundering() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void loadChunk(Chunk chunk) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean loadChunk(int x, int z, boolean generate) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void playEffect(Location location, Effect effect, int data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T> void playEffect(Location location, Effect effect, T data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playEffect(Location location, Effect effect, int data, int radius) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playSound(Location arg0, Sound arg1, float arg2, float arg3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean refreshChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean regenerateChunk(int x, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAnimalSpawnLimit(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAutoSave(boolean value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBiome(int x, int z, Biome bio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDifficulty(Difficulty difficulty) {
+		switch(getEnvironment()) {
+			case NORMAL: WorldConfiguration.NORMAL.DIFFICULTY.setValue(difficulty.name()); break;
+			case NETHER: WorldConfiguration.NETHER.DIFFICULTY.setValue(difficulty.name()); break;
+			case THE_END: WorldConfiguration.END.DIFFICULTY.setValue(difficulty.name()); break;
+		}
+	}
+
+	@Override
+	public void setFullTime(long time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setKeepSpawnInMemory(boolean keepLoaded) {
+		switch(getEnvironment()) {
+			case NORMAL: WorldConfiguration.NORMAL.LOADED_SPAWN.setValue(keepLoaded); break;
+			case NETHER: WorldConfiguration.NETHER.LOADED_SPAWN.setValue(keepLoaded); break;
+			case THE_END: WorldConfiguration.END.LOADED_SPAWN.setValue(keepLoaded); break;
+		}
+	}
+
+	@Override
+	public void setMonsterSpawnLimit(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPVP(boolean pvp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean setSpawnLocation(int x, int y, int z) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setStorm(boolean hasStorm) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setThunderDuration(int duration) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setThundering(boolean thundering) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTime(long time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWaterAnimalSpawnLimit(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWeatherDuration(int duration) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Arrow spawnArrow(Location location, Vector velocity, float speed, float spread) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@Deprecated
+	public LivingEntity spawnCreature(Location loc, EntityType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	@Deprecated
+	public LivingEntity spawnCreature(Location loc, CreatureType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entity spawnEntity(Location arg0, EntityType arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FallingBlock spawnFallingBlock(Location arg0, Material arg1, byte arg2) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FallingBlock spawnFallingBlock(Location arg0, int arg1, byte arg2) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LightningStrike strikeLightning(Location loc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LightningStrike strikeLightningEffect(Location loc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean unloadChunk(Chunk chunk) {
+		return unloadChunk(chunk.getX(), chunk.getZ());
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z) {
+		return unloadChunk(x, z, true);
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z, boolean save) {
+		return unloadChunk(x, z, save, true);
+	}
+
+	@Override
+	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
+		return unloadChunkRequest(x, z, safe);
+	}
+
+	@Override
+	public boolean unloadChunkRequest(int x, int z) {
+		return unloadChunkRequest(x, z, true);
+	}
+
+	@Override
+	public boolean unloadChunkRequest(int x, int z, boolean safe) {
+		Chunk chunk = getChunkAt(x, z, LoadOption.NO_LOAD);
+		return chunk.unload(true, true);
 	}
 }
