@@ -13,8 +13,14 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spout.api.material.BlockMaterial;
+import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
+import org.spout.vanilla.material.VanillaMaterial;
+import org.spout.vanilla.material.VanillaMaterials;
+import org.spout.vanilla.material.block.Liquid;
+import org.spout.vanilla.util.RedstoneUtil;
 
 /**
  * BridgeBlock is an implementation of Block.
@@ -111,7 +117,10 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getData() {
-		// TODO Auto-generated method stub
+		BlockMaterial bm = getBlockMaterial();
+		if (bm instanceof VanillaMaterial) {
+			return (byte) ((VanillaMaterial)bm).getMinecraftData(bm.getData());
+		}
 		return 0;
 	}
 
@@ -129,7 +138,15 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockFace getFace(Block block) {
-		// TODO Auto-generated method stub
+		for (BlockFace f : BlockFace.values()) {
+			if (f.getModX() + x == block.getX()) {
+				if (f.getModY() + y == block.getY()) {
+					if (f.getModZ() + z == block.getZ()) {
+						return f;
+					}
+				}
+			}
+		}
 		return null;
 	}
 
@@ -141,50 +158,43 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getLightFromBlocks() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWorld().getHandle().getBlockSkyLightRaw(x, y, z);
 	}
 
 	@Override
 	public byte getLightFromSky() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWorld().getHandle().getBlockSkyLight(x, y, z);
 	}
 
 	@Override
 	public byte getLightLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getWorld().getHandle().getBlockLight(x, y, z);
 	}
 
 	@Override
 	public Location getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Location(getWorld(), x, y, z);
 	}
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
 		// TODO Auto-generated method stub
-		return null;
+		return PistonMoveReaction.BLOCK;
 	}
 
 	@Override
 	public Block getRelative(BlockFace face) {
-		// TODO Auto-generated method stub
-		return null;
+		return getRelative(face, 1);
 	}
 
 	@Override
 	public Block getRelative(BlockFace face, int distance) {
-		// TODO Auto-generated method stub
-		return null;
+		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
 	}
 
 	@Override
 	public Block getRelative(int modX, int modY, int modZ) {
-		// TODO Auto-generated method stub
-		return null;
+		return getWorld().getBlockAt(x + modX, y + modY, z + modZ);
 	}
 
 	@Override
@@ -201,50 +211,46 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Material getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return Material.getMaterial(getTypeId());
 	}
 
 	@Override
 	public int getTypeId() {
-		// TODO Auto-generated method stub
+		BlockMaterial bm = getBlockMaterial();
+		if (bm instanceof VanillaMaterial) {
+			return ((VanillaMaterial)bm).getMinecraftId();
+		}
 		return 0;
 	}
 
 	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getRelative(face).isBlockIndirectlyPowered();
 	}
 
 	@Override
 	public boolean isBlockFacePowered(BlockFace face) {
-		// TODO Auto-generated method stub
-		return false;
+		return getRelative(face).isBlockPowered();
 	}
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		// TODO Auto-generated method stub
-		return false;
+		return RedstoneUtil.isReceivingPower(getWorld().getHandle().getBlock(x, y, z, VanillaBridgePlugin.getInstance()));
 	}
 
 	@Override
 	public boolean isBlockPowered() {
-		// TODO Auto-generated method stub
-		return false;
+		return RedstoneUtil.isEmittingPower(getWorld().getHandle().getBlock(x, y, z, VanillaBridgePlugin.getInstance()));
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return getTypeId() == 0;
 	}
 
 	@Override
 	public boolean isLiquid() {
-		// TODO Auto-generated method stub
-		return false;
+		return getBlockMaterial() instanceof Liquid;
 	}
 
 	@Override
@@ -252,40 +258,43 @@ public class BridgeBlock implements Block {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public BlockMaterial getBlockMaterial() {
+		return getWorld().getHandle().getBlockMaterial(x, y, z);
+	}
 
 	@Override
 	public void setData(byte data) {
-		// TODO Auto-generated method stub
-		
+		setData(data, true);
 	}
 
 	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		
+		getWorld().getHandle().setBlockData(x, y, z, data, VanillaBridgePlugin.getInstance());
 	}
 
 	@Override
 	public void setType(Material type) {
-		// TODO Auto-generated method stub
-		
+		setTypeId(type.getId());
 	}
 
 	@Override
 	public boolean setTypeId(int type) {
-		// TODO Auto-generated method stub
-		return false;
+		return setTypeId(type, true);
 	}
 
 	@Override
 	public boolean setTypeId(int type, boolean applyPhysics) {
-		// TODO Auto-generated method stub
-		return false;
+		return setTypeIdAndData(type, (byte) 0, applyPhysics);
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
-		// TODO Auto-generated method stub
+		org.spout.api.material.Material mat = VanillaMaterials.getMaterial((short) type, data);
+		if (mat instanceof BlockMaterial) {
+			getWorld().getHandle().setBlockMaterial(x, y, z, (BlockMaterial)mat, data, VanillaBridgePlugin.getInstance());
+			return true;
+		}
 		return false;
 	}
 }

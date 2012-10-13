@@ -61,7 +61,7 @@ import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 public class BridgeWorld implements World {
 	private final BridgeServer server;
 	private final org.spout.api.geo.World handle;
-	
+
 	public BridgeWorld(BridgeServer server, org.spout.api.geo.World handle) {
 		this.server = server;
 		this.handle = handle;

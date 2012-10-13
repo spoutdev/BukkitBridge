@@ -27,7 +27,13 @@ import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.listener.WorldListener;
 
 public class VanillaBridgePlugin extends CommonPlugin {
+	private static VanillaBridgePlugin instance;
 	private WorldListener worldListener;
+
+	public VanillaBridgePlugin() {
+		instance = this;
+	}
+
 	@Override
 	public void onEnable() {
 		worldListener = new WorldListener(this);
@@ -45,5 +51,9 @@ public class VanillaBridgePlugin extends CommonPlugin {
 
 	public WorldListener getWorldListener() {
 		return worldListener;
+	}
+
+	public static VanillaBridgePlugin getInstance() {
+		return instance;
 	}
 }
