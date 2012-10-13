@@ -39,9 +39,18 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
+import org.spout.api.geo.discrete.Point;
 import org.spout.api.material.BlockMaterial;
+
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.block.BridgeBlock;
+import org.spout.bridge.bukkit.inventory.BridgeItemStack;
+
 import org.spout.vanilla.configuration.WorldConfiguration;
 import org.spout.vanilla.material.VanillaMaterial;
+import org.spout.vanilla.util.ItemUtil;
+import org.spout.vanilla.util.explosion.ExplosionModel;
+import org.spout.vanilla.util.explosion.ExplosionModelSpherical;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
 import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 
@@ -110,31 +119,28 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean createExplosion(Location loc, float power) {
-		// TODO Auto-generated method stub
-		return false;
+		return createExplosion(loc, power, false);
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+		return createExplosion(loc.getX(), loc.getY(), loc.getZ(), power, setFire);
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power) {
-		// TODO Auto-generated method stub
-		return false;
+		return createExplosion(x, y, z, power, false);
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		// TODO Auto-generated method stub
-		return false;
+		ExplosionModel model = new ExplosionModelSpherical();
+		model.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, handle);
+		return true;
 	}
 
 	@Override
 	public Item dropItem(Location location, ItemStack item) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -182,7 +188,6 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(Location location) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
