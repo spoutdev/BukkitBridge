@@ -1,4 +1,4 @@
-package org.spout.bridge.scheduler;
+package org.spout.bridge.bukkit.scheduler;
 
 import java.util.List;
 import java.util.concurrent.Callable;

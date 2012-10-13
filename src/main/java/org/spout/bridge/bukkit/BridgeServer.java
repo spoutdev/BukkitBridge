@@ -35,7 +35,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.spout.api.util.access.BanType;
 import org.spout.bridge.VanillaBridgePlugin;
-import org.spout.bridge.scheduler.BridgeScheduler;
+import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
 import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.configuration.WorldConfiguration;
 import org.spout.vanilla.inventory.recipe.VanillaRecipes;
