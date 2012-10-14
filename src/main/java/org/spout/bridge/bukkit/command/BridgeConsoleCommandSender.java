@@ -3,6 +3,7 @@ package org.spout.bridge.bukkit.command;
 import java.util.Set;
 
 import org.bukkit.Server;
+import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -10,6 +11,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.bridge.bukkit.BridgeServer;
 
 public class BridgeConsoleCommandSender implements ConsoleCommandSender {
@@ -21,14 +23,14 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public void sendMessage(String paramString) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(paramString);
 	}
 
 	@Override
 	public void sendMessage(String[] paramArrayOfString) {
-		// TODO Auto-generated method stub
-		
+		for (String msg : paramArrayOfString) {
+			sendMessage(msg);
+		}
 	}
 
 	@Override
@@ -38,20 +40,17 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "CONSOLE";
 	}
 
 	@Override
 	public boolean isPermissionSet(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission paramPermission) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -66,44 +65,35 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean, int paramInt) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, int paramInt) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment paramPermissionAttachment) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void recalculatePermissions() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		// TODO Auto-generated method stub
-		return null;
+		return null; // TODO: Return null or a Set of all permissions as this is the console?
 	}
 
 	@Override
@@ -147,8 +137,6 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public void sendRawMessage(String paramString) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(ChatColor.stripColor(paramString));
 	}
-
 }
