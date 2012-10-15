@@ -4,7 +4,13 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
+import org.spout.api.inventory.Inventory;
+
 public class BridgeInventoryCrafting extends BridgeInventory implements CraftingInventory {
+	public BridgeInventoryCrafting(Inventory handle, String name) {
+		super(handle, name);
+	}
+
 	@Override
 	public ItemStack getResult() {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.

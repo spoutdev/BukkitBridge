@@ -40,18 +40,27 @@ import org.bukkit.util.Vector;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.geo.discrete.Transform;
 import org.spout.api.material.BlockMaterial;
+import org.spout.api.math.Quaternion;
+import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.inventory.BridgeItemStack;
 
+import org.spout.vanilla.component.world.VanillaSky;
+import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.configuration.WorldConfiguration;
+import org.spout.vanilla.data.effect.store.GeneralEffects;
+import org.spout.vanilla.data.effect.store.SoundEffects;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.util.ItemUtil;
 import org.spout.vanilla.util.explosion.ExplosionModel;
 import org.spout.vanilla.util.explosion.ExplosionModelSpherical;
+import org.spout.vanilla.util.explosion.ExplosionModels;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
+import org.spout.vanilla.world.generator.object.VanillaObjects;
 import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 
 /**
@@ -134,8 +143,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		ExplosionModel model = new ExplosionModelSpherical();
-		model.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, handle);
+		ExplosionModels.SPHERICAL.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, handle);
 		return true;
 	}
 
@@ -151,27 +159,62 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean generateTree(Location location, TreeType type) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean generateTree(Location loc, TreeType type) {
+		return generateTree(loc, type, null);
 	}
 
 	@Override
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
-		// TODO Auto-generated method stub
-		return false;
+		int x = loc.getBlockX();
+		int y = loc.getBlockY();
+		int z = loc.getBlockZ();
+		switch (type) {
+			case TREE:
+				VanillaObjects.SMALL_OAK_TREE.placeObject(handle, x, y, z);
+				return true;
+			case BIG_TREE:
+				VanillaObjects.BIG_OAK_TREE.placeObject(handle, x, y, z);
+				return true;
+			case REDWOOD:
+				VanillaObjects.SPRUCE_TREE.placeObject(handle, x, y, z);
+				return true;
+			case TALL_REDWOOD:
+				VanillaObjects.PINE_TREE.placeObject(handle, x, y, z);
+				return true;
+			case BIRCH:
+				VanillaObjects.SMALL_BIRCH_TREE.placeObject(handle, x, y, z);
+				return true;
+			case JUNGLE:
+				VanillaObjects.HUGE_JUNGLE_TREE.placeObject(handle, x, y, z);
+				return true;
+			case SMALL_JUNGLE:
+				VanillaObjects.SMALL_JUNGLE_TREE.placeObject(handle, x, y, z);
+				return true;
+			case JUNGLE_BUSH:
+				VanillaObjects.JUNGLE_SHRUB.placeObject(handle, x, y, z);
+				return true;
+			case RED_MUSHROOM:
+				VanillaObjects.HUGE_RED_MUSHROOM.placeObject(handle, x, y, z);
+				return true;
+			case BROWN_MUSHROOM:
+				VanillaObjects.HUGE_BROWN_MUSHROOM.placeObject(handle, x, y, z);
+				return true;
+			case SWAMP:
+				VanillaObjects.SWAMP_TREE.placeObject(handle, x, y, z);
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	@Override
 	public boolean getAllowAnimals() {
-		// TODO Auto-generated method stub
-		return false;
+		return VanillaConfiguration.WORLDS.getOrCreate(handle).SPAWN_ANIMALS.getBoolean();
 	}
 
 	@Override
 	public boolean getAllowMonsters() {
-		// TODO Auto-generated method stub
-		return false;
+		return VanillaConfiguration.WORLDS.getOrCreate(handle).SPAWN_MONSTERS.getBoolean();
 	}
 
 	@Override
@@ -285,8 +328,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getFullTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.getAge();
 	}
 
 	@Override
@@ -370,8 +412,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return handle.getName();
 	}
 
 	@Override
@@ -406,8 +447,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Location getSpawnLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitUtil.fromTransform(handle.getSpawnPoint());
 	}
 
 	@Override
@@ -436,14 +476,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.getComponentHolder().get(VanillaSky.class).getTime();
 	}
 
 	@Override
 	public UUID getUID() {
-		// TODO Auto-generated method stub
-		return null;
+		return handle.getUID();
 	}
 
 	@Override
@@ -460,14 +498,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public File getWorldFolder() {
-		// TODO Auto-generated method stub
-		return null;
+		return handle.getDirectory();
 	}
 
 	@Override
 	public WorldType getWorldType() {
-		// TODO Auto-generated method stub
-		return null;
+		return WorldType.getByName(VanillaConfiguration.WORLDS.getOrCreate(handle).GENERATOR.getString());
 	}
 
 	@Override
@@ -526,14 +562,65 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data) {
-		// TODO Auto-generated method stub
-		
+		Point pos = BukkitUtil.toPoint(location);
+		switch (effect) {
+			case CLICK1:
+				GeneralEffects.RANDOM_CLICK1.playGlobal(pos, data, data);
+				break;
+			case CLICK2:
+				GeneralEffects.RANDOM_CLICK2.playGlobal(pos, data, data);
+				break;
+			case BOW_FIRE:
+				GeneralEffects.RANDOM_BOW.playGlobal(pos, data, data);
+				break;
+			case DOOR_TOGGLE:
+				GeneralEffects.RANDOM_DOOR.playGlobal(pos, data);
+				break;
+			case EXTINGUISH:
+				GeneralEffects.EXTINGUISH.playGlobal(pos);
+				break;
+			case RECORD_PLAY:
+				GeneralEffects.MUSIC_DISC.playGlobal(pos, data);
+				break;
+			case GHAST_SHRIEK:
+				GeneralEffects.GHAST_CHARGE.playGlobal(pos, data);
+				break;
+			case GHAST_SHOOT:
+				GeneralEffects.GHAST_FIREBALL.playGlobal(pos, data);
+				break;
+			case BLAZE_SHOOT:
+				// TODO: Blaze effect
+				break;
+			case ZOMBIE_CHEW_WOODEN_DOOR:
+				GeneralEffects.ZOMBIE_DAMAGE_WOOD.playGlobal(pos, data);
+				break;
+			case ZOMBIE_CHEW_IRON_DOOR:
+				GeneralEffects.ZOMBIE_DAMAGE_METAL.playGlobal(pos, data);
+				break;
+			case ZOMBIE_DESTROY_DOOR:
+				GeneralEffects.ZOMBIE_BREAK.playGlobal(pos, data);
+				break;
+			case SMOKE:
+				GeneralEffects.SMOKE.playGlobal(pos, data);
+				break;
+			case STEP_SOUND:
+				SoundEffects.STEP_STONE.playGlobal(pos, data, data);
+				break;
+			case POTION_BREAK:
+				GeneralEffects.SPLASHPOTION.playGlobal(pos, data);
+				break;
+			case ENDER_SIGNAL:
+				GeneralEffects.ENDEREYE.playGlobal(pos, data);
+				break;
+			case MOBSPAWNER_FLAMES:
+				GeneralEffects.MOBSPAWN.playGlobal(pos, data);
+		}
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -569,7 +656,7 @@ public class BridgeWorld implements World {
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -634,8 +721,8 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean setSpawnLocation(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		handle.setSpawnPoint(new Transform(new Point(handle, x, y, z), Quaternion.IDENTITY, Vector3.ZERO));
+		return true;
 	}
 
 	@Override
@@ -670,8 +757,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setTime(long time) {
-		// TODO Auto-generated method stub
-		
+		handle.getComponentHolder().get(VanillaSky.class).setTime(time);
 	}
 
 	@Override

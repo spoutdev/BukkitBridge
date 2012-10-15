@@ -50,6 +50,36 @@ public class BridgeScheduler implements BukkitScheduler{
 	}
 
 	@Override
+	public BukkitTask runTask(Plugin plugin, Runnable runnable) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable runnable) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public BukkitTask runTaskLater(Plugin plugin, Runnable runnable, long l) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable runnable, long l) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public BukkitTask runTaskTimer(Plugin plugin, Runnable runnable, long l, long l1) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable runnable, long l, long l1) throws IllegalArgumentException {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public boolean isCurrentlyRunning(int taskId) {
 		throw new UnsupportedOperationException();
 	}

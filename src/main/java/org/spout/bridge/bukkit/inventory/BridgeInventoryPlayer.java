@@ -4,7 +4,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import org.spout.api.inventory.Inventory;
+
 public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
+	public BridgeInventoryPlayer(Inventory handle, String name) {
+		super(handle, name);
+	}
+
 	@Override
 	public ItemStack[] getArmorContents() {
 		return new ItemStack[0];  //To change body of implemented methods use File | Settings | File Templates.
