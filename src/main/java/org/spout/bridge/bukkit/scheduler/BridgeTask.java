@@ -20,6 +20,11 @@ public class BridgeTask implements BukkitTask, Runnable {
 	}
 
 	@Override
+	public void cancel() {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public void run() {
 		//To change body of implemented methods use File | Settings | File Templates.
 	}
