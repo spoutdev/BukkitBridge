@@ -19,7 +19,6 @@ import org.bukkit.util.Vector;
  * A BridgeEntity is Bridge's implementation of Entity. BridgeEntity delegates to EntityDelegate.
  */
 public class BridgeEntity implements Entity {
-
 	@Override
 	public List<MetadataValue> getMetadata(String arg0) {
 		// TODO Auto-generated method stub
@@ -35,13 +34,13 @@ public class BridgeEntity implements Entity {
 	@Override
 	public void removeMetadata(String arg0, Plugin arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setMetadata(String arg0, MetadataValue arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -173,31 +172,31 @@ public class BridgeEntity implements Entity {
 	@Override
 	public void playEffect(EntityEffect arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void remove() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setFallDistance(float arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setFireTicks(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -209,13 +208,13 @@ public class BridgeEntity implements Entity {
 	@Override
 	public void setTicksLived(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setVelocity(Vector arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -241,5 +240,4 @@ public class BridgeEntity implements Entity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

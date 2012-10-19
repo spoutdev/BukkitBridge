@@ -5,7 +5,6 @@ import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeDispenser extends BridgeBlockState implements Dispenser {
-
 	public BridgeDispenser(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -22,5 +21,4 @@ public class BridgeDispenser extends BridgeBlockState implements Dispenser {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

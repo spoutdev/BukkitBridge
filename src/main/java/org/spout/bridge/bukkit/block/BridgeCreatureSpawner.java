@@ -7,7 +7,6 @@ import org.bukkit.entity.EntityType;
 
 @SuppressWarnings("deprecation")
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
-
 	public BridgeCreatureSpawner(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -72,5 +71,4 @@ public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureS
 		// TODO Auto-generated method stub
 
 	}
-
 }

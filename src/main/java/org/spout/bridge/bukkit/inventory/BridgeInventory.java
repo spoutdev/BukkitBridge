@@ -85,7 +85,7 @@ public class BridgeInventory implements Inventory {
 	@Override
 	public ItemStack[] getContents() {
 		org.spout.api.inventory.ItemStack[] contents = handle.toArray(new org.spout.api.inventory.ItemStack[handle.size()]);
-	    ItemStack[] newContents = new ItemStack[getSize()];
+		ItemStack[] newContents = new ItemStack[getSize()];
 		for (int i = 0; i < newContents.length; i++) {
 			newContents[i] = BukkitUtil.fromItemStack(contents[i]);
 		}

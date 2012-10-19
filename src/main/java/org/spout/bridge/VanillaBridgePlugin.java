@@ -20,9 +20,11 @@
 package org.spout.bridge;
 
 import org.bukkit.Bukkit;
+
 import org.spout.api.Server;
 import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
+
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.listener.WorldListener;
 
@@ -37,16 +39,14 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	@Override
 	public void onEnable() {
 		worldListener = new WorldListener(this);
-		
-		
-		BridgeServer server = new BridgeServer((Server)Spout.getEngine(), this);
+
+		BridgeServer server = new BridgeServer((Server) Spout.getEngine(), this);
 		Bukkit.setServer(server);
-		
 	}
 
 	@Override
 	public void onDisable() {
-		
+
 	}
 
 	public WorldListener getWorldListener() {

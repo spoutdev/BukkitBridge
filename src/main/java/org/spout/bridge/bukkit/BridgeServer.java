@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Logger;
 
+import com.avaje.ebean.config.ServerConfig;
+
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -33,14 +35,15 @@ import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.scheduler.BukkitScheduler;
+
 import org.spout.api.util.access.BanType;
+
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
+
 import org.spout.vanilla.configuration.VanillaConfiguration;
 import org.spout.vanilla.configuration.WorldConfiguration;
 import org.spout.vanilla.inventory.recipe.VanillaRecipes;
-
-import com.avaje.ebean.config.ServerConfig;
 
 /**
  * BridgeServer is Bridge's version of Bukkit's Server.
@@ -50,6 +53,7 @@ public class BridgeServer implements Server {
 	private final org.spout.api.Server server;
 	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
 	private final BridgeScheduler scheduler = new BridgeScheduler();
+
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
@@ -64,7 +68,7 @@ public class BridgeServer implements Server {
 	@Override
 	public void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -100,7 +104,7 @@ public class BridgeServer implements Server {
 	@Override
 	public void configureDbConfig(ServerConfig arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -430,10 +434,10 @@ public class BridgeServer implements Server {
 		return "DEFAULT";
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public List<World> getWorlds() {
-		return (List<World>)(List)plugin.getWorldListener().getWorlds();
+		return (List<World>) (List) plugin.getWorldListener().getWorlds();
 	}
 
 	@Override
@@ -516,7 +520,7 @@ public class BridgeServer implements Server {
 	@Override
 	public boolean unloadWorld(World world, boolean save) {
 		if (world != null) {
-			((BridgeWorld)world).getHandle().unload(save);
+			((BridgeWorld) world).getHandle().unload(save);
 			return true;
 		}
 		return false;

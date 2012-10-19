@@ -26,7 +26,7 @@ public class BridgeBlockState implements BlockState {
 	private int typeid;
 	private byte lightlevel;
 	private Location location;
-	
+
 	public BridgeBlockState(Block b) {
 		this.b = b;
 		this.x = b.getX();
@@ -124,25 +124,34 @@ public class BridgeBlockState implements BlockState {
 	public boolean update() {
 		return update(false);
 	}
-	
+
 	private void updateMaterialData(MaterialData data) {
-		if(getType() == null) this.data = data;
-		else if (getType().getData() == null) this.data = data;
-		else if (getType().getData().equals(data)) this.data = data;
-		else if (MaterialData.class.equals(data)) this.data = data;
-		else throw new IllegalArgumentException("Specified data is invalid must be an instance of org.bukkit.material.MaterialData or " + getType().getData().getName());
+		if (getType() == null) {
+			this.data = data;
+		} else if (getType().getData() == null) {
+			this.data = data;
+		} else if (getType().getData().equals(data)) {
+			this.data = data;
+		} else if (MaterialData.class.equals(data)) {
+			this.data = data;
+		} else {
+			throw new IllegalArgumentException("Specified data is invalid must be an instance of org.bukkit.material.MaterialData or " + getType().getData().getName());
+		}
 	}
-	
+
 	private void updateMaterialData(byte data) {
-		if(getType() == null || getType().getData() == null) this.data = new MaterialData(getTypeId(), data);
-		else this.data = getType().getNewData(data);
+		if (getType() == null || getType().getData() == null) {
+			this.data = new MaterialData(getTypeId(), data);
+		} else {
+			this.data = getType().getNewData(data);
+		}
 	}
 
 	@Override
 	public boolean update(boolean force) {
-		if(b.getType().equals(getType())) {
+		if (b.getType().equals(getType())) {
 			b.setData(getRawData());
-		} else if(force) {
+		} else if (force) {
 			b.setType(getType());
 			b.setData(getRawData());
 		} else {
@@ -150,8 +159,7 @@ public class BridgeBlockState implements BlockState {
 		}
 		return true;
 	}
-	
-	
+
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
 		// TODO Auto-generated method stub
@@ -167,13 +175,12 @@ public class BridgeBlockState implements BlockState {
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 }

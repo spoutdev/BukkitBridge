@@ -37,6 +37,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
@@ -46,8 +47,6 @@ import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.bukkit.block.BridgeBlock;
-import org.spout.bridge.bukkit.inventory.BridgeItemStack;
 
 import org.spout.vanilla.component.world.VanillaSky;
 import org.spout.vanilla.configuration.VanillaConfiguration;
@@ -55,9 +54,6 @@ import org.spout.vanilla.configuration.WorldConfiguration;
 import org.spout.vanilla.data.effect.store.GeneralEffects;
 import org.spout.vanilla.data.effect.store.SoundEffects;
 import org.spout.vanilla.material.VanillaMaterial;
-import org.spout.vanilla.util.ItemUtil;
-import org.spout.vanilla.util.explosion.ExplosionModel;
-import org.spout.vanilla.util.explosion.ExplosionModelSpherical;
 import org.spout.vanilla.util.explosion.ExplosionModels;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
 import org.spout.vanilla.world.generator.object.VanillaObjects;
@@ -75,11 +71,11 @@ public class BridgeWorld implements World {
 		this.server = server;
 		this.handle = handle;
 	}
-	
+
 	public BridgeServer getServer() {
 		return server;
 	}
-	
+
 	public org.spout.api.geo.World getHandle() {
 		return handle;
 	}
@@ -93,7 +89,7 @@ public class BridgeWorld implements World {
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -111,13 +107,13 @@ public class BridgeWorld implements World {
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -249,7 +245,7 @@ public class BridgeWorld implements World {
 	public int getBlockTypeIdAt(int x, int y, int z) {
 		BlockMaterial bm = getHandle().getBlockMaterial(x, y, z);
 		if (bm instanceof VanillaMaterial) {
-			return ((VanillaMaterial)bm).getMinecraftId();
+			return ((VanillaMaterial) bm).getMinecraftId();
 		}
 		return 0;
 	}
@@ -277,10 +273,13 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Difficulty getDifficulty() {
-		switch(getEnvironment()) {
-			case NORMAL: return Difficulty.valueOf(WorldConfiguration.NORMAL.DIFFICULTY.getString().toUpperCase());
-			case NETHER: return Difficulty.valueOf(WorldConfiguration.NETHER.DIFFICULTY.getString().toUpperCase());
-			case THE_END: return Difficulty.valueOf(WorldConfiguration.END.DIFFICULTY.getString().toUpperCase());
+		switch (getEnvironment()) {
+			case NORMAL:
+				return Difficulty.valueOf(WorldConfiguration.NORMAL.DIFFICULTY.getString().toUpperCase());
+			case NETHER:
+				return Difficulty.valueOf(WorldConfiguration.NETHER.DIFFICULTY.getString().toUpperCase());
+			case THE_END:
+				return Difficulty.valueOf(WorldConfiguration.END.DIFFICULTY.getString().toUpperCase());
 		}
 		return Difficulty.NORMAL;
 	}
@@ -369,10 +368,13 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean getKeepSpawnInMemory() {
-		switch(getEnvironment()) {
-			case NORMAL: return WorldConfiguration.NORMAL.LOADED_SPAWN.getBoolean();
-			case NETHER: return WorldConfiguration.NETHER.LOADED_SPAWN.getBoolean();
-			case THE_END: return WorldConfiguration.END.LOADED_SPAWN.getBoolean();
+		switch (getEnvironment()) {
+			case NORMAL:
+				return WorldConfiguration.NORMAL.LOADED_SPAWN.getBoolean();
+			case NETHER:
+				return WorldConfiguration.NETHER.LOADED_SPAWN.getBoolean();
+			case THE_END:
+				return WorldConfiguration.END.LOADED_SPAWN.getBoolean();
 		}
 		throw new IllegalStateException("Unknown environment");
 	}
@@ -545,13 +547,13 @@ public class BridgeWorld implements World {
 	@Override
 	public void loadChunk(Chunk chunk) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void loadChunk(int x, int z) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -626,19 +628,19 @@ public class BridgeWorld implements World {
 	@Override
 	public void playEffect(Location location, Effect effect, int data, int radius) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void playSound(Location arg0, Sound arg1, float arg2, float arg3) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -662,61 +664,73 @@ public class BridgeWorld implements World {
 	@Override
 	public void setAnimalSpawnLimit(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setAutoSave(boolean value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setBiome(int x, int z, Biome bio) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setDifficulty(Difficulty difficulty) {
-		switch(getEnvironment()) {
-			case NORMAL: WorldConfiguration.NORMAL.DIFFICULTY.setValue(difficulty.name()); break;
-			case NETHER: WorldConfiguration.NETHER.DIFFICULTY.setValue(difficulty.name()); break;
-			case THE_END: WorldConfiguration.END.DIFFICULTY.setValue(difficulty.name()); break;
+		switch (getEnvironment()) {
+			case NORMAL:
+				WorldConfiguration.NORMAL.DIFFICULTY.setValue(difficulty.name());
+				break;
+			case NETHER:
+				WorldConfiguration.NETHER.DIFFICULTY.setValue(difficulty.name());
+				break;
+			case THE_END:
+				WorldConfiguration.END.DIFFICULTY.setValue(difficulty.name());
+				break;
 		}
 	}
 
 	@Override
 	public void setFullTime(long time) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded) {
-		switch(getEnvironment()) {
-			case NORMAL: WorldConfiguration.NORMAL.LOADED_SPAWN.setValue(keepLoaded); break;
-			case NETHER: WorldConfiguration.NETHER.LOADED_SPAWN.setValue(keepLoaded); break;
-			case THE_END: WorldConfiguration.END.LOADED_SPAWN.setValue(keepLoaded); break;
+		switch (getEnvironment()) {
+			case NORMAL:
+				WorldConfiguration.NORMAL.LOADED_SPAWN.setValue(keepLoaded);
+				break;
+			case NETHER:
+				WorldConfiguration.NETHER.LOADED_SPAWN.setValue(keepLoaded);
+				break;
+			case THE_END:
+				WorldConfiguration.END.LOADED_SPAWN.setValue(keepLoaded);
+				break;
 		}
 	}
 
 	@Override
 	public void setMonsterSpawnLimit(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPVP(boolean pvp) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -728,31 +742,31 @@ public class BridgeWorld implements World {
 	@Override
 	public void setStorm(boolean hasStorm) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setThunderDuration(int duration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setThundering(boolean thundering) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -763,13 +777,13 @@ public class BridgeWorld implements World {
 	@Override
 	public void setWaterAnimalSpawnLimit(int arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setWeatherDuration(int duration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

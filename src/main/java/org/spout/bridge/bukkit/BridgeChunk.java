@@ -1,11 +1,13 @@
 package org.spout.bridge.bukkit;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
+
 import org.spout.api.geo.LoadOption;
 
 /**
@@ -138,7 +140,7 @@ public class BridgeChunk implements Chunk {
 		if (!(obj instanceof BridgeChunk)) {
 			return false;
 		}
-		BridgeChunk other = (BridgeChunk)obj;
+		BridgeChunk other = (BridgeChunk) obj;
 		return other.x == x && other.z == z && other.world.equals(world);
 	}
 

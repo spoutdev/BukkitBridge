@@ -5,7 +5,6 @@ import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 
 public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand {
-
 	public BridgeBrewingStand(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -20,7 +19,7 @@ public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand
 	@Override
 	public void setBrewingTime(int paramInt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -28,5 +27,4 @@ public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

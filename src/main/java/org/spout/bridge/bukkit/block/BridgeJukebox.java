@@ -5,7 +5,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 
 public class BridgeJukebox extends BridgeBlockState implements Jukebox {
-
 	public BridgeJukebox(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -20,7 +19,7 @@ public class BridgeJukebox extends BridgeBlockState implements Jukebox {
 	@Override
 	public void setPlaying(Material paramMaterial) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -34,5 +33,4 @@ public class BridgeJukebox extends BridgeBlockState implements Jukebox {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

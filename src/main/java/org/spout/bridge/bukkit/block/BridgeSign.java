@@ -4,7 +4,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
-
 	public BridgeSign(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -27,5 +26,4 @@ public class BridgeSign extends BridgeBlockState implements Sign {
 		// TODO Auto-generated method stub
 
 	}
-
 }

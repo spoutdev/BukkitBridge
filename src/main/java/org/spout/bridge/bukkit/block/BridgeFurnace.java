@@ -5,7 +5,6 @@ import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
 
 public class BridgeFurnace extends BridgeBlockState implements Furnace {
-
 	public BridgeFurnace(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -40,5 +39,4 @@ public class BridgeFurnace extends BridgeBlockState implements Furnace {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

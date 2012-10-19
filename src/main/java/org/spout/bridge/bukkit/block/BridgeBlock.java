@@ -13,10 +13,13 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.api.material.BlockMaterial;
+
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
+
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.block.Liquid;
@@ -28,7 +31,7 @@ import org.spout.vanilla.util.RedstoneUtil;
 public class BridgeBlock implements Block {
 	private final BridgeChunk chunk;
 	private final int x, y, z;
-	
+
 	public BridgeBlock(BridgeChunk chunk, int x, int y, int z) {
 		this.chunk = chunk;
 		this.x = x;
@@ -76,13 +79,13 @@ public class BridgeBlock implements Block {
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -119,7 +122,7 @@ public class BridgeBlock implements Block {
 	public byte getData() {
 		BlockMaterial bm = getBlockMaterial();
 		if (bm instanceof VanillaMaterial) {
-			return (byte) ((VanillaMaterial)bm).getMinecraftData(bm.getData());
+			return (byte) ((VanillaMaterial) bm).getMinecraftData(bm.getData());
 		}
 		return 0;
 	}
@@ -218,7 +221,7 @@ public class BridgeBlock implements Block {
 	public int getTypeId() {
 		BlockMaterial bm = getBlockMaterial();
 		if (bm instanceof VanillaMaterial) {
-			return ((VanillaMaterial)bm).getMinecraftId();
+			return ((VanillaMaterial) bm).getMinecraftId();
 		}
 		return 0;
 	}
@@ -256,9 +259,9 @@ public class BridgeBlock implements Block {
 	@Override
 	public void setBiome(Biome bio) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public BlockMaterial getBlockMaterial() {
 		return getWorld().getHandle().getBlockMaterial(x, y, z);
 	}
@@ -292,7 +295,7 @@ public class BridgeBlock implements Block {
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
 		org.spout.api.material.Material mat = VanillaMaterials.getMaterial((short) type, data);
 		if (mat instanceof BlockMaterial) {
-			getWorld().getHandle().setBlockMaterial(x, y, z, (BlockMaterial)mat, data, VanillaBridgePlugin.getInstance());
+			getWorld().getHandle().setBlockMaterial(x, y, z, (BlockMaterial) mat, data, VanillaBridgePlugin.getInstance());
 			return true;
 		}
 		return false;

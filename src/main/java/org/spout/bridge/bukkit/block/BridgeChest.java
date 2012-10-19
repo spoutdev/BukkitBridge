@@ -5,7 +5,6 @@ import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeChest extends BridgeBlockState implements Chest {
-
 	public BridgeChest(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -22,5 +21,4 @@ public class BridgeChest extends BridgeBlockState implements Chest {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

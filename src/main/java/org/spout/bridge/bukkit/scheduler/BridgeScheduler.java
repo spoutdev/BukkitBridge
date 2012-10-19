@@ -12,11 +12,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+
 import org.spout.api.Spout;
 import org.spout.api.scheduler.TaskPriority;
 
-public class BridgeScheduler implements BukkitScheduler{
-
+public class BridgeScheduler implements BukkitScheduler {
 	@Override
 	public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> task) {
 		FutureRunnable<T> futureRun = new FutureRunnable<T>(task);
@@ -118,13 +118,14 @@ public class BridgeScheduler implements BukkitScheduler{
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
 		return Spout.getEngine().getScheduler().scheduleSyncRepeatingTask(plugin, task, delay, period, TaskPriority.NORMAL);
 	}
-	
+
 	private static class FutureRunnable<T> implements Runnable, Future<T> {
 		private final Callable<T> future;
 		private volatile T result;
 		private volatile ExecutionException ex;
 		private volatile boolean cancelled = false;
 		private final AtomicBoolean done = new AtomicBoolean(false);
+
 		FutureRunnable(Callable<T> future) {
 			this.future = future;
 		}

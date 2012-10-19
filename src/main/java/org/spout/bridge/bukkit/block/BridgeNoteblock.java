@@ -6,7 +6,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
 
 public class BridgeNoteblock extends BridgeBlockState implements NoteBlock {
-
 	public BridgeNoteblock(Block b) {
 		super(b);
 		// TODO Auto-generated constructor stub
@@ -53,5 +52,4 @@ public class BridgeNoteblock extends BridgeBlockState implements NoteBlock {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

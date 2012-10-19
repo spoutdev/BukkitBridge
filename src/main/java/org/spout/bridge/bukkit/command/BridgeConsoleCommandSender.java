@@ -10,11 +10,12 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.bridge.bukkit.BridgeServer;
 
 public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	private final BridgeServer server;
-	
+
 	public BridgeConsoleCommandSender(BridgeServer b) {
 		server = b;
 	}
@@ -22,13 +23,13 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	@Override
 	public void sendMessage(String paramString) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void sendMessage(String[] paramArrayOfString) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -91,13 +92,13 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	@Override
 	public void removeAttachment(PermissionAttachment paramPermissionAttachment) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void recalculatePermissions() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -124,7 +125,7 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	@Override
 	public void acceptConversationInput(String paramString) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -136,19 +137,18 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	@Override
 	public void abandonConversation(Conversation paramConversation) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void abandonConversation(Conversation paramConversation, ConversationAbandonedEvent paramConversationAbandonedEvent) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void sendRawMessage(String paramString) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 }
