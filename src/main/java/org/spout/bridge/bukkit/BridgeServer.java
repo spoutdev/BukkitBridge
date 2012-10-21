@@ -1,16 +1,21 @@
 package org.spout.bridge.bukkit;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.avaje.ebean.config.ServerConfig;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
@@ -29,13 +34,18 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimpleServicesManager;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
-
+import org.bukkit.util.permissions.DefaultPermissions;
+import org.spout.api.Spout;
 import org.spout.api.util.access.BanType;
 
 import org.spout.bridge.VanillaBridgePlugin;
@@ -53,10 +63,76 @@ public class BridgeServer implements Server {
 	private final org.spout.api.Server server;
 	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
 	private final BridgeScheduler scheduler = new BridgeScheduler();
-
+	private final PluginManager pluginManager = new ForwardingPluginManager(this);
+	private final String bridgeVersion = getPOMVersion();
+	private final String serverVersion = "Spout Server ( " + Spout.getAPIVersion() + " )";
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
+		Bukkit.setServer(this);
+
+		org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
+		PotionEffectType.stopAcceptingRegistrations();
+		
+		loadPlugins();
+		enablePlugins(PluginLoadOrder.STARTUP);
+	}
+
+	public void loadPlugins() {
+		pluginManager.registerInterface(JavaPluginLoader.class);
+
+		File pluginFolder = new File(plugin.getDataFolder(), "plugins");
+
+		if (pluginFolder.exists()) {
+			Plugin[] plugins = pluginManager.loadPlugins(pluginFolder);
+			for (Plugin plugin : plugins) {
+				try {
+					String message = String.format("Loading %s", plugin.getDescription().getFullName());
+					plugin.getLogger().info(message);
+					plugin.onLoad();
+				} catch (Throwable ex) {
+					getLogger().log(Level.SEVERE, ex.getMessage() + " initializing " + plugin.getDescription().getFullName(), ex);
+				}
+			}
+		} else {
+			pluginFolder.mkdirs();
+		}
+	}
+
+	public void enablePlugins(PluginLoadOrder type) {
+		Plugin[] plugins = pluginManager.getPlugins();
+
+		for (Plugin plugin : plugins) {
+			if ((!plugin.isEnabled()) && (plugin.getDescription().getLoad() == type)) {
+				loadPlugin(plugin);
+			}
+		}
+
+		if (type == PluginLoadOrder.POSTWORLD) {
+			DefaultPermissions.registerCorePermissions();
+		}
+	}
+
+	public void disablePlugins() {
+		pluginManager.disablePlugins();
+	}
+
+	private void loadPlugin(Plugin plugin) {
+		try {
+			pluginManager.enablePlugin(plugin);
+
+			List<Permission> perms = plugin.getDescription().getPermissions();
+
+			for (Permission perm : perms) {
+				try {
+					pluginManager.addPermission(perm);
+				} catch (IllegalArgumentException ex) {
+					getLogger().log(Level.WARNING, "Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered", ex);
+				}
+			}
+		} catch (Throwable ex) {
+			getLogger().log(Level.SEVERE, ex.getMessage() + " loading " + plugin.getDescription().getFullName(), ex);
+		}
 	}
 
 	@Override
@@ -173,8 +249,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getBukkitVersion() {
-		// TODO Auto-generated method stub
-		return null;
+		return bridgeVersion;
 	}
 
 	@Override
@@ -280,7 +355,7 @@ public class BridgeServer implements Server {
 	@Override
 	public Player[] getOnlinePlayers() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Player[0];
 	}
 
 	@Override
@@ -309,8 +384,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public PluginManager getPluginManager() {
-		// TODO Auto-generated method stub
-		return null;
+		return pluginManager;
 	}
 
 	@Override
@@ -367,20 +441,17 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getUpdateFolder() {
-		// TODO Auto-generated method stub
-		return null;
+		return "update";
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
-		// TODO Auto-generated method stub
-		return null;
+		return new File(plugin.getDataFolder(), "update");
 	}
 
 	@Override
 	public String getVersion() {
-		// TODO Auto-generated method stub
-		return null;
+		return serverVersion;
 	}
 
 	@Override
@@ -535,5 +606,20 @@ public class BridgeServer implements Server {
 	@Override
 	public WarningState getWarningState() {
 		return WarningState.DEFAULT;
+	}
+
+	private static String getPOMVersion() {
+		String result = "Unknown-Version";
+		InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.spout/bukkitbridge/pom.properties");
+		Properties properties = new Properties();
+		if (stream != null) {
+			try {
+				properties.load(stream);
+				result = properties.getProperty("version");
+			} catch (IOException ex) {
+				Spout.getLogger().log(Level.SEVERE, "Could not get Bridge version!", ex);
+			}
+		}
+		return result;
 	}
 }

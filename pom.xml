@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mainClass>org.spout.bukkit.BukkitBridge</mainClass>
+		<mainClass>org.spout.bridge.VanillaBridgePlugin</mainClass>
 		<bukkitVersion>${project.version}</bukkitVersion>
 		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>

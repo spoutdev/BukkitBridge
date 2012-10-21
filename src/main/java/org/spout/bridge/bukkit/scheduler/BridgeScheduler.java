@@ -50,36 +50,6 @@ public class BridgeScheduler implements BukkitScheduler {
 	}
 
 	@Override
-	public BukkitTask runTask(Plugin plugin, Runnable runnable) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable runnable) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public BukkitTask runTaskLater(Plugin plugin, Runnable runnable, long l) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable runnable, long l) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public BukkitTask runTaskTimer(Plugin plugin, Runnable runnable, long l, long l1) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable runnable, long l, long l1) throws IllegalArgumentException {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
 	public boolean isCurrentlyRunning(int taskId) {
 		throw new UnsupportedOperationException();
 	}
@@ -101,7 +71,7 @@ public class BridgeScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return Spout.getEngine().getScheduler().scheduleAsyncRepeatingTask(plugin, task, delay, period, TaskPriority.NORMAL);
+		return Spout.getEngine().getScheduler().scheduleAsyncRepeatingTask(plugin, task, delay * 50L, (period > 0 ? period * 50L : period), TaskPriority.NORMAL);
 	}
 
 	@Override
@@ -116,7 +86,7 @@ public class BridgeScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return Spout.getEngine().getScheduler().scheduleSyncRepeatingTask(plugin, task, delay, period, TaskPriority.NORMAL);
+		return Spout.getEngine().getScheduler().scheduleSyncRepeatingTask(plugin, task, delay * 50L, (period > 0 ? period * 50L : period), TaskPriority.NORMAL);
 	}
 
 	private static class FutureRunnable<T> implements Runnable, Future<T> {
@@ -185,5 +155,35 @@ public class BridgeScheduler implements BukkitScheduler {
 			}
 			throw new TimeoutException();
 		}
+	}
+
+	@Override
+	public BukkitTask runTask(Plugin arg0, Runnable arg1) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BukkitTask runTaskAsynchronously(Plugin arg0, Runnable arg1) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BukkitTask runTaskLater(Plugin arg0, Runnable arg1, long arg2) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BukkitTask runTaskLaterAsynchronously(Plugin arg0, Runnable arg1, long arg2) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BukkitTask runTaskTimer(Plugin arg0, Runnable arg1, long arg2, long arg3) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public BukkitTask runTaskTimerAsynchronously(Plugin arg0, Runnable arg1, long arg2, long arg3) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
 	}
 }
