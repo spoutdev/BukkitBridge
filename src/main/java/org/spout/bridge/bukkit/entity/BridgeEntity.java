@@ -174,8 +174,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-
+		handle.remove();
 	}
 
 	@Override
