@@ -14,11 +14,17 @@ import org.bukkit.Sound;
 import org.bukkit.Statistic;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.spout.api.entity.Entity;
 
 public class BridgePlayer extends BridgeHumanEntity implements Player {
+	protected BridgePlayer(Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public String getDisplayName() {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.
@@ -437,5 +443,10 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	@Override
 	public Set<String> getListeningPluginChannels() {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.PLAYER;
 	}
 }

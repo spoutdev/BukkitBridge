@@ -1,24 +1,37 @@
 package org.spout.bridge.bukkit.entity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
-import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spout.api.geo.discrete.Point;
+import org.spout.bridge.bukkit.BridgeServer;
 
-/**
- * A BridgeEntity is Bridge's implementation of Entity. BridgeEntity delegates to EntityDelegate.
- */
-public class BridgeEntity implements Entity {
+public abstract class BridgeEntity implements Entity {
+	private final org.spout.api.entity.Entity handle;
+	protected BridgeEntity(org.spout.api.entity.Entity handle) {
+		this.handle = handle;
+	}
+
+	public org.spout.api.entity.Entity getHandle() {
+		return handle;
+	}
+
+	@Override
+	public BridgeServer getServer() {
+		return (BridgeServer)Bukkit.getServer();
+	}
+
 	@Override
 	public List<MetadataValue> getMetadata(String arg0) {
 		// TODO Auto-generated method stub
@@ -51,8 +64,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public int getEntityId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.getId();
 	}
 
 	@Override
@@ -75,8 +87,9 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public Location getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		Point pos = handle.getTransform().getPosition();
+		World w = getServer().getWorld(handle.getWorld().getUID());
+		return new Location(w, pos.getX(), pos.getY(), pos.getZ(), handle.getTransform().getYaw(), handle.getTransform().getPitch());
 	}
 
 	@Override
@@ -88,17 +101,11 @@ public class BridgeEntity implements Entity {
 	@Override
 	public List<Entity> getNearbyEntities(double arg0, double arg1, double arg2) {
 		// TODO Auto-generated method stub
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
 	public Entity getPassenger() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Server getServer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -110,15 +117,8 @@ public class BridgeEntity implements Entity {
 	}
 
 	@Override
-	public EntityType getType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public UUID getUniqueId() {
-		// TODO Auto-generated method stub
-		return null;
+		return handle.getUID();
 	}
 
 	@Override
@@ -135,20 +135,18 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public World getWorld() {
-		// TODO Auto-generated method stub
-		return null;
+		return getServer().getWorld(handle.getWorld().getUID());
 	}
 
 	@Override
 	public boolean isDead() {
-		// TODO Auto-generated method stub
-		return false;
+		return handle.isRemoved();
 	}
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -159,8 +157,7 @@ public class BridgeEntity implements Entity {
 
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		return handle.isRemoved() || handle.getId() == -1;
 	}
 
 	@Override
@@ -170,7 +167,7 @@ public class BridgeEntity implements Entity {
 	}
 
 	@Override
-	public void playEffect(EntityEffect arg0) {
+	public void playEffect(EntityEffect effect) {
 		// TODO Auto-generated method stub
 
 	}
@@ -182,62 +179,62 @@ public class BridgeEntity implements Entity {
 	}
 
 	@Override
-	public void setFallDistance(float arg0) {
+	public void setFallDistance(float dist) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setFireTicks(int arg0) {
+	public void setFireTicks(int ticks) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setLastDamageCause(EntityDamageEvent arg0) {
+	public void setLastDamageCause(EntityDamageEvent event) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean setPassenger(Entity arg0) {
+	public boolean setPassenger(Entity entity) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void setTicksLived(int arg0) {
+	public void setTicksLived(int ticks) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setVelocity(Vector arg0) {
+	public void setVelocity(Vector vec) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public boolean teleport(Location arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean teleport(Location loc) {
+		return teleport(loc, TeleportCause.PLUGIN);
 	}
 
 	@Override
-	public boolean teleport(Entity arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean teleport(Entity entity) {
+		return teleport(entity.getLocation());
 	}
 
 	@Override
-	public boolean teleport(Location arg0, TeleportCause arg1) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean teleport(Location loc, TeleportCause cause) {
+		handle.getTransform().setPosition(new Point(handle.getWorld(), (float)loc.getX(), (float)loc.getY(), (float)loc.getZ()));
+		handle.getTransform().setPitch(loc.getPitch());
+		handle.getTransform().setYaw(loc.getYaw());
+		//TODO: event?
+		return true;
 	}
 
 	@Override
-	public boolean teleport(Entity arg0, TeleportCause arg1) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean teleport(Entity loc, TeleportCause cause) {
+		return teleport(loc.getLocation(), cause);
 	}
 }

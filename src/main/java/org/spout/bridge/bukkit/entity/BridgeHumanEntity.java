@@ -13,8 +13,13 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.spout.api.entity.Entity;
 
-public class BridgeHumanEntity extends BridgeLivingEntity implements HumanEntity {
+public abstract class BridgeHumanEntity extends BridgeLivingEntity implements HumanEntity {
+	protected BridgeHumanEntity(Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public String getName() {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.

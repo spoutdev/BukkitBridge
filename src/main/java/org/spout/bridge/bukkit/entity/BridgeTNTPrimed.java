@@ -1,8 +1,14 @@
 package org.spout.bridge.bukkit.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
+import org.spout.api.entity.Entity;
 
 public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
+	protected BridgeTNTPrimed(Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public void setFuseTicks(int i) {
 		//To change body of implemented methods use File | Settings | File Templates.
@@ -31,5 +37,10 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 	@Override
 	public boolean isIncendiary() {
 		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.PRIMED_TNT;
 	}
 }

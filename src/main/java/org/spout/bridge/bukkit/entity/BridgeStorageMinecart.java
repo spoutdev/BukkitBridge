@@ -28,8 +28,13 @@ package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.StorageMinecart;
 import org.bukkit.inventory.Inventory;
+import org.spout.api.entity.Entity;
 
 public class BridgeStorageMinecart extends BridgeMinecart implements StorageMinecart {
+	protected BridgeStorageMinecart(Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public Inventory getInventory() {
 		return null;  //To change body of implemented methods use File | Settings | File Templates.

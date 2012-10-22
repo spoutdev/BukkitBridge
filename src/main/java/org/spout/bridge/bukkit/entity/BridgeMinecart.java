@@ -26,10 +26,16 @@
  */
 package org.spout.bridge.bukkit.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
+import org.spout.api.entity.Entity;
 
 public class BridgeMinecart extends BridgeVehicle implements Minecart {
+	protected BridgeMinecart(Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public void setDamage(int i) {
 		//To change body of implemented methods use File | Settings | File Templates.
@@ -78,5 +84,10 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 	@Override
 	public void setDerailedVelocityMod(Vector vector) {
 		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.MINECART;
 	}
 }

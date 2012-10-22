@@ -16,7 +16,11 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
+public abstract class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
+	protected BridgeLivingEntity(org.spout.api.entity.Entity handle) {
+		super(handle);
+	}
+
 	@Override
 	public int getHealth() {
 		return 0;  //To change body of implemented methods use File | Settings | File Templates.

@@ -1,6 +1,11 @@
 package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.Monster;
+import org.spout.api.entity.Entity;
 
-public class BridgeMonster extends BridgeCreature implements Monster {
+public abstract class BridgeMonster extends BridgeCreature implements Monster {
+
+	protected BridgeMonster(Entity handle) {
+		super(handle);
+	}
 }
