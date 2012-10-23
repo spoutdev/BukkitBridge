@@ -258,8 +258,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public void setBiome(Biome bio) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	public BlockMaterial getBlockMaterial() {

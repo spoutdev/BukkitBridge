@@ -157,7 +157,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean isValid() {
-		return handle.isRemoved() || handle.getId() == -1;
+		return !handle.isRemoved() && handle.getId() != -1;
 	}
 
 	@Override

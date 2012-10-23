@@ -18,21 +18,25 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.spout.api.entity.Entity;
 
 public class BridgePlayer extends BridgeHumanEntity implements Player {
-	protected BridgePlayer(Entity handle) {
+	protected BridgePlayer(org.spout.api.entity.Player handle) {
 		super(handle);
+	}
+	
+	@Override
+	public org.spout.api.entity.Player getHandle() {
+		return (org.spout.api.entity.Player) getHandle();
 	}
 
 	@Override
 	public String getDisplayName() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return getHandle().getDisplayName();
 	}
 
 	@Override
-	public void setDisplayName(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public void setDisplayName(String name) {
+		getHandle().setDisplayName(name);
 	}
 
 	@Override
@@ -86,13 +90,13 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	}
 
 	@Override
-	public void sendRawMessage(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public void sendRawMessage(String message) {
+		getHandle().sendRawMessage(message);
 	}
 
 	@Override
-	public void kickPlayer(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public void kickPlayer(String msg) {
+		getHandle().kick(msg);
 	}
 
 	@Override
@@ -101,7 +105,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	}
 
 	@Override
-	public boolean performCommand(String s) {
+	public boolean performCommand(String cmd) {
 		return false;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
@@ -127,7 +131,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void saveData() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().save();
 	}
 
 	@Override
@@ -337,7 +341,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public Player getPlayer() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return this;
 	}
 
 	@Override
@@ -421,13 +425,13 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	}
 
 	@Override
-	public void sendMessage(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public void sendMessage(String message) {
+		getHandle().sendMessage(message);
 	}
 
 	@Override
-	public void sendMessage(String[] strings) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public void sendMessage(String[] message) {
+		getHandle().sendMessage((Object[])message);
 	}
 
 	@Override

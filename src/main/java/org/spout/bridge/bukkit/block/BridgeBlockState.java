@@ -12,11 +12,6 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
-/**
- * A BridgeBlockState is BukkitBridge's implementation of BlockState. Note that unlike most
- * of BukkitBridge, BridgeBlockState does not delegate, but rather copies data on instantiation
- * for future use.
- */
 public class BridgeBlockState implements BlockState {
 	private Block b;
 	private int x, y, z;

@@ -227,7 +227,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(Location location) {
-		return null;
+		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
@@ -265,7 +265,7 @@ public class BridgeWorld implements World {
 		return getChunkAt(x, z, LoadOption.LOAD_GEN);
 	}
 
-	public Chunk getChunkAt(int x, int z, LoadOption opt) {
+	public BridgeChunk getChunkAt(int x, int z, LoadOption opt) {
 		BridgeChunk chunk = new BridgeChunk(this, x, z);
 		chunk.getHandle(opt);
 		return chunk;
@@ -443,8 +443,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getSeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.getSeed();
 	}
 
 	@Override
@@ -521,21 +520,29 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean isChunkInUse(int arg0, int arg1) {
-		// TODO Auto-generated method stub
+	public boolean isChunkInUse(int x, int z) {
+		BridgeChunk chunk = getChunkAt(x, z, LoadOption.NO_LOAD);
+		org.spout.api.geo.cuboid.Chunk handle[] = chunk.getHandle(LoadOption.NO_LOAD);
+		for (int i = 0; i < handle.length; i++) {
+			org.spout.api.geo.cuboid.Chunk c = handle[i];
+			if (c != null && c.isLoaded()) {
+				if (c.getNumObservers() > 0) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean isChunkLoaded(Chunk chunk) {
-		// TODO Auto-generated method stub
-		return false;
+		return isChunkLoaded(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public boolean isChunkLoaded(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		Chunk chunk = getChunkAt(x, z, LoadOption.NO_LOAD);
+		return chunk.isLoaded();
 	}
 
 	@Override
@@ -546,20 +553,18 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void loadChunk(Chunk chunk) {
-		// TODO Auto-generated method stub
-
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
 	public void loadChunk(int x, int z) {
-		// TODO Auto-generated method stub
-
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		// TODO Auto-generated method stub
-		return false;
+		Chunk chunk = getChunkAt(x, z, generate ? LoadOption.LOAD_GEN : LoadOption.LOAD_ONLY);
+		return chunk.isLoaded();
 	}
 
 	@Override
@@ -638,15 +643,21 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public void playSound(Location arg0, Sound arg1, float arg2, float arg3) {
+	public void playSound(Location loc, Sound sound, float volume, float pitch) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public boolean refreshChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		BridgeChunk chunk = getChunkAt(x, z, LoadOption.LOAD_GEN);
+		org.spout.api.geo.cuboid.Chunk[] handle = chunk.getHandle(LoadOption.LOAD_GEN);
+		for (int i = 0; i < handle.length; i++) {
+			for (org.spout.api.entity.Player p : handle[i].getObservingPlayers()) {
+				p.getNetworkSynchronizer().sendChunk(handle[i]);
+			}
+		}
+		return true;
 	}
 
 	@Override
@@ -662,7 +673,7 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public void setAnimalSpawnLimit(int arg0) {
+	public void setAnimalSpawnLimit(int limit) {
 		// TODO Auto-generated method stub
 
 	}
@@ -675,8 +686,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setBiome(int x, int z, Biome bio) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -813,19 +823,18 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public Entity spawnEntity(Location arg0, EntityType arg1) {
+	public Entity spawnEntity(Location loc, EntityType type) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location arg0, Material arg1, byte arg2) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+	public FallingBlock spawnFallingBlock(Location loc, Material material, byte data) throws IllegalArgumentException {
+		return spawnFallingBlock(loc, material.getId(), data);
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location arg0, int arg1, byte arg2) throws IllegalArgumentException {
+	public FallingBlock spawnFallingBlock(Location loc, int id, byte data) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

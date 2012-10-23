@@ -92,8 +92,8 @@ public class BridgeChunk implements Chunk {
 	}
 
 	@Override
-	public boolean load(boolean arg0) {
-		getHandle(LoadOption.LOAD_GEN);
+	public boolean load(boolean generate) {
+		getHandle(generate ? LoadOption.LOAD_GEN : LoadOption.LOAD_ONLY);
 		return true;
 	}
 
