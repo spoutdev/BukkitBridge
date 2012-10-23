@@ -2,16 +2,18 @@ package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
+
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
 import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
+
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
-public class PlayerListener extends AbstractListener{
+public class PlayerListener extends AbstractListener {
 	public PlayerListener(VanillaBridgePlugin plugin) {
 		super(plugin);
 	}
