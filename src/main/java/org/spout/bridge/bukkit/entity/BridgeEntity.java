@@ -4,6 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import org.spout.api.Spout;
+import org.spout.api.event.entity.EntityTeleportEvent;
+import org.spout.api.geo.discrete.Point;
+
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.BridgeServer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -14,11 +21,10 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spout.api.geo.discrete.Point;
-import org.spout.bridge.bukkit.BridgeServer;
 
 public abstract class BridgeEntity implements Entity {
 	private final org.spout.api.entity.Entity handle;
+
 	protected BridgeEntity(org.spout.api.entity.Entity handle) {
 		this.handle = handle;
 	}
@@ -33,13 +39,13 @@ public abstract class BridgeEntity implements Entity {
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String arg0) {
+	public List<MetadataValue> getMetadata(String key) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean hasMetadata(String arg0) {
+	public boolean hasMetadata(String key) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -53,7 +59,6 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public void setMetadata(String arg0, MetadataValue arg1) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -169,7 +174,6 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public void playEffect(EntityEffect effect) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -186,13 +190,11 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public void setFireTicks(int ticks) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -204,13 +206,11 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public void setTicksLived(int ticks) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void setVelocity(Vector vec) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -225,11 +225,19 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean teleport(Location loc, TeleportCause cause) {
-		handle.getTransform().setPosition(new Point(handle.getWorld(), (float)loc.getX(), (float)loc.getY(), (float)loc.getZ()));
-		handle.getTransform().setPitch(loc.getPitch());
-		handle.getTransform().setYaw(loc.getYaw());
-		//TODO: event?
-		return true;
+		Location prev = getLocation();
+		//Call Spout EntityTeleportEvent; later mapped to Bukkit EntityTeleportEvent via the EntityListener
+		EntityTeleportEvent event = new EntityTeleportEvent(handle, BukkitUtil.toPoint(prev), BukkitUtil.toPoint(loc));
+		Spout.getEventManager().callEvent(event);
+		if (!event.isCancelled()) {
+			loc = BukkitUtil.fromPoint(event.getTo());
+			prev = BukkitUtil.fromPoint(event.getFrom());
+			handle.getTransform().setPosition(new Point(handle.getWorld(), (float)loc.getX(), (float)loc.getY(), (float)loc.getZ()));
+			handle.getTransform().setPitch(loc.getPitch());
+			handle.getTransform().setYaw(loc.getYaw());
+			return true;
+		}
+		return false;
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import org.bukkit.entity.ThrownExpBottle;
 import org.spout.api.entity.Entity;
 
 public class BridgeThrownExpBottle extends BridgeProjectile implements ThrownExpBottle {
-
 	protected BridgeThrownExpBottle(Entity handle) {
 		super(handle);
 	}

@@ -5,7 +5,6 @@ import org.bukkit.entity.Weather;
 import org.spout.api.entity.Entity;
 
 public class BridgeWeather extends BridgeEntity implements Weather {
-
 	protected BridgeWeather(Entity handle) {
 		super(handle);
 	}
