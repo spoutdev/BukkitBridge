@@ -12,15 +12,18 @@ import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
+import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.spout.bridge.bukkit.BridgeOfflinePlayer;;
 
+@DelegateDeserialization(BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
-	protected BridgePlayer(org.spout.api.entity.Player handle) {
+	public BridgePlayer(org.spout.api.entity.Player handle) {
 		super(handle);
 	}
 	

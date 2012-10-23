@@ -236,4 +236,23 @@ public abstract class BridgeEntity implements Entity {
 	public boolean teleport(Entity loc, TeleportCause cause) {
 		return teleport(loc.getLocation(), cause);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof BridgeEntity)) {
+			return false;
+		}
+		BridgeEntity other = (BridgeEntity) obj;
+		return other.getEntityId() == this.getEntityId();
+	}
+
+	@Override
+	public int hashCode() {
+		return getEntityId();
+	}
+
+	@Override
+	public String toString() {
+		return "{ " + getClass().getSimpleName() + " : " + handle.toString() + " }";
+	}
 }
