@@ -24,6 +24,7 @@ import org.spout.api.Server;
 import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
 import org.spout.bridge.bukkit.BridgeServer;
+import org.spout.bridge.listener.EntityListener;
 import org.spout.bridge.listener.PlayerListener;
 import org.spout.bridge.listener.WorldListener;
 
@@ -31,6 +32,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	private static VanillaBridgePlugin instance;
 	private WorldListener worldListener;
 	private PlayerListener playerListener;
+	private EntityListener entityListener;
 
 	public VanillaBridgePlugin() {
 		instance = this;
@@ -40,6 +42,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	public void onEnable() {
 		worldListener = new WorldListener(this);
 		playerListener = new PlayerListener(this);
+		entityListener = new EntityListener(this);
 		BridgeServer server = new BridgeServer((Server)Spout.getEngine(), this);
 		server.enablePlugins(PluginLoadOrder.POSTWORLD);
 		getLogger().info("Bukkit Bridge Enabling, Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
@@ -56,6 +59,10 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	
 	public PlayerListener getPlayerListener() {
 		return playerListener;
+	}
+
+	public EntityListener getEntityListener() {
+		return entityListener;
 	}
 
 	public static VanillaBridgePlugin getInstance() {
