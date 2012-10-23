@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.spout.api.entity.Entity;
 
 public class BridgeCow extends BridgeAnimals implements Cow {
-
 	protected BridgeCow(Entity handle) {
 		super(handle);
 	}
