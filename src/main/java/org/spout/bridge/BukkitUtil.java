@@ -3,6 +3,7 @@ package org.spout.bridge;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
@@ -65,5 +66,43 @@ public class BukkitUtil {
 		int data = item.getDurability();
 		int amount = item.getAmount();
 		return new ItemStack(mat, data, amount);
+	}
+
+	public static DamageCause getBukkitDamageCause(org.spout.vanilla.source.DamageCause damageCause) {
+		// TODO: Vanilla doesn't have all the causes Bukkit does, not sure what to do about that
+		switch (damageCause) {
+			case ATTACK:
+				return DamageCause.ENTITY_ATTACK;
+			case FALL:
+				return DamageCause.FALL;
+			case DROWN:
+				return DamageCause.DROWNING;
+			case EXPLOSION:
+				return DamageCause.BLOCK_EXPLOSION;
+			case COMMAND:
+				return DamageCause.CUSTOM;
+			case FIREBALL:
+				return DamageCause.ENTITY_EXPLOSION;
+			case UNKNOWN:
+				return DamageCause.CUSTOM;
+			case WITHERED:
+				return DamageCause.ENTITY_ATTACK;
+			case CACTUS:
+				return DamageCause.CONTACT;
+			case BURN:
+				return DamageCause.FIRE_TICK;
+			case FIRE_SOURCE:
+				return DamageCause.FIRE;
+			case PROJECTILE:
+				return DamageCause.PROJECTILE;
+			case STARVATION:
+				return DamageCause.STARVATION;
+			case SUFFOCATION:
+				return DamageCause.SUFFOCATION;
+			case VOID:
+				return DamageCause.VOID;
+			default:
+				return DamageCause.CUSTOM;
+		}
 	}
 }
