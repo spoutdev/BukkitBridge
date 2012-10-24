@@ -19,14 +19,19 @@
  */
 package org.spout.bridge;
 
-import org.bukkit.plugin.PluginLoadOrder;
 import org.spout.api.Server;
 import org.spout.api.Spout;
 import org.spout.api.plugin.CommonPlugin;
+
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.listener.PlayerListener;
 import org.spout.bridge.listener.WorldListener;
 
+import org.bukkit.plugin.PluginLoadOrder;
+
+/**
+ * Bridge redirects Bukkit method calls to the Spout API, allowing Bukkit plugins to run on Spout
+ */
 public class VanillaBridgePlugin extends CommonPlugin {
 	private static VanillaBridgePlugin instance;
 	private WorldListener worldListener;
@@ -47,7 +52,6 @@ public class VanillaBridgePlugin extends CommonPlugin {
 
 	@Override
 	public void onDisable() {
-		
 	}
 
 	public WorldListener getWorldListener() {
