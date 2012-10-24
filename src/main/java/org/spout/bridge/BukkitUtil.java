@@ -3,6 +3,8 @@ package org.spout.bridge;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.spout.api.geo.discrete.Point;
@@ -16,6 +18,11 @@ import org.spout.bridge.bukkit.inventory.BridgeItemStack;
 
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
+import org.spout.vanilla.material.enchantment.ArmorEnchantment;
+import org.spout.vanilla.material.enchantment.BowEnchantment;
+import org.spout.vanilla.material.enchantment.Enchantments;
+import org.spout.vanilla.material.enchantment.SwordEnchantment;
+import org.spout.vanilla.material.enchantment.ToolEnchantment;
 
 /**
  * Various utilities for converting Bukkit --> Spout objects and vice versa
@@ -141,5 +148,27 @@ public class BukkitUtil {
 			default:
 				return DamageCause.CUSTOM;
 		}
+	}
+
+	public static VanillaMaterial getVanillaMaterial(org.bukkit.inventory.ItemStack is) {
+		return (VanillaMaterial) VanillaMaterials.getMaterial((short) is.getTypeId());
+	}
+
+	public static org.spout.vanilla.material.enchantment.Enchantment getVanillaEnchantment(Enchantment enchant) {
+		return Enchantments.getById(enchant.getId());
+	}
+
+	public static EnchantmentTarget getEnchantmentTargetFromEnchantment(org.spout.vanilla.material.enchantment.Enchantment enchant) {
+		if (enchant instanceof ArmorEnchantment) {
+			return EnchantmentTarget.ARMOR;
+		} else if (enchant instanceof SwordEnchantment) {
+			return EnchantmentTarget.WEAPON;
+		} else if (enchant instanceof BowEnchantment) {
+			return EnchantmentTarget.BOW;
+		} else if (enchant instanceof ToolEnchantment) {
+			return EnchantmentTarget.TOOL;
+		}
+
+		return EnchantmentTarget.ALL;
 	}
 }
