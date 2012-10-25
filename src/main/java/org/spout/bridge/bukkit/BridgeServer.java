@@ -172,9 +172,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void clearRecipes() {
-		for (org.spout.api.inventory.recipe.Recipe r : server.getRecipeManager().getAllRecipes()) {
-			server.getRecipeManager().removeRecipe(r);
-		}
+		server.getRecipeManager().clear();
 	}
 
 	@Override
