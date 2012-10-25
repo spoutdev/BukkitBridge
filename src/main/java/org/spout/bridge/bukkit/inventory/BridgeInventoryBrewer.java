@@ -13,7 +13,7 @@ public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInve
 
 	@Override
 	public ItemStack getIngredient() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

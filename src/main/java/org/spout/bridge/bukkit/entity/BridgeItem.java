@@ -12,7 +12,7 @@ public class BridgeItem extends BridgeEntity implements Item {
 
 	@Override
 	public ItemStack getItemStack() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class BridgeItem extends BridgeEntity implements Item {
 
 	@Override
 	public int getPickupDelay() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -11,12 +11,12 @@ public class BridgeInventoryDoubleChest extends BridgeInventory implements Doubl
 
 	@Override
 	public Inventory getLeftSide() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Inventory getRightSide() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

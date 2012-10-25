@@ -14,61 +14,51 @@ public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureS
 
 	@Override
 	public CreatureType getCreatureType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public EntityType getSpawnedType() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setSpawnedType(EntityType paramEntityType) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setCreatureType(CreatureType paramCreatureType) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getCreatureTypeId() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setCreatureTypeByName(String paramString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getCreatureTypeName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setCreatureTypeId(String paramString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getDelay() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setDelay(int paramInt) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 }

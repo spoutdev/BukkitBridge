@@ -13,7 +13,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public ItemStack getResult() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -33,6 +33,6 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public Recipe getRecipe() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

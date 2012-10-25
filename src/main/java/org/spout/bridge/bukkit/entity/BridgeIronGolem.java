@@ -10,7 +10,7 @@ public class BridgeIronGolem extends BridgeGolem implements IronGolem {
 
 	@Override
 	public boolean isPlayerCreated() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

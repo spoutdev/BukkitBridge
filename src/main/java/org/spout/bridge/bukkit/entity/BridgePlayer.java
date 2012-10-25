@@ -44,7 +44,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public String getPlayerListName() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -59,17 +59,17 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public Location getCompassTarget() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public InetSocketAddress getAddress() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isConversing() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean beginConversation(Conversation conversation) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -109,12 +109,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean performCommand(String cmd) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isSneaking() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isSprinting() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isSleepingIgnored() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean sendChunkChange(Location location, int i, int i1, int i2, byte[] bytes) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -234,17 +234,17 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public long getPlayerTime() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long getPlayerTimeOffset() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isPlayerTimeRelative() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public float getExp() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -269,7 +269,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public int getLevel() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public int getTotalExperience() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -289,7 +289,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public float getExhaustion() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -299,7 +299,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public float getSaturation() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -309,7 +309,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public int getFoodLevel() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -319,12 +319,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isOnline() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isBanned() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -334,7 +334,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isWhitelisted() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -349,22 +349,22 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public long getFirstPlayed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long getLastPlayed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasPlayedBefore() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Location getBedSpawnLocation() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -374,7 +374,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean getAllowFlight() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -394,12 +394,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean canSee(Player player) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isFlying() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -419,12 +419,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public float getFlySpeed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public float getWalkSpeed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -439,7 +439,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public Map<String, Object> serialize() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -449,7 +449,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class BridgeLightningStrike extends BridgeEntity implements LightningStri
 
 	@Override
 	public boolean isEffect() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

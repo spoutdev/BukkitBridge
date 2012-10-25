@@ -14,7 +14,7 @@ public class BridgeComplexLivingEntity extends BridgeLivingEntity implements Com
 
 	@Override
 	public Set<ComplexEntityPart> getParts() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

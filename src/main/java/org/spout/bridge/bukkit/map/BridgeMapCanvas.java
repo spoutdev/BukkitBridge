@@ -10,12 +10,12 @@ import org.bukkit.map.MapView;
 public class BridgeMapCanvas implements MapCanvas {
 	@Override
 	public MapView getMapView() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public MapCursorCollection getCursors() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -30,12 +30,12 @@ public class BridgeMapCanvas implements MapCanvas {
 
 	@Override
 	public byte getPixel(int i, int i1) {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public byte getBasePixel(int i, int i1) {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

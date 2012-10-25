@@ -22,14 +22,12 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public void sendMessage(String paramString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void sendMessage(String[] paramArrayOfString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -39,20 +37,17 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isPermissionSet(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission paramPermission) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -67,44 +62,37 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean, int paramInt) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin paramPlugin, int paramInt) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment paramPermissionAttachment) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void recalculatePermissions() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -118,37 +106,31 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public boolean isConversing() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void acceptConversationInput(String paramString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean beginConversation(Conversation paramConversation) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void abandonConversation(Conversation paramConversation) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void abandonConversation(Conversation paramConversation, ConversationAbandonedEvent paramConversationAbandonedEvent) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void sendRawMessage(String paramString) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 }

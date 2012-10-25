@@ -12,7 +12,7 @@ public class BridgeSheep extends BridgeAnimals implements Sheep {
 
 	@Override
 	public boolean isSheared() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class BridgeSheep extends BridgeAnimals implements Sheep {
 
 	@Override
 	public DyeColor getColor() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 
 	@Override
 	public int getFuseTicks() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 
 	@Override
 	public float getYield() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 
 	@Override
 	public boolean isIncendiary() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -9,17 +9,17 @@ import org.bukkit.map.MapView;
 public class BridgeMapView implements MapView {
 	@Override
 	public short getId() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isVirtual() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Scale getScale() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -29,12 +29,12 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public int getCenterX() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getCenterZ() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public World getWorld() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public List<MapRenderer> getRenderers() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -69,6 +69,6 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public boolean removeRenderer(MapRenderer mapRenderer) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

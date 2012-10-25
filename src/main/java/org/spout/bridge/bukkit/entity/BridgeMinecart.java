@@ -43,12 +43,12 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 
 	@Override
 	public int getDamage() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public double getMaxSpeed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 
 	@Override
 	public boolean isSlowWhenEmpty() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 
 	@Override
 	public Vector getFlyingVelocityMod() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 
 	@Override
 	public Vector getDerailedVelocityMod() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

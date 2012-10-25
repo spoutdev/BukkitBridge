@@ -40,31 +40,27 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public List<MetadataValue> getMetadata(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasMetadata(String key) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void removeMetadata(String arg0, Plugin arg1) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setMetadata(String arg0, MetadataValue arg1) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean eject() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -74,20 +70,17 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public float getFallDistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getFireTicks() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -99,26 +92,22 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public int getMaxFireTicks() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Entity> getNearbyEntities(double arg0, double arg1, double arg2) {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Entity getPassenger() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getTicksLived() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -128,14 +117,12 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Entity getVehicle() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Vector getVelocity() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -150,14 +137,12 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return true;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isInsideVehicle() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -167,13 +152,12 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean leaveVehicle() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playEffect(EntityEffect effect) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -183,34 +167,32 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void setFallDistance(float dist) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setFireTicks(int ticks) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean setPassenger(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setTicksLived(int ticks) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setVelocity(Vector vec) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getHealth() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -33,62 +33,62 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getMaxHealth() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public double getEyeHeight() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public double getEyeHeight(boolean b) {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Location getEyeLocation() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Block> getLineOfSight(HashSet<Byte> bytes, int i) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Block getTargetBlock(HashSet<Byte> bytes, int i) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Block> getLastTwoTargetBlocks(HashSet<Byte> bytes, int i) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Egg throwEgg() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Snowball throwSnowball() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Arrow shootArrow() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> aClass) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getRemainingAir() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getMaximumAir() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getMaximumNoDamageTicks() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getLastDamage() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getNoDamageTicks() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -148,27 +148,27 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public Player getKiller() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addPotionEffect(PotionEffect potionEffect) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addPotionEffect(PotionEffect potionEffect, boolean b) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> potionEffects) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasPotionEffect(PotionEffectType potionEffectType) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -178,11 +178,11 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public Collection<PotionEffect> getActivePotionEffects() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasLineOfSight(Entity entity) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

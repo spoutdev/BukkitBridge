@@ -66,56 +66,47 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean breakNaturally() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean breakNaturally(ItemStack tool) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Biome getBiome() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getBlockPower() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getBlockPower(BlockFace face) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -129,14 +120,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public Collection<ItemStack> getDrops() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -155,8 +144,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public double getHumidity() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -181,8 +169,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
-		// TODO Auto-generated method stub
-		return PistonMoveReaction.BLOCK;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -202,14 +189,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockState getState() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public double getTemperature() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

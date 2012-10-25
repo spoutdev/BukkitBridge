@@ -11,7 +11,7 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public double getMaxSpeed() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public double getOccupiedDeceleration() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public double getUnoccupiedDeceleration() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public boolean getWorkOnLand() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public abstract class BridgeTameableAnimal extends BridgeAnimals implements Tame
 
 	@Override
 	public boolean isTamed() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public abstract class BridgeTameableAnimal extends BridgeAnimals implements Tame
 
 	@Override
 	public AnimalTamer getOwner() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

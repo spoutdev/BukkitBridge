@@ -17,7 +17,7 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public Vector getDirection() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public float getYield() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public boolean isIncendiary() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

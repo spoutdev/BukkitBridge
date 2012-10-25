@@ -12,7 +12,7 @@ public class BridgeOcelot extends BridgeTameableAnimal implements Ocelot {
 
 	@Override
 	public Type getCatType() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class BridgeOcelot extends BridgeTameableAnimal implements Ocelot {
 
 	@Override
 	public boolean isSitting() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

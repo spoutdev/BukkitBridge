@@ -37,6 +37,6 @@ public class BridgeStorageMinecart extends BridgeMinecart implements StorageMine
 
 	@Override
 	public Inventory getInventory() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

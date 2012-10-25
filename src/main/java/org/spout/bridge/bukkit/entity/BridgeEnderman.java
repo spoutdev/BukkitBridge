@@ -13,7 +13,7 @@ public class BridgeEnderman extends BridgeMonster implements Enderman {
 
 	@Override
 	public MaterialData getCarriedMaterial() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

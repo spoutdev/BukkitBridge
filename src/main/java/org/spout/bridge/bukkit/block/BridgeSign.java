@@ -11,19 +11,16 @@ public class BridgeSign extends BridgeBlockState implements Sign {
 
 	@Override
 	public String[] getLines() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getLine(int paramInt) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setLine(int paramInt, String paramString) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 }

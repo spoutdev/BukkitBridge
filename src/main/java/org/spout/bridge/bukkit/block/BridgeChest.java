@@ -12,13 +12,11 @@ public class BridgeChest extends BridgeBlockState implements Chest {
 
 	@Override
 	public Inventory getInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Inventory getBlockInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 }

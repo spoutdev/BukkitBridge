@@ -10,12 +10,12 @@ import org.bukkit.help.HelpTopicFactory;
 public class SimpleHelpMap implements HelpMap {
 	@Override
 	public HelpTopic getHelpTopic(String s) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<HelpTopic> getHelpTopics() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -35,6 +35,6 @@ public class SimpleHelpMap implements HelpMap {
 
 	@Override
 	public List<String> getIgnoredPlugins() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

@@ -16,6 +16,6 @@ public abstract class BridgeCreature extends BridgeLivingEntity implements Creat
 
 	@Override
 	public LivingEntity getTarget() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

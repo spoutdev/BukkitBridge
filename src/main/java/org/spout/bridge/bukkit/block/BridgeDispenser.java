@@ -12,13 +12,11 @@ public class BridgeDispenser extends BridgeBlockState implements Dispenser {
 
 	@Override
 	public Inventory getInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean dispense() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 }

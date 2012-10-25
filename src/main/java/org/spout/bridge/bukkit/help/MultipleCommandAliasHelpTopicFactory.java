@@ -7,6 +7,6 @@ import org.bukkit.help.HelpTopicFactory;
 public class MultipleCommandAliasHelpTopicFactory implements HelpTopicFactory<MultipleCommandAlias> {
 	@Override
 	public HelpTopic createTopic(MultipleCommandAlias multipleCommandAlias) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

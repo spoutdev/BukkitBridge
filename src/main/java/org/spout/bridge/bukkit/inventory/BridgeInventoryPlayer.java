@@ -18,22 +18,22 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public ItemStack getHelmet() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ItemStack getChestplate() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ItemStack getLeggings() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ItemStack getBoots() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public ItemStack getItemInHand() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public int getHeldItemSlot() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

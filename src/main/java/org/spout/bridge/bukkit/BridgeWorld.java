@@ -2,7 +2,6 @@ package org.spout.bridge.bukkit;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -82,44 +81,37 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean canGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -150,8 +142,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack item) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -215,14 +206,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -232,8 +221,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -286,33 +274,28 @@ public class BridgeWorld implements World {
 
 	@Override
 	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Entity> getEntities() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	@Deprecated
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -332,38 +315,32 @@ public class BridgeWorld implements World {
 
 	@Override
 	public ChunkGenerator getGenerator() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Block getHighestBlockAt(Location location) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Block getHighestBlockAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getHighestBlockYAt(Location location) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public double getHumidity(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -381,8 +358,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -402,14 +378,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getMaxHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -419,26 +393,22 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean getPVP() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Player> getPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<BlockPopulator> getPopulators() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getSeaLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -453,26 +423,22 @@ public class BridgeWorld implements World {
 
 	@Override
 	public double getTemperature(int x, int z) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getThunderDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long getTicksPerAnimalSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long getTicksPerMonsterSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -487,14 +453,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getWeatherDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -509,14 +473,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean hasStorm() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isAutoSave() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -547,8 +509,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean isThundering() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -626,26 +587,22 @@ public class BridgeWorld implements World {
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data, int radius) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playSound(Location loc, Sound sound, float volume, float pitch) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -662,26 +619,22 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean regenerateChunk(int x, int z) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setAnimalSpawnLimit(int limit) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setAutoSave(boolean value) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -706,8 +659,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setFullTime(long time) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -727,20 +679,17 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setMonsterSpawnLimit(int arg0) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setPVP(boolean pvp) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -751,32 +700,27 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setStorm(boolean hasStorm) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setThunderDuration(int duration) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setThundering(boolean thundering) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -786,46 +730,39 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setWaterAnimalSpawnLimit(int arg0) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setWeatherDuration(int duration) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Arrow spawnArrow(Location location, Vector velocity, float speed, float spread) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	@Deprecated
 	public LivingEntity spawnCreature(Location loc, EntityType type) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	@Deprecated
 	public LivingEntity spawnCreature(Location loc, CreatureType type) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -835,20 +772,17 @@ public class BridgeWorld implements World {
 
 	@Override
 	public FallingBlock spawnFallingBlock(Location loc, int id, byte data) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public LightningStrike strikeLightning(Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public LightningStrike strikeLightningEffect(Location loc) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

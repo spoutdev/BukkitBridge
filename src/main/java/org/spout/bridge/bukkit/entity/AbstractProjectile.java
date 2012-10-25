@@ -11,7 +11,7 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 
 	@Override
 	public LivingEntity getShooter() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 
 	@Override
 	public boolean doesBounce() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

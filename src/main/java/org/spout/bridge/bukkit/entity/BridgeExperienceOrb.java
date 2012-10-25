@@ -11,7 +11,7 @@ public class BridgeExperienceOrb extends BridgeEntity implements ExperienceOrb {
 
 	@Override
 	public int getExperience() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

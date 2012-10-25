@@ -157,25 +157,21 @@ public class BridgeBlockState implements BlockState {
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 }

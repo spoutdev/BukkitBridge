@@ -13,17 +13,17 @@ public class BridgeInventoryFurnace extends BridgeInventory implements FurnaceIn
 
 	@Override
 	public ItemStack getResult() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ItemStack getFuel() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ItemStack getSmelting() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

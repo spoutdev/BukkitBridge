@@ -49,6 +49,7 @@ import org.spout.api.Spout;
 import org.spout.api.util.access.BanType;
 
 import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
 
 import org.spout.vanilla.configuration.VanillaConfiguration;
@@ -137,20 +138,17 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addRecipe(Recipe recipe) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -172,49 +170,42 @@ public class BridgeServer implements Server {
 
 	@Override
 	public void clearRecipes() {
-		server.getRecipeManager().clear();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void configureDbConfig(ServerConfig arg0) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder arg0, InventoryType arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder arg0, int arg1, String arg2) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public MapView createMap(World arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public World createWorld(WorldCreator arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean dispatchCommand(CommandSender arg0, String arg1) throws CommandException {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -224,8 +215,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getAllowFlight() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -235,14 +225,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -252,8 +240,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Map<String, String[]> getCommandAliases() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -263,8 +250,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -274,14 +260,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public HelpMap getHelpMap() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -301,26 +285,22 @@ public class BridgeServer implements Server {
 
 	@Override
 	public MapView getMap(short arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getMaxPlayers() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Messenger getMessenger() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -335,14 +315,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -352,32 +330,32 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Player[] getOnlinePlayers() {
-		// TODO Auto-generated method stub
-		return new Player[0];
+		org.spout.api.entity.Player[] online = server.getOnlinePlayers();
+		Player[] copy = new Player[online.length];
+		for (int i = 0; i < online.length; i++) {
+			copy[i] = EntityFactory.createPlayer(online[i]);
+		}
+		return copy;
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Player getPlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Player getPlayerExact(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PluginCommand getPluginCommand(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -387,14 +365,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getPort() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Recipe> getRecipesFor(ItemStack arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -404,14 +380,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getServerId() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getServerName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -421,20 +395,17 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getSpawnRadius() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -454,14 +425,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getViewDistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -521,14 +490,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public List<Player> matchPlayer(String arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Iterator<Recipe> recipeIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -597,8 +564,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean useExactLoginLocation() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

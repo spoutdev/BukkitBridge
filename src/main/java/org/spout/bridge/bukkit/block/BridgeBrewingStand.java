@@ -12,19 +12,16 @@ public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand
 
 	@Override
 	public int getBrewingTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setBrewingTime(int paramInt) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public BrewerInventory getInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 }

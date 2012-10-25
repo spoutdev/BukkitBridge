@@ -9,11 +9,11 @@ import org.bukkit.potion.PotionEffectType;
 public class BridgePotionBrewer implements PotionBrewer {
 	@Override
 	public PotionEffect createEffect(PotionEffectType potionEffectType, int i, int i1) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<PotionEffect> getEffectsFromDamage(int i) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 }

@@ -53,8 +53,7 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -64,20 +63,17 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Entity[] getEntities() {
-		// TODO Auto-generated method stub
-		return new Entity[0];
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public BlockState[] getTileEntities() {
-		// TODO Auto-generated method stub
-		return new BlockState[0];
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
