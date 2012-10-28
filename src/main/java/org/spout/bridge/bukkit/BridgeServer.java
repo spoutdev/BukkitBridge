@@ -215,7 +215,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getAllowFlight() {
-		throw new UnsupportedOperationException();
+		return WorldConfiguration.NORMAL.ALLOW_FLIGHT.getBoolean();
 	}
 
 	@Override

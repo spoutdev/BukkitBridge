@@ -196,12 +196,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean getAllowAnimals() {
-		return VanillaConfiguration.WORLDS.getOrCreate(handle).SPAWN_ANIMALS.getBoolean();
+		return VanillaConfiguration.WORLDS.get(handle).SPAWN_ANIMALS.getBoolean();
 	}
 
 	@Override
 	public boolean getAllowMonsters() {
-		return VanillaConfiguration.WORLDS.getOrCreate(handle).SPAWN_MONSTERS.getBoolean();
+		return VanillaConfiguration.WORLDS.get(handle).SPAWN_MONSTERS.getBoolean();
 	}
 
 	@Override
@@ -468,7 +468,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public WorldType getWorldType() {
-		return WorldType.getByName(VanillaConfiguration.WORLDS.getOrCreate(handle).GENERATOR.getString());
+		return WorldType.getByName(VanillaConfiguration.WORLDS.get(handle).GENERATOR.getString());
 	}
 
 	@Override
