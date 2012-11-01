@@ -9,6 +9,7 @@ import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.inventory.ItemStack;
 import org.spout.api.material.Material;
+import org.spout.api.material.block.BlockFace;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.bukkit.BridgeWorld;
@@ -79,6 +80,9 @@ public class BukkitUtil {
 	 * @return The BridgeItemStack with the same values and type as given Spout ItemStack
 	 */
 	public static BridgeItemStack fromItemStack(ItemStack item) {
+		if (item == null){
+			return null;
+		}
 		Material material = item.getMaterial();
 		org.bukkit.Material mat = null;
 		if (material instanceof VanillaMaterial) {
@@ -99,6 +103,9 @@ public class BukkitUtil {
 	 * @return The converted SpoutAPI ItemStack
 	 */
 	public static ItemStack toItemStack(org.bukkit.inventory.ItemStack item) {
+		if (item == null){
+			return null;
+		}
 		Material mat = VanillaMaterials.getMaterial((short) item.getTypeId());
 		int data = item.getDurability();
 		int amount = item.getAmount();
@@ -140,6 +147,19 @@ public class BukkitUtil {
 				return DamageCause.VOID;
 			default:
 				return DamageCause.CUSTOM;
+		}
+	}
+
+	public static org.bukkit.block.BlockFace toBukkitBlockFace(BlockFace face) {
+		switch(face) {
+			case TOP: return org.bukkit.block.BlockFace.UP;
+			case BOTTOM: return org.bukkit.block.BlockFace.DOWN;
+			case NORTH: return org.bukkit.block.BlockFace.NORTH;
+			case SOUTH: return org.bukkit.block.BlockFace.SOUTH;
+			case EAST: return org.bukkit.block.BlockFace.EAST;
+			case WEST: return org.bukkit.block.BlockFace.WEST;
+			case THIS: return org.bukkit.block.BlockFace.SELF;
+			default: throw new IllegalArgumentException("Unknown face type");
 		}
 	}
 }

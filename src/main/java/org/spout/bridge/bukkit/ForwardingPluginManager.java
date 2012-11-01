@@ -42,17 +42,23 @@ public class ForwardingPluginManager implements PluginManager{
 	}
 
 	@Override
-	public synchronized void callEvent(Event event) throws IllegalStateException {
-		//Can not forward to callEvent(event), it checks for bukkit-esque thread-safety
-		try {
-			fireEvent.invoke(manager, event);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException("Unable to access SimplePluginManager.fireEvent(event)", e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("Unable to call SimplePluginManager.fireEvent(event) with " + event, e);
-		} catch (InvocationTargetException e) {
-			throw new IllegalStateException(e);
+	public void callEvent(Event event) throws IllegalStateException {
+		if (event.getHandlers().getRegisteredListeners().length > 0) {
+			callEventSafe(event);
 		}
+	}
+
+	private synchronized void callEventSafe(Event event) throws IllegalStateException {
+		//Can not forward to callEvent(event), it checks for bukkit-esque thread-safety
+			try {
+				fireEvent.invoke(manager, event);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException("Unable to access SimplePluginManager.fireEvent(event)", e);
+			} catch (IllegalArgumentException e) {
+				throw new RuntimeException("Unable to call SimplePluginManager.fireEvent(event) with " + event, e);
+			} catch (InvocationTargetException e) {
+				throw new IllegalStateException(e);
+			}
 	}
 
 	@Override

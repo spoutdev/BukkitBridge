@@ -1,6 +1,7 @@
 package org.spout.bridge.bukkit;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,6 +47,8 @@ import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.block.BridgeBlock;
+import org.spout.bridge.bukkit.entity.EntityFactory;
 
 import org.spout.vanilla.component.world.VanillaSky;
 import org.spout.vanilla.configuration.VanillaConfiguration;
@@ -221,7 +224,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		throw new UnsupportedOperationException();
+		return new BridgeBlock((BridgeChunk)getChunkAt(x / 16, z / 16), x, y, z);
 	}
 
 	@Override
@@ -398,7 +401,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public List<Player> getPlayers() {
-		throw new UnsupportedOperationException();
+		List<org.spout.api.entity.Player> players = handle.getPlayers();
+		List<Player> playerCopy = new ArrayList<Player>(players.size());
+		for (int i = 0; i < players.size(); i++) {
+			playerCopy.add(EntityFactory.createPlayer(players.get(i)));
+		}
+		return playerCopy;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 import org.spout.api.geo.LoadOption;
+import org.spout.bridge.bukkit.block.BridgeBlock;
 
 /**
  * BridgeChunk is Bridge's version of Bukkit's Chunk.
@@ -53,7 +54,7 @@ public class BridgeChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		throw new UnsupportedOperationException();
+		return new BridgeBlock(this, x, y, z);
 	}
 
 	@Override
