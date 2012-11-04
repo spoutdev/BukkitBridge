@@ -134,7 +134,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		ExplosionModels.SPHERICAL.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, handle);
+		ExplosionModels.SPHERICAL.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, null);
 		return true;
 	}
 

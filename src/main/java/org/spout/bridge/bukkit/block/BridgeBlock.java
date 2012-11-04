@@ -16,7 +16,6 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.api.material.BlockMaterial;
 
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
 
@@ -223,12 +222,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		return RedstoneUtil.isReceivingPower(getWorld().getHandle().getBlock(x, y, z, VanillaBridgePlugin.getInstance()));
+		return RedstoneUtil.isReceivingPower(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
 	public boolean isBlockPowered() {
-		return RedstoneUtil.isEmittingPower(getWorld().getHandle().getBlock(x, y, z, VanillaBridgePlugin.getInstance()));
+		return RedstoneUtil.isEmittingPower(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
@@ -257,7 +256,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		getWorld().getHandle().setBlockData(x, y, z, data, VanillaBridgePlugin.getInstance());
+		getWorld().getHandle().setBlockData(x, y, z, data, null);
 	}
 
 	@Override
@@ -279,7 +278,7 @@ public class BridgeBlock implements Block {
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
 		org.spout.api.material.Material mat = VanillaMaterials.getMaterial((short) type, data);
 		if (mat instanceof BlockMaterial) {
-			getWorld().getHandle().setBlockMaterial(x, y, z, (BlockMaterial) mat, data, VanillaBridgePlugin.getInstance());
+			getWorld().getHandle().setBlockMaterial(x, y, z, (BlockMaterial) mat, data, null);
 			return true;
 		}
 		return false;

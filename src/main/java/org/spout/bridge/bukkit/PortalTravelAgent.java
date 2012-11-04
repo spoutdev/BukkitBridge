@@ -7,8 +7,6 @@ import org.spout.api.Spout;
 import org.spout.api.geo.World;
 
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
-
 import org.spout.vanilla.material.VanillaMaterials;
 
 public class PortalTravelAgent implements TravelAgent {
@@ -62,7 +60,7 @@ public class PortalTravelAgent implements TravelAgent {
 		for (int x = centerX; x < creationRadius; x++) {
 			for (int y = centerY; y < creationRadius; y++) {
 				for (int z = centerZ; z < creationRadius; z++) {
-					if (VanillaMaterials.PORTAL.createPortal(Spout.getEngine().getWorld(location.getWorld().getName()).getBlock(x, y, z, VanillaBridgePlugin.getInstance()))) {
+					if (VanillaMaterials.PORTAL.createPortal(Spout.getEngine().getWorld(location.getWorld().getName()).getBlock(x, y, z))) {
 						return new Location(location.getWorld(), x, y, z);
 					}
 				}
@@ -88,7 +86,7 @@ public class PortalTravelAgent implements TravelAgent {
 		for (int x = centerX; x < searchRadius; x++) {
 			for (int y = centerY; y < searchRadius; y++) {
 				for (int z = centerZ; z < searchRadius; z++) {
-					if (world.getBlock(x, y, z, VanillaBridgePlugin.getInstance()).getMaterial() == VanillaMaterials.PORTAL) {
+					if (world.getBlock(x, y, z).getMaterial() == VanillaMaterials.PORTAL) {
 						return new Location(location.getWorld(), x, y, z);
 					}
 				}
@@ -105,6 +103,6 @@ public class PortalTravelAgent implements TravelAgent {
 		if (world == null) {
 			throw new IllegalArgumentException("World '" + name + "' not found.");
 		}
-		return VanillaMaterials.PORTAL.createPortal(world.getBlock(BukkitUtil.toVector3(location), VanillaBridgePlugin.getInstance()));
+		return VanillaMaterials.PORTAL.createPortal(world.getBlock(BukkitUtil.toVector3(location)));
 	}
 }
