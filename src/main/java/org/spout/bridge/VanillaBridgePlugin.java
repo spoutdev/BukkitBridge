@@ -21,13 +21,19 @@ package org.spout.bridge;
 
 import org.spout.api.Server;
 import org.spout.api.Spout;
+import org.spout.api.event.Cause;
+import org.spout.api.event.cause.PluginCause;
 import org.spout.api.plugin.CommonPlugin;
+import org.spout.api.plugin.Plugin;
+import org.spout.api.scheduler.TaskPriority;
 
 import org.spout.bridge.bukkit.BridgeServer;
+import org.spout.bridge.listener.BlockListener;
 import org.spout.bridge.listener.EntityListener;
 import org.spout.bridge.listener.PlayerListener;
 import org.spout.bridge.listener.WorldListener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginLoadOrder;
 
 /**
@@ -35,9 +41,11 @@ import org.bukkit.plugin.PluginLoadOrder;
  */
 public class VanillaBridgePlugin extends CommonPlugin {
 	private static VanillaBridgePlugin instance;
+	private static Cause<Plugin> pluginCause;
 	private WorldListener worldListener;
 	private PlayerListener playerListener;
 	private EntityListener entityListener;
+	private BlockListener blockListener;
 
 	public VanillaBridgePlugin() {
 		instance = this;
@@ -48,9 +56,12 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		worldListener = new WorldListener(this);
 		playerListener = new PlayerListener(this);
 		entityListener = new EntityListener(this);
+		blockListener = new BlockListener(this);
 		BridgeServer server = new BridgeServer((Server)Spout.getEngine(), this);
-		server.enablePlugins(PluginLoadOrder.POSTWORLD);
 		getLogger().info("Bukkit Bridge Enabling, Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
+		pluginCause = new PluginCause(this);
+		
+		this.getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
 	}
 
 	@Override
@@ -60,7 +71,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	public WorldListener getWorldListener() {
 		return worldListener;
 	}
-	
+
 	public PlayerListener getPlayerListener() {
 		return playerListener;
 	}
@@ -69,7 +80,23 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		return entityListener;
 	}
 
+	public BlockListener getBlockListener() {
+		return blockListener;
+	}
+
 	public static VanillaBridgePlugin getInstance() {
 		return instance;
+	}
+
+	public static Cause<Plugin> getCause() {
+		return pluginCause;
+	}
+
+	private static class LoadPluginsTask implements Runnable {
+		@Override
+		public void run() {
+			Spout.getLogger().info("Loading post-world bukkit plugins");
+			((BridgeServer)Bukkit.getServer()).enablePlugins(PluginLoadOrder.POSTWORLD);
+		}
 	}
 }

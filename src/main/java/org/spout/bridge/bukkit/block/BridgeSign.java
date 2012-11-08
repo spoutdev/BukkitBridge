@@ -2,25 +2,29 @@ package org.spout.bridge.bukkit.block;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.spout.bridge.VanillaBridgePlugin;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
-	public BridgeSign(Block b) {
+	private final org.spout.vanilla.component.substance.material.Sign sign;
+	public BridgeSign(Block b, org.spout.vanilla.component.substance.material.Sign handle) {
 		super(b);
-		// TODO Auto-generated constructor stub
+		this.sign = handle;
 	}
 
 	@Override
 	public String[] getLines() {
-		throw new UnsupportedOperationException();
+		return sign.getText();
 	}
 
 	@Override
-	public String getLine(int paramInt) throws IndexOutOfBoundsException {
-		throw new UnsupportedOperationException();
+	public String getLine(int line) throws IndexOutOfBoundsException {
+		return getLines()[line];
 	}
 
 	@Override
-	public void setLine(int paramInt, String paramString) throws IndexOutOfBoundsException {
-		throw new UnsupportedOperationException();
+	public void setLine(int line, String text) throws IndexOutOfBoundsException {
+		String[] lines = sign.getText();
+		lines[line] = text;
+		sign.setText(lines, VanillaBridgePlugin.getCause());
 	}
 }

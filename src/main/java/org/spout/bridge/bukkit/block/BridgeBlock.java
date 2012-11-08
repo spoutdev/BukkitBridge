@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
+import org.spout.api.component.components.BlockComponent;
 import org.spout.api.material.BlockMaterial;
 
 import org.spout.bridge.bukkit.BridgeChunk;
@@ -188,7 +189,12 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockState getState() {
-		throw new UnsupportedOperationException();
+		BlockComponent component = getWorld().getHandle().getBlockComponent(x, y, z);
+		if (component instanceof org.spout.vanilla.component.substance.material.Sign) {
+			return new BridgeSign(this, (org.spout.vanilla.component.substance.material.Sign)component);
+		} else {
+			return new BridgeBlockState(this);
+		}
 	}
 
 	@Override

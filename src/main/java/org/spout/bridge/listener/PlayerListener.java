@@ -12,6 +12,7 @@ import org.spout.api.event.player.PlayerInteractEvent;
 import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
+import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
 
 import org.spout.bridge.BukkitUtil;
@@ -56,20 +57,26 @@ public class PlayerListener extends AbstractListener {
 	}
 
 	@EventHandler(order = Order.EARLIEST)
-	public void onPlayerKick(PlayerKickEvent event) {
+	public void onPlayerLeave(PlayerLeaveEvent event) {
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		final String kickMessage = event.getKickReason().asString();
 		final String leaveMessage = event.getMessage().asString();
-		org.bukkit.event.player.PlayerKickEvent kick = new org.bukkit.event.player.PlayerKickEvent(player, kickMessage, leaveMessage);
-		kick.setCancelled(event.isCancelled());
-		Bukkit.getPluginManager().callEvent(kick);
-		if (!kickMessage.equals(kick.getReason())) {
-			event.setKickReason(kick.getReason());
+		if (event instanceof PlayerKickEvent) {
+			PlayerKickEvent kickEvent = (PlayerKickEvent) event;
+			final String kickMessage = kickEvent.getKickReason().asString();
+			org.bukkit.event.player.PlayerKickEvent kick = new org.bukkit.event.player.PlayerKickEvent(player, kickMessage, leaveMessage);
+			kick.setCancelled(event.isCancelled());
+			Bukkit.getPluginManager().callEvent(kick);
+			if (!kickMessage.equals(kick.getReason())) {
+				kickEvent.setKickReason(kick.getReason());
+			}
+			if (!leaveMessage.equals(kick.getLeaveMessage())) {
+				kickEvent.setMessage(kick.getLeaveMessage());
+			}
+			kickEvent.setCancelled(kick.isCancelled());
+		} else {
+			org.bukkit.event.player.PlayerQuitEvent quit = new org.bukkit.event.player.PlayerQuitEvent(player, leaveMessage);
+			Bukkit.getPluginManager().callEvent(quit);
 		}
-		if (!leaveMessage.equals(kick.getLeaveMessage())) {
-			event.setMessage(kick.getLeaveMessage());
-		}
-		event.setCancelled(kick.isCancelled());
 	}
 
 	@EventHandler(order = Order.EARLIEST)

@@ -76,6 +76,8 @@ public class BridgeServer implements Server {
 		PotionEffectType.stopAcceptingRegistrations();
 		
 		loadPlugins();
+		
+		Spout.getLogger().info("Loading pre-world bukkit plugins");
 		enablePlugins(PluginLoadOrder.STARTUP);
 	}
 
@@ -443,20 +445,20 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public World getWorld(String name) {
+	public BridgeWorld getWorld(String name) {
 		for (World w : getWorlds()) {
 			if (w.getName().equals(name)) {
-				return w;
+				return (BridgeWorld) w;
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public World getWorld(UUID uid) {
+	public BridgeWorld getWorld(UUID uid) {
 		for (World w : getWorlds()) {
 			if (w.getUID().equals(uid)) {
-				return w;
+				return (BridgeWorld) w;
 			}
 		}
 		return null;

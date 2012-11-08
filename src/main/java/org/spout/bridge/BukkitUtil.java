@@ -3,6 +3,7 @@ package org.spout.bridge;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -14,6 +15,7 @@ import org.spout.api.material.Material;
 import org.spout.api.material.block.BlockFace;
 import org.spout.api.math.Vector3;
 
+import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
 import org.spout.bridge.bukkit.inventory.BridgeItemStack;
 
@@ -31,6 +33,10 @@ import org.spout.vanilla.material.enchantment.ToolEnchantment;
 public class BukkitUtil {
 	private BukkitUtil() {
 	}
+	
+	private static BridgeServer getServer() {
+		return (BridgeServer) Bukkit.getServer();
+	}
 
 	/**
 	 * Creates a Bukkit Location from a SpoutAPI Transform
@@ -43,6 +49,11 @@ public class BukkitUtil {
 		loc.setPitch(transform.getRotation().getPitch());
 		loc.setYaw(transform.getRotation().getYaw());
 		return loc;
+	}
+
+	public static Block fromBlock(org.spout.api.geo.cuboid.Block block) {
+		BridgeWorld world = getServer().getWorld(block.getWorld().getUID());
+		return world.getBlockAt(block.getX(), block.getY(), block.getZ());
 	}
 
 	/**
