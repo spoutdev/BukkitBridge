@@ -14,10 +14,16 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spout.api.entity.Entity;
+import org.spout.bridge.bukkit.inventory.BridgeInventoryPlayer;
+import org.spout.bridge.bukkit.inventory.VanillaInventoryPlayer;
+import org.spout.vanilla.component.living.Human;
 
 public abstract class BridgeHumanEntity extends BridgeLivingEntity implements HumanEntity {
+	private BridgeInventoryPlayer inventory;
+	
 	protected BridgeHumanEntity(Entity handle) {
 		super(handle);
+		inventory = new BridgeInventoryPlayer(new VanillaInventoryPlayer(handle.getExact(Human.class).getInventory()), "");
 	}
 
 	@Override
@@ -27,7 +33,7 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public PlayerInventory getInventory() {
-		throw new UnsupportedOperationException();
+		return inventory;
 	}
 
 	@Override
