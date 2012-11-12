@@ -13,14 +13,23 @@ import org.bukkit.inventory.ItemStack;
 
 import org.spout.bridge.BukkitUtil;
 
+import org.spout.vanilla.inventory.block.BrewingStandInventory;
+import org.spout.vanilla.inventory.block.ChestInventory;
+import org.spout.vanilla.inventory.block.CraftingTableInventory;
+import org.spout.vanilla.inventory.block.DispenserInventory;
+import org.spout.vanilla.inventory.block.EnchantmentTableInventory;
+import org.spout.vanilla.inventory.block.FurnaceInventory;
+import org.spout.vanilla.inventory.player.PlayerCraftingInventory;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 
 public class BridgeInventory implements Inventory {
 	private org.spout.api.inventory.Inventory handle;
+	private String name;
 
 	public BridgeInventory(org.spout.api.inventory.Inventory handle, String name) {
 		this.handle = handle;
+		this.name = name;
 	}
 
 	public org.spout.api.inventory.Inventory getHandle() {
@@ -39,11 +48,12 @@ public class BridgeInventory implements Inventory {
 
 	@Override
 	public void setMaxStackSize(int maxStackSize) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	@Override
@@ -233,7 +243,23 @@ public class BridgeInventory implements Inventory {
 
 	@Override
 	public InventoryType getType() {
-		throw new UnsupportedOperationException();
+		if (handle instanceof VanillaInventoryPlayer) {
+			return InventoryType.PLAYER;
+        } else if (handle instanceof PlayerCraftingInventory) {
+			return InventoryType.CRAFTING;
+        } else if (handle instanceof CraftingTableInventory) {
+        	return InventoryType.WORKBENCH;
+        } else if (handle instanceof DispenserInventory) {
+            return InventoryType.DISPENSER;
+        } else if (handle instanceof FurnaceInventory) {
+            return InventoryType.FURNACE;
+        } else if (handle instanceof EnchantmentTableInventory) {
+            return InventoryType.ENCHANTING;
+        } else if (handle instanceof BrewingStandInventory) {
+            return InventoryType.BREWING;
+        } else if (handle instanceof ChestInventory) {
+            return InventoryType.CHEST;
+        } else return null;
 	}
 
 	@Override
