@@ -10,11 +10,11 @@ import org.spout.api.inventory.Inventory;
 import org.spout.bridge.BukkitUtil;
 
 public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
-	private VanillaInventoryPlayer spoutInventory;
+	private VanillaInventoryPlayer vanillaInventory;
 	
 	public BridgeInventoryPlayer(Inventory handle, String name) {
 		super(handle, name);
-		this.spoutInventory = (VanillaInventoryPlayer) handle;
+		this.vanillaInventory = (VanillaInventoryPlayer) handle;
 	}
 	
 	@Override
@@ -84,7 +84,7 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public int getHeldItemSlot() {
-		return spoutInventory.getHeldItemSlot();
+		return vanillaInventory.getHeldItemSlot();
 	}
 
 	@Override
@@ -98,14 +98,14 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
  */
 	@Override
 	public ItemStack getItem(int i) {
-		spoutInventory.syncWithVanilla(i);
+		vanillaInventory.syncWithVanilla(i);
 		return super.getItem(i);
 	}
 	
 	@Override
 	public void setItem(int i, ItemStack itemStack) {
 		super.setItem(i, itemStack);
-		spoutInventory.syncVanillaWith(i);
+		vanillaInventory.syncVanillaWith(i);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 				map.put(item.getAmount(), item);
 			}
 		}
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 		return map;
 	}
 
@@ -132,128 +132,128 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 				map.put(item.getAmount(), item);
 			}
 		}
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 		return map;
 	}
 	
 	@Override
 	public ItemStack[] getContents() {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.getContents();
 	}
 	
 	@Override
 	public void setContents(ItemStack[] contents) {
 		super.setContents(contents);
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 	}
 	
 	@Override
 	public boolean contains(int typeId) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(typeId);
 	}
 
 	@Override
 	public boolean contains(Material material) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(material);
 	}
 
 	@Override
 	public boolean contains(ItemStack itemStack) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(itemStack);
 	}
 
 	@Override
 	public boolean contains(int typeId, int amount) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(typeId, amount);
 	}
 
 	@Override
 	public boolean contains(Material material, int amount) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(material, amount);
 	}
 
 	@Override
 	public boolean contains(ItemStack itemStack, int amount) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.contains(itemStack, amount);
 	}
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(int typeId) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.all(typeId);
 	}
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(Material material) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.all(material);
 	}
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(ItemStack itemStack) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.all(itemStack);
 	}
 
 	@Override
 	public int first(int typeId) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.first(typeId);
 	}
 
 	@Override
 	public int first(Material material) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.first(material);
 	}
 
 	@Override
 	public int first(ItemStack itemStack) {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.first(itemStack);
 	}
 
 	@Override
 	public int firstEmpty() {
-		spoutInventory.syncWithVanilla();
+		vanillaInventory.syncWithVanilla();
 		return super.firstEmpty();
 	}
 	
 	@Override
 	public void remove(int typeId) {
 		super.remove(typeId);
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 	}
 
 	@Override
 	public void remove(Material material) {
 		super.remove(material);
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 	}
 
 	@Override
 	public void remove(ItemStack itemStack) {
 		super.remove(itemStack);
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 	}
 
 	@Override
 	public void clear(int slot) {
 		super.remove(slot);
-		spoutInventory.syncVanillaWith(slot);
+		vanillaInventory.syncVanillaWith(slot);
 	}
 
 	@Override
 	public void clear() {
 		super.clear();
-		spoutInventory.syncVanillaWith();
+		vanillaInventory.syncVanillaWith();
 	}
 	
 }

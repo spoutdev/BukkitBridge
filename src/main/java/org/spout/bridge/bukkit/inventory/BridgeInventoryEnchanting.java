@@ -9,14 +9,15 @@ public class BridgeInventoryEnchanting extends BridgeInventory implements Enchan
 	public BridgeInventoryEnchanting(Inventory handle, String name) {
 		super(handle, name);
 	}
+	
+	@Override
+	public ItemStack getItem() {
+		return getItem(0);
+	}
 
 	@Override
 	public void setItem(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		setItem(0, itemStack);
 	}
 
-	@Override
-	public ItemStack getItem() {
-		throw new UnsupportedOperationException();
-	}
 }
