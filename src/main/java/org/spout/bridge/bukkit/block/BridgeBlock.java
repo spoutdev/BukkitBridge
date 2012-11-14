@@ -13,13 +13,10 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-
 import org.spout.api.component.components.BlockComponent;
 import org.spout.api.material.BlockMaterial;
-
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
-
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.block.Liquid;
@@ -191,8 +188,22 @@ public class BridgeBlock implements Block {
 	public BlockState getState() {
 		BlockComponent component = getWorld().getHandle().getBlockComponent(x, y, z);
 		if (component instanceof org.spout.vanilla.component.substance.material.Sign) {
-			return new BridgeSign(this, (org.spout.vanilla.component.substance.material.Sign)component);
-		} else {
+			return new BridgeSign(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.chest.Chest) {
+			return new BridgeChest(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.Furnace) {
+			return new BridgeFurnace(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.Dispenser) {
+			return new BridgeDispenser(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.MonsterSpawner) {
+			return new BridgeCreatureSpawner(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.NoteBlock) {
+			return new BridgeNoteblock(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.Jukebox) {
+			return new BridgeJukebox(this);
+		} else if (component instanceof org.spout.vanilla.component.substance.material.BrewingStand) {
+			return new BridgeBrewingStand(this);
+		}  else {
 			return new BridgeBlockState(this);
 		}
 	}

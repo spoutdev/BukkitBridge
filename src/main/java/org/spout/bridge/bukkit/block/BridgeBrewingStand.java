@@ -3,11 +3,13 @@ package org.spout.bridge.bukkit.block;
 import org.bukkit.block.Block;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
+import org.spout.bridge.bukkit.inventory.BridgeInventoryBrewer;
 
 public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand {
+	private final org.spout.vanilla.component.substance.material.BrewingStand stand;
 	public BridgeBrewingStand(Block b) {
 		super(b);
-		// TODO Auto-generated constructor stub
+		this.stand = (org.spout.vanilla.component.substance.material.BrewingStand) getHandle();
 	}
 
 	@Override
@@ -22,6 +24,6 @@ public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand
 
 	@Override
 	public BrewerInventory getInventory() {
-		throw new UnsupportedOperationException();
+		return new BridgeInventoryBrewer(stand.getInventory(), "");
 	}
 }

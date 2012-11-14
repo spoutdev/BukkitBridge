@@ -4,12 +4,14 @@ import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
+import org.spout.vanilla.component.substance.material.MonsterSpawner;
 
 @SuppressWarnings("deprecation")
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
+	private final MonsterSpawner spawner;
 	public BridgeCreatureSpawner(Block b) {
 		super(b);
-		// TODO Auto-generated constructor stub
+		this.spawner = (MonsterSpawner) getHandle();
 	}
 
 	@Override

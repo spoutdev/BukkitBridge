@@ -51,9 +51,26 @@ public class BukkitUtil {
 		return loc;
 	}
 
+	/**
+	 * Creates a Bukkit block from a SpoutAPI block
+	 *
+	 * @param block The SpoutAPI block to convert to a Bukkit block
+	 * @return The corresponding Bukkit block
+	 */
 	public static Block fromBlock(org.spout.api.geo.cuboid.Block block) {
 		BridgeWorld world = getServer().getWorld(block.getWorld().getUID());
 		return world.getBlockAt(block.getX(), block.getY(), block.getZ());
+	}
+	
+	/**
+	 * Creates a SpoutAPI block from a Bukkit block
+	 *
+	 * @param point The Bukkit block to convert to a SpoutAPI block
+	 * @return The corresponding SpoutAPI block
+	 */
+	public static org.spout.api.geo.cuboid.Block toBlock(Block block) {
+		Point point = toPoint(block.getLocation());
+		return point.getWorld().getBlock(point);
 	}
 
 	/**
