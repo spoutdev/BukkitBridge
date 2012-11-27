@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
@@ -80,18 +81,21 @@ public class BridgeScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task) {
-		return scheduleAsyncDelayedTask(plugin, task, 0);
+		return Spout.getEngine().getScheduler().scheduleAsyncTask(plugin, task);
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay) {
-		return scheduleAsyncRepeatingTask(plugin, task, delay, -1L);
+		return Spout.getEngine().getScheduler().scheduleAsyncDelayedTask(plugin, task, delay * 50L, TaskPriority.NORMAL);
 	}
 
 	@Override
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return 0;
-		//return Spout.getEngine().getScheduler().scheduleAsyncRepeatingTask(plugin, task, delay * 50L, (period > 0 ? period * 50L : period), TaskPriority.NORMAL);
+		if (period > 0) {
+			return scheduleAsyncDelayedTask(plugin, new RepeatingRunnable(plugin, task, period), delay);
+		} else {
+			return scheduleAsyncDelayedTask(plugin, task, delay);
+		}
 	}
 
 	@Override
@@ -205,5 +209,25 @@ public class BridgeScheduler implements BukkitScheduler {
 	@Override
 	public BukkitTask runTaskTimerAsynchronously(Plugin arg0, Runnable arg1, long arg2, long arg3) throws IllegalArgumentException {
 		throw new UnsupportedOperationException();
+	}
+
+	private static class RepeatingRunnable implements Runnable{
+		final Runnable r;
+		final Plugin p;
+		final long period;
+		RepeatingRunnable(Plugin p, Runnable r, long period) {
+			this.r = r;
+			this.p = p;
+			this.period = period;
+		}
+
+		@Override
+		public void run() {
+			try {
+				r.run();
+			} finally {
+				Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(p, r, 1, period - 1);
+			}
+		}
 	}
 }
