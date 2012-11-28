@@ -25,9 +25,10 @@ import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
 
 public class BridgeNoteblock extends BridgeBlockState implements NoteBlock {
+	private final org.spout.vanilla.component.substance.material.NoteBlock noteblock;
 	public BridgeNoteblock(Block b) {
 		super(b);
-		// TODO Auto-generated constructor stub
+		this.noteblock = (org.spout.vanilla.component.substance.material.NoteBlock) getHandle();
 	}
 
 	@Override
