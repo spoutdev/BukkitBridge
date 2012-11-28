@@ -25,9 +25,9 @@ import org.spout.bridge.VanillaBridgePlugin;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
 	private final org.spout.vanilla.component.substance.material.Sign sign;
-	public BridgeSign(Block b, org.spout.vanilla.component.substance.material.Sign handle) {
+	public BridgeSign(Block b) {
 		super(b);
-		this.sign = handle;
+		this.sign = (org.spout.vanilla.component.substance.material.Sign) getHandle();
 	}
 
 	@Override
