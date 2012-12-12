@@ -147,4 +147,239 @@ public class PlayerListener extends AbstractListener {
 			}
 		}
 	}
+
+    @EventHandler
+    public void onAsyncPlayerChat(){
+        //todo implement onAsyncPlayerChat
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onAsyncPlayerPreLogin(){
+        //todo implement onAsyncPlayerPreLogin
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerAnimation(){
+        //todo implement onPlayerAnimation
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerAnimationType(){
+        //todo implement onPlayerAnimationType
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerBedEnter(){
+        //todo implement onPlayerBedEnter
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerBedLeave(){
+        //todo implement onPlayerBedLeave
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerBucketEmpty(){
+        //todo implement onPlayerBucketEmpty
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerBucket(){
+        //todo implement onPlayerBucket
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerBucketFill(){
+        //todo implement onPlayerBucketFill
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerChangedWorld(){
+        //todo implement onPlayerChangedWorld
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerChannel(){
+        //todo implement onPlayerChannel
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerChat(){
+        //todo implement onPlayerChat
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerChatTabComplete(){
+        //todo implement onPlayerChatTabComplete
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerCommandPreProcess(){
+        //todo implement onPlayerCommandPreProcess
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerDropItem(){
+        //todo implement onPlayerDropItem
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerEggThrow(){
+        //todo implement onPlayerEggThrow
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayer(){
+        //todo implement onPlayer
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerExpChange(){
+        //todo implement onPlayerExpChange
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerFish(){
+        //todo implement onPlayerFish
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerGameModeChange(){
+        //todo implement onPlayerGameModeChange
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerInteractEntity(){
+        //todo implement onPlayerInteractEntity
+        throw new UnsupportedOperationException();
+    }
+
+
+    @EventHandler
+    public void onPlayerInventory(){
+        //todo implement onPlayerInventory
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerItemBreak(){
+        //todo implement onPlayerItemBreak
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerItemHeld(){
+        //todo implement onPlayerItemHeld
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerKick(){
+        //todo implement onPlayerKick
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerLevelChange(){
+        //todo implement onPlayerLevelChange
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerMove(){
+        //todo implement onPlayerMove
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerPickUpItem(){
+        //todo implement onPlayerPickUpItem
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerPortal(){
+        //todo implement onPlayerPortal
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerPreLogin(){
+        //todo implement onPlayerPreLogin
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerQuit(){
+        //todo implement onPlayerQuit
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerRegisterChannel(){
+        //todo implement onPlayerRegisterChannel
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(){
+        //todo implement onPlayerRespawn
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerShearEntity(){
+        //todo implement onPlayerShearEntity
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerToggleFlight(){
+        //todo implement onPlayerToggleFlight
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerToggleSneak(){
+        //todo implement onPlayerToggleSneak
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerToggleSprint(){
+        //todo implement onPlayerToggleSprint
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerUnregisterChannel(){
+        //todo implement onPlayerUnregisterChannel
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onPlayerVelocity(){
+        //todo implement onPlayerVelocity
+        throw new UnsupportedOperationException();
+    }
 }
