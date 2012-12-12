@@ -21,15 +21,16 @@ package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.block.BlockChangeEvent;
+import org.spout.api.event.block.BlockEvent;
 import org.spout.api.event.cause.PlayerCause;
+import org.spout.api.event.server.protection.EntityCanBuildEvent;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
-import org.spout.vanilla.component.inventory.PlayerInventory;
 import org.spout.vanilla.event.block.RedstoneChangeEvent;
 import org.spout.vanilla.event.cause.PlayerBreakCause;
 import org.spout.vanilla.event.cause.PlayerPlacementCause;
@@ -64,10 +65,10 @@ public class BlockListener extends AbstractListener{
 		BlockBreakEvent breakEvent = new BlockBreakEvent(BukkitUtil.fromBlock(event.getBlock()), new BridgePlayer(pcause.getSource()));
 		Bukkit.getPluginManager().callEvent(breakEvent);
 		event.setCancelled(breakEvent.isCancelled());
-		//TODO exp drops and such!
+		//TODO finish onBlockBreak, exp drops and such!
 	}
-	
-	//public BlockPlaceEvent(final Block placedBlock, final BlockState replacedBlockState, 
+
+	//public BlockPlaceEvent(final Block placedBlock, final BlockState replacedBlockState,
 	//final Block placedAgainst,
 	//final ItemStack itemInHand, final Player thePlayer, final boolean canBuild) 
 	
@@ -80,11 +81,130 @@ public class BlockListener extends AbstractListener{
 			return;
 		}
 		PlayerPlacementCause pcause = (PlayerPlacementCause) event.getCause();
+        //todo finish onBlockPlace
 		//PlayerInventory pinv = pcause.getSource().get(PlayerInventory.class);
 		//BlockPlaceEvent breakEvent = new BlockPlaceEvent(BukkitUtil.fromBlock(event.getBlock()), null,null,BukkitUtil.fromItemStack(pinv.getQuickbar().getCurrentItem()), new BridgePlayer(pcause.getSource()), event.isCancelled());
 		//Bukkit.getPluginManager().callEvent(breakEvent);
 		//event.setCancelled(breakEvent.isCancelled());
 	}
 	
-	
+	@EventHandler
+    public void onBlockBurn(BlockChangeEvent event){
+        //todo implement onBlockBurn
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockCanBuild(BlockCanBuildEvent event){
+        //todo implement onBlockCanBuild
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockDamage(BlockChangeEvent event){
+        //todo implement onBlockDamage
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockDispense(){
+        //todo implement onBlockDispense
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockEvent(BlockEvent event){
+        //todo implement onBlockEvent
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockExp(){
+        //todo implement onBlockExp
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockFade(BlockChangeEvent event){
+        //todo implement onBlockFade
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockForm(BlockChangeEvent event){
+        //todo implement onBlockForm
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockFormTo(){
+        //todo implement onBlockFormTo
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockGrow(BlockChangeEvent event){
+        //todo implement onBlockGrow
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockIngite(BlockChangeEvent event){
+        //todo implement onBlockIgnite
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockPhysics(){
+        //todo implement onBlockPhysics
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockPiston(){
+        //todo implement onBlockPiston
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockPistonExtend(){
+        //todo implement onBlockPistonExtend
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockPistonRetract(){
+        //todo implement onBlockPistonRetract
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onBlockSpread(){
+        //todo implement onBlockSpread
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onEntityBlockForm(){
+        //todo implement onEntityBlockForm
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onLeavesDecay(){
+        //todo implement onLeavesDecay
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onNotePlay(){
+        //todo implement onNotePlay
+        throw new UnsupportedOperationException();
+    }
+
+    @EventHandler
+    public void onSignChange(){
+        //todo implement onSignChange
+        throw new UnsupportedOperationException();
+    }
 }
