@@ -16,7 +16,7 @@
 		<bukkitVersion>${project.version}</bukkitVersion>
 		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
-		<vanillaVersion>1.3.2-SNAPSHOT</vanillaVersion>
+		<vanillaVersion>1.4.5-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
 	</properties>
 
