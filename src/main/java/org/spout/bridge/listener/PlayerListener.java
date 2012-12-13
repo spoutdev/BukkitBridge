@@ -20,19 +20,21 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.inventory.ItemStack;
 
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
+import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.event.player.PlayerInteractEvent;
 import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
+import org.spout.api.event.player.PlayerPreLoginEvent;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
@@ -40,6 +42,7 @@ import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.player.PlayerMoveComponent;
 import org.spout.vanilla.component.living.Human;
+import org.spout.vanilla.event.player.PlayerRespawnEvent;
 
 public class PlayerListener extends AbstractListener {
 	public PlayerListener(VanillaBridgePlugin plugin) {
@@ -154,12 +157,17 @@ public class PlayerListener extends AbstractListener {
         throw new UnsupportedOperationException();
     }
 
-    @EventHandler
-    public void onAsyncPlayerPreLogin(){
-        //todo implement onAsyncPlayerPreLogin
-        throw new UnsupportedOperationException();
+    @EventHandler(order = Order.EARLIEST)
+    public void onAsyncPlayerPreLogin(PlayerPreLoginEvent event){
+    	if(event.isCancelled()){
+    		return;
+    	}
+    	org.bukkit.event.player.AsyncPlayerPreLoginEvent preLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(),event.getAddress());
+    	Bukkit.getPluginManager().callEvent(preLogin);
+    	if(preLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED){
+    		//todo implement disallow login
+    	}
     }
-
     @EventHandler
     public void onPlayerAnimation(){
         //todo implement onPlayerAnimation
@@ -323,16 +331,26 @@ public class PlayerListener extends AbstractListener {
         throw new UnsupportedOperationException();
     }
 
-    @EventHandler
-    public void onPlayerPreLogin(){
-        //todo implement onPlayerPreLogin
-        throw new UnsupportedOperationException();
+    @EventHandler(order = Order.EARLIEST)
+    public void onPlayerPreLogin(PlayerPreLoginEvent event){
+    	if(event.isCancelled()){
+    		return;
+    	}
+    	org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(),event.getAddress());
+    	Bukkit.getPluginManager().callEvent(preLogin);
+    	if(preLogin.getResult() != org.bukkit.event.player.PlayerPreLoginEvent.Result.ALLOWED){
+    		//todo implement disallow login
+    	}
     }
 
-    @EventHandler
-    public void onPlayerQuit(){
-        //todo implement onPlayerQuit
-        throw new UnsupportedOperationException();
+    @EventHandler(order = Order.EARLIEST)
+    public void onPlayerQuit(PlayerLeaveEvent event){
+    	if(event.isCancelled()){
+    		return;
+    	}
+    	BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
+		org.bukkit.event.player.PlayerQuitEvent quit = new org.bukkit.event.player.PlayerQuitEvent(player, event.getMessage().asString());
+		Bukkit.getPluginManager().callEvent(quit);
     }
 
     @EventHandler
@@ -341,10 +359,15 @@ public class PlayerListener extends AbstractListener {
         throw new UnsupportedOperationException();
     }
 
-    @EventHandler
-    public void onPlayerRespawn(){
-        //todo implement onPlayerRespawn
-        throw new UnsupportedOperationException();
+    @EventHandler(order = Order.EARLIEST)
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	if(event.isCancelled()){
+    		return;
+    	}
+    	BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
+    	org.bukkit.event.player.PlayerRespawnEvent respawn = new org.bukkit.event.player.PlayerRespawnEvent(player, BukkitUtil.fromPoint(event.getPoint()), false);
+    	Bukkit.getPluginManager().callEvent(respawn);
+    	event.setPoint(BukkitUtil.toPoint(respawn.getRespawnLocation()));
     }
 
     @EventHandler
@@ -352,7 +375,7 @@ public class PlayerListener extends AbstractListener {
         //todo implement onPlayerShearEntity
         throw new UnsupportedOperationException();
     }
-
+    
     @EventHandler
     public void onPlayerToggleFlight(){
         //todo implement onPlayerToggleFlight
