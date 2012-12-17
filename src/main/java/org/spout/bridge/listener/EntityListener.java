@@ -32,6 +32,9 @@ import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
 import org.spout.vanilla.event.entity.EntityDamageEvent;
+import org.spout.vanilla.event.entity.EntityTameEvent;
+import org.spout.vanilla.event.entity.EntityTargetEvent;
+import org.spout.vanilla.event.player.PlayerFoodSaturationChangeEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -80,203 +83,208 @@ public class EntityListener extends AbstractListener {
 		}
 	}
 
-    @EventHandler
-    public void onCreatureSpawn(){
-        //todo implement onCreatureSpawn
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onCreatureSpawn(){
+		//todo implement onCreatureSpawn
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onCreeperPower(){
-        //todo implement onCreeperPower
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onCreeperPower(){
+		//todo implement onCreeperPower
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityBreakDoor(){
-        //todo implement onEntityBreakDoor
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityBreakDoor(){
+		//todo implement onEntityBreakDoor
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityChangeBlock(){
-        //todo implement onEntityChangeBlock
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityChangeBlock(){
+		//todo implement onEntityChangeBlock
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityCombustByBlock(){
-        //todo implement onEntityCombustByBlock
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityCombustByBlock(){
+		//todo implement onEntityCombustByBlock
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityCombustByEntity(){
-        //todo implement onEntityCombustByEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityCombustByEntity(){
+		//todo implement onEntityCombustByEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityCombust(){
-        //todo implement onEntityCombust
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityCombust(){
+		//todo implement onEntityCombust
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityCreatePortal(){
-        //todo implement onEntityCreatePortal
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityCreatePortal(){
+		//todo implement onEntityCreatePortal
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityDamageByBlock(){
-        //todo implement onEntityDamageByBlock
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityDamageByBlock(){
+		//todo implement onEntityDamageByBlock
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityDamageByEntity(){
-        //todo implement onEntityDamageByEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityDamageByEntity(){
+		//todo implement onEntityDamageByEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityDeath(EntityDeathEvent event){
-        //todo implement onEntityDeath
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityDeath(EntityDeathEvent event){
+		//todo implement onEntityDeath
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntity(EntityEvent event){
-        //todo implement onEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntity(EntityEvent event){
+		//todo implement onEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityExplode(){
-        //todo implement onEntityExplode
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityExplode(){
+		//todo implement onEntityExplode
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityInteract(){
-        //todo implement onEntityInteract
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityInteract(){
+		//todo implement onEntityInteract
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityPortalEnter(){
-        //todo implement onEntityPortalEnter
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityPortalEnter(){
+		//todo implement onEntityPortalEnter
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityRegainHealth(){
-        //todo implement onEntityRegainHealth
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityRegainHealth(){
+		//todo implement onEntityRegainHealth
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityShootBow(){
-        //todo implement onEntityShootBow
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityShootBow(){
+		//todo implement onEntityShootBow
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityTame(){
-        //todo implement onEntityTame
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityTame(EntityTameEvent event){
+		//todo implement onEntityTame
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityTarget(){
-        //todo implement onEntityTarget
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityTarget(EntityTargetEvent event){
+		//todo implement onEntityTarget
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onEntityTargetLivingEntity(){
-        //todo implement onEntityTargetLivingEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEntityTargetLivingEntity(){
+		//todo implement onEntityTargetLivingEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onExpBottle(){
-        //todo implement onExpBottle
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onExpBottle(){
+		//todo implement onExpBottle
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onExplosionPrime(){
-        //todo implement onExplosionPrime
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onExplosionPrime(){
+		//todo implement onExplosionPrime
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onFoodLevelChange(){
-        //todo implement onFoodLevelChange
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onFoodLevelChange(PlayerFoodSaturationChangeEvent event){
+		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
+		int foodLevel = (int) event.getFoodSaturation();
+		org.bukkit.event.entity.FoodLevelChangeEvent foodLevelChange = new org.bukkit.event.entity.FoodLevelChangeEvent(player, foodLevel);
+		foodLevelChange.setCancelled(event.isCancelled());
+		Bukkit.getPluginManager().callEvent(foodLevelChange);
+		event.setCancelled(foodLevelChange.isCancelled());
+		event.setFoodSaturation(foodLevelChange.getFoodLevel());
+	}
 
-    @EventHandler
-    public void onItemDespawn(){
-        //todo implement onItemDespawn
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onItemDespawn(){
+		//todo implement onItemDespawn
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onItemSpawn(){
-        //todo implement onItemSpawn
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onItemSpawn(){
+		//todo implement onItemSpawn
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPigZap(){
-        //todo implement onPigZap
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPigZap(){
+		//todo implement onPigZap
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPlayerDeath(){
-        //todo implement onPlayerDeath
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPlayerDeath(){
+		//todo implement onPlayerDeath
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPotionSplash(){
-        //todo implement onPotionSplash
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPotionSplash(){
+		//todo implement onPotionSplash
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onProjectileHit(){
-        //todo implement onProjectileHit
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onProjectileHit(){
+		//todo implement onProjectileHit
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onProjectileLaunch(){
-        //todo implement onProjectileLaunch
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onProjectileLaunch(){
+		//todo implement onProjectileLaunch
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onSheepDyeWool(){
-        //todo implement onSheepDyeWool
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onSheepDyeWool(){
+		//todo implement onSheepDyeWool
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onSheepRegrowWool(){
-        //todo implement onSheepRegrowWool
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onSheepRegrowWool(){
+		//todo implement onSheepRegrowWool
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onSlimeSplit(){
-        //todo implement onSlimeSplit
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onSlimeSplit(){
+		//todo implement onSlimeSplit
+		throw new UnsupportedOperationException();
+	}
 }
 
 
