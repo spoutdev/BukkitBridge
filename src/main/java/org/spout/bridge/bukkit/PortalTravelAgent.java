@@ -25,8 +25,8 @@ import org.bukkit.TravelAgent;
 import org.spout.api.Spout;
 import org.spout.api.geo.World;
 
-import org.spout.bridge.BukkitUtil;
 import org.spout.vanilla.material.VanillaMaterials;
+import org.spout.vanilla.world.generator.object.VanillaObjects;
 
 public class PortalTravelAgent implements TravelAgent {
 	private int searchRadius = 20, creationRadius = 20;
@@ -79,8 +79,9 @@ public class PortalTravelAgent implements TravelAgent {
 		for (int x = centerX; x < creationRadius; x++) {
 			for (int y = centerY; y < creationRadius; y++) {
 				for (int z = centerZ; z < creationRadius; z++) {
-					if (VanillaMaterials.PORTAL.createPortal(Spout.getEngine().getWorld(location.getWorld().getName()).getBlock(x, y, z))) {
-						return new Location(location.getWorld(), x, y, z);
+					Location loc = new Location(location.getWorld(), x, y, z);
+					if (createPortal(loc)) {
+						return loc;
 					}
 				}
 			}
@@ -122,6 +123,13 @@ public class PortalTravelAgent implements TravelAgent {
 		if (world == null) {
 			throw new IllegalArgumentException("World '" + name + "' not found.");
 		}
-		return VanillaMaterials.PORTAL.createPortal(world.getBlock(BukkitUtil.toVector3(location)));
+		final int x = location.getBlockX();
+		final int y = location.getBlockY();
+		final int z = location.getBlockZ();
+		if (VanillaObjects.NETHER_PORTAL.canPlaceObject(world, x, y, z)) {
+			VanillaObjects.NETHER_PORTAL.placeObject(world, x, y, z, true);
+			return true;
+		}
+		return false;
 	}
 }

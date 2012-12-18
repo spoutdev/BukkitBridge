@@ -19,20 +19,17 @@
  */
 package org.spout.bridge.bukkit.entity;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import org.spout.api.Spout;
-import org.spout.api.component.components.PhysicsComponent;
+import org.spout.api.component.implementation.PhysicsComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
-import org.spout.vanilla.component.substance.object.ObjectEntity;
-
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -214,10 +211,6 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void setVelocity(Vector vec) {
-		ObjectEntity object = handle.get(ObjectEntity.class);
-		if (object != null) {
-			object.setVelocity(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
-		}
 		PhysicsComponent physics = handle.get(PhysicsComponent.class);
 		if (physics != null) {
 			physics.applyForce(new Vector3(vec.getX(), vec.getY(), vec.getZ()));

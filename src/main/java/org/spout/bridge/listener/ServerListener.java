@@ -30,70 +30,70 @@ public class ServerListener extends AbstractListener {
 		super(plugin);
 	}
 
-    @EventHandler
-    public void onMapInitialze(){
-        //todo implement onMapInitialize
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onMapInitialze(){
+		//todo implement onMapInitialize
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPluginDisable(PluginDisableEvent event){
-        //todo implement onPluginDisable
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPluginDisable(PluginDisableEvent event){
+		//todo implement onPluginDisable
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPluginEnable(PluginEnableEvent event){
-        //todo implement onPluginEnable
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPluginEnable(PluginEnableEvent event){
+		//todo implement onPluginEnable
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPlugin(PluginEvent event){
-        //todo implement onPlugin
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPlugin(PluginEvent event){
+		//todo implement onPlugin
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onRemoteServerCommand(){
-        //todo implement onRemoteServerCommand
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onRemoteServerCommand(){
+		//todo implement onRemoteServerCommand
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onServerCommand(){
-        //todo implement onServerCommand
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onServerCommand(){
+		//todo implement onServerCommand
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onServer(){
-        //todo implement onServer
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onServer(){
+		//todo implement onServer
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onServerListPing(){
-        //todo implement onServerListPing
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onServerListPing(){
+		//todo implement onServerListPing
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onService(){
-        //todo implement onService
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onService(){
+		//todo implement onService
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onServiceRegister(){
-        //todo implement onServiceRegister
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onServiceRegister(){
+		//todo implement onServiceRegister
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onServiceUnregister(){
-        //todo implement onServiceUnregister
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onServiceUnregister(){
+		//todo implement onServiceUnregister
+		throw new UnsupportedOperationException();
+	}
 
 }

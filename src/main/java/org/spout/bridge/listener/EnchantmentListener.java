@@ -39,16 +39,16 @@ public class EnchantmentListener extends AbstractListener {
 		super(plugin);
 	}
 
-    @EventHandler
-    public void onEnchantItem(){
-        //todo implement onEnchantItem
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onEnchantItem(){
+		//todo implement onEnchantItem
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPrepareItemEnchant(){
-        //todo implement onPrepareItemEnchant
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPrepareItemEnchant(){
+		//todo implement onPrepareItemEnchant
+		throw new UnsupportedOperationException();
+	}
 
 }

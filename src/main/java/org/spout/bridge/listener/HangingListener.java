@@ -27,28 +27,28 @@ public class HangingListener extends AbstractListener {
 		super(plugin);
 	}
 
-    @EventHandler
-    public void onHangingBreakByEntity(){
-        //todo implement onHangingBreakByEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onHangingBreakByEntity(){
+		//todo implement onHangingBreakByEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onHangingBreak(){
-        //todo implement onHangingBreak
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onHangingBreak(){
+		//todo implement onHangingBreak
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onHanging(){
-        //todo implement onHanging
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onHanging(){
+		//todo implement onHanging
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onHangingPlace(){
-        //todo implement onHangingPlace
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onHangingPlace(){
+		//todo implement onHangingPlace
+		throw new UnsupportedOperationException();
+	}
 
 }

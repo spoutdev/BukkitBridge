@@ -23,7 +23,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.spout.api.component.components.EntityComponent;
+import org.spout.api.component.type.EntityComponent;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.entity.EntityFactory;

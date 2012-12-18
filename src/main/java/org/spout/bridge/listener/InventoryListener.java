@@ -27,69 +27,69 @@ public class InventoryListener extends AbstractListener {
 		super(plugin);
 	}
 
-    @EventHandler
-    public void onBrew(){
-        //todo implement onBrew
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onBrew(){
+		//todo implement onBrew
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onCraftItem(){
-        //todo implement onCraftItem
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onCraftItem(){
+		//todo implement onCraftItem
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onFurnaceBurn(){
-        //todo implement onFurnaceBurn
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onFurnaceBurn(){
+		//todo implement onFurnaceBurn
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onFurnaceExtract(){
-        //todo implement onFurnaceExtract
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onFurnaceExtract(){
+		//todo implement onFurnaceExtract
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onFurnaceSmelt(){
-        //todo implement onFurnaceSmelt
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onFurnaceSmelt(){
+		//todo implement onFurnaceSmelt
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onInventoryClick(){
-        //todo implement onInventoryClick
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onInventoryClick(){
+		//todo implement onInventoryClick
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onInventoryClose(){
-        //todo implement onInventoryClose
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onInventoryClose(){
+		//todo implement onInventoryClose
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onInventory(){
-        //todo implement onInventory
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onInventory(){
+		//todo implement onInventory
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onInventoryOpen(){
-        //todo implement onInventoryOpen
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onInventoryOpen(){
+		//todo implement onInventoryOpen
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onInventoryType(){
-        //todo implement onInventoryType
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onInventoryType(){
+		//todo implement onInventoryType
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPrepareItemCraft(){
-        //todo implement onPreprareItemCraft
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPrepareItemCraft(){
+		//todo implement onPreprareItemCraft
+		throw new UnsupportedOperationException();
+	}
 }

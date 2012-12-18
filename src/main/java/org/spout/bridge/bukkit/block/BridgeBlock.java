@@ -32,7 +32,7 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spout.api.component.components.BlockComponent;
+import org.spout.api.component.type.BlockComponent;
 import org.spout.api.material.BlockMaterial;
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
