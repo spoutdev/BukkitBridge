@@ -27,6 +27,7 @@ import org.bukkit.Bukkit;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
 import org.spout.api.event.world.WorldLoadEvent;
+import org.spout.api.event.world.WorldSaveEvent;
 import org.spout.api.event.world.WorldUnloadEvent;
 
 import org.spout.bridge.VanillaBridgePlugin;
@@ -46,6 +47,9 @@ public class WorldListener extends AbstractListener {
 		synchronized (worlds) {
 			worlds.add(world);
 		}
+		//Call init during world load because Spout has no init event
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldInitEvent(world));
+
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldLoadEvent(world));
 	}
 
@@ -115,20 +119,17 @@ public class WorldListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onWorld(){
-		//todo implement onWorld
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onWorldInit(){
-		//todo implement onWorldInit
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onWorldSave(){
-		//todo implement onWorldSave
-		throw new UnsupportedOperationException();
+	public void onWorldSave(WorldSaveEvent event){
+		BridgeWorld world = null;
+		synchronized (worlds) {
+			for (int i = 0; i < worlds.size(); i++) {
+				BridgeWorld w = worlds.get(i);
+				if (w.getName().equals(event.getWorld().getName())) {
+					world = w;
+					break;
+				}
+			}
+		}
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldSaveEvent(world));
 	}
 }
