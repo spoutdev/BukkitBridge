@@ -19,6 +19,9 @@
  */
 package org.spout.bridge.listener;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -45,12 +48,24 @@ import org.spout.vanilla.component.living.neutral.Human;
 import org.spout.vanilla.event.player.PlayerRespawnEvent;
 
 public class PlayerListener extends AbstractListener {
+	/**
+	 * Maintains a list of players from prelogin events to kick on login events, as Spout does not allow kicking in prelogin
+	 */
+	private Map<String, String> toKick = new ConcurrentHashMap<String, String>();
 	public PlayerListener(VanillaBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler(order = Order.EARLIEST)
 	public void onPlayerLogin(PlayerLoginEvent event) {
+		//Handle the bukkit prelogin kicks
+		String kickMessage = toKick.remove(event.getPlayer().getName());
+		if (kickMessage != null) {
+			event.setAllowed(false);
+			event.setMessage(kickMessage);
+			return;
+		}
+		
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
 		String hostname = event.getPlayer().getAddress().getHostName();
 		org.bukkit.event.player.PlayerLoginEvent login = new org.bukkit.event.player.PlayerLoginEvent(player, hostname, event.getPlayer().getAddress());
@@ -330,12 +345,14 @@ public class PlayerListener extends AbstractListener {
 		org.bukkit.event.player.AsyncPlayerPreLoginEvent asyncPreLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(),event.getAddress());
 		Bukkit.getPluginManager().callEvent(asyncPreLogin);
 		if(asyncPreLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED){
-			//todo implement disallow login
+			toKick.put(asyncPreLogin.getName(), asyncPreLogin.getKickMessage());
+			return;
 		}
 		org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(),event.getAddress());
 		Bukkit.getPluginManager().callEvent(preLogin);
 		if(preLogin.getResult() != org.bukkit.event.player.PlayerPreLoginEvent.Result.ALLOWED){
-			//todo implement disallow login
+			toKick.put(preLogin.getName(), preLogin.getKickMessage());
+			return;
 		}
 	}
 
