@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.entity;
 
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.Player;
+import org.spout.vanilla.component.living.hostile.Zombie;
 
 /**
  * Creates BridgeEntity and BridgePlayer objects upon request
@@ -37,6 +38,9 @@ public final class EntityFactory {
 	public static BridgeEntity createEntity(Entity entity) {
 		if (entity instanceof Player) {
 			return createPlayer((Player) entity);
+		}
+		if (entity.has(Zombie.class)) {
+			return new BridgeZombie(entity);
 		}
 		return null;
 	}
