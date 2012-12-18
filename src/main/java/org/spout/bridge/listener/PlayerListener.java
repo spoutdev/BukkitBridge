@@ -20,7 +20,6 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
@@ -28,7 +27,6 @@ import org.bukkit.inventory.ItemStack;
 
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
-import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.event.player.PlayerInteractEvent;
 import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.event.player.PlayerJoinEvent;
@@ -159,17 +157,6 @@ public class PlayerListener extends AbstractListener {
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
-	public void onAsyncPlayerPreLogin(PlayerPreLoginEvent event){
-		if(event.isCancelled()){
-			return;
-		}
-		org.bukkit.event.player.AsyncPlayerPreLoginEvent preLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(),event.getAddress());
-		Bukkit.getPluginManager().callEvent(preLogin);
-		if(preLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED){
-			//todo implement disallow login
-		}
-	}
 	@EventHandler
 	public void onPlayerAnimation(){
 		//todo implement onPlayerAnimation
@@ -336,8 +323,14 @@ public class PlayerListener extends AbstractListener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(order = Order.EARLIEST)
 	public void onPlayerPreLogin(PlayerPreLoginEvent event){
-		if(event.isCancelled()){
+		if (event.isCancelled()){
 			return;
+		}
+		//Do both events here because Spout login events are all async
+		org.bukkit.event.player.AsyncPlayerPreLoginEvent asyncPreLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(),event.getAddress());
+		Bukkit.getPluginManager().callEvent(asyncPreLogin);
+		if(asyncPreLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED){
+			//todo implement disallow login
 		}
 		org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(),event.getAddress());
 		Bukkit.getPluginManager().callEvent(preLogin);

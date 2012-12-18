@@ -30,8 +30,6 @@ import org.spout.api.event.EventHandler;
 import org.spout.api.event.block.BlockChangeEvent;
 import org.spout.api.event.block.BlockEvent;
 import org.spout.api.event.cause.PlayerCause;
-import org.spout.api.event.server.protection.EntityCanBuildEvent;
-
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
