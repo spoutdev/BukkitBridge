@@ -343,16 +343,6 @@ public class PlayerListener extends AbstractListener {
     	}
     }
 
-    @EventHandler(order = Order.EARLIEST)
-    public void onPlayerQuit(PlayerLeaveEvent event){
-    	if(event.isCancelled()){
-    		return;
-    	}
-    	BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		org.bukkit.event.player.PlayerQuitEvent quit = new org.bukkit.event.player.PlayerQuitEvent(player, event.getMessage().asString());
-		Bukkit.getPluginManager().callEvent(quit);
-    }
-
     @EventHandler
     public void onPlayerRegisterChannel(){
         //todo implement onPlayerRegisterChannel
