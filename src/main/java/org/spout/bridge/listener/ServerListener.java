@@ -19,11 +19,12 @@
  */
 package org.spout.bridge.listener;
 
+import org.bukkit.Bukkit;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.server.plugin.PluginDisableEvent;
 import org.spout.api.event.server.plugin.PluginEnableEvent;
-import org.spout.api.event.server.plugin.PluginEvent;
 import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.bukkit.plugin.SpoutPlugin;
 
 public class ServerListener extends AbstractListener {
 	public ServerListener(VanillaBridgePlugin plugin) {
@@ -38,20 +39,12 @@ public class ServerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPluginDisable(PluginDisableEvent event){
-		//todo implement onPluginDisable
-		throw new UnsupportedOperationException();
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.PluginDisableEvent(new SpoutPlugin(event.getPlugin())));
 	}
 
 	@EventHandler
 	public void onPluginEnable(PluginEnableEvent event){
-		//todo implement onPluginEnable
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onPlugin(PluginEvent event){
-		//todo implement onPlugin
-		throw new UnsupportedOperationException();
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.PluginEnableEvent(new SpoutPlugin(event.getPlugin())));
 	}
 
 	@EventHandler
