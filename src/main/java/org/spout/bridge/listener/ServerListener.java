@@ -20,9 +20,13 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.server.plugin.PluginDisableEvent;
 import org.spout.api.event.server.plugin.PluginEnableEvent;
+import org.spout.api.event.server.service.ServiceRegisterEvent;
+import org.spout.api.event.server.service.ServiceUnregisterEvent;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.plugin.SpoutPlugin;
 
@@ -71,22 +75,37 @@ public class ServerListener extends AbstractListener {
 		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@EventHandler
-	public void onService(){
-		//todo implement onService
-		throw new UnsupportedOperationException();
+	public void onServiceRegister(ServiceRegisterEvent event){
+		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());
+		RegisteredServiceProvider<Object> provider = new RegisteredServiceProvider(Object.class, event.getProvider().getService(), fromPriority(event.getPriority()), plugin);
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceRegisterEvent(provider));
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@EventHandler
-	public void onServiceRegister(){
-		//todo implement onServiceRegister
-		throw new UnsupportedOperationException();
+	public void onServiceUnregister(ServiceUnregisterEvent event){
+		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());
+		RegisteredServiceProvider<Object> provider = new RegisteredServiceProvider(Object.class, event.getProvider().getService(), org.bukkit.plugin.ServicePriority.Normal , plugin);
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceUnregisterEvent(provider));
 	}
 
-	@EventHandler
-	public void onServiceUnregister(){
-		//todo implement onServiceUnregister
-		throw new UnsupportedOperationException();
+	private org.bukkit.plugin.ServicePriority fromPriority(org.spout.api.plugin.ServiceManager.ServicePriority priority) {
+		switch(priority) {
+			case High:
+				return org.bukkit.plugin.ServicePriority.High;
+			case Highest:
+				return org.bukkit.plugin.ServicePriority.Highest;
+			case Low:
+				return org.bukkit.plugin.ServicePriority.Low;
+			case Lowest:
+				return org.bukkit.plugin.ServicePriority.Lowest;
+			case Normal:
+				return org.bukkit.plugin.ServicePriority.Normal;
+			default:
+				throw new IllegalArgumentException("Unknown priority: " + priority);
+			
+		}
 	}
-
 }
