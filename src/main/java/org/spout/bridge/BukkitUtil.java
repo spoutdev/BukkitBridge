@@ -166,7 +166,7 @@ public class BukkitUtil {
 		return new ItemStack(mat, data, amount);
 	}
 
-	public static DamageCause getBukkitDamageCause(org.spout.vanilla.source.DamageCause damageCause) {
+	public static DamageCause getBukkitDamageCause(org.spout.vanilla.event.cause.DamageCause.DamageType damageCause) {
 		// TODO: Vanilla doesn't have all the causes Bukkit does, not sure what to do about that
 		switch (damageCause) {
 			case ATTACK:

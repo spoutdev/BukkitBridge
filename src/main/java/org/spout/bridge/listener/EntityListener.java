@@ -20,10 +20,12 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.spout.api.entity.Entity;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
 import org.spout.api.event.entity.EntityEvent;
 import org.spout.api.event.entity.EntityTeleportEvent;
+import org.spout.api.geo.cuboid.Block;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
@@ -31,6 +33,7 @@ import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
+import org.spout.vanilla.event.cause.DamageCause.DamageType;
 import org.spout.vanilla.event.entity.EntityDamageEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
 import org.spout.vanilla.event.entity.EntityTargetEvent;
@@ -51,15 +54,26 @@ public class EntityListener extends AbstractListener {
 	public void onEntityDamage(EntityDamageEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityDamageEvent bukkitEvent;
-		switch (event.getDamageCause()) {
-			case ATTACK:
-				bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(event.getDamager()), entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.ENTITY_ATTACK, event.getDamage());
-			case CACTUS:
-				// TODO: There is currently no way to get the block (cactus) that damaged the entity from the vanilla event
-				bukkitEvent = new EntityDamageByBlockEvent(/* Placeholder null value for above comment */null, entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.CONTACT, event.getDamage());
-			default:
-				bukkitEvent = new org.bukkit.event.entity.EntityDamageEvent(entity, BukkitUtil.getBukkitDamageCause(event.getDamageCause()), event.getDamage());
+		
+		//Determine cause
+		Entity entityCause = null;
+		Block blockCause = null;
+		if (event.getDamageCause().getSource() instanceof Entity) {
+			entityCause = (Entity) event.getDamageCause().getSource();
+		} else if (event.getDamageCause().getSource() instanceof Block) {
+			blockCause = (Block) event.getDamageCause().getSource();
 		}
+
+		//TODO: more types
+		DamageType type = event.getDamageCause().getType();
+		if (type == DamageType.ATTACK && entityCause != null) {
+			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(entityCause), entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.ENTITY_ATTACK, event.getDamage());
+		} else if (type == DamageType.CACTUS && blockCause != null) {
+			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock(blockCause), entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.CONTACT, event.getDamage());
+		} else {
+			bukkitEvent = new org.bukkit.event.entity.EntityDamageEvent(entity, BukkitUtil.getBukkitDamageCause(event.getDamageCause().getType()), event.getDamage());
+		}
+		
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
 		event.setCancelled(bukkitEvent.isCancelled());
 		event.setDamage(bukkitEvent.getDamage());
