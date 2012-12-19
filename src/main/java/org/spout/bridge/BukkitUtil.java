@@ -166,44 +166,6 @@ public class BukkitUtil {
 		return new ItemStack(mat, data, amount);
 	}
 
-	public static DamageCause getBukkitDamageCause(org.spout.vanilla.event.cause.DamageCause.DamageType damageCause) {
-		// TODO: Vanilla doesn't have all the causes Bukkit does, not sure what to do about that
-		switch (damageCause) {
-			case ATTACK:
-				return DamageCause.ENTITY_ATTACK;
-			case FALL:
-				return DamageCause.FALL;
-			case DROWN:
-				return DamageCause.DROWNING;
-			case EXPLOSION:
-				return DamageCause.BLOCK_EXPLOSION;
-			case COMMAND:
-				return DamageCause.CUSTOM;
-			case FIREBALL:
-				return DamageCause.ENTITY_EXPLOSION;
-			case UNKNOWN:
-				return DamageCause.CUSTOM;
-			case WITHERED:
-				return DamageCause.ENTITY_ATTACK;
-			case CACTUS:
-				return DamageCause.CONTACT;
-			case BURN:
-				return DamageCause.FIRE_TICK;
-			case FIRE_SOURCE:
-				return DamageCause.FIRE;
-			case PROJECTILE:
-				return DamageCause.PROJECTILE;
-			case STARVATION:
-				return DamageCause.STARVATION;
-			case SUFFOCATION:
-				return DamageCause.SUFFOCATION;
-			case VOID:
-				return DamageCause.VOID;
-			default:
-				return DamageCause.CUSTOM;
-		}
-	}
-
 	public static org.bukkit.block.BlockFace toBukkitBlockFace(BlockFace face) {
 		switch(face) {
 			case TOP: return org.bukkit.block.BlockFace.UP;

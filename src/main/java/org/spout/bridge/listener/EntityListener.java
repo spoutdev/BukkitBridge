@@ -33,29 +33,34 @@ import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
+import org.spout.vanilla.component.substance.Lightning;
+import org.spout.vanilla.component.substance.Potion;
+import org.spout.vanilla.component.substance.object.Tnt;
 import org.spout.vanilla.event.cause.DamageCause.DamageType;
 import org.spout.vanilla.event.entity.EntityDamageEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
 import org.spout.vanilla.event.entity.EntityTargetEvent;
 import org.spout.vanilla.event.player.PlayerFoodSaturationChangeEvent;
+import org.spout.vanilla.material.block.liquid.Lava;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class EntityListener extends AbstractListener {
 	public EntityListener(VanillaBridgePlugin plugin) {
 		super(plugin);
 	}
-
+	
 	@EventHandler(order = Order.EARLIEST)
 	public void onEntityDamage(EntityDamageEvent event) {
+		// TODO: Poison and Melting (Snowman), Bukkit damage causes.
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityDamageEvent bukkitEvent;
 		
-		//Determine cause
 		Entity entityCause = null;
 		Block blockCause = null;
 		if (event.getDamageCause().getSource() instanceof Entity) {
@@ -63,15 +68,65 @@ public class EntityListener extends AbstractListener {
 		} else if (event.getDamageCause().getSource() instanceof Block) {
 			blockCause = (Block) event.getDamageCause().getSource();
 		}
-
-		//TODO: more types
-		DamageType type = event.getDamageCause().getType();
-		if (type == DamageType.ATTACK && entityCause != null) {
-			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(entityCause), entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.ENTITY_ATTACK, event.getDamage());
-		} else if (type == DamageType.CACTUS && blockCause != null) {
-			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock(blockCause), entity, org.bukkit.event.entity.EntityDamageEvent.DamageCause.CONTACT, event.getDamage());
+		
+		DamageType type = event.getDamageType();
+		DamageCause bukkitCause = null;
+		if (entityCause != null) {
+			switch (event.getDamageCause().getType()) {
+				case ATTACK:
+					bukkitCause = DamageCause.ENTITY_ATTACK;
+				case EXPLOSION:
+					bukkitCause = DamageCause.ENTITY_EXPLOSION;
+					if (event.getDamager() instanceof Tnt)
+						bukkitCause = DamageCause.BLOCK_EXPLOSION;
+				case FIREBALL:
+				case PROJECTILE:
+					bukkitCause = DamageCause.PROJECTILE;
+					if (event.getDamager() instanceof Potion)
+						bukkitCause = DamageCause.MAGIC;
+				default:
+					bukkitCause = DamageCause.CUSTOM;
+					if (event.getDamager() instanceof Lightning)
+						bukkitCause = DamageCause.LIGHTNING;
+			}
+			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(entityCause), entity, bukkitCause, event.getDamage());
+		} else if (blockCause != null) {
+			switch (event.getDamageCause().getType()) {
+				case CACTUS:
+					bukkitCause = DamageCause.CONTACT;
+				case DROWN:
+					bukkitCause = DamageCause.DROWNING;
+				case EXPLOSION:
+					bukkitCause = DamageCause.BLOCK_EXPLOSION;
+				case FALL:
+					bukkitCause = DamageCause.FALL;
+				case FIRE_SOURCE:
+					bukkitCause = DamageCause.FIRE;
+					if (event.getDamager() instanceof Lava)
+						bukkitCause = DamageCause.LAVA;
+				case SUFFOCATION:
+					bukkitCause = DamageCause.SUFFOCATION;
+				default:
+					bukkitCause = DamageCause.CUSTOM;
+			}
+			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock(blockCause), entity, bukkitCause, event.getDamage());
 		} else {
-			bukkitEvent = new org.bukkit.event.entity.EntityDamageEvent(entity, BukkitUtil.getBukkitDamageCause(event.getDamageCause().getType()), event.getDamage());
+			switch (event.getDamageCause().getType()) {
+				case BURN:
+					bukkitCause = DamageCause.FIRE_TICK;
+				case STARVATION:
+					bukkitCause = DamageCause.STARVATION;
+				case VOID:
+					bukkitCause = DamageCause.VOID;
+				case WITHERED:
+					// TODO: Withered has its own DamageCause in newer Bukkit builds.
+					bukkitCause = DamageCause.ENTITY_ATTACK;
+				case COMMAND:
+				case UNKNOWN:
+				default:
+					bukkitCause = DamageCause.CUSTOM;
+			}
+			bukkitEvent = new org.bukkit.event.entity.EntityDamageEvent(entity, bukkitCause, event.getDamage());
 		}
 		
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
