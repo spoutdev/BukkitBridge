@@ -21,6 +21,8 @@ package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.event.entity.EntityCombustByBlockEvent;
+import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -42,6 +44,7 @@ import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.vanilla.component.substance.Lightning;
 import org.spout.vanilla.component.substance.Potion;
 import org.spout.vanilla.component.substance.object.Tnt;
+import org.spout.vanilla.event.entity.EntityCombustEvent;
 import org.spout.vanilla.event.entity.EntityDamageEvent;
 import org.spout.vanilla.event.entity.EntityHealEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
@@ -161,6 +164,26 @@ public class EntityListener extends AbstractListener {
 		event.setCancelled(bukkitEvent.isCancelled());
 		event.setDamage(bukkitEvent.getDamage());
 	}
+	
+	@EventHandler(order = Order.EARLIEST)
+	public void onEntityCombust(EntityCombustEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		org.bukkit.event.entity.EntityCombustEvent bukkitEvent;
+		
+		if (event.getCombustCause().getSource() instanceof Entity) {
+			bukkitEvent = new EntityCombustByEntityEvent(entity, 
+					EntityFactory.createEntity((Entity) event.getCombustCause().getSource()), event.getDuration());
+		} else if (event.getCombustCause().getSource() instanceof Block) {
+			bukkitEvent = new EntityCombustByBlockEvent(BukkitUtil.fromBlock((Block) event.getCombustCause().getSource()), 
+					entity, event.getDuration());
+		} else {
+			bukkitEvent = new org.bukkit.event.entity.EntityCombustEvent(entity, event.getDuration());
+		}
+		
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+		event.setDuration(bukkitEvent.getDuration());
+	}
 
 	@EventHandler(order = Order.EARLIEST)
 	public void onEntityTeleport(EntityTeleportEvent event) {
@@ -201,24 +224,6 @@ public class EntityListener extends AbstractListener {
 	@EventHandler
 	public void onEntityChangeBlock(){
 		//todo implement onEntityChangeBlock
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityCombustByBlock(){
-		//todo implement onEntityCombustByBlock
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityCombustByEntity(){
-		//todo implement onEntityCombustByEntity
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityCombust(){
-		//todo implement onEntityCombust
 		throw new UnsupportedOperationException();
 	}
 
@@ -267,12 +272,6 @@ public class EntityListener extends AbstractListener {
 	@EventHandler
 	public void onEntityPortalEnter(){
 		//todo implement onEntityPortalEnter
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityRegainHealth(){
-		//todo implement onEntityRegainHealth
 		throw new UnsupportedOperationException();
 	}
 
