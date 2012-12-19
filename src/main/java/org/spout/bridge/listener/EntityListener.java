@@ -19,40 +19,69 @@
  */
 package org.spout.bridge.listener;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.event.entity.EntityDamageByBlockEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.spout.api.entity.Entity;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
 import org.spout.api.event.entity.EntityEvent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.cuboid.Block;
-
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
-
 import org.spout.vanilla.component.substance.Lightning;
 import org.spout.vanilla.component.substance.Potion;
 import org.spout.vanilla.component.substance.object.Tnt;
-import org.spout.vanilla.event.cause.DamageCause.DamageType;
 import org.spout.vanilla.event.entity.EntityDamageEvent;
+import org.spout.vanilla.event.entity.EntityHealEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
 import org.spout.vanilla.event.entity.EntityTargetEvent;
 import org.spout.vanilla.event.player.PlayerFoodSaturationChangeEvent;
 import org.spout.vanilla.material.block.liquid.Lava;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.event.entity.EntityDamageByBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.player.PlayerTeleportEvent;
-
 public class EntityListener extends AbstractListener {
 	public EntityListener(VanillaBridgePlugin plugin) {
 		super(plugin);
+	}
+	
+	@EventHandler(order = Order.EARLIEST)
+	public void onEntityHeal(EntityHealEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		EntityRegainHealthEvent bukkitEvent;
+		
+		RegainReason bukkitCause = null;
+		switch(event.getHealCause()) {
+			case CONSUMABLE:
+				bukkitCause = RegainReason.EATING;
+			case ENDER_CRYSTAL:
+				bukkitCause = RegainReason.ENDER_CRYSTAL;
+			case MAGIC:
+				bukkitCause = RegainReason.MAGIC;
+			case MAGIC_REGEN:
+				bukkitCause = RegainReason.MAGIC_REGEN;
+			case REGENERATION:
+				bukkitCause = RegainReason.REGEN;
+			case SATIATED:
+				bukkitCause = RegainReason.SATIATED;
+			case WITHER_SPAWN:
+				// TODO: Wither_Spawn is available in newer Bukkit Builds.
+			default:
+				bukkitCause = RegainReason.CUSTOM;
+		}
+		bukkitEvent = new EntityRegainHealthEvent(entity, event.getHealAmount(), bukkitCause);
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+		event.setHealAmount(bukkitEvent.getAmount());
 	}
 	
 	@EventHandler(order = Order.EARLIEST)
@@ -69,7 +98,6 @@ public class EntityListener extends AbstractListener {
 			blockCause = (Block) event.getDamageCause().getSource();
 		}
 		
-		DamageType type = event.getDamageType();
 		DamageCause bukkitCause = null;
 		if (entityCause != null) {
 			switch (event.getDamageCause().getType()) {
