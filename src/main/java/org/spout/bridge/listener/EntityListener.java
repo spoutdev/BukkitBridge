@@ -19,6 +19,8 @@
  */
 package org.spout.bridge.listener;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.entity.EntityCombustByBlockEvent;
@@ -46,6 +48,7 @@ import org.spout.vanilla.component.substance.Potion;
 import org.spout.vanilla.component.substance.object.Tnt;
 import org.spout.vanilla.event.entity.EntityCombustEvent;
 import org.spout.vanilla.event.entity.EntityDamageEvent;
+import org.spout.vanilla.event.entity.EntityExplodeEvent;
 import org.spout.vanilla.event.entity.EntityHealEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
 import org.spout.vanilla.event.entity.EntityTargetEvent;
@@ -184,6 +187,34 @@ public class EntityListener extends AbstractListener {
 		event.setCancelled(bukkitEvent.isCancelled());
 		event.setDuration(bukkitEvent.getDuration());
 	}
+	
+	@EventHandler
+	public void onEntityExplode(EntityExplodeEvent event){
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		org.bukkit.event.entity.EntityExplodeEvent bukkitEvent;
+		
+		ArrayList<org.bukkit.block.Block> bukkitBlocks = new ArrayList<org.bukkit.block.Block>();
+		for(Block b : event.getBlocks()) {
+			bukkitBlocks.add(BukkitUtil.fromBlock(b));
+		}
+		
+		bukkitEvent = new org.bukkit.event.entity.EntityExplodeEvent(entity, BukkitUtil.fromPoint(event.getEpicenter()), bukkitBlocks, event.getYield());
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+		event.setYield(bukkitEvent.getYield());
+	}
+	
+	@EventHandler
+	public void onEntityTame(EntityTameEvent event){
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		BridgeEntity tamer = EntityFactory.createEntity(event.getOwner());
+		
+		org.bukkit.event.entity.EntityTameEvent bukkitEvent = new org.bukkit.event.entity.EntityTameEvent(
+				(org.bukkit.entity.LivingEntity) entity, (org.bukkit.entity.AnimalTamer) tamer);
+		
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+	}
 
 	@EventHandler(order = Order.EARLIEST)
 	public void onEntityTeleport(EntityTeleportEvent event) {
@@ -234,18 +265,6 @@ public class EntityListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onEntityDamageByBlock(){
-		//todo implement onEntityDamageByBlock
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityDamageByEntity(){
-		//todo implement onEntityDamageByEntity
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event){
 		//todo implement onEntityDeath
 		throw new UnsupportedOperationException();
@@ -254,12 +273,6 @@ public class EntityListener extends AbstractListener {
 	@EventHandler
 	public void onEntity(EntityEvent event){
 		//todo implement onEntity
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityExplode(){
-		//todo implement onEntityExplode
 		throw new UnsupportedOperationException();
 	}
 
@@ -278,12 +291,6 @@ public class EntityListener extends AbstractListener {
 	@EventHandler
 	public void onEntityShootBow(){
 		//todo implement onEntityShootBow
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityTame(EntityTameEvent event){
-		//todo implement onEntityTame
 		throw new UnsupportedOperationException();
 	}
 
