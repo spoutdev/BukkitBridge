@@ -150,7 +150,7 @@ public class EntityListener extends AbstractListener {
 		
 		DamageCause bukkitCause = null;
 		if (entityCause != null) {
-			switch (event.getDamageCause().getType()) {
+			switch (event.getDamageType()) {
 				case ATTACK:
 					bukkitCause = DamageCause.ENTITY_ATTACK;
 				case EXPLOSION:
@@ -169,7 +169,7 @@ public class EntityListener extends AbstractListener {
 			}
 			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(entityCause), entity, bukkitCause, event.getDamage());
 		} else if (blockCause != null) {
-			switch (event.getDamageCause().getType()) {
+			switch (event.getDamageType()) {
 				case CACTUS:
 					bukkitCause = DamageCause.CONTACT;
 				case DROWN:
@@ -189,7 +189,7 @@ public class EntityListener extends AbstractListener {
 			}
 			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock(blockCause), entity, bukkitCause, event.getDamage());
 		} else {
-			switch (event.getDamageCause().getType()) {
+			switch (event.getDamageType()) {
 				case BURN:
 					bukkitCause = DamageCause.FIRE_TICK;
 				case STARVATION:
