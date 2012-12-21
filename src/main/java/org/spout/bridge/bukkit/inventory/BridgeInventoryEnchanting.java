@@ -21,21 +21,20 @@ package org.spout.bridge.bukkit.inventory;
 
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.ItemStack;
-
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryEnchanting extends BridgeInventory implements EnchantingInventory {
 	public BridgeInventoryEnchanting(Inventory handle, String name) {
 		super(handle, name);
 	}
-
+	
 	@Override
-	public void setItem(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+	public ItemStack getItem() {
+		return getItem(0);
 	}
 
 	@Override
-	public ItemStack getItem() {
-		throw new UnsupportedOperationException();
+	public void setItem(ItemStack itemStack) {
+		setItem(0, itemStack);
 	}
 }
