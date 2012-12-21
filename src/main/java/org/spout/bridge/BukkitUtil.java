@@ -23,15 +23,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.inventory.ItemStack;
 import org.spout.api.material.Material;
 import org.spout.api.material.block.BlockFace;
+import org.spout.api.material.block.BlockSnapshot;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.bukkit.BridgeServer;
@@ -199,5 +200,18 @@ public class BukkitUtil {
 		}
 
 		return EnchantmentTarget.ALL;
+	}
+
+	public static BlockState getBlockState(BlockSnapshot blockSnapshot) {
+		Block block = fromBlock(blockSnapshot.getBlock());
+		int typeID = blockSnapshot.getMaterial().getId();
+		BlockState blockState = block.getState();
+		blockState.setTypeId(typeID);
+		return blockState;
+	}
+
+	public static BlockSnapshot getBlockSnapshot(BlockState blockState) {
+		org.spout.api.geo.cuboid.Block block = toBlock(blockState.getBlock());
+		return new BlockSnapshot(block);
 	}
 }

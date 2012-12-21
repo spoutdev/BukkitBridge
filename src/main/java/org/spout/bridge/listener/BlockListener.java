@@ -20,20 +20,30 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
+import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.block.BlockSpreadEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.block.SignChangeEvent;
 
 import org.spout.api.entity.Player;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.block.BlockChangeEvent;
 import org.spout.api.event.block.BlockEvent;
+import org.spout.api.event.cause.BlockCause;
 import org.spout.api.event.cause.PlayerCause;
+
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 
+import org.spout.vanilla.event.block.BlockDisappearEvent;
+import org.spout.vanilla.event.block.BlockFormEvent;
+import org.spout.vanilla.event.block.BlockGrowEvent;
+import org.spout.vanilla.event.block.BlockIgniteEvent;
 import org.spout.vanilla.event.block.RedstoneChangeEvent;
 import org.spout.vanilla.event.block.SignUpdateEvent;
 import org.spout.vanilla.event.cause.PlayerBreakCause;
@@ -128,16 +138,34 @@ public class BlockListener extends AbstractListener {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Handles block fading to melting, fading and disappearance
+	 * @param event
+	 */
 	@EventHandler
-	public void onBlockFade(BlockChangeEvent event) {
-		//todo implement onBlockFade
-		throw new UnsupportedOperationException();
+	public void onBlockFade(BlockDisappearEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		if (event.getDisappearCause() == BlockDisappearEvent.DisappearCause.DECAY) {
+			return;
+		}
+		BlockFadeEvent fadeEvent = new BlockFadeEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.getBlockState(event.getSnapshot()));
+		Bukkit.getPluginManager().callEvent(fadeEvent);
+		event.setCancelled(fadeEvent.isCancelled());
 	}
 
 	@EventHandler
-	public void onBlockForm(BlockChangeEvent event) {
-		//todo implement onBlockForm
-		throw new UnsupportedOperationException();
+	public void onBlockForm(BlockFormEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		if (event.getFormCause() == BlockFormEvent.FormCause.SPREAD) {
+			return;
+		}
+		org.bukkit.event.block.BlockFormEvent  formEvent = new org.bukkit.event.block.BlockFormEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.getBlockState(event.getSnapshot()));
+		Bukkit.getPluginManager().callEvent(formEvent);
+		event.setCancelled(formEvent.isCancelled());
 	}
 
 	@EventHandler
@@ -147,15 +175,47 @@ public class BlockListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onBlockGrow(BlockChangeEvent event) {
-		//todo implement onBlockGrow
-		throw new UnsupportedOperationException();
+	public void onBlockGrow(BlockGrowEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		org.bukkit.event.block.BlockGrowEvent growEvent = new org.bukkit.event.block.BlockGrowEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.getBlockState(event.getSnapshot()));
+		Bukkit.getPluginManager().callEvent(growEvent);
+		event.setCancelled(growEvent.isCancelled());
 	}
 
 	@EventHandler
-	public void onBlockIngite(BlockChangeEvent event) {
-		//todo implement onBlockIgnite
-		throw new UnsupportedOperationException();
+	public void onBlockIngite(BlockIgniteEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		org.bukkit.event.block.BlockIgniteEvent.IgniteCause igniteCause;
+		switch (event.getIgniteCause()) {
+			case LAVA:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.LAVA;
+				break;
+			case FLINT_AND_STEEL:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL;
+				break;
+			case SPREAD:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.SPREAD;
+				break;
+			case LIGHTING:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.LIGHTNING;
+				break;
+			case FIREBALL:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.FIREBALL;
+				break;
+			default:
+				igniteCause = org.bukkit.event.block.BlockIgniteEvent.IgniteCause.SPREAD;
+		}
+		Player player = null;
+		if (event.getCause() instanceof PlayerCause) {
+			player = ((PlayerCause) event.getCause()).getSource();
+		}
+		org.bukkit.event.block.BlockIgniteEvent igniteEvent = new org.bukkit.event.block.BlockIgniteEvent(BukkitUtil.fromBlock(event.getBlock()),igniteCause, new BridgePlayer(player));
+		Bukkit.getPluginManager().callEvent(igniteEvent);
+		event.setCancelled(igniteEvent.isCancelled());
 	}
 
 	@EventHandler
@@ -183,9 +243,20 @@ public class BlockListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onBlockSpread() {
-		//todo implement onBlockSpread
-		throw new UnsupportedOperationException();
+	public void onBlockSpread(BlockFormEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		if (!(event.getCause() instanceof BlockCause)) {
+			return;
+		}
+		if (event.getFormCause() != BlockFormEvent.FormCause.SPREAD) {
+			return;
+		}
+		Block fromBlock = BukkitUtil.fromBlock(((BlockCause)event.getCause()).getSource());
+		BlockSpreadEvent spreadEvent = new BlockSpreadEvent(BukkitUtil.fromBlock(event.getBlock()), fromBlock, BukkitUtil.getBlockState(event.getSnapshot()));
+		Bukkit.getPluginManager().callEvent(spreadEvent);
+		event.setCancelled(spreadEvent.isCancelled());
 	}
 
 	@EventHandler
@@ -195,9 +266,16 @@ public class BlockListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onLeavesDecay() {
-		//todo implement onLeavesDecay
-		throw new UnsupportedOperationException();
+	public void onLeavesDecay(BlockDisappearEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		if (!(event.getDisappearCause() != BlockDisappearEvent.DisappearCause.DECAY)) {
+			return;
+		}
+		LeavesDecayEvent decayEvent = new LeavesDecayEvent(BukkitUtil.fromBlock(event.getBlock()));
+		Bukkit.getPluginManager().callEvent(decayEvent);
+		event.setCancelled(decayEvent.isCancelled());
 	}
 
 	@EventHandler
