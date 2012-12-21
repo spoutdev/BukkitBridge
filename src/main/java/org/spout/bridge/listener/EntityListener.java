@@ -20,9 +20,20 @@
 package org.spout.bridge.listener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.IronGolem;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Slime;
+import org.bukkit.entity.Snowman;
+import org.bukkit.entity.Tameable;
+import org.bukkit.entity.ThrownPotion;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityCombustByBlockEvent;
 import org.bukkit.event.entity.EntityCombustByEntityEvent;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
@@ -31,11 +42,17 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
+import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.ItemDespawnEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.spout.api.entity.Entity;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
+import org.spout.api.event.entity.EntityDespawnEvent;
 import org.spout.api.event.entity.EntityEvent;
+import org.spout.api.event.entity.EntitySpawnEvent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.cuboid.Block;
 import org.spout.bridge.BukkitUtil;
@@ -43,6 +60,7 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
+import org.spout.vanilla.component.substance.Item;
 import org.spout.vanilla.component.substance.Lightning;
 import org.spout.vanilla.component.substance.Potion;
 import org.spout.vanilla.component.substance.object.Tnt;
@@ -52,42 +70,68 @@ import org.spout.vanilla.event.entity.EntityExplodeEvent;
 import org.spout.vanilla.event.entity.EntityHealEvent;
 import org.spout.vanilla.event.entity.EntityTameEvent;
 import org.spout.vanilla.event.entity.EntityTargetEvent;
+import org.spout.vanilla.event.entity.LivingSpawnEvent;
+import org.spout.vanilla.event.entity.PotionSplashEvent;
+import org.spout.vanilla.event.entity.ProjectileHitEvent;
+import org.spout.vanilla.event.entity.SlimeSplitEvent;
 import org.spout.vanilla.event.player.PlayerFoodSaturationChangeEvent;
 import org.spout.vanilla.material.block.liquid.Lava;
 
 public class EntityListener extends AbstractListener {
+	
 	public EntityListener(VanillaBridgePlugin plugin) {
 		super(plugin);
 	}
+
+	@EventHandler
+	public void onCreeperPower(){
+		//todo implement onCreeperPower
+		throw new UnsupportedOperationException();
+	}
+	
+	@EventHandler
+	public void onEntity(EntityEvent event){
+		//todo implement onEntity
+		throw new UnsupportedOperationException();
+	}
+
+	@EventHandler
+	public void onEntityBreakDoor(){
+		//todo implement onEntityBreakDoor
+		throw new UnsupportedOperationException();
+	}
+
+	@EventHandler
+	public void onEntityChangeBlock(){
+		//todo implement onEntityChangeBlock
+		throw new UnsupportedOperationException();
+	}
 	
 	@EventHandler(order = Order.EARLIEST)
-	public void onEntityHeal(EntityHealEvent event) {
+	public void onEntityCombust(EntityCombustEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
-		EntityRegainHealthEvent bukkitEvent;
+		org.bukkit.event.entity.EntityCombustEvent bukkitEvent;
 		
-		RegainReason bukkitCause = null;
-		switch(event.getHealCause()) {
-			case CONSUMABLE:
-				bukkitCause = RegainReason.EATING;
-			case ENDER_CRYSTAL:
-				bukkitCause = RegainReason.ENDER_CRYSTAL;
-			case MAGIC:
-				bukkitCause = RegainReason.MAGIC;
-			case MAGIC_REGEN:
-				bukkitCause = RegainReason.MAGIC_REGEN;
-			case REGENERATION:
-				bukkitCause = RegainReason.REGEN;
-			case SATIATED:
-				bukkitCause = RegainReason.SATIATED;
-			case WITHER_SPAWN:
-				// TODO: Wither_Spawn is available in newer Bukkit Builds.
-			default:
-				bukkitCause = RegainReason.CUSTOM;
+		if (event.getCombustCause().getSource() instanceof Entity) {
+			bukkitEvent = new EntityCombustByEntityEvent(entity, 
+					EntityFactory.createEntity((Entity) event.getCombustCause().getSource()), event.getDuration());
+		} else if (event.getCombustCause().getSource() instanceof Block) {
+			bukkitEvent = new EntityCombustByBlockEvent(BukkitUtil.fromBlock((Block) event.getCombustCause().getSource()), 
+					entity, event.getDuration());
+		} else {
+			bukkitEvent = new org.bukkit.event.entity.EntityCombustEvent(entity, event.getDuration());
 		}
-		bukkitEvent = new EntityRegainHealthEvent(entity, event.getHealAmount(), bukkitCause);
+		
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
 		event.setCancelled(bukkitEvent.isCancelled());
-		event.setHealAmount(bukkitEvent.getAmount());
+		event.setDuration(bukkitEvent.getDuration());
+	}
+	
+
+	@EventHandler
+	public void onEntityCreatePortal(){
+		//todo implement onEntityCreatePortal
+		throw new UnsupportedOperationException();
 	}
 	
 	@EventHandler(order = Order.EARLIEST)
@@ -167,29 +211,21 @@ public class EntityListener extends AbstractListener {
 		event.setCancelled(bukkitEvent.isCancelled());
 		event.setDamage(bukkitEvent.getDamage());
 	}
-	
-	@EventHandler(order = Order.EARLIEST)
-	public void onEntityCombust(EntityCombustEvent event) {
-		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
-		org.bukkit.event.entity.EntityCombustEvent bukkitEvent;
-		
-		if (event.getCombustCause().getSource() instanceof Entity) {
-			bukkitEvent = new EntityCombustByEntityEvent(entity, 
-					EntityFactory.createEntity((Entity) event.getCombustCause().getSource()), event.getDuration());
-		} else if (event.getCombustCause().getSource() instanceof Block) {
-			bukkitEvent = new EntityCombustByBlockEvent(BukkitUtil.fromBlock((Block) event.getCombustCause().getSource()), 
-					entity, event.getDuration());
-		} else {
-			bukkitEvent = new org.bukkit.event.entity.EntityCombustEvent(entity, event.getDuration());
-		}
-		
-		Bukkit.getPluginManager().callEvent(bukkitEvent);
-		event.setCancelled(bukkitEvent.isCancelled());
-		event.setDuration(bukkitEvent.getDuration());
+
+	@EventHandler
+	public void onEntityDeath(EntityDeathEvent event){
+		//todo implement onEntityDeath
+		throw new UnsupportedOperationException();
 	}
 	
 	@EventHandler
-	public void onEntityExplode(EntityExplodeEvent event){
+	public void onEntityDespawn(EntityDespawnEvent event){
+		if (event.getEntity().has(Item.class))
+			onItemDespawn(event);
+	}
+	
+	@EventHandler
+	public void onEntityExplode(EntityExplodeEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityExplodeEvent bukkitEvent;
 		
@@ -204,76 +240,34 @@ public class EntityListener extends AbstractListener {
 		event.setYield(bukkitEvent.getYield());
 	}
 	
-	@EventHandler
-	public void onEntityTame(EntityTameEvent event){
+	@EventHandler(order = Order.EARLIEST)
+	public void onEntityHeal(EntityHealEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
-		BridgeEntity tamer = EntityFactory.createEntity(event.getOwner());
+		EntityRegainHealthEvent bukkitEvent;
 		
-		org.bukkit.event.entity.EntityTameEvent bukkitEvent = new org.bukkit.event.entity.EntityTameEvent(
-				(org.bukkit.entity.LivingEntity) entity, (org.bukkit.entity.AnimalTamer) tamer);
-		
+		RegainReason bukkitCause = null;
+		switch(event.getHealCause()) {
+			case CONSUMABLE:
+				bukkitCause = RegainReason.EATING;
+			case ENDER_CRYSTAL:
+				bukkitCause = RegainReason.ENDER_CRYSTAL;
+			case MAGIC:
+				bukkitCause = RegainReason.MAGIC;
+			case MAGIC_REGEN:
+				bukkitCause = RegainReason.MAGIC_REGEN;
+			case REGENERATION:
+				bukkitCause = RegainReason.REGEN;
+			case SATIATED:
+				bukkitCause = RegainReason.SATIATED;
+			case WITHER_SPAWN:
+				// TODO: Wither_Spawn is available in newer Bukkit Builds.
+			default:
+				bukkitCause = RegainReason.CUSTOM;
+		}
+		bukkitEvent = new EntityRegainHealthEvent(entity, event.getHealAmount(), bukkitCause);
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
 		event.setCancelled(bukkitEvent.isCancelled());
-	}
-
-	@EventHandler(order = Order.EARLIEST)
-	public void onEntityTeleport(EntityTeleportEvent event) {
-		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
-		Location from = BukkitUtil.fromPoint(event.getFrom());
-		Location to = BukkitUtil.fromPoint(event.getTo());
-		if (entity instanceof BridgePlayer) {
-			PlayerTeleportEvent bukkitEvent = new PlayerTeleportEvent((BridgePlayer)entity, from, to);
-			Bukkit.getPluginManager().callEvent(bukkitEvent);
-			event.setCancelled(bukkitEvent.isCancelled());
-			event.setTo(BukkitUtil.toPoint(bukkitEvent.getTo()));
-		} else {
-			org.bukkit.event.entity.EntityTeleportEvent bukkitEvent = new org.bukkit.event.entity.EntityTeleportEvent(entity, from, from);
-			Bukkit.getPluginManager().callEvent(bukkitEvent);
-			event.setCancelled(bukkitEvent.isCancelled());
-			event.setTo(BukkitUtil.toPoint(bukkitEvent.getTo()));
-		}
-	}
-
-	@EventHandler
-	public void onCreatureSpawn(){
-		//todo implement onCreatureSpawn
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onCreeperPower(){
-		//todo implement onCreeperPower
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityBreakDoor(){
-		//todo implement onEntityBreakDoor
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityChangeBlock(){
-		//todo implement onEntityChangeBlock
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityCreatePortal(){
-		//todo implement onEntityCreatePortal
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntityDeath(EntityDeathEvent event){
-		//todo implement onEntityDeath
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
-	public void onEntity(EntityEvent event){
-		//todo implement onEntity
-		throw new UnsupportedOperationException();
+		event.setHealAmount(bukkitEvent.getAmount());
 	}
 
 	@EventHandler
@@ -293,17 +287,87 @@ public class EntityListener extends AbstractListener {
 		//todo implement onEntityShootBow
 		throw new UnsupportedOperationException();
 	}
-
+	
 	@EventHandler
-	public void onEntityTarget(EntityTargetEvent event){
-		//todo implement onEntityTarget
-		throw new UnsupportedOperationException();
+	public void onEntitySpawn(EntitySpawnEvent event){
+		if (event instanceof LivingSpawnEvent)
+			onLivingSpawn((LivingSpawnEvent) event);
+		
+		if (event.getEntity().has(Item.class))
+			onItemSpawn(event);
+	}
+	
+	@EventHandler
+	public void onEntityTame(EntityTameEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		BridgeEntity tamer = EntityFactory.createEntity(event.getOwner());
+		
+		org.bukkit.event.entity.EntityTameEvent bukkitEvent = new org.bukkit.event.entity.EntityTameEvent(
+				(LivingEntity) entity, (org.bukkit.entity.AnimalTamer) tamer);
+		
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
 	}
 
 	@EventHandler
-	public void onEntityTargetLivingEntity(){
-		//todo implement onEntityTargetLivingEntity
-		throw new UnsupportedOperationException();
+	public void onEntityTarget(EntityTargetEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		BridgeEntity target = EntityFactory.createEntity(event.getTarget());
+		org.bukkit.event.entity.EntityTargetEvent bukkitEvent;
+		
+		TargetReason bukkitCause = null;
+		switch(event.getCause()) {
+			case CLOSEST_PLAYER:
+				bukkitCause = TargetReason.CLOSEST_PLAYER;
+			case FORGOT_TARGET:
+				bukkitCause = TargetReason.FORGOT_TARGET;
+			case OWNER_ATTACKED:
+				bukkitCause = TargetReason.OWNER_ATTACKED_TARGET;
+			case PIG_ZOMBIE_MASSACRE:
+				bukkitCause = TargetReason.PIG_ZOMBIE_TARGET;
+			case RANDOM_TARGET:
+				bukkitCause = TargetReason.RANDOM_TARGET;
+			case TARGET_ATTACKED_ENTITY:
+				bukkitCause = TargetReason.TARGET_ATTACKED_ENTITY;
+				if (entity instanceof Tameable)
+					bukkitCause = TargetReason.TARGET_ATTACKED_OWNER;
+				if (entity instanceof IronGolem)
+					bukkitCause = TargetReason.DEFEND_VILLAGE;
+			case TARGET_DIED:
+				bukkitCause = TargetReason.TARGET_DIED;
+			case CUSTOM_TARGET:
+			case CUSTOM_UNTARGET:
+			default:
+				bukkitCause = TargetReason.CUSTOM;
+		}
+		
+		if (target instanceof LivingEntity) {
+			bukkitEvent = new EntityTargetLivingEntityEvent(entity, (LivingEntity) target, bukkitCause);
+		} else {
+			bukkitEvent = new org.bukkit.event.entity.EntityTargetEvent(entity, target, bukkitCause);
+		}
+		
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+		event.setTarget(((BridgeEntity) bukkitEvent.getTarget()).getHandle());
+	}
+
+	@EventHandler(order = Order.EARLIEST)
+	public void onEntityTeleport(EntityTeleportEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		Location from = BukkitUtil.fromPoint(event.getFrom());
+		Location to = BukkitUtil.fromPoint(event.getTo());
+		if (entity instanceof BridgePlayer) {
+			PlayerTeleportEvent bukkitEvent = new PlayerTeleportEvent((BridgePlayer)entity, from, to);
+			Bukkit.getPluginManager().callEvent(bukkitEvent);
+			event.setCancelled(bukkitEvent.isCancelled());
+			event.setTo(BukkitUtil.toPoint(bukkitEvent.getTo()));
+		} else {
+			org.bukkit.event.entity.EntityTeleportEvent bukkitEvent = new org.bukkit.event.entity.EntityTeleportEvent(entity, from, from);
+			Bukkit.getPluginManager().callEvent(bukkitEvent);
+			event.setCancelled(bukkitEvent.isCancelled());
+			event.setTo(BukkitUtil.toPoint(bukkitEvent.getTo()));
+		}
 	}
 
 	@EventHandler
@@ -328,17 +392,63 @@ public class EntityListener extends AbstractListener {
 		event.setCancelled(foodLevelChange.isCancelled());
 		event.setFoodSaturation(foodLevelChange.getFoodLevel());
 	}
-
-	@EventHandler
-	public void onItemDespawn(){
-		//todo implement onItemDespawn
-		throw new UnsupportedOperationException();
+	
+	public void onItemDespawn(EntityDespawnEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		ItemDespawnEvent bukkitEvent = new ItemDespawnEvent((org.bukkit.entity.Item) entity, entity.getLocation());
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
 	}
 
 	@EventHandler
-	public void onItemSpawn(){
-		//todo implement onItemSpawn
-		throw new UnsupportedOperationException();
+	public void onItemSpawn(EntitySpawnEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		ItemSpawnEvent bukkitEvent = new ItemSpawnEvent((org.bukkit.entity.Item) entity, BukkitUtil.fromPoint(event.getPoint()));
+		
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+	}
+	
+	public void onLivingSpawn(LivingSpawnEvent event){
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		CreatureSpawnEvent bukkitEvent;
+		
+		SpawnReason bukkitCause;
+		switch (event.getSpawnCause()) {
+			case BIRTH:
+				bukkitCause = SpawnReason.BREEDING;
+			case BUILT:
+				if (entity instanceof IronGolem)
+					bukkitCause = SpawnReason.BUILD_IRONGOLEM;
+				else if (entity instanceof Snowman)
+					bukkitCause = SpawnReason.BUILD_SNOWMAN;
+			case CHUNK_GENERATION:
+				bukkitCause = SpawnReason.CHUNK_GEN;
+			case CUSTOM:
+				bukkitCause = SpawnReason.CUSTOM;
+			case EGG:
+				bukkitCause = SpawnReason.SPAWNER_EGG;
+			case LIGHTNING:
+				bukkitCause = SpawnReason.LIGHTNING;
+			case NATURAL:
+				bukkitCause = SpawnReason.NATURAL;
+			case SPAWNER:
+				bukkitCause = SpawnReason.SPAWNER;
+			case SPLIT:
+				bukkitCause = SpawnReason.SLIME_SPLIT;
+			case VILLAGE:
+				if (entity instanceof IronGolem)
+					bukkitCause = SpawnReason.VILLAGE_DEFENSE;
+				else
+					bukkitCause = SpawnReason.VILLAGE_INVASION;
+			case UNKNOWN:
+			default:
+				bukkitCause = SpawnReason.DEFAULT;
+		}
+		
+		bukkitEvent = new CreatureSpawnEvent((LivingEntity) entity, bukkitCause);
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
 	}
 
 	@EventHandler
@@ -352,17 +462,33 @@ public class EntityListener extends AbstractListener {
 		//todo implement onPlayerDeath
 		throw new UnsupportedOperationException();
 	}
-
-	@EventHandler
-	public void onPotionSplash(){
-		//todo implement onPotionSplash
-		throw new UnsupportedOperationException();
+	
+	public void onPotionSplash(PotionSplashEvent event) {
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		org.bukkit.event.entity.PotionSplashEvent bukkitEvent;
+		
+		Map<LivingEntity, Double> bukkitMap = new HashMap<LivingEntity, Double>();
+		for (Entity e : ((PotionSplashEvent) event).getAffectedEntities()) {
+			bukkitMap.put((LivingEntity) EntityFactory.createEntity(e), ((PotionSplashEvent) event).getIntensityFor(e));
+		}
+		
+		bukkitEvent = new org.bukkit.event.entity.PotionSplashEvent((ThrownPotion) entity, bukkitMap);
+		event.setCancelled(bukkitEvent.isCancelled());
+		for (LivingEntity e : bukkitEvent.getAffectedEntities()) {
+			event.setIntensityFor(((BridgeEntity) e).getHandle(), bukkitEvent.getIntensity(e));
+		}
 	}
-
+	
 	@EventHandler
-	public void onProjectileHit(){
-		//todo implement onProjectileHit
-		throw new UnsupportedOperationException();
+	public void onProjectileHit(ProjectileHitEvent event){
+		if (event instanceof PotionSplashEvent) {
+			onPotionSplash((PotionSplashEvent) event);
+			return;
+		}
+		
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		org.bukkit.event.entity.ProjectileHitEvent bukkitEvent = new org.bukkit.event.entity.ProjectileHitEvent((Projectile) entity);
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
 	}
 
 	@EventHandler
@@ -384,9 +510,12 @@ public class EntityListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onSlimeSplit(){
-		//todo implement onSlimeSplit
-		throw new UnsupportedOperationException();
+	public void onSlimeSplit(SlimeSplitEvent event){
+		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
+		org.bukkit.event.entity.SlimeSplitEvent bukkitEvent = new org.bukkit.event.entity.SlimeSplitEvent((Slime) entity, event.getSize());
+		Bukkit.getPluginManager().callEvent(bukkitEvent);
+		event.setCancelled(bukkitEvent.isCancelled());
+		event.setAmount(bukkitEvent.getCount());
 	}
 }
 
