@@ -50,6 +50,8 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.spout.api.entity.Entity;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
+import org.spout.api.event.cause.BlockCause;
+import org.spout.api.event.cause.EntityCause;
 import org.spout.api.event.entity.EntityDespawnEvent;
 import org.spout.api.event.entity.EntityEvent;
 import org.spout.api.event.entity.EntitySpawnEvent;
@@ -112,10 +114,10 @@ public class EntityListener extends AbstractListener {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityCombustEvent bukkitEvent;
 		
-		if (event.getCombustCause().getSource() instanceof Entity) {
+		if (event.getCombustCause() instanceof EntityCause) {
 			bukkitEvent = new EntityCombustByEntityEvent(entity, 
 					EntityFactory.createEntity((Entity) event.getCombustCause().getSource()), event.getDuration());
-		} else if (event.getCombustCause().getSource() instanceof Block) {
+		} else if (event.getCombustCause() instanceof BlockCause) {
 			bukkitEvent = new EntityCombustByBlockEvent(BukkitUtil.fromBlock((Block) event.getCombustCause().getSource()), 
 					entity, event.getDuration());
 		} else {
@@ -140,16 +142,8 @@ public class EntityListener extends AbstractListener {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityDamageEvent bukkitEvent;
 		
-		Entity entityCause = null;
-		Block blockCause = null;
-		if (event.getDamageCause().getSource() instanceof Entity) {
-			entityCause = (Entity) event.getDamageCause().getSource();
-		} else if (event.getDamageCause().getSource() instanceof Block) {
-			blockCause = (Block) event.getDamageCause().getSource();
-		}
-		
 		DamageCause bukkitCause = null;
-		if (entityCause != null) {
+		if (event.getDamageCause() instanceof EntityCause) {
 			switch (event.getDamageCause().getType()) {
 				case ATTACK:
 					bukkitCause = DamageCause.ENTITY_ATTACK;
@@ -167,8 +161,8 @@ public class EntityListener extends AbstractListener {
 					if (event.getDamager() instanceof Lightning)
 						bukkitCause = DamageCause.LIGHTNING;
 			}
-			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity(entityCause), entity, bukkitCause, event.getDamage());
-		} else if (blockCause != null) {
+			bukkitEvent = new EntityDamageByEntityEvent(EntityFactory.createEntity((Entity) event.getDamageCause().getSource()), entity, bukkitCause, event.getDamage());
+		} else if (event.getDamageCause() instanceof BlockCause) {
 			switch (event.getDamageCause().getType()) {
 				case CACTUS:
 					bukkitCause = DamageCause.CONTACT;
@@ -187,7 +181,7 @@ public class EntityListener extends AbstractListener {
 				default:
 					bukkitCause = DamageCause.CUSTOM;
 			}
-			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock(blockCause), entity, bukkitCause, event.getDamage());
+			bukkitEvent = new EntityDamageByBlockEvent(BukkitUtil.fromBlock((Block) event.getDamageCause().getSource()), entity, bukkitCause, event.getDamage());
 		} else {
 			switch (event.getDamageCause().getType()) {
 				case BURN:
