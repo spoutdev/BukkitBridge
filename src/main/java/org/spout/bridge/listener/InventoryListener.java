@@ -19,8 +19,15 @@
  */
 package org.spout.bridge.listener;
 
+import org.bukkit.Bukkit;
+
 import org.spout.api.event.EventHandler;
+
+import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
+
+import org.spout.vanilla.event.block.FurnaceBurnEvent;
+import org.spout.vanilla.event.block.FurnaceSmeltEvent;
 
 public class InventoryListener extends AbstractListener {
 	public InventoryListener(VanillaBridgePlugin plugin) {
@@ -40,9 +47,20 @@ public class InventoryListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onFurnaceBurn(){
-		//todo implement onFurnaceBurn
-		throw new UnsupportedOperationException();
+	public void onFurnaceBurn(FurnaceBurnEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		// todo check if the burntime float is correctly moved over to the int value and back
+		org.bukkit.event.inventory.FurnaceBurnEvent furnaceBurnEvent = new org.bukkit.event.inventory.FurnaceBurnEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.fromItemStack(event.getFuel()),Math.round(event.getBurnTime()));
+		Bukkit.getPluginManager().callEvent(furnaceBurnEvent);
+		event.setCancelled(furnaceBurnEvent.isCancelled());
+		if (furnaceBurnEvent.getBurnTime() != Math.round(event.getBurnTime())) {
+			event.setBurnTime(furnaceBurnEvent.getBurnTime());
+		}
+		if (furnaceBurnEvent.isBurning() != event.isBurning()) {
+			event.setBurning(furnaceBurnEvent.isBurning());
+		}
 	}
 
 	@EventHandler
@@ -52,9 +70,16 @@ public class InventoryListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onFurnaceSmelt(){
-		//todo implement onFurnaceSmelt
-		throw new UnsupportedOperationException();
+	public void onFurnaceSmelt(FurnaceSmeltEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		org.bukkit.event.inventory.FurnaceSmeltEvent furnaceSmeltEvent = new org.bukkit.event.inventory.FurnaceSmeltEvent(BukkitUtil.fromBlock(event.getBlock()),BukkitUtil.fromItemStack(event.getSource()),BukkitUtil.fromItemStack(event.getResult()));
+		Bukkit.getPluginManager().callEvent(furnaceSmeltEvent);
+		event.setCancelled(furnaceSmeltEvent.isCancelled());
+		if (furnaceSmeltEvent.getResult() != BukkitUtil.fromItemStack(event.getResult())) {
+			event.setResult(BukkitUtil.toItemStack(furnaceSmeltEvent.getResult()));
+		}
 	}
 
 	@EventHandler

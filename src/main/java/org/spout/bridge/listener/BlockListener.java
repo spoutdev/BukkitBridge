@@ -63,7 +63,7 @@ public class BlockListener extends AbstractListener {
 		BlockRedstoneEvent redstoneEvent = new BlockRedstoneEvent(BukkitUtil.fromBlock(event.getBlock()), event.getPreviousPower(), event.getNewPower());
 		Bukkit.getPluginManager().callEvent(redstoneEvent);
 		if (redstoneEvent.getNewCurrent() != event.getNewPower()) {
-			event.setCancelled(true);
+			event.setNewPower(redstoneEvent.getNewCurrent());
 		}
 	}
 
@@ -185,7 +185,7 @@ public class BlockListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onBlockIngite(BlockIgniteEvent event) {
+	public void onBlockIgnite(BlockIgniteEvent event) {
 		if (event.isCancelled()) {
 			return;
 		}
