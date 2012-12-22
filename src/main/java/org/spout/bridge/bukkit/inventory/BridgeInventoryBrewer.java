@@ -22,7 +22,6 @@ package org.spout.bridge.bukkit.inventory;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
-
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInventory {
@@ -32,16 +31,17 @@ public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInve
 
 	@Override
 	public ItemStack getIngredient() {
-		throw new UnsupportedOperationException();
+		return getItem(3);
 	}
 
 	@Override
 	public void setIngredient(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		setItem(3, itemStack);
 	}
 
 	@Override
 	public BrewingStand getHolder() {
-		return null;
+		// TODO: Currently no way to get the holder of any Vanilla inventory.
+		throw new UnsupportedOperationException();
 	}
 }

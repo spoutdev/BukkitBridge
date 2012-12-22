@@ -22,7 +22,6 @@ package org.spout.bridge.bukkit.inventory;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
-
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryCrafting extends BridgeInventory implements CraftingInventory {
@@ -32,26 +31,42 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public ItemStack getResult() {
-		throw new UnsupportedOperationException();
+		return getItem(((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot());
 	}
 
 	@Override
 	public ItemStack[] getMatrix() {
-		return new ItemStack[0];  //To change body of implemented methods use File | Settings | File Templates.
+		ItemStack[] itemStacks = new ItemStack[getSize() - 1];
+		
+        for (int i = 0; i < itemStacks.length; i++ ) {
+        	if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot())
+        		continue;
+        	itemStacks[i] = getItem(i);
+        }
+        
+        return itemStacks;
 	}
 
 	@Override
 	public void setResult(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		setItem(((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot(), itemStack);
 	}
 
 	@Override
 	public void setMatrix(ItemStack[] itemStacks) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		if (itemStacks.length > getSize() - 1)
+            throw new IllegalArgumentException("Invalid matrix size. A size of " + (getSize() - 1) + " or less expected.");
+		
+		for (int i = 0; i < itemStacks.length; i++ ) {
+        	if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot())
+        		continue;
+        	setItem(i, itemStacks[i]);
+        }
 	}
 
 	@Override
 	public Recipe getRecipe() {
+		// TODO: Converting the results from a crafting inventory to a bukkit recipe.
 		throw new UnsupportedOperationException();
 	}
 }
