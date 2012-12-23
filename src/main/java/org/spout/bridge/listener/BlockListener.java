@@ -163,7 +163,7 @@ public class BlockListener extends AbstractListener {
 		if (event.getFormCause() == BlockFormEvent.FormCause.SPREAD) {
 			return;
 		}
-		org.bukkit.event.block.BlockFormEvent  formEvent = new org.bukkit.event.block.BlockFormEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.getBlockState(event.getSnapshot()));
+		org.bukkit.event.block.BlockFormEvent formEvent = new org.bukkit.event.block.BlockFormEvent(BukkitUtil.fromBlock(event.getBlock()), BukkitUtil.getBlockState(event.getSnapshot()));
 		Bukkit.getPluginManager().callEvent(formEvent);
 		event.setCancelled(formEvent.isCancelled());
 	}
@@ -213,7 +213,7 @@ public class BlockListener extends AbstractListener {
 		if (event.getCause() instanceof PlayerCause) {
 			player = ((PlayerCause) event.getCause()).getSource();
 		}
-		org.bukkit.event.block.BlockIgniteEvent igniteEvent = new org.bukkit.event.block.BlockIgniteEvent(BukkitUtil.fromBlock(event.getBlock()),igniteCause, new BridgePlayer(player));
+		org.bukkit.event.block.BlockIgniteEvent igniteEvent = new org.bukkit.event.block.BlockIgniteEvent(BukkitUtil.fromBlock(event.getBlock()), igniteCause, new BridgePlayer(player));
 		Bukkit.getPluginManager().callEvent(igniteEvent);
 		event.setCancelled(igniteEvent.isCancelled());
 	}
@@ -253,7 +253,7 @@ public class BlockListener extends AbstractListener {
 		if (event.getFormCause() != BlockFormEvent.FormCause.SPREAD) {
 			return;
 		}
-		Block fromBlock = BukkitUtil.fromBlock(((BlockCause)event.getCause()).getSource());
+		Block fromBlock = BukkitUtil.fromBlock(((BlockCause) event.getCause()).getSource());
 		BlockSpreadEvent spreadEvent = new BlockSpreadEvent(BukkitUtil.fromBlock(event.getBlock()), fromBlock, BukkitUtil.getBlockState(event.getSnapshot()));
 		Bukkit.getPluginManager().callEvent(spreadEvent);
 		event.setCancelled(spreadEvent.isCancelled());

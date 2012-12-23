@@ -53,14 +53,13 @@ import org.spout.vanilla.material.enchantment.ToolEnchantment;
 public class BukkitUtil {
 	private BukkitUtil() {
 	}
-	
+
 	private static BridgeServer getServer() {
 		return (BridgeServer) Bukkit.getServer();
 	}
 
 	/**
 	 * Creates a Bukkit Location from a SpoutAPI Transform
-	 *
 	 * @param transform The SpoutAPI Transform to convert to a Location
 	 * @return A Location with the same values as given Transform
 	 */
@@ -73,7 +72,6 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a Bukkit block from a SpoutAPI block
-	 *
 	 * @param block The SpoutAPI block to convert to a Bukkit block
 	 * @return The corresponding Bukkit block
 	 */
@@ -81,10 +79,9 @@ public class BukkitUtil {
 		BridgeWorld world = getServer().getWorld(block.getWorld().getUID());
 		return world.getBlockAt(block.getX(), block.getY(), block.getZ());
 	}
-	
+
 	/**
 	 * Creates a SpoutAPI block from a Bukkit block
-	 *
 	 * @param point The Bukkit block to convert to a SpoutAPI block
 	 * @return The corresponding SpoutAPI block
 	 */
@@ -95,7 +92,6 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a Bukkit Location from a SpoutAPI Point
-	 *
 	 * @param point The SpoutAPI Point to convert to a Location
 	 * @return A Location with the same values as given Point
 	 */
@@ -110,7 +106,6 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI Point from a Bukkit Location
-	 *
 	 * @param loc The Bukkit Location to convert to a Point
 	 * @return A SpoutAPI Point with the same values as given Location
 	 */
@@ -120,7 +115,6 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI Vector3 from a Bukkit Location
-	 *
 	 * @param loc The Bukkit Location to convert to a Vector3
 	 * @return A SpoutAPI Vector3 with the same values as given Bukkit Location
 	 */
@@ -130,12 +124,11 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a BridgeItemStack from a SpoutAPI ItemStack
-	 *
 	 * @param item The SpoutAPI ItemStack to convert to a BridgeItemStack
 	 * @return The BridgeItemStack with the same values and type as given Spout ItemStack
 	 */
 	public static BridgeItemStack fromItemStack(ItemStack item) {
-		if (item == null){
+		if (item == null) {
 			return null;
 		}
 		Material material = item.getMaterial();
@@ -153,12 +146,11 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI ItemStack from a Bukkit ItemStack
-	 *
 	 * @param item The Bukkit ItemStack to convert to a SpoutAPI ItemStack
 	 * @return The converted SpoutAPI ItemStack
 	 */
 	public static ItemStack toItemStack(org.bukkit.inventory.ItemStack item) {
-		if (item == null){
+		if (item == null) {
 			return null;
 		}
 		Material mat = VanillaMaterials.getMaterial((short) item.getTypeId());
@@ -168,15 +160,23 @@ public class BukkitUtil {
 	}
 
 	public static org.bukkit.block.BlockFace toBukkitBlockFace(BlockFace face) {
-		switch(face) {
-			case TOP: return org.bukkit.block.BlockFace.UP;
-			case BOTTOM: return org.bukkit.block.BlockFace.DOWN;
-			case NORTH: return org.bukkit.block.BlockFace.NORTH;
-			case SOUTH: return org.bukkit.block.BlockFace.SOUTH;
-			case EAST: return org.bukkit.block.BlockFace.EAST;
-			case WEST: return org.bukkit.block.BlockFace.WEST;
-			case THIS: return org.bukkit.block.BlockFace.SELF;
-			default: throw new IllegalArgumentException("Unknown face type");
+		switch (face) {
+			case TOP:
+				return org.bukkit.block.BlockFace.UP;
+			case BOTTOM:
+				return org.bukkit.block.BlockFace.DOWN;
+			case NORTH:
+				return org.bukkit.block.BlockFace.NORTH;
+			case SOUTH:
+				return org.bukkit.block.BlockFace.SOUTH;
+			case EAST:
+				return org.bukkit.block.BlockFace.EAST;
+			case WEST:
+				return org.bukkit.block.BlockFace.WEST;
+			case THIS:
+				return org.bukkit.block.BlockFace.SELF;
+			default:
+				throw new IllegalArgumentException("Unknown face type");
 		}
 	}
 

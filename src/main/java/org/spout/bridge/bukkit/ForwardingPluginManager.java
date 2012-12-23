@@ -40,9 +40,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.UnknownDependencyException;
 
-public class ForwardingPluginManager implements PluginManager{
+public class ForwardingPluginManager implements PluginManager {
 	private final SimplePluginManager manager;
 	private final Method fireEvent;
+
 	ForwardingPluginManager(Server server) {
 		manager = new SimplePluginManager(server, new SimpleCommandMap(server));
 		try {
@@ -69,15 +70,15 @@ public class ForwardingPluginManager implements PluginManager{
 
 	private synchronized void callEventSafe(Event event) throws IllegalStateException {
 		//Can not forward to callEvent(event), it checks for bukkit-esque thread-safety
-			try {
-				fireEvent.invoke(manager, event);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException("Unable to access SimplePluginManager.fireEvent(event)", e);
-			} catch (IllegalArgumentException e) {
-				throw new RuntimeException("Unable to call SimplePluginManager.fireEvent(event) with " + event, e);
-			} catch (InvocationTargetException e) {
-				throw new IllegalStateException(e);
-			}
+		try {
+			fireEvent.invoke(manager, event);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException("Unable to access SimplePluginManager.fireEvent(event)", e);
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException("Unable to call SimplePluginManager.fireEvent(event) with " + event, e);
+		} catch (InvocationTargetException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 	@Override

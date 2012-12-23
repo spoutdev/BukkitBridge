@@ -20,8 +20,11 @@
 package org.spout.bridge.listener;
 
 import org.bukkit.Bukkit;
+
 import org.spout.api.event.EventHandler;
+
 import org.spout.bridge.VanillaBridgePlugin;
+
 import org.spout.vanilla.data.Weather;
 import org.spout.vanilla.event.world.WeatherChangeEvent;
 
@@ -31,36 +34,36 @@ public class WeatherListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onLightningStrike(){
+	public void onLightningStrike() {
 		//todo implement onLightningStrike
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onWeatherChange(WeatherChangeEvent event){
+	public void onWeatherChange(WeatherChangeEvent event) {
 		org.bukkit.World world = Bukkit.getWorld(event.getWorld().getName());
 		//Rain
-		org.bukkit.event.weather.WeatherChangeEvent weatherChange=null;
-		if((event.getCurrentWeather() == Weather.RAIN || event.getCurrentWeather() == Weather.THUNDERSTORM) && event.getNewWeather() == Weather.CLEAR){
+		org.bukkit.event.weather.WeatherChangeEvent weatherChange = null;
+		if ((event.getCurrentWeather() == Weather.RAIN || event.getCurrentWeather() == Weather.THUNDERSTORM) && event.getNewWeather() == Weather.CLEAR) {
 			weatherChange = new org.bukkit.event.weather.WeatherChangeEvent(world, false);
 		}
-		if(event.getCurrentWeather() == Weather.CLEAR && (event.getNewWeather() == Weather.RAIN || event.getNewWeather() == Weather.THUNDERSTORM)){
+		if (event.getCurrentWeather() == Weather.CLEAR && (event.getNewWeather() == Weather.RAIN || event.getNewWeather() == Weather.THUNDERSTORM)) {
 			weatherChange = new org.bukkit.event.weather.WeatherChangeEvent(world, true);
 		}
-		if(weatherChange!=null){
+		if (weatherChange != null) {
 			weatherChange.setCancelled(event.isCancelled());
 			Bukkit.getPluginManager().callEvent(weatherChange);
 			event.setCancelled(weatherChange.isCancelled());
 		}
 		//Thunderstorm
 		org.bukkit.event.weather.ThunderChangeEvent thunderChange = null;
-		if(event.getCurrentWeather() == Weather.THUNDERSTORM && (event.getNewWeather() == Weather.CLEAR || event.getNewWeather() == Weather.RAIN)){
+		if (event.getCurrentWeather() == Weather.THUNDERSTORM && (event.getNewWeather() == Weather.CLEAR || event.getNewWeather() == Weather.RAIN)) {
 			thunderChange = new org.bukkit.event.weather.ThunderChangeEvent(world, false);
 		}
-		if((event.getCurrentWeather() == Weather.CLEAR || event.getCurrentWeather() == Weather.RAIN) && event.getNewWeather() == Weather.THUNDERSTORM){
+		if ((event.getCurrentWeather() == Weather.CLEAR || event.getCurrentWeather() == Weather.RAIN) && event.getNewWeather() == Weather.THUNDERSTORM) {
 			thunderChange = new org.bukkit.event.weather.ThunderChangeEvent(world, true);
 		}
-		if(thunderChange!=null){
+		if (thunderChange != null) {
 			thunderChange.setCancelled(event.isCancelled());
 			Bukkit.getPluginManager().callEvent(thunderChange);
 			event.setCancelled(thunderChange.isCancelled());

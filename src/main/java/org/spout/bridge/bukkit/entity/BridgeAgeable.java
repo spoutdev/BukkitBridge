@@ -20,6 +20,7 @@
 package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.Ageable;
+
 import org.spout.api.entity.Entity;
 
 public abstract class BridgeAgeable extends BridgeCreature implements Ageable {

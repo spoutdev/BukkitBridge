@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.inventory;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
+
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryFurnace extends BridgeInventory implements FurnaceInventory {
@@ -38,7 +39,7 @@ public class BridgeInventoryFurnace extends BridgeInventory implements FurnaceIn
 	public ItemStack getFuel() {
 		return getItem(0);
 	}
-	
+
 	@Override
 	public ItemStack getSmelting() {
 		return getItem(1);

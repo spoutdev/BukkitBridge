@@ -32,10 +32,13 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.api.component.type.BlockComponent;
 import org.spout.api.material.BlockMaterial;
+
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
+
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.block.Liquid;
@@ -222,7 +225,7 @@ public class BridgeBlock implements Block {
 			return new BridgeJukebox(this);
 		} else if (component instanceof org.spout.vanilla.component.substance.material.BrewingStand) {
 			return new BridgeBrewingStand(this);
-		}  else {
+		} else {
 			return new BridgeBlockState(this);
 		}
 	}

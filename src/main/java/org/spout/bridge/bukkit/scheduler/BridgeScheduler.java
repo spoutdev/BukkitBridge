@@ -211,10 +211,11 @@ public class BridgeScheduler implements BukkitScheduler {
 		throw new UnsupportedOperationException();
 	}
 
-	private static class RepeatingRunnable implements Runnable{
+	private static class RepeatingRunnable implements Runnable {
 		final Runnable r;
 		final Plugin p;
 		final long period;
+
 		RepeatingRunnable(Plugin p, Runnable r, long period) {
 			this.r = r;
 			this.p = p;

@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.avaje.ebean.EbeanServer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -15,13 +17,12 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 
-import com.avaje.ebean.EbeanServer;
-
 /**
  * A wrapper around Spout plugins for Bukkit plugins
  */
-public final class SpoutPlugin implements Plugin{
+public final class SpoutPlugin implements Plugin {
 	private final org.spout.api.plugin.Plugin plugin;
+
 	public SpoutPlugin(org.spout.api.plugin.Plugin plugin) {
 		this.plugin = plugin;
 	}

@@ -77,49 +77,49 @@ public class WorldListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onChunk(){
+	public void onChunk() {
 		//todo implement onChunk
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onChunkLoad(){
+	public void onChunkLoad() {
 		//todo implement onChunkLoad
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onChunkPopulate(){
+	public void onChunkPopulate() {
 		//todo implement onChunkPopulate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onChunkOnload(){
+	public void onChunkOnload() {
 		//todo implement onChunkOnload
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPortalCreate(){
+	public void onPortalCreate() {
 		//todo implement onPortalCreate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onSpawnChange(){
+	public void onSpawnChange() {
 		//todo implement onSpawnChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onStructureGrow(){
+	public void onStructureGrow() {
 		//todo implement onStructureGrow
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onWorldSave(WorldSaveEvent event){
+	public void onWorldSave(WorldSaveEvent event) {
 		BridgeWorld world = null;
 		synchronized (worlds) {
 			for (int i = 0; i < worlds.size(); i++) {

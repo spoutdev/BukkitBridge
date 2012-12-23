@@ -27,7 +27,6 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
 
 public class BridgeOfflinePlayer implements OfflinePlayer, ConfigurationSerializable {
-
 	@Override
 	public boolean isOp() {
 		throw new UnsupportedOperationException();
@@ -97,5 +96,4 @@ public class BridgeOfflinePlayer implements OfflinePlayer, ConfigurationSerializ
 	public void setWhitelisted(boolean whitelisted) {
 		throw new UnsupportedOperationException();
 	}
-
 }

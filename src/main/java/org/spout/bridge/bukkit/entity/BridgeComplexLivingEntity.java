@@ -24,6 +24,7 @@ import java.util.Set;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.entity.EntityType;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeComplexLivingEntity extends BridgeLivingEntity implements ComplexLivingEntity {

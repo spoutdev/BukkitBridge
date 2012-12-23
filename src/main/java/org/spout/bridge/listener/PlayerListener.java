@@ -43,6 +43,7 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.player.PlayerMoveComponent;
+
 import org.spout.vanilla.component.inventory.PlayerInventory;
 import org.spout.vanilla.component.living.neutral.Human;
 import org.spout.vanilla.event.player.PlayerRespawnEvent;
@@ -52,6 +53,7 @@ public class PlayerListener extends AbstractListener {
 	 * Maintains a list of players from prelogin events to kick on login events, as Spout does not allow kicking in prelogin
 	 */
 	private Map<String, String> toKick = new ConcurrentHashMap<String, String>();
+
 	public PlayerListener(VanillaBridgePlugin plugin) {
 		super(plugin);
 	}
@@ -65,7 +67,7 @@ public class PlayerListener extends AbstractListener {
 			event.setMessage(kickMessage);
 			return;
 		}
-		
+
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
 		String hostname = event.getPlayer().getAddress().getHostName();
 		org.bukkit.event.player.PlayerLoginEvent login = new org.bukkit.event.player.PlayerLoginEvent(player, hostname, event.getPlayer().getAddress());
@@ -88,7 +90,7 @@ public class PlayerListener extends AbstractListener {
 		if (!joinMessage.equals(join.getJoinMessage())) {
 			event.setMessage(join.getJoinMessage());
 		}
-		
+
 		//Add components
 		event.getPlayer().add(PlayerMoveComponent.class);
 	}
@@ -167,204 +169,203 @@ public class PlayerListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onAsyncPlayerChat(){
+	public void onAsyncPlayerChat() {
 		//todo implement onAsyncPlayerChat
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerAnimation(){
+	public void onPlayerAnimation() {
 		//todo implement onPlayerAnimation
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerAnimationType(){
+	public void onPlayerAnimationType() {
 		//todo implement onPlayerAnimationType
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerBedEnter(){
+	public void onPlayerBedEnter() {
 		//todo implement onPlayerBedEnter
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerBedLeave(){
+	public void onPlayerBedLeave() {
 		//todo implement onPlayerBedLeave
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerBucketEmpty(){
+	public void onPlayerBucketEmpty() {
 		//todo implement onPlayerBucketEmpty
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerBucket(){
+	public void onPlayerBucket() {
 		//todo implement onPlayerBucket
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerBucketFill(){
+	public void onPlayerBucketFill() {
 		//todo implement onPlayerBucketFill
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerChangedWorld(){
+	public void onPlayerChangedWorld() {
 		//todo implement onPlayerChangedWorld
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerChannel(){
+	public void onPlayerChannel() {
 		//todo implement onPlayerChannel
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerChat(){
+	public void onPlayerChat() {
 		//todo implement onPlayerChat
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerChatTabComplete(){
+	public void onPlayerChatTabComplete() {
 		//todo implement onPlayerChatTabComplete
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerCommandPreProcess(){
+	public void onPlayerCommandPreProcess() {
 		//todo implement onPlayerCommandPreProcess
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerDropItem(){
+	public void onPlayerDropItem() {
 		//todo implement onPlayerDropItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerEggThrow(){
+	public void onPlayerEggThrow() {
 		//todo implement onPlayerEggThrow
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayer(){
+	public void onPlayer() {
 		//todo implement onPlayer
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerExpChange(){
+	public void onPlayerExpChange() {
 		//todo implement onPlayerExpChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerFish(){
+	public void onPlayerFish() {
 		//todo implement onPlayerFish
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerGameModeChange(){
+	public void onPlayerGameModeChange() {
 		//todo implement onPlayerGameModeChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerInteractEntity(){
+	public void onPlayerInteractEntity() {
 		//todo implement onPlayerInteractEntity
 		throw new UnsupportedOperationException();
 	}
 
-
 	@EventHandler
-	public void onPlayerInventory(){
+	public void onPlayerInventory() {
 		//todo implement onPlayerInventory
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerItemBreak(){
+	public void onPlayerItemBreak() {
 		//todo implement onPlayerItemBreak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerItemHeld(){
+	public void onPlayerItemHeld() {
 		//todo implement onPlayerItemHeld
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerKick(){
+	public void onPlayerKick() {
 		//todo implement onPlayerKick
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerLevelChange(){
+	public void onPlayerLevelChange() {
 		//todo implement onPlayerLevelChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerMove(){
+	public void onPlayerMove() {
 		//todo implement onPlayerMove
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerPickUpItem(){
+	public void onPlayerPickUpItem() {
 		//todo implement onPlayerPickUpItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerPortal(){
+	public void onPlayerPortal() {
 		//todo implement onPlayerPortal
 		throw new UnsupportedOperationException();
 	}
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(order = Order.EARLIEST)
-	public void onPlayerPreLogin(PlayerPreLoginEvent event){
-		if (event.isCancelled()){
+	public void onPlayerPreLogin(PlayerPreLoginEvent event) {
+		if (event.isCancelled()) {
 			return;
 		}
 		//Do both events here because Spout login events are all async
-		org.bukkit.event.player.AsyncPlayerPreLoginEvent asyncPreLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(),event.getAddress());
+		org.bukkit.event.player.AsyncPlayerPreLoginEvent asyncPreLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(), event.getAddress());
 		Bukkit.getPluginManager().callEvent(asyncPreLogin);
-		if(asyncPreLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED){
+		if (asyncPreLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED) {
 			toKick.put(asyncPreLogin.getName(), asyncPreLogin.getKickMessage());
 			return;
 		}
-		org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(),event.getAddress());
+		org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(), event.getAddress());
 		Bukkit.getPluginManager().callEvent(preLogin);
-		if(preLogin.getResult() != org.bukkit.event.player.PlayerPreLoginEvent.Result.ALLOWED){
+		if (preLogin.getResult() != org.bukkit.event.player.PlayerPreLoginEvent.Result.ALLOWED) {
 			toKick.put(preLogin.getName(), preLogin.getKickMessage());
 			return;
 		}
 	}
 
 	@EventHandler
-	public void onPlayerRegisterChannel(){
+	public void onPlayerRegisterChannel() {
 		//todo implement onPlayerRegisterChannel
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler(order = Order.EARLIEST)
-	public void onPlayerRespawn(PlayerRespawnEvent event){
-		if(event.isCancelled()){
+	public void onPlayerRespawn(PlayerRespawnEvent event) {
+		if (event.isCancelled()) {
 			return;
 		}
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
@@ -374,37 +375,37 @@ public class PlayerListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onPlayerShearEntity(){
+	public void onPlayerShearEntity() {
 		//todo implement onPlayerShearEntity
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@EventHandler
-	public void onPlayerToggleFlight(){
+	public void onPlayerToggleFlight() {
 		//todo implement onPlayerToggleFlight
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerToggleSneak(){
+	public void onPlayerToggleSneak() {
 		//todo implement onPlayerToggleSneak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerToggleSprint(){
+	public void onPlayerToggleSprint() {
 		//todo implement onPlayerToggleSprint
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerUnregisterChannel(){
+	public void onPlayerUnregisterChannel() {
 		//todo implement onPlayerUnregisterChannel
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPlayerVelocity(){
+	public void onPlayerVelocity() {
 		//todo implement onPlayerVelocity
 		throw new UnsupportedOperationException();
 	}

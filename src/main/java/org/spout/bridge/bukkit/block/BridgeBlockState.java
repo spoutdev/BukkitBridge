@@ -30,7 +30,9 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
 import org.spout.api.component.type.BlockComponent;
+
 import org.spout.bridge.BukkitUtil;
 
 public class BridgeBlockState implements BlockState {
@@ -55,7 +57,7 @@ public class BridgeBlockState implements BlockState {
 		lightlevel = b.getLightLevel();
 		location = b.getLocation();
 	}
-	
+
 	public BlockComponent getHandle() {
 		return handle;
 	}

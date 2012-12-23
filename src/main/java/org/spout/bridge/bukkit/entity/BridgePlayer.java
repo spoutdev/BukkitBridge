@@ -38,14 +38,17 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.spout.bridge.bukkit.BridgeOfflinePlayer;;
+
+import org.spout.bridge.bukkit.BridgeOfflinePlayer;
+
+;
 
 @DelegateDeserialization(BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
 	public BridgePlayer(org.spout.api.entity.Player handle) {
 		super(handle);
 	}
-	
+
 	@Override
 	public org.spout.api.entity.Player getHandle() {
 		return (org.spout.api.entity.Player) getHandle();
@@ -453,7 +456,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendMessage(String[] message) {
-		getHandle().sendMessage((Object[])message);
+		getHandle().sendMessage((Object[]) message);
 	}
 
 	@Override

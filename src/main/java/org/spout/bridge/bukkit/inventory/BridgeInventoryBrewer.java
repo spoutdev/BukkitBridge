@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.inventory;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
+
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInventory {

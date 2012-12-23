@@ -19,6 +19,9 @@
  */
 package org.spout.bridge;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginLoadOrder;
+
 import org.spout.api.Server;
 import org.spout.api.Spout;
 import org.spout.api.event.Cause;
@@ -32,9 +35,6 @@ import org.spout.bridge.listener.BlockListener;
 import org.spout.bridge.listener.EntityListener;
 import org.spout.bridge.listener.PlayerListener;
 import org.spout.bridge.listener.WorldListener;
-
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginLoadOrder;
 
 /**
  * Bridge redirects Bukkit method calls to the Spout API, allowing Bukkit plugins to run on Spout
@@ -57,10 +57,10 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		playerListener = new PlayerListener(this);
 		entityListener = new EntityListener(this);
 		blockListener = new BlockListener(this);
-		BridgeServer server = new BridgeServer((Server)Spout.getEngine(), this);
+		BridgeServer server = new BridgeServer((Server) Spout.getEngine(), this);
 		getLogger().info("Bukkit Bridge Enabling, Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
 		pluginCause = new PluginCause(this);
-		
+
 		this.getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
 	}
 
@@ -96,7 +96,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		@Override
 		public void run() {
 			Spout.getLogger().info("Loading post-world bukkit plugins");
-			((BridgeServer)Bukkit.getServer()).enablePlugins(PluginLoadOrder.POSTWORLD);
+			((BridgeServer) Bukkit.getServer()).enablePlugins(PluginLoadOrder.POSTWORLD);
 		}
 	}
 }

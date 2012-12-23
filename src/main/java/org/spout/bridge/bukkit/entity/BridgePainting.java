@@ -23,6 +23,7 @@ import org.bukkit.Art;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Painting;
+
 import org.spout.api.entity.Entity;
 
 public class BridgePainting extends BridgeEntity implements Painting {

@@ -19,11 +19,11 @@
  */
 package org.spout.bridge.bukkit.enchantments;
 
-import org.spout.bridge.BukkitUtil;
-
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
+
+import org.spout.bridge.BukkitUtil;
 
 public class BridgeEnchantment extends Enchantment {
 	private org.spout.vanilla.material.enchantment.Enchantment vanillaEnchantment;

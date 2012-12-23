@@ -27,7 +27,6 @@ import org.spout.vanilla.material.enchantment.Enchantments;
 public class BridgeEnchantments {
 	private static final Map<Integer, BridgeEnchantment> byId = new HashMap<Integer, BridgeEnchantment>();
 	private static final Map<String, BridgeEnchantment> byName = new HashMap<String, BridgeEnchantment>();
-
 	public static final BridgeEnchantment PROTECTION = register(new BridgeEnchantment(Enchantments.PROTECTION, 0));
 	public static final BridgeEnchantment FIRE_PROTECTION = register(new BridgeEnchantment(Enchantments.FIRE_PROTECTION, 1));
 	public static final BridgeEnchantment FEATHER_FALLING = register(new BridgeEnchantment(Enchantments.FEATHER_FALLING, 2));

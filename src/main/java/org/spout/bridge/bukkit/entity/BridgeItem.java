@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeItem extends BridgeEntity implements Item {

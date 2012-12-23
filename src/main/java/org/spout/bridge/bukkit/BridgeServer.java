@@ -64,6 +64,7 @@ import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.permissions.DefaultPermissions;
+
 import org.spout.api.Spout;
 import org.spout.api.util.access.BanType;
 
@@ -86,6 +87,7 @@ public class BridgeServer implements Server {
 	private final PluginManager pluginManager = new ForwardingPluginManager(this);
 	private final String bridgeVersion = getPOMVersion();
 	private final String serverVersion = "Spout Server ( " + Spout.getAPIVersion() + " )";
+
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
@@ -93,9 +95,9 @@ public class BridgeServer implements Server {
 
 		org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
 		PotionEffectType.stopAcceptingRegistrations();
-		
+
 		loadPlugins();
-		
+
 		Spout.getLogger().info("Loading pre-world bukkit plugins");
 		enablePlugins(PluginLoadOrder.STARTUP);
 	}

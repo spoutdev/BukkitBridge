@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Slime;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeSlime extends BridgeLivingEntity implements Slime {

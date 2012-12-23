@@ -25,6 +25,7 @@ import org.bukkit.block.Jukebox;
 
 public class BridgeJukebox extends BridgeBlockState implements Jukebox {
 	private final org.spout.vanilla.component.substance.material.Jukebox jukebox;
+
 	public BridgeJukebox(Block b) {
 		super(b);
 		this.jukebox = (org.spout.vanilla.component.substance.material.Jukebox) getHandle();

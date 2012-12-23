@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Tameable;
+
 import org.spout.api.entity.Entity;
 
 public abstract class BridgeTameableAnimal extends BridgeAnimals implements Tameable, Creature {

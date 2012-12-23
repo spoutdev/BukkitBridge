@@ -23,11 +23,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
+
 import org.spout.bridge.bukkit.inventory.BridgeInventory;
 import org.spout.bridge.bukkit.inventory.BridgeInventoryDoubleChest;
 
 public class BridgeChest extends BridgeBlockState implements Chest {
 	private final org.spout.vanilla.component.substance.material.chest.Chest chest;
+
 	public BridgeChest(Block b) {
 		super(b);
 		this.chest = (org.spout.vanilla.component.substance.material.chest.Chest) getHandle();

@@ -20,6 +20,7 @@
 package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
+
 import org.spout.bridge.VanillaBridgePlugin;
 
 public class VehicleListener extends AbstractListener {
@@ -28,67 +29,67 @@ public class VehicleListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onVehicleBlockCollision(){
+	public void onVehicleBlockCollision() {
 		//todo implement onVehicleBlockCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleCollision(){
+	public void onVehicleCollision() {
 		//todo implement onVehicleCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleCreate(){
+	public void onVehicleCreate() {
 		//todo implement onVehicleCreate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleDamage(){
+	public void onVehicleDamage() {
 		//todo implement onVehicleDamage
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleDestroy(){
+	public void onVehicleDestroy() {
 		//todo implement onVehicleDestroy
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleEnter(){
+	public void onVehicleEnter() {
 		//todo implement onVehicleEnter
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleEntityCollision(){
+	public void onVehicleEntityCollision() {
 		//todo implement onVehicleEntityCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicle(){
+	public void onVehicle() {
 		//todo implement onVehicle
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleExit(){
+	public void onVehicleExit() {
 		//todo implement onVehicleExit
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleMove(){
+	public void onVehicleMove() {
 		//todo implement onVehicleMove
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onVehicleUpdate(){
+	public void onVehicleUpdate() {
 		//todo implement onVehicleUpdate
 		throw new UnsupportedOperationException();
 	}

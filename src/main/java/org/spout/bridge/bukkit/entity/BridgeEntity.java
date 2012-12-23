@@ -22,14 +22,6 @@ package org.spout.bridge.bukkit.entity;
 import java.util.List;
 import java.util.UUID;
 
-import org.spout.api.Spout;
-import org.spout.api.component.implementation.PhysicsComponent;
-import org.spout.api.event.entity.EntityTeleportEvent;
-import org.spout.api.geo.discrete.Point;
-import org.spout.api.math.Vector3;
-
-import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.bukkit.BridgeServer;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -40,6 +32,15 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+
+import org.spout.api.Spout;
+import org.spout.api.component.impl.PhysicsComponent;
+import org.spout.api.event.entity.EntityTeleportEvent;
+import org.spout.api.geo.discrete.Point;
+import org.spout.api.math.Vector3;
+
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.BridgeServer;
 
 public abstract class BridgeEntity implements Entity {
 	private final org.spout.api.entity.Entity handle;
@@ -54,7 +55,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public BridgeServer getServer() {
-		return (BridgeServer)Bukkit.getServer();
+		return (BridgeServer) Bukkit.getServer();
 	}
 
 	@Override
@@ -236,7 +237,7 @@ public abstract class BridgeEntity implements Entity {
 		if (!event.isCancelled()) {
 			loc = BukkitUtil.fromPoint(event.getTo());
 			prev = BukkitUtil.fromPoint(event.getFrom());
-			handle.getTransform().setPosition(new Point(handle.getWorld(), (float)loc.getX(), (float)loc.getY(), (float)loc.getZ()));
+			handle.getTransform().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
 			handle.getTransform().setPitch(loc.getPitch());
 			handle.getTransform().setYaw(loc.getYaw());
 			return true;

@@ -22,11 +22,13 @@ package org.spout.bridge.listener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
+
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.server.plugin.PluginDisableEvent;
 import org.spout.api.event.server.plugin.PluginEnableEvent;
 import org.spout.api.event.server.service.ServiceRegisterEvent;
 import org.spout.api.event.server.service.ServiceUnregisterEvent;
+
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.plugin.SpoutPlugin;
 
@@ -36,63 +38,63 @@ public class ServerListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onMapInitialze(){
+	public void onMapInitialze() {
 		//todo implement onMapInitialize
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPluginDisable(PluginDisableEvent event){
+	public void onPluginDisable(PluginDisableEvent event) {
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.PluginDisableEvent(new SpoutPlugin(event.getPlugin())));
 	}
 
 	@EventHandler
-	public void onPluginEnable(PluginEnableEvent event){
+	public void onPluginEnable(PluginEnableEvent event) {
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.PluginEnableEvent(new SpoutPlugin(event.getPlugin())));
 	}
 
 	@EventHandler
-	public void onRemoteServerCommand(){
+	public void onRemoteServerCommand() {
 		//todo implement onRemoteServerCommand
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onServerCommand(){
+	public void onServerCommand() {
 		//todo implement onServerCommand
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onServer(){
+	public void onServer() {
 		//todo implement onServer
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onServerListPing(){
+	public void onServerListPing() {
 		//todo implement onServerListPing
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@EventHandler
-	public void onServiceRegister(ServiceRegisterEvent event){
+	public void onServiceRegister(ServiceRegisterEvent event) {
 		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());
 		RegisteredServiceProvider<Object> provider = new RegisteredServiceProvider(Object.class, event.getProvider().getService(), fromPriority(event.getPriority()), plugin);
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceRegisterEvent(provider));
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@EventHandler
-	public void onServiceUnregister(ServiceUnregisterEvent event){
+	public void onServiceUnregister(ServiceUnregisterEvent event) {
 		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());
-		RegisteredServiceProvider<Object> provider = new RegisteredServiceProvider(Object.class, event.getProvider().getService(), org.bukkit.plugin.ServicePriority.Normal , plugin);
+		RegisteredServiceProvider<Object> provider = new RegisteredServiceProvider(Object.class, event.getProvider().getService(), org.bukkit.plugin.ServicePriority.Normal, plugin);
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceUnregisterEvent(provider));
 	}
 
 	private org.bukkit.plugin.ServicePriority fromPriority(org.spout.api.plugin.ServiceManager.ServicePriority priority) {
-		switch(priority) {
+		switch (priority) {
 			case High:
 				return org.bukkit.plugin.ServicePriority.High;
 			case Highest:
@@ -105,7 +107,6 @@ public class ServerListener extends AbstractListener {
 				return org.bukkit.plugin.ServicePriority.Normal;
 			default:
 				throw new IllegalArgumentException("Unknown priority: " + priority);
-			
 		}
 	}
 }

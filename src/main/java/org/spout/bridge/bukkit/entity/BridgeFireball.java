@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeFireball extends AbstractProjectile implements Fireball {

@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.EntityType;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeEnderDragonPart extends BridgeComplexPart implements EnderDragonPart {

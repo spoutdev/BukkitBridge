@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeExperienceOrb extends BridgeEntity implements ExperienceOrb {

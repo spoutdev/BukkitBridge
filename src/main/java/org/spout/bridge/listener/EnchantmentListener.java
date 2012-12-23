@@ -19,20 +19,9 @@
  */
 package org.spout.bridge.listener;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.event.entity.EntityDamageByBlockEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.spout.api.event.EventHandler;
-import org.spout.api.event.Order;
-import org.spout.api.event.entity.EntityTeleportEvent;
-import org.spout.bridge.BukkitUtil;
+
 import org.spout.bridge.VanillaBridgePlugin;
-import org.spout.bridge.bukkit.entity.BridgeEntity;
-import org.spout.bridge.bukkit.entity.BridgePlayer;
-import org.spout.bridge.bukkit.entity.EntityFactory;
-import org.spout.vanilla.event.entity.EntityDamageEvent;
 
 public class EnchantmentListener extends AbstractListener {
 	public EnchantmentListener(VanillaBridgePlugin plugin) {
@@ -40,15 +29,14 @@ public class EnchantmentListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onEnchantItem(){
+	public void onEnchantItem() {
 		//todo implement onEnchantItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPrepareItemEnchant(){
+	public void onPrepareItemEnchant() {
 		//todo implement onPrepareItemEnchant
 		throw new UnsupportedOperationException();
 	}
-
 }

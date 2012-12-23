@@ -20,6 +20,7 @@
 package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
+
 import org.spout.bridge.VanillaBridgePlugin;
 
 public class InventoryListener extends AbstractListener {
@@ -28,67 +29,67 @@ public class InventoryListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onBrew(){
+	public void onBrew() {
 		//todo implement onBrew
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onCraftItem(){
+	public void onCraftItem() {
 		//todo implement onCraftItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onFurnaceBurn(){
+	public void onFurnaceBurn() {
 		//todo implement onFurnaceBurn
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onFurnaceExtract(){
+	public void onFurnaceExtract() {
 		//todo implement onFurnaceExtract
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onFurnaceSmelt(){
+	public void onFurnaceSmelt() {
 		//todo implement onFurnaceSmelt
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onInventoryClick(){
+	public void onInventoryClick() {
 		//todo implement onInventoryClick
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onInventoryClose(){
+	public void onInventoryClose() {
 		//todo implement onInventoryClose
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onInventory(){
+	public void onInventory() {
 		//todo implement onInventory
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onInventoryOpen(){
+	public void onInventoryOpen() {
 		//todo implement onInventoryOpen
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onInventoryType(){
+	public void onInventoryType() {
 		//todo implement onInventoryType
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onPrepareItemCraft(){
+	public void onPrepareItemCraft() {
 		//todo implement onPreprareItemCraft
 		throw new UnsupportedOperationException();
 	}

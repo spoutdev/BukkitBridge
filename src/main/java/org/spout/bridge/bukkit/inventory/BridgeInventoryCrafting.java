@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.inventory;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryCrafting extends BridgeInventory implements CraftingInventory {
@@ -37,14 +38,15 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 	@Override
 	public ItemStack[] getMatrix() {
 		ItemStack[] itemStacks = new ItemStack[getSize() - 1];
-		
-        for (int i = 0; i < itemStacks.length; i++ ) {
-        	if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot())
-        		continue;
-        	itemStacks[i] = getItem(i);
-        }
-        
-        return itemStacks;
+
+		for (int i = 0; i < itemStacks.length; i++) {
+			if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot()) {
+				continue;
+			}
+			itemStacks[i] = getItem(i);
+		}
+
+		return itemStacks;
 	}
 
 	@Override
@@ -54,14 +56,16 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public void setMatrix(ItemStack[] itemStacks) {
-		if (itemStacks.length > getSize() - 1)
-            throw new IllegalArgumentException("Invalid matrix size. A size of " + (getSize() - 1) + " or less expected.");
-		
-		for (int i = 0; i < itemStacks.length; i++ ) {
-        	if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot())
-        		continue;
-        	setItem(i, itemStacks[i]);
-        }
+		if (itemStacks.length > getSize() - 1) {
+			throw new IllegalArgumentException("Invalid matrix size. A size of " + (getSize() - 1) + " or less expected.");
+		}
+
+		for (int i = 0; i < itemStacks.length; i++) {
+			if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot()) {
+				continue;
+			}
+			setItem(i, itemStacks[i]);
+		}
 	}
 
 	@Override

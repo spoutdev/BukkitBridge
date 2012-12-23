@@ -20,6 +20,7 @@
 package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
+
 import org.spout.bridge.VanillaBridgePlugin;
 
 public class HangingListener extends AbstractListener {
@@ -28,27 +29,26 @@ public class HangingListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onHangingBreakByEntity(){
+	public void onHangingBreakByEntity() {
 		//todo implement onHangingBreakByEntity
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onHangingBreak(){
+	public void onHangingBreak() {
 		//todo implement onHangingBreak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onHanging(){
+	public void onHanging() {
 		//todo implement onHanging
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
-	public void onHangingPlace(){
+	public void onHangingPlace() {
 		//todo implement onHangingPlace
 		throw new UnsupportedOperationException();
 	}
-
 }

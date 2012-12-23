@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeEnderman extends BridgeMonster implements Enderman {

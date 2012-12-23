@@ -243,7 +243,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		return new BridgeBlock((BridgeChunk)getChunkAt(x / 16, z / 16), x, y, z);
+		return new BridgeBlock((BridgeChunk) getChunkAt(x / 16, z / 16), x, y, z);
 	}
 
 	@Override

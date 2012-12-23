@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeCreeper extends BridgeMonster implements Creeper {

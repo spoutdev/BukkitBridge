@@ -20,6 +20,7 @@
 package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
+
 import org.spout.bridge.VanillaBridgePlugin;
 
 public class PaintingListener extends AbstractListener {
@@ -27,28 +28,27 @@ public class PaintingListener extends AbstractListener {
 		super(plugin);
 	}
 
-    @EventHandler
-    public void onPaintingBreakByEntity(){
-        //todo implement onPaintingBreakByEntity
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPaintingBreakByEntity() {
+		//todo implement onPaintingBreakByEntity
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPaintingBreak(){
-        //todo implement onPaintingBreak
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPaintingBreak() {
+		//todo implement onPaintingBreak
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPainting(){
-        //todo implement onPainting
-        throw new UnsupportedOperationException();
-    }
+	@EventHandler
+	public void onPainting() {
+		//todo implement onPainting
+		throw new UnsupportedOperationException();
+	}
 
-    @EventHandler
-    public void onPaintingPlace(){
-        //todo implement onPaintingPlace
-        throw new UnsupportedOperationException();
-    }
-
+	@EventHandler
+	public void onPaintingPlace() {
+		//todo implement onPaintingPlace
+		throw new UnsupportedOperationException();
+	}
 }

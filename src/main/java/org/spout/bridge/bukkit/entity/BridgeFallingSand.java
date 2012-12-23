@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeFallingSand extends BridgeEntity implements FallingSand {

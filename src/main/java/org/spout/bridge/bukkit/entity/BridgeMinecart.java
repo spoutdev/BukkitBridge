@@ -48,6 +48,7 @@ package org.spout.bridge.bukkit.entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
+
 import org.spout.api.entity.Entity;
 
 public class BridgeMinecart extends BridgeVehicle implements Minecart {

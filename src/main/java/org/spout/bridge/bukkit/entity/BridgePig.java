@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.entity;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pig;
+
 import org.spout.api.entity.Entity;
 
 public class BridgePig extends BridgeAnimals implements Pig {
