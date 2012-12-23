@@ -81,12 +81,12 @@ public class BridgeScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task) {
-		return Spout.getEngine().getScheduler().scheduleAsyncTask(plugin, task);
+		return Spout.getEngine().getScheduler().scheduleAsyncTask(plugin, task).getTaskId();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay) {
-		return Spout.getEngine().getScheduler().scheduleAsyncDelayedTask(plugin, task, delay * 50L, TaskPriority.NORMAL);
+		return Spout.getEngine().getScheduler().scheduleAsyncDelayedTask(plugin, task, delay * 50L, TaskPriority.NORMAL).getTaskId();
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class BridgeScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return Spout.getEngine().getScheduler().scheduleSyncRepeatingTask(plugin, task, delay * 50L, (period > 0 ? period * 50L : period), TaskPriority.NORMAL);
+		return Spout.getEngine().getScheduler().scheduleSyncRepeatingTask(plugin, task, delay * 50L, (period > 0 ? period * 50L : period), TaskPriority.NORMAL).getTaskId();
 	}
 
 	private static class FutureRunnable<T> implements Runnable, Future<T> {
