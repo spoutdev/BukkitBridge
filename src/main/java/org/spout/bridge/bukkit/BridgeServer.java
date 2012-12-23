@@ -86,7 +86,7 @@ public class BridgeServer implements Server {
 	private final BridgeScheduler scheduler = new BridgeScheduler();
 	private final PluginManager pluginManager = new ForwardingPluginManager(this);
 	private final String bridgeVersion = getPOMVersion();
-	private final String serverVersion = "Spout Server ( " + Spout.getAPIVersion() + " )";
+	private final String serverVersion = "Spout Server ( " + Spout.getEngine().getVersion() + " )";
 
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;

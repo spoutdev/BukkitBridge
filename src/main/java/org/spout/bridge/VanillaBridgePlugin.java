@@ -58,7 +58,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		entityListener = new EntityListener(this);
 		blockListener = new BlockListener(this);
 		BridgeServer server = new BridgeServer((Server) Spout.getEngine(), this);
-		getLogger().info("Bukkit Bridge Enabling, Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
+		getLogger().info("enabled. Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
 		pluginCause = new PluginCause(this);
 
 		this.getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
@@ -66,6 +66,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 
 	@Override
 	public void onDisable() {
+		getLogger().info("disabled.");
 	}
 
 	public WorldListener getWorldListener() {
