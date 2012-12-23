@@ -19,15 +19,19 @@
  */
 package org.spout.bridge.bukkit.inventory;
 
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import org.spout.api.inventory.Inventory;
 
+import org.spout.bridge.bukkit.entity.BridgePlayer;
+
 public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
-	public BridgeInventoryPlayer(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryPlayer(Inventory handle, BridgePlayer holder) {
+		super(handle, holder, "container.player", "Inventory", InventoryType.PLAYER);
 	}
 
 	@Override
@@ -96,7 +100,7 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 	}
 
 	@Override
-	public Player getHolder() {
-		return null;
+	public HumanEntity getHolder() {
+		return (HumanEntity) holder;
 	}
 }

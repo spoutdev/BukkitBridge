@@ -55,6 +55,6 @@ public class BridgeFurnace extends BridgeBlockState implements Furnace {
 
 	@Override
 	public FurnaceInventory getInventory() {
-		return new BridgeInventoryFurnace(furnace.getInventory(), "");
+		return new BridgeInventoryFurnace(furnace.getInventory(), this);
 	}
 }

@@ -19,12 +19,15 @@
  */
 package org.spout.bridge.bukkit.inventory;
 
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.MerchantInventory;
 
 import org.spout.api.inventory.Inventory;
 
+import org.spout.bridge.bukkit.entity.BridgePlayer;
+
 public class BridgeInventoryMerchant extends BridgeInventory implements MerchantInventory {
-	public BridgeInventoryMerchant(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryMerchant(Inventory handle, BridgePlayer holder) {
+		super(handle, holder, "container.merchant", "Merchant", InventoryType.MERCHANT);
 	}
 }

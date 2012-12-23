@@ -19,14 +19,17 @@
  */
 package org.spout.bridge.bukkit.inventory;
 
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.ItemStack;
 
 import org.spout.api.inventory.Inventory;
 
+import org.spout.bridge.bukkit.entity.BridgePlayer;
+
 public class BridgeInventoryEnchanting extends BridgeInventory implements EnchantingInventory {
-	public BridgeInventoryEnchanting(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryEnchanting(Inventory handle, BridgePlayer holder) {
+		super(handle, holder, "container.enchanting", "Enchant", InventoryType.ENCHANTING);
 	}
 
 	@Override

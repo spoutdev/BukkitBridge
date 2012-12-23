@@ -41,8 +41,6 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
-;
-
 @DelegateDeserialization(BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
 	public BridgePlayer(org.spout.api.entity.Player handle) {

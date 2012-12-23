@@ -20,14 +20,15 @@
 package org.spout.bridge.bukkit.inventory;
 
 import org.bukkit.block.Furnace;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
 
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryFurnace extends BridgeInventory implements FurnaceInventory {
-	public BridgeInventoryFurnace(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryFurnace(Inventory handle, Furnace holder) {
+		super(handle, holder, "container.furnace", "Furnace", InventoryType.FURNACE);
 	}
 
 	@Override
@@ -62,7 +63,6 @@ public class BridgeInventoryFurnace extends BridgeInventory implements FurnaceIn
 
 	@Override
 	public Furnace getHolder() {
-		// TODO: Currently no way to get the holder of any Vanilla inventory.
-		throw new UnsupportedOperationException();
+		return (Furnace) holder;
 	}
 }

@@ -19,15 +19,18 @@
  */
 package org.spout.bridge.bukkit.inventory;
 
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 import org.spout.api.inventory.Inventory;
 
+import org.spout.bridge.bukkit.entity.BridgePlayer;
+
 public class BridgeInventoryCrafting extends BridgeInventory implements CraftingInventory {
-	public BridgeInventoryCrafting(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryCrafting(Inventory handle, BridgePlayer player) {
+		super(handle, player, "container.crafting", "Crafting table", InventoryType.CRAFTING);
 	}
 
 	@Override

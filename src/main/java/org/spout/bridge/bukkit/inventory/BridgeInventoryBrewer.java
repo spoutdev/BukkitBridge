@@ -20,14 +20,15 @@
 package org.spout.bridge.bukkit.inventory;
 
 import org.bukkit.block.BrewingStand;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
 
 import org.spout.api.inventory.Inventory;
 
 public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInventory {
-	public BridgeInventoryBrewer(Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryBrewer(Inventory handle, BrewingStand stand) {
+		super(handle, stand, "container.brewer", "Brewing stand", InventoryType.BREWING);
 	}
 
 	@Override
@@ -42,7 +43,6 @@ public class BridgeInventoryBrewer extends BridgeInventory implements BrewerInve
 
 	@Override
 	public BrewingStand getHolder() {
-		// TODO: Currently no way to get the holder of any Vanilla inventory.
-		throw new UnsupportedOperationException();
+		return (BrewingStand) holder;
 	}
 }

@@ -19,10 +19,12 @@
  */
 package org.spout.bridge.bukkit.inventory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -30,16 +32,27 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
+import org.spout.api.inventory.InventoryViewer;
+
 import org.spout.bridge.BukkitUtil;
 
+import org.spout.vanilla.inventory.window.Window;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 
 public class BridgeInventory implements Inventory {
-	private org.spout.api.inventory.Inventory handle;
+	protected org.spout.api.inventory.Inventory handle;
+	protected final InventoryHolder holder;
+	protected int maxStackSize = 64;
+	protected final String name, title;
+	protected final InventoryType type;
 
-	public BridgeInventory(org.spout.api.inventory.Inventory handle, String name) {
+	public BridgeInventory(org.spout.api.inventory.Inventory handle, InventoryHolder holder, String name, String title, InventoryType type) {
 		this.handle = handle;
+		this.holder = holder;
+		this.name = name;
+		this.title = title;
+		this.type = type;
 	}
 
 	public org.spout.api.inventory.Inventory getHandle() {
@@ -53,16 +66,17 @@ public class BridgeInventory implements Inventory {
 
 	@Override
 	public int getMaxStackSize() {
-		return 64;
+		return maxStackSize;
 	}
 
 	@Override
 	public void setMaxStackSize(int maxStackSize) {
+		this.maxStackSize = Math.min(maxStackSize, 64);
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	@Override
@@ -242,31 +256,41 @@ public class BridgeInventory implements Inventory {
 
 	@Override
 	public List<HumanEntity> getViewers() {
-		throw new UnsupportedOperationException();
+		List<HumanEntity> humans = new ArrayList<HumanEntity>();
+		for (InventoryViewer viewer : handle.getViewers()) {
+			if (viewer instanceof Window) {
+				humans.add(Bukkit.getPlayer(((Window) viewer).getPlayer().getName()));
+			}
+		}
+		return humans;
 	}
 
 	@Override
 	public String getTitle() {
-		throw new UnsupportedOperationException();
+		return title;
 	}
 
 	@Override
 	public InventoryType getType() {
-		throw new UnsupportedOperationException();
+		return type;
 	}
 
 	@Override
 	public InventoryHolder getHolder() {
-		throw new UnsupportedOperationException();
+		return holder;
 	}
 
 	@Override
 	public ListIterator<ItemStack> iterator() {
-		throw new UnsupportedOperationException();
+		return iterator(0);
 	}
 
 	@Override
 	public ListIterator<ItemStack> iterator(int i) {
-		throw new UnsupportedOperationException();
+		List<ItemStack> items = new ArrayList<ItemStack>();
+		for (org.spout.api.inventory.ItemStack item : handle) {
+			items.add(BukkitUtil.fromItemStack(item));
+		}
+		return items.listIterator(i);
 	}
 }

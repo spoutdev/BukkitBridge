@@ -20,12 +20,13 @@
 package org.spout.bridge.bukkit.inventory;
 
 import org.bukkit.block.DoubleChest;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeInventoryDoubleChest extends BridgeInventory implements DoubleChestInventory {
-	public BridgeInventoryDoubleChest(org.spout.api.inventory.Inventory handle, String name) {
-		super(handle, name);
+	public BridgeInventoryDoubleChest(org.spout.api.inventory.Inventory handle, DoubleChest holder) {
+		super(handle, holder, "container.double_chest", "Large chest", InventoryType.CHEST);
 	}
 
 	@Override
@@ -40,6 +41,6 @@ public class BridgeInventoryDoubleChest extends BridgeInventory implements Doubl
 
 	@Override
 	public DoubleChest getHolder() {
-		return null;
+		return (DoubleChest) holder;
 	}
 }

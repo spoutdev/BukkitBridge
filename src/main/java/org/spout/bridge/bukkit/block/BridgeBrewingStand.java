@@ -45,6 +45,6 @@ public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand
 
 	@Override
 	public BrewerInventory getInventory() {
-		return new BridgeInventoryBrewer(stand.getInventory(), "");
+		return new BridgeInventoryBrewer(stand.getInventory(), this);
 	}
 }
