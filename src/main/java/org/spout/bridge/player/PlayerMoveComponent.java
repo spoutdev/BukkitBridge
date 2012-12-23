@@ -31,8 +31,8 @@ import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
 public class PlayerMoveComponent extends EntityComponent {
-	Transform prev;
-	Player player;
+	private Transform prev;
+	private Player player;
 
 	@Override
 	public void onAttached() {

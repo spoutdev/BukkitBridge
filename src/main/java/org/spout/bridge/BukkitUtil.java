@@ -82,7 +82,8 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI block from a Bukkit block
-	 * @param point The Bukkit block to convert to a SpoutAPI block
+	 * @param block The Bukkit block to convert to a SpoutAPI block
+	 *
 	 * @return The corresponding SpoutAPI block
 	 */
 	public static org.spout.api.geo.cuboid.Block toBlock(Block block) {

@@ -34,7 +34,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import org.spout.api.Spout;
+<<<<<<< HEAD
 import org.spout.api.component.impl.PhysicsComponent;
+=======
+import org.spout.api.component.implementation.PhysicsComponent;
+>>>>>>> Formatting
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.math.Vector3;
