@@ -40,17 +40,24 @@ public class PlayerMoveComponent extends EntityComponent {
 	}
 
 	@Override
+	public boolean canTick() {
+		return true;
+	}
+
+	@Override
 	public void onTick(float dt) {
-		if (prev != null && !prev.equals(getOwner().getTransform().getTransform())) {
+		if (prev != null && !prev.equals(getOwner().getScene().getTransform())) {
 			Location from = BukkitUtil.fromTransform(prev);
-			Location to = BukkitUtil.fromTransform(getOwner().getTransform().getTransform());
+			Location to = BukkitUtil.fromTransform(getOwner().getScene().getTransform());
 			PlayerMoveEvent event = new PlayerMoveEvent(player, from, to);
 			Bukkit.getPluginManager().callEvent(event);
 			if (event.isCancelled()) {
-				getOwner().getTransform().setTransform(prev);
+				getOwner().getScene().setTransform(prev);
 			} else if (!event.getTo().equals(to)) {
-				getOwner().getTransform().setPosition(BukkitUtil.toPoint(to));
+				getOwner().getScene().setPosition(BukkitUtil.toPoint(to));
 			}
 		}
+		
+		prev = getOwner().getScene().getTransform();
 	}
 }

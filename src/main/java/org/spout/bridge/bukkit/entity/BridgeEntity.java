@@ -34,10 +34,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import org.spout.api.Spout;
-import org.spout.api.component.impl.PhysicsComponent;
-import org.spout.api.component.impl.PhysicsComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
@@ -106,9 +105,10 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Location getLocation() {
-		Point pos = handle.getTransform().getPosition();
+		Point pos = handle.getScene().getPosition();
 		World w = getServer().getWorld(handle.getWorld().getUID());
-		return new Location(w, pos.getX(), pos.getY(), pos.getZ(), handle.getTransform().getYaw(), handle.getTransform().getPitch());
+		Quaternion rotation = handle.getScene().getRotation();
+		return new Location(w, pos.getX(), pos.getY(), pos.getZ(), rotation.getYaw(), rotation.getPitch());
 	}
 
 	@Override
@@ -213,9 +213,8 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void setVelocity(Vector vec) {
-		PhysicsComponent physics = handle.get(PhysicsComponent.class);
-		if (physics != null) {
-			physics.applyForce(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
+		if (handle.getScene().isActivated()) {
+			handle.getScene().force(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
 		}
 	}
 
@@ -238,9 +237,8 @@ public abstract class BridgeEntity implements Entity {
 		if (!event.isCancelled()) {
 			loc = BukkitUtil.fromPoint(event.getTo());
 			prev = BukkitUtil.fromPoint(event.getFrom());
-			handle.getTransform().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
-			handle.getTransform().setPitch(loc.getPitch());
-			handle.getTransform().setYaw(loc.getYaw());
+			handle.getScene().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
+			handle.getScene().setRotation(new Quaternion(loc.getPitch(), loc.getYaw(), 0, 0));
 			return true;
 		}
 		return false;
