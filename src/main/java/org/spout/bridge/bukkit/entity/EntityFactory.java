@@ -39,7 +39,7 @@ public final class EntityFactory {
 		if (entity instanceof Player) {
 			return createPlayer((Player) entity);
 		}
-		if (entity.has(Zombie.class)) {
+		if (entity.get(Zombie.class) != null) {
 			return new BridgeZombie(entity);
 		}
 		return null;

@@ -225,7 +225,7 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onEntityDespawn(EntityDespawnEvent event) {
-		if (event.getEntity().has(Item.class)) {
+		if (event.getEntity().get(Item.class) != null) {
 			onItemDespawn(event);
 		}
 	}
@@ -300,7 +300,7 @@ public class EntityListener extends AbstractListener {
 			onLivingSpawn((LivingSpawnEvent) event);
 		}
 
-		if (event.getEntity().has(Item.class)) {
+		if (event.getEntity().get(Item.class) != null)  {
 			onItemSpawn(event);
 		}
 	}
