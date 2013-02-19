@@ -293,7 +293,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public Set<String> getIPBans() {
-		throw new UnsupportedOperationException("Not supported");
+		return new HashSet<String>(server.getAccessManager().getBanned(BanType.IP));
 	}
 
 	@Override
@@ -313,7 +313,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getMaxPlayers() {
-		throw new UnsupportedOperationException();
+		return server.getMaxPlayers();
 	}
 
 	@Override
@@ -337,7 +337,7 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public OfflinePlayer getOfflinePlayer(String arg0) {
+	public OfflinePlayer getOfflinePlayer(String name) {
 		throw new UnsupportedOperationException();
 	}
 
