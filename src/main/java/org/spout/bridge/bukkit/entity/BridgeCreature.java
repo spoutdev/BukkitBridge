@@ -38,4 +38,9 @@ public abstract class BridgeCreature extends BridgeLivingEntity implements Creat
 	public LivingEntity getTarget() {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return false;
+	}
 }

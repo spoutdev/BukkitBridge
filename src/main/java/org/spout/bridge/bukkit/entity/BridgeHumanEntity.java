@@ -204,4 +204,9 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 	public void setOp(boolean b) {
 		//To change body of implemented methods use File | Settings | File Templates.
 	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return true;
+	}
 }

@@ -33,4 +33,19 @@ public class BridgeSkeleton extends BridgeMonster implements Skeleton {
 	public EntityType getType() {
 		return EntityType.SKELETON;
 	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return true;
+	}
+
+	@Override
+	public SkeletonType getSkeletonType() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setSkeletonType(SkeletonType skeletonType) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
 }

@@ -187,6 +187,18 @@ public class BridgeBlock implements Block {
 	}
 
 	@Override
+	public Location getLocation(Location location) {
+		if (location != null) {
+			location.setX(x);
+			location.setY(y);
+			location.setZ(z);
+			location.setPitch(0);
+			location.setYaw(0);
+		}
+		return location;
+	}
+
+	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
 		throw new UnsupportedOperationException();
 	}
@@ -266,7 +278,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isBlockPowered() {
-		return RedstoneUtil.isEmittingPower(getWorld().getHandle().getBlock(x, y, z));
+		return false; //TODO: fix
 	}
 
 	@Override

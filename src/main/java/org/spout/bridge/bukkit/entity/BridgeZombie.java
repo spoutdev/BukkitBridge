@@ -33,4 +33,29 @@ public class BridgeZombie extends BridgeMonster implements Zombie {
 	public EntityType getType() {
 		return EntityType.ZOMBIE;
 	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return true;
+	}
+
+	@Override
+	public boolean isBaby() {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setBaby(boolean b) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public boolean isVillager() {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setVillager(boolean b) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
 }

@@ -19,6 +19,7 @@
  */
 package org.spout.bridge.bukkit.entity;
 
+import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 
@@ -36,7 +37,7 @@ public class BridgeWolf extends BridgeTameableAnimal implements Wolf {
 
 	@Override
 	public void setAngry(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -46,7 +47,17 @@ public class BridgeWolf extends BridgeTameableAnimal implements Wolf {
 
 	@Override
 	public void setSitting(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public DyeColor getCollarColor() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setCollarColor(DyeColor dyeColor) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

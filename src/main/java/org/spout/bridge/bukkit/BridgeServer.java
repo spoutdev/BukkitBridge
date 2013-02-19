@@ -50,6 +50,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
@@ -72,8 +73,8 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
 
-import org.spout.vanilla.configuration.VanillaConfiguration;
-import org.spout.vanilla.configuration.WorldConfiguration;
+import org.spout.vanilla.data.configuration.VanillaConfiguration;
+import org.spout.vanilla.data.configuration.WorldConfiguration;
 import org.spout.vanilla.inventory.recipe.VanillaRecipes;
 
 /**
@@ -233,12 +234,17 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean getAllowEnd() {
-		return WorldConfiguration.END.LOAD.getBoolean();
+		return WorldConfiguration.THE_END.LOAD.getBoolean();
 	}
 
 	@Override
 	public boolean getAllowFlight() {
 		return WorldConfiguration.NORMAL.ALLOW_FLIGHT.getBoolean();
+	}
+
+	@Override
+	public boolean isHardcore() {
+		return false;  //TODO:
 	}
 
 	@Override
@@ -329,6 +335,11 @@ public class BridgeServer implements Server {
 	@Override
 	public String getMotd() {
 		return VanillaConfiguration.MOTD.getString();
+	}
+
+	@Override
+	public String getShutdownMessage() {
+		return null;  //TODO
 	}
 
 	@Override
@@ -457,6 +468,11 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
+	public int getAmbientSpawnLimit() {
+		return 0;  //TODO
+	}
+
+	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
 		HashSet<OfflinePlayer> set = new HashSet<OfflinePlayer>();
 		for (String name : server.getAccessManager().getWhitelistedPlayers()) {
@@ -548,7 +564,7 @@ public class BridgeServer implements Server {
 		WorldConfiguration.NORMAL.GAMEMODE.setValue(mode.name().toLowerCase());
 		WorldConfiguration.FLAT.GAMEMODE.setValue(mode.name().toLowerCase());
 		WorldConfiguration.NETHER.GAMEMODE.setValue(mode.name().toLowerCase());
-		WorldConfiguration.END.GAMEMODE.setValue(mode.name().toLowerCase());
+		WorldConfiguration.THE_END.GAMEMODE.setValue(mode.name().toLowerCase());
 	}
 
 	@Override
@@ -593,6 +609,11 @@ public class BridgeServer implements Server {
 	@Override
 	public WarningState getWarningState() {
 		return WarningState.DEFAULT;
+	}
+
+	@Override
+	public ItemFactory getItemFactory() {
+		return null; //TODO
 	}
 
 	private static String getPOMVersion() {

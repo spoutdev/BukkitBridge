@@ -63,8 +63,8 @@ import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
-import org.spout.vanilla.component.substance.Item;
 import org.spout.vanilla.component.substance.Lightning;
+import org.spout.vanilla.component.substance.object.Item;
 import org.spout.vanilla.component.substance.object.Tnt;
 import org.spout.vanilla.component.substance.object.projectile.Potion;
 import org.spout.vanilla.event.entity.EntityCombustEvent;

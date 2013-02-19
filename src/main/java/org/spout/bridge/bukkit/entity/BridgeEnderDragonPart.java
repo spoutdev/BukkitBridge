@@ -38,4 +38,39 @@ public class BridgeEnderDragonPart extends BridgeComplexPart implements EnderDra
 	public EntityType getType() {
 		return EntityType.ENDER_DRAGON;
 	}
+
+	@Override
+	public void damage(int i) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void damage(int i, org.bukkit.entity.Entity entity) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getHealth() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setHealth(int i) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getMaxHealth() {
+		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setMaxHealth(int i) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void resetMaxHealth() {
+		throw new UnsupportedOperationException();
+	}
 }

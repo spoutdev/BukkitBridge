@@ -50,7 +50,7 @@ public class BridgeEnchantment extends Enchantment {
 
 	@Override
 	public int getMaxLevel() {
-		return vanillaEnchantment.getMaximumLevel();
+		return vanillaEnchantment.getMaximumPowerLevel();
 	}
 
 	@Override

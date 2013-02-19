@@ -47,4 +47,9 @@ public class BridgePigZombie extends BridgeZombie implements PigZombie {
 	public boolean isAngry() {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return true;
+	}
 }

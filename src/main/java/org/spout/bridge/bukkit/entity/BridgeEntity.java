@@ -27,6 +27,7 @@ import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
@@ -182,6 +183,11 @@ public abstract class BridgeEntity implements Entity {
 	}
 
 	@Override
+	public EntityType getType() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public void remove() {
 		handle.remove();
 	}
@@ -266,5 +272,21 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public String toString() {
 		return "{ " + getClass().getSimpleName() + " : " + handle.toString() + " }";
+	}
+
+	@Override
+	public Location getLocation(Location loc) {
+		if (loc != null) {
+			Point pos = handle.getScene().getPosition();
+			Quaternion rotation = handle.getScene().getRotation();
+
+			loc.setWorld(getWorld());
+			loc.setX(pos.getX());
+			loc.setY(pos.getY());
+			loc.setZ(loc.getZ());
+			loc.setYaw(rotation.getYaw());
+			loc.setPitch(rotation.getPitch());
+		}
+		return loc;
 	}
 }

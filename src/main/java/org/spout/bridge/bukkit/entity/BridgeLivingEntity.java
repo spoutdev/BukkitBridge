@@ -32,6 +32,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowball;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -53,6 +54,16 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	@Override
 	public int getMaxHealth() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setMaxHealth(int i) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void resetMaxHealth() {
+		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -203,5 +214,30 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	@Override
 	public boolean hasLineOfSight(Entity entity) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean getRemoveWhenFarAway() {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setRemoveWhenFarAway(boolean b) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public EntityEquipment getEquipment() {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setCanPickupItems(boolean b) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public boolean getCanPickupItems() {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 }

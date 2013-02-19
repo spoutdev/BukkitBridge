@@ -278,6 +278,11 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	}
 
 	@Override
+	public void giveExpLevels(int i) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public float getExp() {
 		throw new UnsupportedOperationException();
 	}
@@ -393,6 +398,11 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	}
 
 	@Override
+	public void setBedSpawnLocation(Location location, boolean b) {
+		//To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public boolean getAllowFlight() {
 		throw new UnsupportedOperationException();
 	}
@@ -445,6 +455,11 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	@Override
 	public float getWalkSpeed() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setTexturePack(String s) {
+		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

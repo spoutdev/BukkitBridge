@@ -70,8 +70,8 @@ import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
 import org.spout.vanilla.component.world.VanillaSky;
-import org.spout.vanilla.configuration.VanillaConfiguration;
-import org.spout.vanilla.configuration.WorldConfiguration;
+import org.spout.vanilla.data.configuration.VanillaConfiguration;
+import org.spout.vanilla.data.configuration.WorldConfiguration;
 import org.spout.vanilla.data.effect.store.GeneralEffects;
 import org.spout.vanilla.data.effect.store.SoundEffects;
 import org.spout.vanilla.material.VanillaMaterial;
@@ -155,6 +155,11 @@ public class BridgeWorld implements World {
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
 		ExplosionModels.SPHERICAL.execute(new Point(handle, (float) x, (float) y, (float) z), power, setFire, null);
 		return true;
+	}
+
+	@Override
+	public boolean createExplosion(double v, double v2, double v3, float v4, boolean b, boolean b2) {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -289,7 +294,7 @@ public class BridgeWorld implements World {
 			case NETHER:
 				return Difficulty.valueOf(WorldConfiguration.NETHER.DIFFICULTY.getString().toUpperCase());
 			case THE_END:
-				return Difficulty.valueOf(WorldConfiguration.END.DIFFICULTY.getString().toUpperCase());
+				return Difficulty.valueOf(WorldConfiguration.THE_END.DIFFICULTY.getString().toUpperCase());
 		}
 		return Difficulty.NORMAL;
 	}
@@ -373,7 +378,7 @@ public class BridgeWorld implements World {
 			case NETHER:
 				return WorldConfiguration.NETHER.LOADED_SPAWN.getBoolean();
 			case THE_END:
-				return WorldConfiguration.END.LOADED_SPAWN.getBoolean();
+				return WorldConfiguration.THE_END.LOADED_SPAWN.getBoolean();
 		}
 		throw new IllegalStateException("Unknown environment");
 	}
@@ -633,6 +638,26 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
+	public String[] getGameRules() {
+		return new String[0];  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public String getGameRuleValue(String s) {
+		return null;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public boolean setGameRuleValue(String s, String s2) {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public boolean isGameRule(String s) {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public boolean refreshChunk(int x, int z) {
 		BridgeChunk chunk = getChunkAt(x, z, LoadOption.LOAD_GEN);
 		org.spout.api.geo.cuboid.Chunk[] handle = chunk.getHandle(LoadOption.LOAD_GEN);
@@ -679,7 +704,7 @@ public class BridgeWorld implements World {
 				WorldConfiguration.NETHER.DIFFICULTY.setValue(difficulty.name());
 				break;
 			case THE_END:
-				WorldConfiguration.END.DIFFICULTY.setValue(difficulty.name());
+				WorldConfiguration.THE_END.DIFFICULTY.setValue(difficulty.name());
 				break;
 		}
 	}
@@ -699,7 +724,7 @@ public class BridgeWorld implements World {
 				WorldConfiguration.NETHER.LOADED_SPAWN.setValue(keepLoaded);
 				break;
 			case THE_END:
-				WorldConfiguration.END.LOADED_SPAWN.setValue(keepLoaded);
+				WorldConfiguration.THE_END.LOADED_SPAWN.setValue(keepLoaded);
 				break;
 		}
 	}
@@ -758,6 +783,16 @@ public class BridgeWorld implements World {
 	@Override
 	public void setWaterAnimalSpawnLimit(int arg0) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int getAmbientSpawnLimit() {
+		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public void setAmbientSpawnLimit(int i) {
+		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -25,11 +25,10 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
-import org.getspout.spoutapi.Spout;
 
 import org.spout.api.util.access.BanType;
 
-import org.spout.vanilla.configuration.VanillaConfiguration;
+import org.spout.vanilla.data.configuration.VanillaConfiguration;
 
 public class BridgeOfflinePlayer implements OfflinePlayer, ConfigurationSerializable {
 	private final String name;

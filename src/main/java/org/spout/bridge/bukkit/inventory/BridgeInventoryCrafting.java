@@ -35,7 +35,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public ItemStack getResult() {
-		return getItem(((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot());
+		return getItem(((org.spout.vanilla.inventory.player.CraftingInventory) getHandle()).getOutputSlot());
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 		ItemStack[] itemStacks = new ItemStack[getSize() - 1];
 
 		for (int i = 0; i < itemStacks.length; i++) {
-			if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot()) {
+			if (i == ((org.spout.vanilla.inventory.player.CraftingInventory) getHandle()).getOutputSlot()) {
 				continue;
 			}
 			itemStacks[i] = getItem(i);
@@ -54,7 +54,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public void setResult(ItemStack itemStack) {
-		setItem(((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot(), itemStack);
+		setItem(((org.spout.vanilla.inventory.player.CraftingInventory) getHandle()).getOutputSlot(), itemStack);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 		}
 
 		for (int i = 0; i < itemStacks.length; i++) {
-			if (i == ((org.spout.vanilla.inventory.CraftingInventory) getHandle()).getOutputSlot()) {
+			if (i == ((org.spout.vanilla.inventory.player.CraftingInventory) getHandle()).getOutputSlot()) {
 				continue;
 			}
 			setItem(i, itemStacks[i]);

@@ -166,6 +166,11 @@ public class BridgeInventory implements Inventory {
 	}
 
 	@Override
+	public boolean containsAtLeast(ItemStack itemStack, int i) {
+		return false;
+	}
+
+	@Override
 	public HashMap<Integer, ? extends ItemStack> all(int typeId) {
 		HashMap<Integer, ItemStack> map = new HashMap<Integer, ItemStack>();
 		for (int i = 0; i < handle.size(); i++) {
