@@ -48,6 +48,7 @@ import org.spout.vanilla.component.entity.inventory.PlayerInventory;
 import org.spout.vanilla.component.entity.living.neutral.Human;
 import org.spout.vanilla.component.entity.misc.Hunger;
 import org.spout.vanilla.component.entity.misc.Level;
+import org.spout.vanilla.data.VanillaData;
 
 @DelegateDeserialization(BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
@@ -142,22 +143,22 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isSneaking() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.IS_SNEAKING);
 	}
 
 	@Override
 	public void setSneaking(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().getData().put(VanillaData.IS_SNEAKING, b);
 	}
 
 	@Override
 	public boolean isSprinting() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.IS_SPRINTING);
 	}
 
 	@Override
 	public void setSprinting(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().getData().put(VanillaData.IS_SPRINTING, b);
 	}
 
 	@Override

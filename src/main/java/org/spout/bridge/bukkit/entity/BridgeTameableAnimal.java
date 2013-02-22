@@ -19,11 +19,14 @@
  */
 package org.spout.bridge.bukkit.entity;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Tameable;
 
 import org.spout.api.entity.Entity;
+
+import org.spout.vanilla.data.VanillaData;
 
 public abstract class BridgeTameableAnimal extends BridgeAnimals implements Tameable, Creature {
 	protected BridgeTameableAnimal(Entity handle) {
@@ -32,21 +35,21 @@ public abstract class BridgeTameableAnimal extends BridgeAnimals implements Tame
 
 	@Override
 	public boolean isTamed() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.TAMED);
 	}
 
 	@Override
 	public void setTamed(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().getData().put(VanillaData.TAMED, b);
 	}
 
 	@Override
 	public AnimalTamer getOwner() {
-		throw new UnsupportedOperationException();
+		return Bukkit.getPlayer(getHandle().getData().get(VanillaData.OWNER));
 	}
 
 	@Override
 	public void setOwner(AnimalTamer animalTamer) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().getData().put(VanillaData.OWNER, animalTamer.getName());
 	}
 }
