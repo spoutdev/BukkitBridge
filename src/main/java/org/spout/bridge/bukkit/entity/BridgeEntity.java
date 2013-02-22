@@ -35,8 +35,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 import org.spout.api.Spout;
+import org.spout.api.component.type.EntityComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.map.DefaultedKey;
+import org.spout.api.map.DefaultedKeyImpl;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
@@ -47,14 +50,22 @@ import org.spout.vanilla.component.entity.misc.Burn;
 import org.spout.vanilla.component.entity.misc.Health;
 
 public abstract class BridgeEntity implements Entity {
+	protected static final DefaultedKey<Integer> TICKS_LIVED = new DefaultedKeyImpl<Integer>("ticks_lived", 0);
+
 	private final org.spout.api.entity.Entity handle;
+	private final BridgeComponent component;
 
 	protected BridgeEntity(org.spout.api.entity.Entity handle) {
 		this.handle = handle;
+		this.component = this.handle.add(BridgeComponent.class);
 	}
 
 	public org.spout.api.entity.Entity getHandle() {
 		return handle;
+	}
+
+	public final BridgeComponent getComponent() {
+		return component;
 	}
 
 	@Override
@@ -131,11 +142,6 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Entity getPassenger() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public int getTicksLived() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -225,8 +231,13 @@ public abstract class BridgeEntity implements Entity {
 	}
 
 	@Override
+	public int getTicksLived() {
+		return handle.getData().get(TICKS_LIVED);
+	}
+
+	@Override
 	public void setTicksLived(int ticks) {
-		throw new UnsupportedOperationException();
+		handle.getData().put(TICKS_LIVED, ticks);
 	}
 
 	@Override
@@ -300,5 +311,22 @@ public abstract class BridgeEntity implements Entity {
 			loc.setPitch(rotation.getPitch());
 		}
 		return loc;
+	}
+}
+
+class BridgeComponent extends EntityComponent {
+	private final org.spout.api.entity.Entity handle;
+	public BridgeComponent(org.spout.api.entity.Entity entity) {
+		this.handle = entity;
+	}
+
+	@Override
+	public boolean canTick() {
+		return true;
+	}
+
+	@Override
+	public void onTick(float dt) {
+		handle.getData().put(BridgeEntity.TICKS_LIVED, handle.getData().get(BridgeEntity.TICKS_LIVED) + 1);
 	}
 }
