@@ -43,6 +43,9 @@ import org.spout.api.math.Vector3;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
 
+import org.spout.vanilla.component.entity.misc.Burn;
+import org.spout.vanilla.component.entity.misc.Health;
+
 public abstract class BridgeEntity implements Entity {
 	private final org.spout.api.entity.Entity handle;
 
@@ -96,7 +99,11 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public int getFireTicks() {
-		throw new UnsupportedOperationException();
+		Burn burn = handle.get(Burn.class);
+		if (burn == null) {
+			return 0;
+		}
+		return (int) burn.getFireTick();
 	}
 
 	@Override
@@ -144,7 +151,8 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Vector getVelocity() {
-		throw new UnsupportedOperationException();
+		Vector3 velocity = getHandle().getScene().getMovementVelocity();
+		return new Vector(velocity.getX(), velocity.getY(), velocity.getZ());
 	}
 
 	@Override
@@ -154,7 +162,8 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean isDead() {
-		return handle.isRemoved();
+		Health health = getHandle().get(Health.class);
+		return health != null ? health.isDead() : handle.isRemoved();
 	}
 
 	@Override
@@ -184,7 +193,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public EntityType getType() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;
 	}
 
 	@Override
@@ -199,7 +208,10 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void setFireTicks(int ticks) {
-		throw new UnsupportedOperationException();
+		Burn burn = handle.get(Burn.class);
+		if (burn != null) {
+			burn.setOnFire(ticks / 20, true);
+		}
 	}
 
 	@Override
