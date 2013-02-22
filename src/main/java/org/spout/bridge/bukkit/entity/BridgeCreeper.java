@@ -24,6 +24,8 @@ import org.bukkit.entity.EntityType;
 
 import org.spout.api.entity.Entity;
 
+import org.spout.vanilla.data.VanillaData;
+
 public class BridgeCreeper extends BridgeMonster implements Creeper {
 	protected BridgeCreeper(Entity handle) {
 		super(handle);
@@ -31,12 +33,12 @@ public class BridgeCreeper extends BridgeMonster implements Creeper {
 
 	@Override
 	public boolean isPowered() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.CHARGED);
 	}
 
 	@Override
 	public void setPowered(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().getData().put(VanillaData.CHARGED, b);
 	}
 
 	@Override

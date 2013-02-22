@@ -31,7 +31,7 @@ public class BridgeVillager extends BridgeAgeable implements Villager {
 
 	@Override
 	public Profession getProfession() {
-		throw new UnsupportedOperationException();
+		return Profession.getProfession(getHandle().get(org.spout.vanilla.component.entity.living.passive.Villager.class).getVillagerTypeID());
 	}
 
 	@Override
