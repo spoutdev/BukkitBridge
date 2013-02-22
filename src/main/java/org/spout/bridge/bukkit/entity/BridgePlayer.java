@@ -41,6 +41,14 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
+import org.spout.api.Server;
+import org.spout.api.util.access.BanType;
+
+import org.spout.vanilla.component.entity.inventory.PlayerInventory;
+import org.spout.vanilla.component.entity.living.neutral.Human;
+import org.spout.vanilla.component.entity.misc.Hunger;
+import org.spout.vanilla.component.entity.misc.Level;
+
 @DelegateDeserialization(BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
 	public BridgePlayer(org.spout.api.entity.Player handle) {
@@ -84,7 +92,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public InetSocketAddress getAddress() {
-		throw new UnsupportedOperationException();
+		return getHandle().getSession().getAddress();
 	}
 
 	@Override
@@ -219,7 +227,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void updateInventory() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(PlayerInventory.class).updateAll();
 	}
 
 	@Override
@@ -274,12 +282,21 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void giveExp(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Level level = getHandle().get(Level.class);
+		if (level != null) {
+			level.addExperience(i);
+		}
 	}
 
 	@Override
 	public void giveExpLevels(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
+		/*
+		Level level = getHandle().get(Level.class);
+		if (level != null) {
+			//TODO: currently no way to add a sepcific number of levels worth of exp
+		}
+		*/
 	}
 
 	@Override
@@ -289,82 +306,104 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setExp(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getLevel() {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		return level != null ? level.getLevel() : 0;
 	}
 
 	@Override
 	public void setLevel(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int getTotalExperience() {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		return level != null ? level.getExperience() : 0;
 	}
 
 	@Override
 	public void setTotalExperience(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public float getExhaustion() {
-		throw new UnsupportedOperationException();
+		Hunger hunger = getHandle().get(Hunger.class);
+		return hunger != null ? hunger.getExhaustion() : 0;
 	}
 
 	@Override
 	public void setExhaustion(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Hunger hunger = getHandle().get(Hunger.class);
+		if (hunger != null) {
+			hunger.setExhaustion(v);
+		}
 	}
 
 	@Override
 	public float getSaturation() {
-		throw new UnsupportedOperationException();
+		Hunger hunger = getHandle().get(Hunger.class);
+		return hunger != null ? hunger.getExhaustion() : 0;
 	}
 
 	@Override
 	public void setSaturation(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Hunger hunger = getHandle().get(Hunger.class);
+		if (hunger != null) {
+			hunger.setFoodSaturation(v);
+		}
 	}
 
 	@Override
 	public int getFoodLevel() {
-		throw new UnsupportedOperationException();
+		Hunger hunger = getHandle().get(Hunger.class);
+		return hunger != null ? hunger.getHunger() : 0;
 	}
 
 	@Override
 	public void setFoodLevel(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Hunger hunger = getHandle().get(Hunger.class);
+		if (hunger != null) {
+			hunger.setHunger(i);
+		}
 	}
 
 	@Override
 	public boolean isOnline() {
-		throw new UnsupportedOperationException();
+		return true;
 	}
 
 	@Override
 	public boolean isBanned() {
-		throw new UnsupportedOperationException();
+		return ((Server) org.spout.api.Spout.getEngine()).getAccessManager().isBanned(BanType.PLAYER, getName());
 	}
 
 	@Override
 	public void setBanned(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		if (b) {
+		((Server) org.spout.api.Spout.getEngine()).getAccessManager().ban(BanType.PLAYER, getName());
+		} else {
+			((Server) org.spout.api.Spout.getEngine()).getAccessManager().unban(BanType.PLAYER, getName());
+		}
 	}
 
 	@Override
 	public boolean isWhitelisted() {
-		throw new UnsupportedOperationException();
+		return ((Server) org.spout.api.Spout.getEngine()).getAccessManager().isWhitelisted(getName());
 	}
 
 	@Override
 	public void setWhitelisted(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		if (b) {
+			((Server) org.spout.api.Spout.getEngine()).getAccessManager().whitelist(getName());
+		} else {
+			((Server) org.spout.api.Spout.getEngine()).getAccessManager().unwhitelist(getName());
+		}
 	}
 
 	@Override
@@ -394,32 +433,32 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setBedSpawnLocation(Location location) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public void setBedSpawnLocation(Location location, boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public boolean getAllowFlight() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	public void setBedSpawnLocation(Location location, boolean b) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean getAllowFlight() {
+		return getHandle().get(Human.class).canFly();
+	}
+
+	@Override
 	public void setAllowFlight(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(Human.class).setCanFly(b, true);
 	}
 
 	@Override
 	public void hidePlayer(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void showPlayer(Player player) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -429,37 +468,37 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isFlying() {
-		throw new UnsupportedOperationException();
+		return getHandle().get(Human.class).isFlying();
 	}
 
 	@Override
 	public void setFlying(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(Human.class).setFlying(b, true);
 	}
 
 	@Override
 	public void setFlySpeed(float v) throws IllegalArgumentException {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(Human.class).setFlyingSpeed((byte) v, true); //TODO: Check speed conversion loss float -> byte
 	}
 
 	@Override
 	public void setWalkSpeed(float v) throws IllegalArgumentException {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(Human.class).setWalkingSpeed((byte) v, true); //TODO: Check speed conversion loss float -> byte
 	}
 
 	@Override
 	public float getFlySpeed() {
-		throw new UnsupportedOperationException();
+		return getHandle().get(Human.class).getFlyingSpeed(); //TODO: possible speed conversion issue
 	}
 
 	@Override
 	public float getWalkSpeed() {
-		throw new UnsupportedOperationException();
+		return getHandle().get(Human.class).getWalkingSpeed(); //TODO: possible speed conversion issue
 	}
 
 	@Override
 	public void setTexturePack(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -479,7 +518,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendPluginMessage(Plugin plugin, String s, byte[] bytes) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
