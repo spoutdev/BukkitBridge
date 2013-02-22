@@ -24,6 +24,8 @@ import org.bukkit.entity.Projectile;
 
 import org.spout.api.entity.Entity;
 
+import org.spout.vanilla.component.entity.substance.Substance;
+
 public abstract class AbstractProjectile extends BridgeEntity implements Projectile {
 	protected AbstractProjectile(Entity handle) {
 		super(handle);
@@ -31,7 +33,8 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 
 	@Override
 	public LivingEntity getShooter() {
-		throw new UnsupportedOperationException();
+		BridgeEntity entity = EntityFactory.createEntity(((org.spout.vanilla.component.entity.substance.projectile.Projectile) getHandle().get(Substance.class)).getShooter());
+		return entity instanceof LivingEntity ? (LivingEntity) entity : null ;
 	}
 
 	@Override

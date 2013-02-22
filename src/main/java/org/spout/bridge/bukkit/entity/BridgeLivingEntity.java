@@ -36,6 +36,12 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import org.spout.vanilla.component.entity.misc.Drowning;
+import org.spout.vanilla.component.entity.misc.Head;
+import org.spout.vanilla.component.entity.misc.Health;
+import org.spout.vanilla.data.VanillaData;
+import org.spout.vanilla.event.cause.HealthChangeCause;
+
 public abstract class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
 	protected BridgeLivingEntity(org.spout.api.entity.Entity handle) {
 		super(handle);
@@ -43,32 +49,47 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getHealth() {
-		throw new UnsupportedOperationException();
+		Health health = getHandle().get(Health.class);
+		return health != null ? health.getHealth() : 0;
 	}
 
 	@Override
 	public void setHealth(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Health health = getHandle().get(Health.class);
+		if (health != null) {
+			health.setHealth(i, HealthChangeCause.PLUGIN);
+		}
 	}
 
 	@Override
 	public int getMaxHealth() {
-		throw new UnsupportedOperationException();
+		Health health = getHandle().get(Health.class);
+		return health != null ? health.getMaxHealth() : 0;
 	}
 
 	@Override
 	public void setMaxHealth(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Health health = getHandle().get(Health.class);
+		if (health != null) {
+			health.setMaxHealth(i);
+		}
 	}
 
 	@Override
 	public void resetMaxHealth() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
+		/*
+		Health health = getHandle().get(Health.class);
+		if (health != null) {
+			//TODO: reset not implemented
+		}
+		*/
 	}
 
 	@Override
 	public double getEyeHeight() {
-		throw new UnsupportedOperationException();
+		Head head = getHandle().get(Head.class);
+		return head != null ? head.getHeight() : 0;
 	}
 
 	@Override
@@ -118,32 +139,44 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public int getRemainingAir() {
-		throw new UnsupportedOperationException();
+		Drowning drown = getHandle().get(Drowning.class);
+		return drown != null ? (int) drown.getAir() * 20 : 0;
 	}
 
 	@Override
 	public void setRemainingAir(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
-
-	@Override
-	public int getMaximumAir() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
+	public int getMaximumAir() {
+		return (int) (VanillaData.AIR_SECS.getDefaultValue() * 20);
+
+	}
+
+	@Override
 	public void setMaximumAir(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void damage(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		Health health = getHandle().get(Health.class);
+		if (health != null) {
+			health.damage(i);
+		}
 	}
 
 	@Override
 	public void damage(int i, Entity entity) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
+		/*
+		Health health = getHandle().get(Health.class);
+		if (health != null) {
+		    //TODO: need to convert to spout entity
+			health.damage(i, new EntityDamageCause());
+		}
+		*/
 	}
 
 	@Override
@@ -153,7 +186,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public void setMaximumNoDamageTicks(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -163,7 +196,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public void setLastDamage(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -173,7 +206,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public void setNoDamageTicks(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -203,7 +236,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public void removePotionEffect(PotionEffectType potionEffectType) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -218,26 +251,26 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public boolean getRemoveWhenFarAway() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
 	public void setRemoveWhenFarAway(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+
 	}
 
 	@Override
 	public EntityEquipment getEquipment() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;
 	}
 
 	@Override
 	public void setCanPickupItems(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean getCanPickupItems() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 }
