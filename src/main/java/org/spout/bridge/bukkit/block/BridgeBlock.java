@@ -221,21 +221,21 @@ public class BridgeBlock implements Block {
 	@Override
 	public BlockState getState() {
 		BlockComponent component = getWorld().getHandle().getBlockComponent(x, y, z);
-		if (component instanceof org.spout.vanilla.component.substance.material.Sign) {
+		if (component instanceof org.spout.vanilla.component.block.material.Sign) {
 			return new BridgeSign(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.chest.Chest) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.chest.Chest) {
 			return new BridgeChest(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.Furnace) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.Furnace) {
 			return new BridgeFurnace(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.Dispenser) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.Dispenser) {
 			return new BridgeDispenser(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.MonsterSpawner) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.MonsterSpawner) {
 			return new BridgeCreatureSpawner(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.NoteBlock) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.NoteBlock) {
 			return new BridgeNoteblock(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.Jukebox) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.Jukebox) {
 			return new BridgeJukebox(this);
-		} else if (component instanceof org.spout.vanilla.component.substance.material.BrewingStand) {
+		} else if (component instanceof org.spout.vanilla.component.block.material.BrewingStand) {
 			return new BridgeBrewingStand(this);
 		} else {
 			return new BridgeBlockState(this);

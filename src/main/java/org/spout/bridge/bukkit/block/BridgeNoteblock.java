@@ -25,11 +25,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.NoteBlock;
 
 public class BridgeNoteblock extends BridgeBlockState implements NoteBlock {
-	private final org.spout.vanilla.component.substance.material.NoteBlock noteblock;
+	private final org.spout.vanilla.component.block.material.NoteBlock noteblock;
 
 	public BridgeNoteblock(Block b) {
 		super(b);
-		this.noteblock = (org.spout.vanilla.component.substance.material.NoteBlock) getHandle();
+		this.noteblock = (org.spout.vanilla.component.block.material.NoteBlock) getHandle();
 	}
 
 	@Override

@@ -24,11 +24,11 @@ import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 
 public class BridgeChest extends BridgeBlockState implements Chest {
-	private final org.spout.vanilla.component.substance.material.chest.Chest chest;
+	private final org.spout.vanilla.component.block.material.chest.Chest chest;
 
 	public BridgeChest(Block b) {
 		super(b);
-		this.chest = (org.spout.vanilla.component.substance.material.chest.Chest) getHandle();
+		this.chest = (org.spout.vanilla.component.block.material.chest.Chest) getHandle();
 	}
 
 	@Override

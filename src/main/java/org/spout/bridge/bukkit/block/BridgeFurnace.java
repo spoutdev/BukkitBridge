@@ -26,11 +26,11 @@ import org.bukkit.inventory.FurnaceInventory;
 import org.spout.bridge.bukkit.inventory.BridgeInventoryFurnace;
 
 public class BridgeFurnace extends BridgeBlockState implements Furnace {
-	private final org.spout.vanilla.component.substance.material.Furnace furnace;
+	private final org.spout.vanilla.component.block.material.Furnace furnace;
 
 	public BridgeFurnace(Block b) {
 		super(b);
-		this.furnace = (org.spout.vanilla.component.substance.material.Furnace) getHandle();
+		this.furnace = (org.spout.vanilla.component.block.material.Furnace) getHandle();
 	}
 
 	@Override

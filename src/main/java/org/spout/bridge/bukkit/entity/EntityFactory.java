@@ -22,9 +22,8 @@ package org.spout.bridge.bukkit.entity;
 import org.spout.api.entity.Entity;
 import org.spout.api.entity.Player;
 
-import org.spout.vanilla.component.living.Living;
-import org.spout.vanilla.component.living.hostile.Zombie;
-import org.spout.vanilla.component.substance.object.ObjectEntity;
+import org.spout.vanilla.component.entity.living.Living;
+import org.spout.vanilla.component.entity.substance.Substance;
 import org.spout.vanilla.protocol.entity.creature.CreatureType;
 import org.spout.vanilla.protocol.entity.object.ObjectType;
 
@@ -102,7 +101,7 @@ public final class EntityFactory {
 					return null;
 			}
 		}
-		ObjectEntity object = entity.get(ObjectEntity.class);
+		Substance object = entity.get(Substance.class);
 		if (object != null) {
 			switch (ObjectType.get(object.getClass())) {
 				case BOAT:

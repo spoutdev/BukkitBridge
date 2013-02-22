@@ -44,8 +44,8 @@ import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.player.PlayerMoveComponent;
 
-import org.spout.vanilla.component.inventory.PlayerInventoryComponent;
-import org.spout.vanilla.component.living.neutral.Human;
+import org.spout.vanilla.component.entity.inventory.PlayerInventory;
+import org.spout.vanilla.component.entity.living.neutral.Human;
 import org.spout.vanilla.event.player.PlayerRespawnEvent;
 
 public class PlayerListener extends AbstractListener {
@@ -141,7 +141,7 @@ public class PlayerListener extends AbstractListener {
 		} else {
 			bukkitAction = org.bukkit.event.block.Action.PHYSICAL;
 		}
-		ItemStack item = BukkitUtil.fromItemStack(event.getPlayer().get(PlayerInventoryComponent.class).getQuickbar().getSelectedItem());
+		ItemStack item = BukkitUtil.fromItemStack(event.getPlayer().get(PlayerInventory.class).getQuickbar().getSelectedItem());
 		Block clickedBlock = null;
 		if (event.getInteractedPoint() != null) {
 			clickedBlock = player.getWorld().getBlockAt(event.getInteractedPoint().getBlockX(), event.getInteractedPoint().getBlockY(), event.getInteractedPoint().getBlockZ());

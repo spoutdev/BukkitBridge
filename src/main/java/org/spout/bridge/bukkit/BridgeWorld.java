@@ -69,7 +69,7 @@ import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
-import org.spout.vanilla.component.world.VanillaSky;
+import org.spout.vanilla.component.world.sky.Sky;
 import org.spout.vanilla.data.configuration.VanillaConfiguration;
 import org.spout.vanilla.data.configuration.WorldConfiguration;
 import org.spout.vanilla.data.effect.store.GeneralEffects;
@@ -475,7 +475,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getTime() {
-		return handle.getComponentHolder().get(VanillaSky.class).getTime();
+		return handle.getComponentHolder().get(Sky.class).getTime();
 	}
 
 	@Override
@@ -777,7 +777,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setTime(long time) {
-		handle.getComponentHolder().get(VanillaSky.class).setTime(time);
+		handle.getComponentHolder().get(Sky.class).setTime(time);
 	}
 
 	@Override

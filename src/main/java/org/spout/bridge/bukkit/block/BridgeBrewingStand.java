@@ -26,11 +26,11 @@ import org.bukkit.inventory.BrewerInventory;
 import org.spout.bridge.bukkit.inventory.BridgeInventoryBrewer;
 
 public class BridgeBrewingStand extends BridgeBlockState implements BrewingStand {
-	private final org.spout.vanilla.component.substance.material.BrewingStand stand;
+	private final org.spout.vanilla.component.block.material.BrewingStand stand;
 
 	public BridgeBrewingStand(Block b) {
 		super(b);
-		this.stand = (org.spout.vanilla.component.substance.material.BrewingStand) getHandle();
+		this.stand = (org.spout.vanilla.component.block.material.BrewingStand) getHandle();
 	}
 
 	@Override
