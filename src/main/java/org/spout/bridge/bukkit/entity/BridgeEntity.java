@@ -80,12 +80,12 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean hasMetadata(String key) {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().containsKey(key);
 	}
 
 	@Override
 	public void removeMetadata(String arg0, Plugin arg1) {
-		throw new UnsupportedOperationException();
+		getHandle().getData().remove(arg0);
 	}
 
 	@Override
@@ -174,12 +174,12 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException();
+		return getPassenger() == null;
 	}
 
 	@Override
 	public boolean isInsideVehicle() {
-		throw new UnsupportedOperationException();
+		return getVehicle() != null;
 	}
 
 	@Override

@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.command;
 
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
@@ -32,42 +33,26 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.bridge.bukkit.BridgeServer;
 
-public class BridgeConsoleCommandSender implements ConsoleCommandSender {
-	private final BridgeServer server;
+public class BridgeConsoleCommandSender extends BridgeCommandSender implements ConsoleCommandSender {
 
-	public BridgeConsoleCommandSender(BridgeServer b) {
-		server = b;
+
+	@Override
+	public void sendMessage(String s) {
+		sendRawMessage(s);
 	}
 
 	@Override
-	public void sendMessage(String paramString) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void sendMessage(String[] paramArrayOfString) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Server getServer() {
-		return server;
+	public void sendMessage(String[] strings) {
+		for (String msg : strings) {
+			sendMessage(msg);
+		}
 	}
 
 	@Override
 	public String getName() {
-		throw new UnsupportedOperationException();
+		return "CONSOLE";
 	}
 
-	@Override
-	public boolean isPermissionSet(String paramString) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isPermissionSet(Permission paramPermission) {
-		throw new UnsupportedOperationException();
-	}
 
 	@Override
 	public boolean hasPermission(String paramString) {
@@ -80,47 +65,13 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 	}
 
 	@Override
-	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public PermissionAttachment addAttachment(Plugin paramPlugin) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public PermissionAttachment addAttachment(Plugin paramPlugin, String paramString, boolean paramBoolean, int paramInt) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public PermissionAttachment addAttachment(Plugin paramPlugin, int paramInt) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void removeAttachment(PermissionAttachment paramPermissionAttachment) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void recalculatePermissions() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public boolean isOp() {
 		return true;
 	}
 
 	@Override
 	public void setOp(boolean paramBoolean) {
+		throw new UnsupportedOperationException("Console op status can not be changed.");
 	}
 
 	@Override
@@ -150,6 +101,6 @@ public class BridgeConsoleCommandSender implements ConsoleCommandSender {
 
 	@Override
 	public void sendRawMessage(String paramString) {
-		throw new UnsupportedOperationException();
+		System.out.println(paramString);
 	}
 }
