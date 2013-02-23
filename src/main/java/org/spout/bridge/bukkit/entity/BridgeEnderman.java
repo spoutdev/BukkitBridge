@@ -24,21 +24,28 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 
 import org.spout.api.entity.Entity;
+import org.spout.api.util.Parameter;
+
+import org.spout.vanilla.component.entity.living.Living;
+import org.spout.vanilla.data.VanillaData;
+import org.spout.vanilla.material.VanillaMaterial;
+import org.spout.vanilla.material.VanillaMaterials;
 
 public class BridgeEnderman extends BridgeMonster implements Enderman {
 	protected BridgeEnderman(Entity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public MaterialData getCarriedMaterial() {
-		throw new UnsupportedOperationException();
+		return new MaterialData(getHandle().getData().get(VanillaData.HELD_MATERIAL), getHandle().getData().get(VanillaData.HELD_MATERIAL_DATA));
 	}
 
 	@Override
 	public void setCarriedMaterial(MaterialData materialData) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		org.spout.vanilla.component.entity.living.neutral.Enderman enderman = getHandle().get(org.spout.vanilla.component.entity.living.neutral.Enderman.class);
+		enderman.setHeldMaterial((VanillaMaterial) VanillaMaterials.getMaterial((short) materialData.getItemTypeId()));
+		enderman.setHeldMaterialData(materialData.getData());
 	}
 
 	@Override
