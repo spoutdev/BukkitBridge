@@ -36,7 +36,6 @@ import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
-import org.spout.api.event.player.PlayerPreLoginEvent;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
@@ -334,27 +333,6 @@ public class PlayerListener extends AbstractListener {
 	public void onPlayerPortal() {
 		//todo implement onPlayerPortal
 		throw new UnsupportedOperationException();
-	}
-
-	@SuppressWarnings("deprecation")
-	@EventHandler(order = Order.EARLIEST)
-	public void onPlayerPreLogin(PlayerPreLoginEvent event) {
-		if (event.isCancelled()) {
-			return;
-		}
-		//Do both events here because Spout login events are all async
-		org.bukkit.event.player.AsyncPlayerPreLoginEvent asyncPreLogin = new org.bukkit.event.player.AsyncPlayerPreLoginEvent(event.getName(), event.getAddress());
-		Bukkit.getPluginManager().callEvent(asyncPreLogin);
-		if (asyncPreLogin.getLoginResult() != org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.ALLOWED) {
-			toKick.put(asyncPreLogin.getName(), asyncPreLogin.getKickMessage());
-			return;
-		}
-		org.bukkit.event.player.PlayerPreLoginEvent preLogin = new org.bukkit.event.player.PlayerPreLoginEvent(event.getName(), event.getAddress());
-		Bukkit.getPluginManager().callEvent(preLogin);
-		if (preLogin.getResult() != org.bukkit.event.player.PlayerPreLoginEvent.Result.ALLOWED) {
-			toKick.put(preLogin.getName(), preLogin.getKickMessage());
-			return;
-		}
 	}
 
 	@EventHandler

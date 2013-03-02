@@ -475,7 +475,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public long getTime() {
-		return handle.getComponentHolder().get(Sky.class).getTime();
+		return handle.get(Sky.class).getTime();
 	}
 
 	@Override
@@ -777,7 +777,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void setTime(long time) {
-		handle.getComponentHolder().get(Sky.class).setTime(time);
+		handle.get(Sky.class).setTime(time);
 	}
 
 	@Override
