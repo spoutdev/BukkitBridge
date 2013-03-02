@@ -24,6 +24,7 @@ import org.bukkit.plugin.PluginLoadOrder;
 
 import org.spout.api.Server;
 import org.spout.api.Spout;
+import org.spout.api.data.DataProvider;
 import org.spout.api.event.Cause;
 import org.spout.api.event.cause.PluginCause;
 import org.spout.api.plugin.CommonPlugin;
@@ -46,6 +47,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	private PlayerListener playerListener;
 	private EntityListener entityListener;
 	private BlockListener blockListener;
+	private final DataProvider dataProvider = new DataProvider();
 
 	public VanillaBridgePlugin() {
 		instance = this;
@@ -60,7 +62,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 		BridgeServer server = new BridgeServer((Server) Spout.getEngine(), this);
 		getLogger().info("enabled. Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
 		pluginCause = new PluginCause(this);
-
+		Spout.getEventManager().registerEvents(dataProvider, this);
 		this.getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
 	}
 
@@ -83,6 +85,10 @@ public class VanillaBridgePlugin extends CommonPlugin {
 
 	public BlockListener getBlockListener() {
 		return blockListener;
+	}
+
+	public DataProvider getDataProvider() {
+		return dataProvider;
 	}
 
 	public static VanillaBridgePlugin getInstance() {

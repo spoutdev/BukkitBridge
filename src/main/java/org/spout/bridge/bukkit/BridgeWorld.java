@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,10 +54,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.api.data.DataProvider;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
@@ -66,6 +69,7 @@ import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
@@ -113,22 +117,24 @@ public class BridgeWorld implements World {
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		throw new UnsupportedOperationException();
+		List<MetadataValue> data = new ArrayList<MetadataValue>(1);
+		data.add(new FixedMetadataValue(null, handle.getData(metadataKey)));
+		return data;
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		throw new UnsupportedOperationException();
+		return handle.hasData(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		throw new UnsupportedOperationException();
+		VanillaBridgePlugin.getInstance().getDataProvider().remove(handle, metadataKey);
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		throw new UnsupportedOperationException();
+		VanillaBridgePlugin.getInstance().getDataProvider().set(handle, metadataKey, newMetadataValue);
 	}
 
 	@Override
