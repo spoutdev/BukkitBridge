@@ -26,7 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.spout.api.entity.Entity;
 
 public class BridgeItem extends BridgeEntity implements Item {
-	protected BridgeItem(Entity handle) {
+	public BridgeItem(Entity handle) {
 		super(handle);
 	}
 

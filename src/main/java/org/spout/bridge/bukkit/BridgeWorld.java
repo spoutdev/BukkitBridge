@@ -71,6 +71,7 @@ import org.spout.api.math.Vector3;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.block.BridgeBlock;
+import org.spout.bridge.bukkit.entity.BridgeItem;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 
 import org.spout.vanilla.component.world.sky.Sky;
@@ -80,8 +81,22 @@ import org.spout.vanilla.data.effect.store.GeneralEffects;
 import org.spout.vanilla.data.effect.store.SoundEffects;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.util.explosion.ExplosionModels;
+import org.spout.vanilla.world.generator.biome.VanillaBiomes;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
+import org.spout.vanilla.world.generator.nether.biome.NetherrackBiome;
+import org.spout.vanilla.world.generator.normal.biome.grassy.ForestBiome;
+import org.spout.vanilla.world.generator.normal.biome.grassy.OceanBiome;
+import org.spout.vanilla.world.generator.normal.biome.grassy.PlainBiome;
+import org.spout.vanilla.world.generator.normal.biome.grassy.RiverBiome;
+import org.spout.vanilla.world.generator.normal.biome.grassy.SwampBiome;
+import org.spout.vanilla.world.generator.normal.biome.sandy.DesertBiome;
+import org.spout.vanilla.world.generator.normal.biome.snowy.FrozenOceanBiome;
+import org.spout.vanilla.world.generator.normal.biome.snowy.FrozenRiverBiome;
+import org.spout.vanilla.world.generator.normal.biome.snowy.TaigaBiome;
+import org.spout.vanilla.world.generator.normal.biome.snowy.TundraBiome;
+import org.spout.vanilla.world.generator.normal.biome.snowy.TundraHillsBiome;
 import org.spout.vanilla.world.generator.object.VanillaObjects;
+import org.spout.vanilla.world.generator.skylands.biome.SkylandsBiome;
 import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 
 /**
@@ -164,18 +179,24 @@ public class BridgeWorld implements World {
 	}
 
 	@Override
-	public boolean createExplosion(double v, double v2, double v3, float v4, boolean b, boolean b2) {
+	public boolean createExplosion(double x, double y, double z, float power, boolean fire, boolean breakBlocks) {
 		return false;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public Item dropItem(Location location, ItemStack item) {
-		return null;
+		Point pos = BukkitUtil.toPoint(location);
+		org.spout.api.inventory.ItemStack is = BukkitUtil.toItemStack(item);
+		org.spout.vanilla.component.entity.substance.Item i = org.spout.vanilla.component.entity.substance.Item.drop(pos, is, Vector3.ZERO);
+		return new BridgeItem(i.getOwner());
 	}
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack item) {
-		throw new UnsupportedOperationException();
+		Point pos = BukkitUtil.toPoint(location);
+		org.spout.api.inventory.ItemStack is = BukkitUtil.toItemStack(item);
+		org.spout.vanilla.component.entity.substance.Item i = org.spout.vanilla.component.entity.substance.Item.dropNaturally(pos, is);
+		return new BridgeItem(i.getOwner());
 	}
 
 	@Override
@@ -244,7 +265,55 @@ public class BridgeWorld implements World {
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		throw new UnsupportedOperationException();
+		org.spout.api.generator.biome.Biome biome = handle.getBiome(x, 0, z);
+		if (biome.equals(VanillaBiomes.SWAMP)) {
+			return Biome.SWAMPLAND;
+		} else if (biome.equals(VanillaBiomes.FOREST)) {
+			return Biome.FOREST;
+		} else if (biome.equals(VanillaBiomes.TAIGA)) {
+			return Biome.TAIGA;
+		} else if (biome.equals(VanillaBiomes.DESERT)) {
+			return Biome.DESERT;
+		} else if (biome.equals(VanillaBiomes.PLAINS)) {
+			return Biome.PLAINS;
+		} else if (biome.equals(VanillaBiomes.NETHERRACK)) {
+			return Biome.HELL;
+		} else if (biome.equals(VanillaBiomes.SKYLANDS)) {
+			return Biome.SKY;
+		} else if (biome.equals(VanillaBiomes.OCEAN)) {
+			return Biome.OCEAN;
+		} else if (biome.equals(VanillaBiomes.RIVER)) {
+			return Biome.RIVER;
+		} else if (biome.equals(VanillaBiomes.MOUNTAINS)) {
+			return Biome.EXTREME_HILLS;
+		} else if (biome.equals(VanillaBiomes.FROZEN_OCEAN)) {
+			return Biome.FROZEN_OCEAN;
+		} else if (biome.equals(VanillaBiomes.FROZEN_RIVER)) {
+			return Biome.FROZEN_RIVER;
+		} else if (biome.equals(VanillaBiomes.TUNDRA)) {
+			return Biome.ICE_PLAINS;
+		} else if (biome.equals(VanillaBiomes.TUNDRA_HILLS)) {
+			return Biome.ICE_MOUNTAINS;
+		} else if (biome.equals(VanillaBiomes.MUSHROOM)) {
+			return Biome.MUSHROOM_ISLAND;
+		} else if (biome.equals(VanillaBiomes.MUSHROOM_SHORE)) {
+			return Biome.MUSHROOM_SHORE;
+		} else if (biome.equals(VanillaBiomes.BEACH)) {
+			return Biome.BEACH;
+		} else if (biome.equals(VanillaBiomes.DESERT_HILLS)) {
+			return Biome.DESERT_HILLS;
+		} else if (biome.equals(VanillaBiomes.FOREST_HILLS)) {
+			return Biome.FOREST_HILLS;
+		} else if (biome.equals(VanillaBiomes.TAIGA_HILLS)) {
+			return Biome.TAIGA_HILLS;
+		} else if (biome.equals(VanillaBiomes.SMALL_MOUNTAINS)) {
+			return Biome.SMALL_MOUNTAINS;
+		} else if (biome.equals(VanillaBiomes.JUNGLE)) {
+			return Biome.JUNGLE;
+		} else if (biome.equals(VanillaBiomes.JUNGLE_HILLS)) {
+			return Biome.JUNGLE_HILLS;
+		}
+		return null;
 	}
 
 	@Override
