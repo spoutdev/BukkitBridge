@@ -43,6 +43,7 @@ import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.enchantment.ArmorEnchantment;
 import org.spout.vanilla.material.enchantment.BowEnchantment;
+import org.spout.vanilla.material.enchantment.EnchantmentRegistry;
 import org.spout.vanilla.material.enchantment.VanillaEnchantments;
 import org.spout.vanilla.material.enchantment.SwordEnchantment;
 import org.spout.vanilla.material.enchantment.ToolEnchantment;
@@ -186,7 +187,7 @@ public class BukkitUtil {
 	}
 
 	public static org.spout.vanilla.material.enchantment.Enchantment getVanillaEnchantment(Enchantment enchant) {
-		throw new UnsupportedOperationException(); //TODO enchantment rewrite broke lookups?
+		return EnchantmentRegistry.getById(enchant.getId());
 	}
 
 	public static EnchantmentTarget getEnchantmentTargetFromEnchantment(org.spout.vanilla.material.enchantment.Enchantment enchant) {
