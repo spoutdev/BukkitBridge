@@ -23,6 +23,8 @@ import org.bukkit.entity.Ageable;
 
 import org.spout.api.entity.Entity;
 
+import org.spout.vanilla.data.VanillaData;
+
 public abstract class BridgeAgeable extends BridgeCreature implements Ageable {
 	protected BridgeAgeable(Entity handle) {
 		super(handle);
@@ -30,12 +32,12 @@ public abstract class BridgeAgeable extends BridgeCreature implements Ageable {
 
 	@Override
 	public int getAge() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.AGE).intValue() * 20;
 	}
 
 	@Override
 	public void setAge(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		getHandle().get(org.spout.vanilla.component.entity.living.Ageable.class).setAge(i / 20);
 	}
 
 	@Override
@@ -50,26 +52,30 @@ public abstract class BridgeAgeable extends BridgeCreature implements Ageable {
 
 	@Override
 	public void setBaby() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		setAge((int) org.spout.vanilla.component.entity.living.Ageable.MIN_AGE * 20);
 	}
 
 	@Override
 	public void setAdult() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		setAge(0);
 	}
 
 	@Override
 	public boolean isAdult() {
-		throw new UnsupportedOperationException();
+		return getAge() >= 0;
 	}
 
 	@Override
 	public boolean canBreed() {
-		throw new UnsupportedOperationException();
+		return getAge() == 0;
 	}
 
 	@Override
 	public void setBreed(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		if (b) {
+			setAge(0);
+		} else {
+			setAge(6000);
+		}
 	}
 }
