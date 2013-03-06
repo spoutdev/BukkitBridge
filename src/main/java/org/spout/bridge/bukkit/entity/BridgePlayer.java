@@ -39,11 +39,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 
-import org.spout.bridge.bukkit.BridgeOfflinePlayer;
-
 import org.spout.api.Server;
 import org.spout.api.util.access.BanType;
 
+import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 import org.spout.vanilla.component.entity.inventory.PlayerInventory;
 import org.spout.vanilla.component.entity.living.Human;
 import org.spout.vanilla.component.entity.misc.Hunger;
@@ -58,7 +57,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public org.spout.api.entity.Player getHandle() {
-		return (org.spout.api.entity.Player) getHandle();
+		return getHandle();
 	}
 
 	@Override
@@ -133,7 +132,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void chat(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -168,12 +167,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void loadData() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setSleepingIgnored(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -183,32 +182,32 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void playNote(Location location, byte b, byte b1) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playNote(Location location, Instrument instrument, Note note) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, float v, float v1) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T t) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void sendBlockChange(Location location, Material material, byte b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -218,7 +217,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendBlockChange(Location location, int i, byte b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -233,32 +232,32 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void awardAchievement(Achievement achievement) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic, int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material, int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setPlayerTime(long l, boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -278,7 +277,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void resetPlayerTime() {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -292,12 +291,6 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	@Override
 	public void giveExpLevels(int i) {
 		throw new UnsupportedOperationException();
-		/*
-		Level level = getHandle().get(Level.class);
-		if (level != null) {
-			//TODO: currently no way to add a sepcific number of levels worth of exp
-		}
-		*/
 	}
 
 	@Override
@@ -381,29 +374,29 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean isBanned() {
-		return ((Server) org.spout.api.Spout.getEngine()).getAccessManager().isBanned(BanType.PLAYER, getName());
+		return ((Server) getHandle().getEngine()).getAccessManager().isBanned(BanType.PLAYER, getName());
 	}
 
 	@Override
 	public void setBanned(boolean b) {
 		if (b) {
-		((Server) org.spout.api.Spout.getEngine()).getAccessManager().ban(BanType.PLAYER, getName());
+			((Server) getHandle().getEngine()).getAccessManager().ban(BanType.PLAYER, getName());
 		} else {
-			((Server) org.spout.api.Spout.getEngine()).getAccessManager().unban(BanType.PLAYER, getName());
+			((Server) getHandle().getEngine()).getAccessManager().unban(BanType.PLAYER, getName());
 		}
 	}
 
 	@Override
 	public boolean isWhitelisted() {
-		return ((Server) org.spout.api.Spout.getEngine()).getAccessManager().isWhitelisted(getName());
+		return ((Server) getHandle().getEngine()).getAccessManager().isWhitelisted(getName());
 	}
 
 	@Override
 	public void setWhitelisted(boolean b) {
 		if (b) {
-			((Server) org.spout.api.Spout.getEngine()).getAccessManager().whitelist(getName());
+			((Server) getHandle().getEngine()).getAccessManager().whitelist(getName());
 		} else {
-			((Server) org.spout.api.Spout.getEngine()).getAccessManager().unwhitelist(getName());
+			((Server) getHandle().getEngine()).getAccessManager().unwhitelist(getName());
 		}
 	}
 

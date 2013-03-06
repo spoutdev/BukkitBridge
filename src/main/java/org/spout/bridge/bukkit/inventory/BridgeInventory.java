@@ -35,7 +35,6 @@ import org.bukkit.inventory.ItemStack;
 import org.spout.api.inventory.InventoryViewer;
 
 import org.spout.bridge.BukkitUtil;
-
 import org.spout.vanilla.inventory.window.Window;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;

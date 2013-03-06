@@ -57,7 +57,7 @@ public class PlayerMoveComponent extends EntityComponent {
 				getOwner().getScene().setPosition(BukkitUtil.toPoint(to));
 			}
 		}
-		
+
 		prev = getOwner().getScene().getTransform();
 	}
 }

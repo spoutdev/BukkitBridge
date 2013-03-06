@@ -23,7 +23,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginLoadOrder;
 
 import org.spout.api.Server;
-import org.spout.api.Spout;
 import org.spout.api.data.DataProvider;
 import org.spout.api.event.Cause;
 import org.spout.api.event.cause.PluginCause;
@@ -49,21 +48,26 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	private BlockListener blockListener;
 	private final DataProvider dataProvider = new DataProvider();
 
-	public VanillaBridgePlugin() {
-		instance = this;
-	}
-
 	@Override
 	public void onEnable() {
+		instance = this;
+		final BridgeServer server = new BridgeServer((Server) getEngine(), this);
+		//Set the Bukkit singleton.
+		Bukkit.setServer(server);
+		server.loadPlugins();
+
+		getEngine().getLogger().info("Enablng pre-world bukkit plugins");
+		server.enablePlugins(PluginLoadOrder.STARTUP);
+
 		worldListener = new WorldListener(this);
 		playerListener = new PlayerListener(this);
 		entityListener = new EntityListener(this);
 		blockListener = new BlockListener(this);
-		BridgeServer server = new BridgeServer((Server) Spout.getEngine(), this);
-		getLogger().info("enabled. Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
 		pluginCause = new PluginCause(this);
-		Spout.getEventManager().registerEvents(dataProvider, this);
-		this.getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
+
+		getEngine().getEventManager().registerEvents(dataProvider, this);
+		getEngine().getScheduler().scheduleSyncDelayedTask(this, new LoadPluginsTask(), 2, TaskPriority.NORMAL);
+		getLogger().info("enabled. Version: (" + server.getVersion() + " | Bukkit: " + server.getBukkitVersion() + ")");
 	}
 
 	@Override
@@ -102,7 +106,7 @@ public class VanillaBridgePlugin extends CommonPlugin {
 	private static class LoadPluginsTask implements Runnable {
 		@Override
 		public void run() {
-			Spout.getLogger().info("Loading post-world bukkit plugins");
+			getInstance().getEngine().getLogger().info("Enabling post-world Bukkit plugins");
 			((BridgeServer) Bukkit.getServer()).enablePlugins(PluginLoadOrder.POSTWORLD);
 		}
 	}

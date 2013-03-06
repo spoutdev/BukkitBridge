@@ -24,7 +24,6 @@ import org.bukkit.Bukkit;
 import org.spout.api.event.EventHandler;
 
 import org.spout.bridge.VanillaBridgePlugin;
-
 import org.spout.vanilla.data.Weather;
 import org.spout.vanilla.event.world.WeatherChangeEvent;
 

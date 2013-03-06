@@ -19,23 +19,12 @@
  */
 package org.spout.bridge.bukkit.command;
 
-import java.util.Set;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.plugin.Plugin;
-
-import org.spout.bridge.bukkit.BridgeServer;
 
 public class BridgeConsoleCommandSender extends BridgeCommandSender implements ConsoleCommandSender {
-
-
 	@Override
 	public void sendMessage(String s) {
 		sendRawMessage(s);
@@ -52,7 +41,6 @@ public class BridgeConsoleCommandSender extends BridgeCommandSender implements C
 	public String getName() {
 		return "CONSOLE";
 	}
-
 
 	@Override
 	public boolean hasPermission(String paramString) {

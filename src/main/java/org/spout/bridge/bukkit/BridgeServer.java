@@ -66,13 +66,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.permissions.DefaultPermissions;
 
-import org.spout.api.Spout;
 import org.spout.api.util.access.BanType;
 
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
-
 import org.spout.vanilla.data.configuration.VanillaConfiguration;
 import org.spout.vanilla.data.configuration.WorldConfiguration;
 import org.spout.vanilla.inventory.recipe.VanillaRecipes;
@@ -83,24 +81,21 @@ import org.spout.vanilla.inventory.recipe.VanillaRecipes;
 public class BridgeServer implements Server {
 	private final VanillaBridgePlugin plugin;
 	private final org.spout.api.Server server;
-	private final SimpleServicesManager servicesManager = new SimpleServicesManager();
-	private final BridgeScheduler scheduler = new BridgeScheduler();
-	private final PluginManager pluginManager = new ForwardingPluginManager(this);
+	private final SimpleServicesManager servicesManager;
+	private final BridgeScheduler scheduler;
+	private final PluginManager pluginManager;
 	private final String bridgeVersion = getPOMVersion();
-	private final String serverVersion = "Spout Server ( " + Spout.getEngine().getVersion() + " )";
+	private final String serverVersion;
 
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
-		Bukkit.setServer(this);
-
+		serverVersion = "Spout Server ( " + server.getVersion() + " )";
+		servicesManager = new SimpleServicesManager();
+		scheduler = new BridgeScheduler(plugin);
+		pluginManager = new ForwardingPluginManager(this);
 		org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
 		PotionEffectType.stopAcceptingRegistrations();
-
-		loadPlugins();
-
-		Spout.getLogger().info("Loading pre-world bukkit plugins");
-		enablePlugins(PluginLoadOrder.STARTUP);
 	}
 
 	public void loadPlugins() {
@@ -625,7 +620,7 @@ public class BridgeServer implements Server {
 				properties.load(stream);
 				result = properties.getProperty("version");
 			} catch (IOException ex) {
-				Spout.getLogger().log(Level.SEVERE, "Could not get Bridge version!", ex);
+				VanillaBridgePlugin.getInstance().getEngine().getLogger().severe("Could not get Bridge version!\n" + ex);
 			}
 		}
 		return result;

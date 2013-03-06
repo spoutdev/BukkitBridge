@@ -38,13 +38,11 @@ import org.spout.api.math.Vector3;
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
 import org.spout.bridge.bukkit.inventory.BridgeItemStack;
-
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.enchantment.ArmorEnchantment;
 import org.spout.vanilla.material.enchantment.BowEnchantment;
 import org.spout.vanilla.material.enchantment.EnchantmentRegistry;
-import org.spout.vanilla.material.enchantment.VanillaEnchantments;
 import org.spout.vanilla.material.enchantment.SwordEnchantment;
 import org.spout.vanilla.material.enchantment.ToolEnchantment;
 
@@ -84,7 +82,6 @@ public class BukkitUtil {
 	/**
 	 * Creates a SpoutAPI block from a Bukkit block
 	 * @param block The Bukkit block to convert to a SpoutAPI block
-	 *
 	 * @return The corresponding SpoutAPI block
 	 */
 	public static org.spout.api.geo.cuboid.Block toBlock(Block block) {

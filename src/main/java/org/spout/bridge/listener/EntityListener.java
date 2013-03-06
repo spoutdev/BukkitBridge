@@ -62,7 +62,6 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
-
 import org.spout.vanilla.component.entity.substance.Item;
 import org.spout.vanilla.component.entity.substance.Lightning;
 import org.spout.vanilla.component.entity.substance.Tnt;
@@ -300,7 +299,7 @@ public class EntityListener extends AbstractListener {
 			onLivingSpawn((LivingSpawnEvent) event);
 		}
 
-		if (event.getEntity().get(Item.class) != null)  {
+		if (event.getEntity().get(Item.class) != null) {
 			onItemSpawn(event);
 		}
 	}

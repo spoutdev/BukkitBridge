@@ -34,7 +34,6 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import org.spout.api.Spout;
 import org.spout.api.component.type.EntityComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
@@ -45,13 +44,11 @@ import org.spout.api.math.Vector3;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
-
 import org.spout.vanilla.component.entity.misc.Burn;
 import org.spout.vanilla.component.entity.misc.Health;
 
 public abstract class BridgeEntity implements Entity {
 	protected static final DefaultedKey<Integer> TICKS_LIVED = new DefaultedKeyImpl<Integer>("ticks_lived", 0);
-
 	private final org.spout.api.entity.Entity handle;
 	private final BridgeComponent component;
 
@@ -262,7 +259,7 @@ public abstract class BridgeEntity implements Entity {
 		Location prev = getLocation();
 		//Call Spout EntityTeleportEvent; later mapped to Bukkit EntityTeleportEvent via the EntityListener
 		EntityTeleportEvent event = new EntityTeleportEvent(handle, BukkitUtil.toPoint(prev), BukkitUtil.toPoint(loc));
-		Spout.getEventManager().callEvent(event);
+		handle.getEngine().getEventManager().callEvent(event);
 		if (!event.isCancelled()) {
 			loc = BukkitUtil.fromPoint(event.getTo());
 			prev = BukkitUtil.fromPoint(event.getFrom());
@@ -316,6 +313,7 @@ public abstract class BridgeEntity implements Entity {
 
 class BridgeComponent extends EntityComponent {
 	private final org.spout.api.entity.Entity handle;
+
 	public BridgeComponent(org.spout.api.entity.Entity entity) {
 		this.handle = entity;
 	}

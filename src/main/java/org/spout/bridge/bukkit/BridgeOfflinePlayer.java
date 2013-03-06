@@ -116,5 +116,4 @@ public class BridgeOfflinePlayer implements OfflinePlayer, ConfigurationSerializ
 			server.getAccessManager().unwhitelist(getName());
 		}
 	}
-
 }

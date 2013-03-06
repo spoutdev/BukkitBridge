@@ -30,7 +30,6 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
 public abstract class BridgeCommandSender implements CommandSender {
-
 	@Override
 	public Server getServer() {
 		return Bukkit.getServer();
@@ -95,5 +94,4 @@ public abstract class BridgeCommandSender implements CommandSender {
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
 		throw new UnsupportedOperationException();
 	}
-
 }

@@ -21,7 +21,6 @@ package org.spout.bridge.bukkit;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -59,7 +58,6 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import org.spout.api.data.DataProvider;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
@@ -73,7 +71,6 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.BridgeItem;
 import org.spout.bridge.bukkit.entity.EntityFactory;
-
 import org.spout.vanilla.component.world.sky.Sky;
 import org.spout.vanilla.data.configuration.VanillaConfiguration;
 import org.spout.vanilla.data.configuration.WorldConfiguration;
@@ -83,20 +80,7 @@ import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.util.explosion.ExplosionModels;
 import org.spout.vanilla.world.generator.biome.VanillaBiomes;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
-import org.spout.vanilla.world.generator.nether.biome.NetherrackBiome;
-import org.spout.vanilla.world.generator.normal.biome.grassy.ForestBiome;
-import org.spout.vanilla.world.generator.normal.biome.grassy.OceanBiome;
-import org.spout.vanilla.world.generator.normal.biome.grassy.PlainBiome;
-import org.spout.vanilla.world.generator.normal.biome.grassy.RiverBiome;
-import org.spout.vanilla.world.generator.normal.biome.grassy.SwampBiome;
-import org.spout.vanilla.world.generator.normal.biome.sandy.DesertBiome;
-import org.spout.vanilla.world.generator.normal.biome.snowy.FrozenOceanBiome;
-import org.spout.vanilla.world.generator.normal.biome.snowy.FrozenRiverBiome;
-import org.spout.vanilla.world.generator.normal.biome.snowy.TaigaBiome;
-import org.spout.vanilla.world.generator.normal.biome.snowy.TundraBiome;
-import org.spout.vanilla.world.generator.normal.biome.snowy.TundraHillsBiome;
 import org.spout.vanilla.world.generator.object.VanillaObjects;
-import org.spout.vanilla.world.generator.skylands.biome.SkylandsBiome;
 import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 
 /**

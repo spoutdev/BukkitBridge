@@ -151,7 +151,6 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	@Override
 	public int getMaximumAir() {
 		return (int) (VanillaData.AIR_SECS.getDefaultValue() * 20);
-
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 	@Override
 	public LivingEntity getShooter() {
 		BridgeEntity entity = EntityFactory.createEntity(((org.spout.vanilla.component.entity.substance.projectile.Projectile) getHandle().get(Substance.class)).getShooter());
-		return entity instanceof LivingEntity ? (LivingEntity) entity : null ;
+		return entity instanceof LivingEntity ? (LivingEntity) entity : null;
 	}
 
 	@Override

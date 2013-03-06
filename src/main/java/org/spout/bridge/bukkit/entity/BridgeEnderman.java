@@ -24,9 +24,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 
 import org.spout.api.entity.Entity;
-import org.spout.api.util.Parameter;
 
-import org.spout.vanilla.component.entity.living.Living;
 import org.spout.vanilla.data.VanillaData;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
