@@ -77,12 +77,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setPlayerListName(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setCompassTarget(Location location) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void acceptConversationInput(String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -112,12 +112,12 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void abandonConversation(Conversation conversation) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent conversationAbandonedEvent) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -222,7 +222,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendMap(MapView mapView) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
