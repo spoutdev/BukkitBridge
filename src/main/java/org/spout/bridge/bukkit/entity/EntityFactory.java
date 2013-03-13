@@ -110,10 +110,6 @@ public final class EntityFactory {
 					return new BridgeItem(entity);
 				case MINECART:
 					return new BridgeMinecart(entity);
-				case STORAGE_MINECART:
-					return new BridgeStorageMinecart(entity);
-				case POWERED_MINECART:
-					return new BridgePoweredMinecart(entity);
 				case PRIMED_TNT:
 					return new BridgeTNTPrimed(entity);
 				case ENDER_CRYSTAL:
