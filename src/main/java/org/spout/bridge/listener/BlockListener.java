@@ -39,6 +39,7 @@ import org.spout.api.event.cause.PlayerCause;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
+
 import org.spout.vanilla.event.block.BlockDisappearEvent;
 import org.spout.vanilla.event.block.BlockFormEvent;
 import org.spout.vanilla.event.block.BlockGrowEvent;

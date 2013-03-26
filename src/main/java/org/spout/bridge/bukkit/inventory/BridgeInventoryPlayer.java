@@ -23,10 +23,11 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.bukkit.entity.BridgePlayer;
 
 import org.spout.api.inventory.Inventory;
+
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.entity.BridgePlayer;
 
 public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
 	private final org.spout.vanilla.component.entity.inventory.PlayerInventory playerInventory;
@@ -38,7 +39,11 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public ItemStack[] getArmorContents() {
-		return new ItemStack[0];  //To change body of implemented methods use File | Settings | File Templates.
+		ItemStack[] items = new ItemStack[4];
+		for (int i = 0; i < items.length; i++) {
+			items[i] = BukkitUtil.fromItemStack(playerInventory.getArmor().get(i));
+		}
+		return items;
 	}
 
 	@Override
@@ -63,27 +68,32 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public void setArmorContents(ItemStack[] itemStacks) {
-		throw new UnsupportedOperationException();
+		if (itemStacks == null) {
+			itemStacks = new ItemStack[4];
+		}
+		for (int i = 0; i < itemStacks.length; i++) {
+			playerInventory.getArmor().set(i, BukkitUtil.toItemStack(itemStacks[i]), true);
+		}
 	}
 
 	@Override
 	public void setHelmet(ItemStack itemStack) {
-		throw new UnsupportedOperationException();
+		playerInventory.getArmor().setHelmet(BukkitUtil.toItemStack(itemStack));
 	}
 
 	@Override
 	public void setChestplate(ItemStack itemStack) {
-		throw new UnsupportedOperationException();
+		playerInventory.getArmor().setChestPlate(BukkitUtil.toItemStack(itemStack));
 	}
 
 	@Override
 	public void setLeggings(ItemStack itemStack) {
-		throw new UnsupportedOperationException();
+		playerInventory.getArmor().setLeggings(BukkitUtil.toItemStack(itemStack));
 	}
 
 	@Override
 	public void setBoots(ItemStack itemStack) {
-		throw new UnsupportedOperationException();
+		playerInventory.getArmor().setBoots(BukkitUtil.toItemStack(itemStack));
 	}
 
 	@Override
@@ -109,6 +119,19 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 	@Override
 	public int clear(int i, int i2) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ItemStack getItem(int i) {
+		if (i >= handle.size()) {
+			i -= handle.size();
+			if (i < 4) {
+				return getArmorContents()[i];
+			} else {
+				return null;
+			}
+		}
+		return BukkitUtil.fromItemStack(handle.get(i));
 	}
 
 	@Override
