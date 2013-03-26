@@ -38,10 +38,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
-import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
 import org.spout.api.Server;
 import org.spout.api.util.access.BanType;
+
+import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
 import org.spout.vanilla.component.entity.inventory.PlayerInventory;
 import org.spout.vanilla.component.entity.living.Human;
@@ -300,12 +301,16 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void giveExpLevels(int i) {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		if (level != null) {
+			level.addLevel(i);
+		}
 	}
 
 	@Override
 	public float getExp() {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		return level != null ? level.getProgress() : 0;
 	}
 
 	@Override
@@ -321,7 +326,10 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setLevel(int i) {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		if (level != null) {
+			level.addLevel(i - level.getLevel());
+		}
 	}
 
 	@Override
@@ -332,7 +340,10 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setTotalExperience(int i) {
-		throw new UnsupportedOperationException();
+		Level level = getHandle().get(Level.class);
+		if (level != null) {
+			level.setExperience((short) i);
+		}
 	}
 
 	@Override
