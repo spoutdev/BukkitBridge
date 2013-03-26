@@ -21,27 +21,32 @@ package org.spout.bridge.listener;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.inventory.ItemStack;
 
+import org.spout.api.chat.ChatArguments;
+import org.spout.api.entity.Player;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
+import org.spout.api.event.player.PlayerChatEvent;
 import org.spout.api.event.player.PlayerInteractEvent;
 import org.spout.api.event.player.PlayerInteractEvent.Action;
 import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
+import org.spout.api.event.server.PreCommandEvent;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.player.PlayerMoveComponent;
+
 import org.spout.vanilla.component.entity.inventory.PlayerInventory;
 import org.spout.vanilla.component.entity.living.Human;
 import org.spout.vanilla.event.player.PlayerRespawnEvent;
@@ -167,12 +172,6 @@ public class PlayerListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onAsyncPlayerChat() {
-		//todo implement onAsyncPlayerChat
-		throw new UnsupportedOperationException();
-	}
-
-	@EventHandler
 	public void onPlayerAnimation() {
 		//todo implement onPlayerAnimation
 		throw new UnsupportedOperationException();
@@ -227,8 +226,19 @@ public class PlayerListener extends AbstractListener {
 	}
 
 	@EventHandler
-	public void onPlayerChat() {
-		//todo implement onPlayerChat
+	public void onPlayerChat(PlayerChatEvent event) {
+		//TODO: unable to handle list of players that will receive the message
+		//if (event.isCancelled()) {
+		//	return;
+		//}
+		//BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
+		//AsyncPlayerChatEvent chatEvent = new AsyncPlayerChatEvent(false, player, event.getMessage().asString(), null);
+		//Bukkit.getPluginManager().callEvent(chatEvent);
+		//if (chatEvent.isCancelled()) {
+		//	event.setCancelled(true);
+		//	return;
+		//}
+		//event.setMessage(ChatArguments.fromString(chatEvent.getMessage()));
 		throw new UnsupportedOperationException();
 	}
 
@@ -238,10 +248,27 @@ public class PlayerListener extends AbstractListener {
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler
-	public void onPlayerCommandPreProcess() {
-		//todo implement onPlayerCommandPreProcess
-		throw new UnsupportedOperationException();
+	@EventHandler(order = Order.EARLIEST)
+	public void onPlayerCommandPreProcess(PreCommandEvent event) {
+		if (!(event.getCommandSource() instanceof Player) || event.isCancelled()) {
+			return;
+		}
+		BridgePlayer player = EntityFactory.createPlayer((Player) event.getCommandSource());
+		PlayerCommandPreprocessEvent preprocessEvent = new PlayerCommandPreprocessEvent(player, event.getCommand() + " " + event.getArguments().asString());
+		Bukkit.getPluginManager().callEvent(preprocessEvent);
+		event.setCancelled(preprocessEvent.isCancelled());
+		String command;
+		ChatArguments arguments;
+		int spaceIndex = preprocessEvent.getMessage().indexOf(" ");
+		if (spaceIndex != -1) {
+			command = preprocessEvent.getMessage().substring(0, spaceIndex);
+			arguments = new ChatArguments(preprocessEvent.getMessage().substring(spaceIndex + 1));
+		} else {
+			command = preprocessEvent.getMessage();
+			arguments = new ChatArguments();
+		}
+		event.setCommand(command);
+		event.setArguments(arguments);
 	}
 
 	@EventHandler
@@ -304,10 +331,17 @@ public class PlayerListener extends AbstractListener {
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler
-	public void onPlayerKick() {
-		//todo implement onPlayerKick
-		throw new UnsupportedOperationException();
+	@EventHandler(order = Order.EARLIEST)
+	public void onPlayerKick(PlayerKickEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
+		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
+		org.bukkit.event.player.PlayerKickEvent kickEvent = new org.bukkit.event.player.PlayerKickEvent(player, event.getKickReason().asString(), event.getMessage().asString());
+		Bukkit.getPluginManager().callEvent(kickEvent);
+		event.setCancelled(kickEvent.isCancelled());
+		event.setKickReason(kickEvent.getReason());
+		event.setMessage(kickEvent.getLeaveMessage());
 	}
 
 	@EventHandler

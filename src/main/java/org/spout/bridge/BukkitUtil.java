@@ -27,6 +27,8 @@ import org.bukkit.block.BlockState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 
+import org.spout.api.chat.ChatArguments;
+import org.spout.api.command.CommandSource;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.inventory.ItemStack;
@@ -38,6 +40,7 @@ import org.spout.api.math.Vector3;
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
 import org.spout.bridge.bukkit.inventory.BridgeItemStack;
+
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.enchantment.ArmorEnchantment;
@@ -212,5 +215,24 @@ public class BukkitUtil {
 	public static BlockSnapshot getBlockSnapshot(BlockState blockState) {
 		org.spout.api.geo.cuboid.Block block = toBlock(blockState.getBlock());
 		return new BlockSnapshot(block);
+	}
+
+	/**
+	 * Processes a commandLine through the Spout commandSource
+	 * @param source
+	 * @param commandLine
+	 */
+	public static void processCommand(CommandSource source, String commandLine) {
+		String command = null;
+		ChatArguments arguments;
+		int spaceIndex = commandLine.indexOf(" ");
+		if (spaceIndex != -1) {
+			command = commandLine.substring(0, spaceIndex);
+			arguments = new ChatArguments(commandLine.substring(spaceIndex + 1));
+		} else {
+			command = commandLine;
+			arguments = new ChatArguments();
+		}
+		source.sendCommand(command, arguments);
 	}
 }

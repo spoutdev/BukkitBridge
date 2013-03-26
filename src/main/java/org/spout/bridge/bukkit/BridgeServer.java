@@ -19,6 +19,7 @@
  */
 package org.spout.bridge.bukkit;
 
+import com.avaje.ebean.config.ServerConfig;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,9 +32,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.avaje.ebean.config.ServerConfig;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
@@ -68,9 +66,12 @@ import org.bukkit.util.permissions.DefaultPermissions;
 
 import org.spout.api.util.access.BanType;
 
+import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.bukkit.command.BridgeConsoleCommandSender;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
+
 import org.spout.vanilla.data.configuration.VanillaConfiguration;
 import org.spout.vanilla.data.configuration.WorldConfiguration;
 import org.spout.vanilla.inventory.recipe.VanillaRecipes;
@@ -86,10 +87,12 @@ public class BridgeServer implements Server {
 	private final PluginManager pluginManager;
 	private final String bridgeVersion = getPOMVersion();
 	private final String serverVersion;
+	private final ConsoleCommandSender consoleSender;
 
 	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
+		this.consoleSender = new BridgeConsoleCommandSender();
 		serverVersion = "Spout Server ( " + server.getVersion() + " )";
 		servicesManager = new SimpleServicesManager();
 		scheduler = new BridgeScheduler(plugin);
@@ -223,8 +226,13 @@ public class BridgeServer implements Server {
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender arg0, String arg1) throws CommandException {
-		throw new UnsupportedOperationException();
+	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
+		if (sender instanceof Player) {
+			((Player) sender).performCommand(commandLine);
+		} else if (sender instanceof ConsoleCommandSender) {
+			BukkitUtil.processCommand(server.getCommandSource(), commandLine);
+		}
+		return true;
 	}
 
 	@Override
@@ -274,7 +282,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		throw new UnsupportedOperationException();
+		return consoleSender;
 	}
 
 	@Override

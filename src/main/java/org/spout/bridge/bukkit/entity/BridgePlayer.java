@@ -42,6 +42,7 @@ import org.bukkit.plugin.Plugin;
 import org.spout.api.Server;
 import org.spout.api.util.access.BanType;
 
+import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
 import org.spout.vanilla.component.entity.inventory.PlayerInventory;
@@ -138,7 +139,8 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public boolean performCommand(String cmd) {
-		throw new UnsupportedOperationException();
+		BukkitUtil.processCommand(getHandle(), cmd);
+		return true;
 	}
 
 	@Override

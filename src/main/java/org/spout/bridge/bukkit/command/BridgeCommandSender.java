@@ -36,11 +36,6 @@ public abstract class BridgeCommandSender implements CommandSender {
 	}
 
 	@Override
-	public String getName() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public boolean isPermissionSet(String s) {
 		throw new UnsupportedOperationException();
 	}
