@@ -277,7 +277,7 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public boolean isBlockPowered() {
-		return false; //TODO: fix
+		return RedstoneUtil.isReceivingPower(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override

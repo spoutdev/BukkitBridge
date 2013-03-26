@@ -21,6 +21,7 @@ package org.spout.bridge.bukkit.inventory;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -29,7 +30,7 @@ import org.spout.api.inventory.Inventory;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 
-public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
+public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory, EntityEquipment {
 	private final org.spout.vanilla.component.entity.inventory.PlayerInventory playerInventory;
 
 	public BridgeInventoryPlayer(Inventory handle, BridgePlayer holder) {
@@ -74,6 +75,56 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 		for (int i = 0; i < itemStacks.length; i++) {
 			playerInventory.getArmor().set(i, BukkitUtil.toItemStack(itemStacks[i]), true);
 		}
+	}
+
+	@Override
+	public float getItemInHandDropChance() {
+		return 1;
+	}
+
+	@Override
+	public void setItemInHandDropChance(float v) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public float getHelmetDropChance() {
+		return 1;
+	}
+
+	@Override
+	public void setHelmetDropChance(float v) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public float getChestplateDropChance() {
+		return 1;
+	}
+
+	@Override
+	public void setChestplateDropChance(float v) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public float getLeggingsDropChance() {
+		return 1;
+	}
+
+	@Override
+	public void setLeggingsDropChance(float v) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public float getBootsDropChance() {
+		return 1;
+	}
+
+	@Override
+	public void setBootsDropChance(float v) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

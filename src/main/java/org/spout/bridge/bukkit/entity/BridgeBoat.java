@@ -24,6 +24,8 @@ import org.bukkit.entity.EntityType;
 
 import org.spout.api.entity.Entity;
 
+import org.spout.vanilla.data.VanillaData;
+
 public class BridgeBoat extends BridgeVehicle implements Boat {
 	protected BridgeBoat(Entity handle) {
 		super(handle);
@@ -31,7 +33,7 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public double getMaxSpeed() {
-		throw new UnsupportedOperationException();
+		return getHandle().getData().get(VanillaData.MAX_SPEED).length();
 	}
 
 	@Override

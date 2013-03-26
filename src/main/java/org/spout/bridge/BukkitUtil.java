@@ -186,6 +186,10 @@ public class BukkitUtil {
 		return (VanillaMaterial) VanillaMaterials.getMaterial((short) is.getTypeId());
 	}
 
+	public static VanillaMaterial getVanillaMaterial(org.bukkit.Material material) {
+		return (VanillaMaterial) VanillaMaterials.getMaterial((short) material.getId());
+	}
+
 	public static org.spout.vanilla.material.enchantment.Enchantment getVanillaEnchantment(Enchantment enchant) {
 		return EnchantmentRegistry.getById(enchant.getId());
 	}

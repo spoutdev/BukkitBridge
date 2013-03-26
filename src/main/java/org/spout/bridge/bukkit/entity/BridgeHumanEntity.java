@@ -20,10 +20,10 @@
 package org.spout.bridge.bukkit.entity;
 
 import java.util.Set;
-
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -35,24 +35,29 @@ import org.bukkit.plugin.Plugin;
 
 import org.spout.api.entity.Entity;
 
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.inventory.BridgeInventory;
+import org.spout.bridge.bukkit.inventory.BridgeInventoryPlayer;
+
+import org.spout.vanilla.component.entity.misc.Sleep;
+
 public abstract class BridgeHumanEntity extends BridgeLivingEntity implements HumanEntity {
+	private BridgeInventoryPlayer inventory;
+	private BridgeInventory enderInventory;
 	protected BridgeHumanEntity(Entity handle) {
 		super(handle);
-	}
-
-	@Override
-	public String getName() {
-		throw new UnsupportedOperationException();
+		this.inventory = new BridgeInventoryPlayer(getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class).getMain(), (BridgePlayer) this);
+		this.enderInventory = new BridgeInventory(getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class).getEnderChestInventory(), this, "container.enderchest", "container.enderchest", InventoryType.ENDER_CHEST);
 	}
 
 	@Override
 	public PlayerInventory getInventory() {
-		throw new UnsupportedOperationException();
+		return inventory;
 	}
 
 	@Override
 	public Inventory getEnderChest() {
-		throw new UnsupportedOperationException();
+		return enderInventory;
 	}
 
 	@Override
@@ -92,12 +97,16 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public ItemStack getItemInHand() {
-		throw new UnsupportedOperationException();
+		org.spout.vanilla.component.entity.inventory.PlayerInventory inv = getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class);
+		return inv == null ? null : BukkitUtil.fromItemStack(inv.getHeldItem());
 	}
 
 	@Override
 	public void setItemInHand(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		org.spout.vanilla.component.entity.inventory.PlayerInventory inv = getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class);
+		if (inv != null) {
+			inv.getQuickbar().set(inv.getQuickbar().getSelectedSlot().getIndex(), BukkitUtil.toItemStack(itemStack));
+		}
 	}
 
 	@Override
@@ -112,7 +121,8 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public boolean isSleeping() {
-		throw new UnsupportedOperationException();
+		Sleep sleep = getHandle().get(Sleep.class);
+		return sleep != null ? sleep.isSleeping() : false;
 	}
 
 	@Override

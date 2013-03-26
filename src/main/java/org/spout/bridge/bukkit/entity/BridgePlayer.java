@@ -552,4 +552,9 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	public void resetPlayerWeather() {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public String getName() {
+		return getHandle().getName();
+	}
 }
