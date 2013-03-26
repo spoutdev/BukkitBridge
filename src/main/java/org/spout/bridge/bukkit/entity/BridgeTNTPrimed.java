@@ -31,7 +31,7 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 
 	@Override
 	public void setFuseTicks(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -40,8 +40,13 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 	}
 
 	@Override
+	public org.bukkit.entity.Entity getSource() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void setYield(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -51,7 +56,7 @@ public class BridgeTNTPrimed extends BridgeEntity implements TNTPrimed {
 
 	@Override
 	public void setIsIncendiary(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

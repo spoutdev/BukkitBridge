@@ -22,7 +22,6 @@ package org.spout.bridge.bukkit.entity;
 import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Set;
-
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
 import org.bukkit.Instrument;
@@ -31,6 +30,7 @@ import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Sound;
 import org.bukkit.Statistic;
+import org.bukkit.WeatherType;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -38,11 +38,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 
 import org.spout.api.Server;
 import org.spout.api.util.access.BanType;
 
-import org.spout.bridge.bukkit.BridgeOfflinePlayer;
 import org.spout.vanilla.component.entity.inventory.PlayerInventory;
 import org.spout.vanilla.component.entity.living.Human;
 import org.spout.vanilla.component.entity.misc.Hunger;
@@ -277,6 +277,16 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void resetPlayerTime() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setPlayerWeather(WeatherType weatherType) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public WeatherType getPlayerWeather() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -523,5 +533,10 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 	@Override
 	public EntityType getType() {
 		return EntityType.PLAYER;
+	}
+
+	@Override
+	public void resetPlayerWeather() {
+		throw new UnsupportedOperationException();
 	}
 }

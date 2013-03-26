@@ -23,6 +23,7 @@ import java.util.Collection;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ThrownPotion;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import org.spout.api.entity.Entity;
@@ -34,6 +35,16 @@ public class BridgeThrownPotion extends BridgeProjectile implements ThrownPotion
 
 	@Override
 	public Collection<PotionEffect> getEffects() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ItemStack getItem() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setItem(ItemStack itemStack) {
 		throw new UnsupportedOperationException();
 	}
 

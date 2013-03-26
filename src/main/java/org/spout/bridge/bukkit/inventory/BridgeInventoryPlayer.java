@@ -23,14 +23,17 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.entity.BridgePlayer;
 
 import org.spout.api.inventory.Inventory;
 
-import org.spout.bridge.bukkit.entity.BridgePlayer;
-
 public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInventory {
+	private final org.spout.vanilla.component.entity.inventory.PlayerInventory playerInventory;
+
 	public BridgeInventoryPlayer(Inventory handle, BridgePlayer holder) {
 		super(handle, holder, "container.player", "Inventory", InventoryType.PLAYER);
+		this.playerInventory = holder.getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class);
 	}
 
 	@Override
@@ -40,22 +43,22 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public ItemStack getHelmet() {
-		throw new UnsupportedOperationException();
+		return BukkitUtil.fromItemStack(playerInventory.getArmor().getHelmet());
 	}
 
 	@Override
 	public ItemStack getChestplate() {
-		throw new UnsupportedOperationException();
+		return BukkitUtil.fromItemStack(playerInventory.getArmor().getChestPlate());
 	}
 
 	@Override
 	public ItemStack getLeggings() {
-		throw new UnsupportedOperationException();
+		return BukkitUtil.fromItemStack(playerInventory.getArmor().getLeggings());
 	}
 
 	@Override
 	public ItemStack getBoots() {
-		throw new UnsupportedOperationException();
+		return BukkitUtil.fromItemStack(playerInventory.getArmor().getBoots());
 	}
 
 	@Override
@@ -85,17 +88,22 @@ public class BridgeInventoryPlayer extends BridgeInventory implements PlayerInve
 
 	@Override
 	public ItemStack getItemInHand() {
-		throw new UnsupportedOperationException();
+		return BukkitUtil.fromItemStack(playerInventory.getHeldItem());
 	}
 
 	@Override
 	public void setItemInHand(ItemStack itemStack) {
-		throw new UnsupportedOperationException();
+		playerInventory.getQuickbar().set(playerInventory.getQuickbar().getSelectedSlot().getIndex(), BukkitUtil.toItemStack(itemStack), true);
 	}
 
 	@Override
 	public int getHeldItemSlot() {
-		throw new UnsupportedOperationException();
+		return playerInventory.getQuickbar().getSelectedSlot().getIndex();
+	}
+
+	@Override
+	public void setHeldItemSlot(int i) {
+		playerInventory.getQuickbar().setSelectedSlot(i);
 	}
 
 	@Override

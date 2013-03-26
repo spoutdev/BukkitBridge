@@ -272,4 +272,24 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	public boolean getCanPickupItems() {
 		return false;
 	}
+
+	@Override
+	public boolean isCustomNameVisible() {
+		return getComponent().getData().get(VanillaData.IS_CUSTOM_NAME_VISIBLE);
+	}
+
+	@Override
+	public void setCustomNameVisible(boolean val) {
+		getComponent().getData().put(VanillaData.IS_CUSTOM_NAME_VISIBLE, val);
+	}
+
+	@Override
+	public String getCustomName() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setCustomName(String name) {
+		throw new UnsupportedOperationException();
+	}
 }

@@ -33,4 +33,14 @@ public class BridgeFish extends AbstractProjectile implements Fish {
 	public EntityType getType() {
 		return EntityType.FISHING_HOOK;
 	}
+
+	@Override
+	public double getBiteChance() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setBiteChance(double v) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
 }

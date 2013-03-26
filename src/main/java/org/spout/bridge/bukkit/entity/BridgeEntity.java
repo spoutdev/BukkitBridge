@@ -21,7 +21,6 @@ package org.spout.bridge.bukkit.entity;
 
 import java.util.List;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -33,6 +32,8 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spout.bridge.BukkitUtil;
+import org.spout.bridge.bukkit.BridgeServer;
 
 import org.spout.api.component.type.EntityComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
@@ -42,10 +43,9 @@ import org.spout.api.map.DefaultedKeyImpl;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
-import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.vanilla.component.entity.misc.Burn;
 import org.spout.vanilla.component.entity.misc.Health;
+import org.spout.vanilla.data.VanillaData;
 
 public abstract class BridgeEntity implements Entity {
 	protected static final DefaultedKey<Integer> TICKS_LIVED = new DefaultedKeyImpl<Integer>("ticks_lived", 0);
@@ -308,6 +308,11 @@ public abstract class BridgeEntity implements Entity {
 			loc.setPitch(rotation.getPitch());
 		}
 		return loc;
+	}
+
+	@Override
+	public boolean isOnGround() {
+		return getComponent().getData().get(VanillaData.IS_ON_GROUND);
 	}
 }
 
