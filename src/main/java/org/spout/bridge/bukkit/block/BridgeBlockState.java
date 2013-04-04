@@ -197,6 +197,11 @@ public class BridgeBlockState implements BlockState {
 	}
 
 	@Override
+	public boolean update(boolean b, boolean b2) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
 		throw new UnsupportedOperationException();
 	}

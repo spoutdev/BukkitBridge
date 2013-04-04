@@ -84,4 +84,9 @@ public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureS
 	public void setDelay(int paramInt) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public boolean update(boolean b, boolean b2) {
+		throw new UnsupportedOperationException();
+	}
 }
