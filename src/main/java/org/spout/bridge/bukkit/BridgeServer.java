@@ -62,6 +62,7 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.permissions.DefaultPermissions;
 
 import org.spout.api.util.access.BanType;
@@ -616,7 +617,12 @@ public class BridgeServer implements Server {
 
 	@Override
 	public ItemFactory getItemFactory() {
-		return null; //TODO
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ScoreboardManager getScoreboardManager() {
+		throw new UnsupportedOperationException();
 	}
 
 	private static String getPOMVersion() {

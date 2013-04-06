@@ -38,6 +38,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scoreboard.Scoreboard;
 
 import org.spout.api.Server;
 import org.spout.api.util.access.BanType;
@@ -515,6 +516,16 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setTexturePack(String s) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Scoreboard getScoreboard() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setScoreboard(Scoreboard scoreboard) {
 		throw new UnsupportedOperationException();
 	}
 

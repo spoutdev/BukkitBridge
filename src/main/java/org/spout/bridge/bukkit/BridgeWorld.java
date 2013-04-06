@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -58,6 +57,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.spout.api.generator.WorldGenerator;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
@@ -71,6 +71,7 @@ import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.BridgeItem;
 import org.spout.bridge.bukkit.entity.EntityFactory;
+
 import org.spout.vanilla.component.world.sky.Sky;
 import org.spout.vanilla.data.configuration.VanillaConfiguration;
 import org.spout.vanilla.data.configuration.WorldConfiguration;
@@ -78,6 +79,7 @@ import org.spout.vanilla.data.effect.store.GeneralEffects;
 import org.spout.vanilla.data.effect.store.SoundEffects;
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.util.explosion.ExplosionModels;
+import org.spout.vanilla.world.generator.biome.VanillaBiomeGenerator;
 import org.spout.vanilla.world.generator.biome.VanillaBiomes;
 import org.spout.vanilla.world.generator.nether.NetherGenerator;
 import org.spout.vanilla.world.generator.object.VanillaObjects;
@@ -464,7 +466,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getMaxHeight() {
-		throw new UnsupportedOperationException();
+		WorldGenerator gen = getHandle().getGenerator();
+		if (gen instanceof VanillaBiomeGenerator) {
+			return (((VanillaBiomeGenerator) gen).getHighestChunkY() + 1 >> 4) - 1;
+		} else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	@Override
