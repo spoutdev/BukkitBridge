@@ -42,6 +42,7 @@ import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.block.Liquid;
 import org.spout.vanilla.util.RedstoneUtil;
+import org.spout.vanilla.world.lighting.VanillaLighting;
 
 /**
  * BridgeBlock is an implementation of Block.
@@ -167,17 +168,17 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getLightFromBlocks() {
-		return getWorld().getHandle().getBlockSkyLightRaw(x, y, z);
+        return VanillaLighting.getBlockLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
 	public byte getLightFromSky() {
-		return getWorld().getHandle().getBlockSkyLight(x, y, z);
+        return VanillaLighting.getSkyLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
 	public byte getLightLevel() {
-		return getWorld().getHandle().getBlockLight(x, y, z);
+        return VanillaLighting.getLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
@@ -219,26 +220,40 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockState getState() {
-		BlockComponent component = getWorld().getHandle().getBlockComponent(x, y, z);
-		if (component instanceof org.spout.vanilla.component.block.material.Sign) {
-			return new BridgeSign(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.chest.Chest) {
+        org.spout.api.geo.cuboid.Block block = getWorld().getHandle().getBlock(x, y, z);
+        org.spout.vanilla.component.block.material.Sign sign = block.get(org.spout.vanilla.component.block.material.Sign.class);
+        if (sign != null) {
+            return new BridgeSign(this);
+        }
+        org.spout.vanilla.component.block.material.chest.Chest chest = block.get(org.spout.vanilla.component.block.material.chest.Chest.class);
+        if (chest != null) {
 			return new BridgeChest(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.Furnace) {
-			return new BridgeFurnace(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.Dispenser) {
-			return new BridgeDispenser(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.MonsterSpawner) {
-			return new BridgeCreatureSpawner(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.NoteBlock) {
-			return new BridgeNoteblock(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.Jukebox) {
-			return new BridgeJukebox(this);
-		} else if (component instanceof org.spout.vanilla.component.block.material.BrewingStand) {
-			return new BridgeBrewingStand(this);
-		} else {
-			return new BridgeBlockState(this);
 		}
+        org.spout.vanilla.component.block.material.Furnace furnace = block.get(org.spout.vanilla.component.block.material.Furnace.class);
+        if (furnace != null) {
+			return new BridgeFurnace(this);
+		}
+        org.spout.vanilla.component.block.material.Dispenser dispenser = block.get(org.spout.vanilla.component.block.material.Dispenser.class);
+        if (dispenser != null) {
+			return new BridgeDispenser(this);
+		}
+        org.spout.vanilla.component.block.material.MonsterSpawner spawner = block.get(org.spout.vanilla.component.block.material.MonsterSpawner.class);
+        if (spawner != null) {
+			return new BridgeCreatureSpawner(this);
+		}
+        org.spout.vanilla.component.block.material.NoteBlock note = block.get(org.spout.vanilla.component.block.material.NoteBlock.class);
+        if (note != null) {
+			return new BridgeNoteblock(this);
+		}
+        org.spout.vanilla.component.block.material.Jukebox jukebox = block.get(org.spout.vanilla.component.block.material.Jukebox.class);
+        if (jukebox != null) {
+			return new BridgeJukebox(this);
+		}
+        org.spout.vanilla.component.block.material.BrewingStand brewingStand = block.get(org.spout.vanilla.component.block.material.BrewingStand.class);
+        if (brewingStand != null) {
+			return new BridgeBrewingStand(this);
+		}
+		return new BridgeBlockState(this);
 	}
 
 	@Override

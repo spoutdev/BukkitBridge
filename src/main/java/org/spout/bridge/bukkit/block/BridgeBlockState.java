@@ -47,7 +47,7 @@ public class BridgeBlockState implements BlockState {
 	private Location location;
 
 	public BridgeBlockState(Block b) {
-		this.handle = BukkitUtil.toBlock(b).getComponent();
+		this.handle = BukkitUtil.toBlock(b).get(BlockComponent.class);
 		this.b = b;
 		this.x = b.getX();
 		this.y = b.getY();

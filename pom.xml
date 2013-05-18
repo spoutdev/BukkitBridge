@@ -5,7 +5,7 @@
 	<name>BukkitBridge</name>
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>1.5.1-R0.2-SNAPSHOT</version>
+	<version>1.5.2-R0.2-SNAPSHOT</version>
 	<url>http://www.spout.org</url>
 	<inceptionYear>2012</inceptionYear>
 	<description>Bridges SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
@@ -16,7 +16,7 @@
 		<bukkitVersion>${project.version}</bukkitVersion>
 		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
 		<spoutVersion>dev-SNAPSHOT</spoutVersion>
-		<vanillaVersion>1.5.1-SNAPSHOT</vanillaVersion>
+		<vanillaVersion>1.5.2-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
 	</properties>
 
