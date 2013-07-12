@@ -40,36 +40,66 @@ public class BridgeEnderDragonPart extends BridgeComplexPart implements EnderDra
 	}
 
 	@Override
-	public void damage(int i) {
+	public void damage(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public void damage(int i, org.bukkit.entity.Entity entity) {
+    @Override
+    public void _INVALID_damage(int i) {
+        damage(i);
+    }
+
+    @Override
+	public void damage(double d, org.bukkit.entity.Entity entity) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public int getHealth() {
+    @Override
+    public void _INVALID_damage(int i, org.bukkit.entity.Entity entity) {
+        damage(i, entity);
+    }
+
+    @Override
+	public double getHealth() {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public void setHealth(int i) {
+    @Override
+    public int _INVALID_getHealth() {
+        return (int) getHealth();
+    }
+
+    @Override
+	public void setHealth(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public int getMaxHealth() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    @Override
+    public void _INVALID_setHealth(int i) {
+        setHealth(i);
+    }
+
+    @Override
+	public double getMaxHealth() {
+        throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public void setMaxHealth(int i) {
+    @Override
+    public int _INVALID_getMaxHealth() {
+        return (int) getMaxHealth();
+    }
+
+    @Override
+	public void setMaxHealth(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+    @Override
+    public void _INVALID_setMaxHealth(int i) {
+        setMaxHealth(i);
+    }
+
+    @Override
 	public void resetMaxHealth() {
 		throw new UnsupportedOperationException();
 	}

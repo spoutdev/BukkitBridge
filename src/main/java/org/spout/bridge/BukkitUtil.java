@@ -27,7 +27,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 
-import org.spout.api.chat.ChatArguments;
 import org.spout.api.command.CommandSource;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
@@ -48,6 +47,10 @@ import org.spout.vanilla.material.enchantment.BowEnchantment;
 import org.spout.vanilla.material.enchantment.EnchantmentRegistry;
 import org.spout.vanilla.material.enchantment.SwordEnchantment;
 import org.spout.vanilla.material.enchantment.ToolEnchantment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Various utilities for converting Bukkit --> Spout objects and vice versa
@@ -227,16 +230,10 @@ public class BukkitUtil {
 	 * @param commandLine
 	 */
 	public static void processCommand(CommandSource source, String commandLine) {
-		String command = null;
-		ChatArguments arguments;
-		int spaceIndex = commandLine.indexOf(" ");
-		if (spaceIndex != -1) {
-			command = commandLine.substring(0, spaceIndex);
-			arguments = new ChatArguments(commandLine.substring(spaceIndex + 1));
-		} else {
-			command = commandLine;
-			arguments = new ChatArguments();
-		}
-		source.sendCommand(command, arguments);
+        List<String> arguments = Arrays.asList(commandLine.split(" "));
+        String command = arguments.get(0);
+        arguments.remove(0);
+
+		source.sendCommand(command, arguments.toArray(new String[arguments.size()]));
 	}
 }

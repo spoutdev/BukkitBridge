@@ -29,6 +29,7 @@ import org.spout.api.event.server.plugin.PluginEnableEvent;
 import org.spout.api.event.server.service.ServiceRegisterEvent;
 import org.spout.api.event.server.service.ServiceUnregisterEvent;
 
+import org.spout.api.plugin.services.ServiceManager;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.plugin.SpoutPlugin;
 
@@ -93,7 +94,7 @@ public class ServerListener extends AbstractListener {
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceUnregisterEvent(provider));
 	}
 
-	private org.bukkit.plugin.ServicePriority fromPriority(org.spout.api.plugin.ServiceManager.ServicePriority priority) {
+	private org.bukkit.plugin.ServicePriority fromPriority(ServiceManager.ServicePriority priority) {
 		switch (priority) {
 			case High:
 				return org.bukkit.plugin.ServicePriority.High;

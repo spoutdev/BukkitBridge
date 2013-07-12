@@ -56,13 +56,23 @@ public class BridgeMinecart extends BridgeVehicle implements Minecart {
 		super(handle);
 	}
 
-	@Override
-	public void setDamage(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
-	}
+    @Override
+    public void _INVALID_setDamage(int i) {
+        setDamage(i);
+    }
 
-	@Override
-	public int getDamage() {
+    @Override
+    public void setDamage(double v) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int _INVALID_getDamage() {
+        return (int) getDamage();
+    }
+
+    @Override
+	public double getDamage() {
 		throw new UnsupportedOperationException();
 	}
 

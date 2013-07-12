@@ -32,10 +32,11 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spout.api.component.DatatableComponent;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
 
-import org.spout.api.component.type.EntityComponent;
+import org.spout.api.component.entity.EntityComponent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.map.DefaultedKey;
@@ -332,4 +333,8 @@ class BridgeComponent extends EntityComponent {
 	public void onTick(float dt) {
 		handle.getData().put(BridgeEntity.TICKS_LIVED, handle.getData().get(BridgeEntity.TICKS_LIVED) + 1);
 	}
+
+    public DatatableComponent getData() {
+        return getOwner().getData();
+    }
 }

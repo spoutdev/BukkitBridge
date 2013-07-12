@@ -5,7 +5,7 @@
 	<name>BukkitBridge</name>
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>1.5.2-R0.2-SNAPSHOT</version>
+	<version>1.6.2-R0.1-SNAPSHOT</version>
 	<url>http://www.spout.org</url>
 	<inceptionYear>2012</inceptionYear>
 	<description>Bridges SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
@@ -234,6 +234,24 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>com.wolvereness</groupId>
+                <artifactId>overmapped</artifactId>
+                <version>0.0.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>map</goal>
+                        </goals>
+                        <configuration>
+                            <maps>${basedir}/target/maps.yml</maps>
+                            <input>${basedir}/target/${project.artifactId}-${project.version}.jar</input>
+                            <original>${basedir}/target/unmapped-${project.artifactId}-${project.version}.jar</original>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 
 		<!-- Plugin management -->

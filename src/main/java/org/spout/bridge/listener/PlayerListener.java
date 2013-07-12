@@ -19,6 +19,8 @@
  */
 package org.spout.bridge.listener;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.bukkit.Bukkit;
@@ -28,7 +30,6 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.inventory.ItemStack;
 
-import org.spout.api.chat.ChatArguments;
 import org.spout.api.entity.Player;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
@@ -75,7 +76,7 @@ public class PlayerListener extends AbstractListener {
 		String hostname = event.getPlayer().getAddress().getHostName();
 		org.bukkit.event.player.PlayerLoginEvent login = new org.bukkit.event.player.PlayerLoginEvent(player, hostname, event.getPlayer().getAddress());
 		if (!event.isAllowed()) {
-			login.disallow(Result.KICK_OTHER, event.getMessage().asString());
+			login.disallow(Result.KICK_OTHER, event.getMessage());
 		}
 		Bukkit.getPluginManager().callEvent(login);
 		if (login.getResult() != Result.ALLOWED) {
@@ -87,7 +88,7 @@ public class PlayerListener extends AbstractListener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		//Refire event
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		final String joinMessage = event.getMessage().asString();
+		final String joinMessage = event.getMessage();
 		org.bukkit.event.player.PlayerJoinEvent join = new org.bukkit.event.player.PlayerJoinEvent(player, joinMessage);
 		Bukkit.getPluginManager().callEvent(join);
 		if (!joinMessage.equals(join.getJoinMessage())) {
@@ -101,10 +102,10 @@ public class PlayerListener extends AbstractListener {
 	@EventHandler(order = Order.EARLIEST)
 	public void onPlayerLeave(PlayerLeaveEvent event) {
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		final String leaveMessage = event.getMessage().asString();
+		final String leaveMessage = event.getMessage();
 		if (event instanceof PlayerKickEvent) {
 			PlayerKickEvent kickEvent = (PlayerKickEvent) event;
-			final String kickMessage = kickEvent.getKickReason().asString();
+			final String kickMessage = kickEvent.getKickReason();
 			org.bukkit.event.player.PlayerKickEvent kick = new org.bukkit.event.player.PlayerKickEvent(player, kickMessage, leaveMessage);
 			kick.setCancelled(event.isCancelled());
 			Bukkit.getPluginManager().callEvent(kick);
@@ -254,21 +255,15 @@ public class PlayerListener extends AbstractListener {
 			return;
 		}
 		BridgePlayer player = EntityFactory.createPlayer((Player) event.getCommandSource());
-		PlayerCommandPreprocessEvent preprocessEvent = new PlayerCommandPreprocessEvent(player, event.getCommand() + " " + event.getArguments().asString());
+		PlayerCommandPreprocessEvent preprocessEvent = new PlayerCommandPreprocessEvent(player, event.getCommand() + " " + event.getArguments());
 		Bukkit.getPluginManager().callEvent(preprocessEvent);
 		event.setCancelled(preprocessEvent.isCancelled());
-		String command;
-		ChatArguments arguments;
-		int spaceIndex = preprocessEvent.getMessage().indexOf(" ");
-		if (spaceIndex != -1) {
-			command = preprocessEvent.getMessage().substring(0, spaceIndex);
-			arguments = new ChatArguments(preprocessEvent.getMessage().substring(spaceIndex + 1));
-		} else {
-			command = preprocessEvent.getMessage();
-			arguments = new ChatArguments();
-		}
+        List<String> arguments = Arrays.asList(preprocessEvent.getMessage().split(" "));
+        String command = arguments.get(0);
+        arguments.remove(0);
+
 		event.setCommand(command);
-		event.setArguments(arguments);
+		event.setArguments(arguments.toArray(new String[arguments.size()]));
 	}
 
 	@EventHandler
@@ -337,7 +332,7 @@ public class PlayerListener extends AbstractListener {
 			return;
 		}
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		org.bukkit.event.player.PlayerKickEvent kickEvent = new org.bukkit.event.player.PlayerKickEvent(player, event.getKickReason().asString(), event.getMessage().asString());
+		org.bukkit.event.player.PlayerKickEvent kickEvent = new org.bukkit.event.player.PlayerKickEvent(player, event.getKickReason(), event.getMessage());
 		Bukkit.getPluginManager().callEvent(kickEvent);
 		event.setCancelled(kickEvent.isCancelled());
 		event.setKickReason(kickEvent.getReason());

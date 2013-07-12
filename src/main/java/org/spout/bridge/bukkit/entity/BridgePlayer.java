@@ -125,7 +125,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendRawMessage(String message) {
-		getHandle().sendRawMessage(message);
+        throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -529,14 +529,24 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+    @Override
+    public boolean isScaledHealth() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setScaleHealth(boolean b) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
 	public void sendMessage(String message) {
 		getHandle().sendMessage(message);
 	}
 
 	@Override
 	public void sendMessage(String[] message) {
-		getHandle().sendMessage((Object[]) message);
+        throw new UnsupportedOperationException();
 	}
 
 	@Override

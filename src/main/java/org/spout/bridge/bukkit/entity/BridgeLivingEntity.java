@@ -37,7 +37,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import org.spout.vanilla.component.entity.misc.Drowning;
-import org.spout.vanilla.component.entity.misc.Head;
+import org.spout.vanilla.component.entity.misc.EntityHead;
 import org.spout.vanilla.component.entity.misc.Health;
 import org.spout.vanilla.data.VanillaData;
 import org.spout.vanilla.event.cause.HealthChangeCause;
@@ -48,34 +48,54 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	}
 
 	@Override
-	public int getHealth() {
+	public double getHealth() {
 		Health health = getHandle().get(Health.class);
 		return health != null ? health.getHealth() : 0;
 	}
 
-	@Override
-	public void setHealth(int i) {
+    @Override
+    public int _INVALID_getHealth() {
+        return (int) getHealth();
+    }
+
+    @Override
+	public void setHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.setHealth(i, HealthChangeCause.PLUGIN);
+			health.setHealth(d, HealthChangeCause.PLUGIN);
 		}
 	}
 
-	@Override
-	public int getMaxHealth() {
+    @Override
+    public void _INVALID_setHealth(int i) {
+        setHealth(i);
+    }
+
+    @Override
+	public double getMaxHealth() {
 		Health health = getHandle().get(Health.class);
 		return health != null ? health.getMaxHealth() : 0;
 	}
 
-	@Override
-	public void setMaxHealth(int i) {
+    @Override
+    public int _INVALID_getMaxHealth() {
+        return (int) getMaxHealth();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+	public void setMaxHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.setMaxHealth(i);
+			health.setMaxHealth(d);
 		}
 	}
 
-	@Override
+    @Override
+    public void _INVALID_setMaxHealth(int i) {
+        setMaxHealth(i);
+    }
+
+    @Override
 	public void resetMaxHealth() {
 		throw new UnsupportedOperationException();
 		/*
@@ -88,7 +108,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
 	@Override
 	public double getEyeHeight() {
-		Head head = getHandle().get(Head.class);
+		EntityHead head = getHandle().get(EntityHead.class);
 		return head != null ? head.getHeight() : 0;
 	}
 
@@ -159,15 +179,20 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	}
 
 	@Override
-	public void damage(int i) {
+	public void damage(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.damage(i);
+			health.damage(d);
 		}
 	}
 
-	@Override
-	public void damage(int i, Entity entity) {
+    @Override
+    public void _INVALID_damage(int i) {
+        damage(i);
+    }
+
+    @Override
+	public void damage(double d, Entity entity) {
 		throw new UnsupportedOperationException();
 		/*
 		Health health = getHandle().get(Health.class);
@@ -178,7 +203,12 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		*/
 	}
 
-	@Override
+    @Override
+    public void _INVALID_damage(int i, Entity entity) {
+        damage(i, entity);
+    }
+
+    @Override
 	public int getMaximumNoDamageTicks() {
 		throw new UnsupportedOperationException();
 	}
@@ -189,16 +219,26 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	}
 
 	@Override
-	public int getLastDamage() {
+	public double getLastDamage() {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public void setLastDamage(int i) {
+    @Override
+    public int _INVALID_getLastDamage() {
+        return (int) getLastDamage();
+    }
+
+    @Override
+	public void setLastDamage(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+    @Override
+    public void _INVALID_setLastDamage(int i) {
+        setLastDamage(i);
+    }
+
+    @Override
 	public int getNoDamageTicks() {
 		throw new UnsupportedOperationException();
 	}

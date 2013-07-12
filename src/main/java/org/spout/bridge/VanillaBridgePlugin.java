@@ -26,7 +26,6 @@ import org.spout.api.Server;
 import org.spout.api.data.DataProvider;
 import org.spout.api.event.Cause;
 import org.spout.api.event.cause.PluginCause;
-import org.spout.api.plugin.CommonPlugin;
 import org.spout.api.plugin.Plugin;
 import org.spout.api.scheduler.TaskPriority;
 
@@ -39,7 +38,7 @@ import org.spout.bridge.listener.WorldListener;
 /**
  * Bridge redirects Bukkit method calls to the Spout API, allowing Bukkit plugins to run on Spout
  */
-public class VanillaBridgePlugin extends CommonPlugin {
+public class VanillaBridgePlugin extends Plugin {
 	private static VanillaBridgePlugin instance;
 	private static Cause<Plugin> pluginCause;
 	private WorldListener worldListener;

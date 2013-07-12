@@ -20,7 +20,10 @@
 package org.spout.bridge.bukkit.plugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -35,6 +38,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
+import org.spout.api.Spout;
 
 /**
  * A wrapper around Spout plugins for Bukkit plugins
@@ -98,7 +102,7 @@ public final class SpoutPlugin implements Plugin {
 
 	@Override
 	public InputStream getResource(String path) {
-		return plugin.getResource(path);
+        return Spout.getFileSystem().getResourceStream(path);
 	}
 
 	@Override
