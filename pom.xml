@@ -91,7 +91,7 @@
 		<!-- Provided by third-party -->
 		<dependency>
 			<groupId>org.spout</groupId>
-			<artifactId>spoutapi</artifactId>
+			<artifactId>spout-api</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
