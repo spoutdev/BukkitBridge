@@ -6,27 +6,34 @@
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
 	<version>1.6.2-R0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<url>http://www.spout.org</url>
 	<inceptionYear>2012</inceptionYear>
-	<description>Bridges SpoutAPI and Bukkit API to allow Bukkit plugins to be used on the Spout server.</description>
+	<description>Bridge plugin that allows Bukkit plugins to be used on the Spout game voxel platform.</description>
 
+	<!-- Parent information -->
+	<parent>
+		<groupId>org.spout</groupId>
+		<artifactId>shared-parent</artifactId>
+		<version>1</version>
+	</parent>
+
+	<!-- Build properties -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mainClass>org.spout.bridge.VanillaBridgePlugin</mainClass>
-		<bukkitVersion>${project.version}</bukkitVersion>
-		<spoutpluginVersion>dev-SNAPSHOT</spoutpluginVersion>
-		<spoutVersion>dev-SNAPSHOT</spoutVersion>
-		<vanillaVersion>1.5.2-SNAPSHOT</vanillaVersion>
 		<buildNumber>0</buildNumber>
+		<ciSystem>unknown</ciSystem>
+		<commit>unknown</commit>
+		<mainClass>${project.groupId}.bridge.VanillaBridgePlugin</mainClass>
 	</properties>
 
-	<!-- Organization -->
+	<!-- Organization information -->
 	<organization>
-		<name>VanillaDev</name>
+		<name>Spout LLC</name>
 		<url>http://www.spout.org</url>
 	</organization>
 
-	<!-- License -->
+	<!-- License information -->
 	<licenses>
 		<license>
 			<name>GNU General Public License Version 3</name>
@@ -35,182 +42,180 @@
 		</license>
 	</licenses>
 
-	<!-- Source code -->
+	<!-- Source code access -->
 	<scm>
-		<developerConnection>scm:git:git@github.com:VanillaDev/BukkitBridge.git</developerConnection>
-		<connection>scm:git:git://github.com/VanillaDev/BukkitBridge.git</connection>
-		<url>https://github.com/VanillaDev/BukkitBridge</url>
+		<connection>scm:git:git://github.com/Vanilla/BukkitBridge.git</connection>
+		<developerConnection>scm:git:git@github.com:Vanilla/BukkitBridge.git</developerConnection>
+		<url>https://github.com/Vanilla/BukkitBridge</url>
 	</scm>
 
 	<!-- Continuous integration -->
 	<ciManagement>
-		<system>jenkins</system>
-		<url>http://build.spout.org/job/BukkitBridge</url>
+		<system>travis</system>
+		<url>https://travis-ci.org/Vanilla/BukkitBridge</url>
 	</ciManagement>
 
 	<!-- Issue management -->
 	<issueManagement>
 		<system>jira</system>
-		<url>http://issues.spout.org/browse/BukkitBridge</url>
+		<url>https://spoutdev.atlassian.net/browse/BRIDGE</url>
 	</issueManagement>
 
-	<!-- Repository locations -->
+	<!-- Dependency repositories -->
 	<repositories>
 		<repository>
 			<id>spout-repo</id>
-			<url>http://repo.spout.org</url>
+			<url>http://nexus.spout.org/content/groups/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
 		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spout-repo</id>
-			<url>http://repo.spout.org</url>
-		</pluginRepository>
-	</pluginRepositories>
 
-	<!-- Dependencies -->
+	<!-- Project dependencies -->
 	<dependencies>
+		<!-- Include in final JAR -->
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>${bukkitVersion}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.getspout</groupId>
 			<artifactId>spoutplugin</artifactId>
-			<version>${spoutpluginVersion}</version>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Provided by third-party -->
 		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>spoutapi</artifactId>
-			<version>${spoutVersion}</version>
+			<version>1.0.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.spout</groupId>
 			<artifactId>vanilla</artifactId>
-			<version>${vanillaVersion}</version>
+			<version>1.6.2-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Testing only -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
-	<!-- Build settings -->
+	<!-- Build configuration -->
 	<build>
 		<defaultGoal>clean install</defaultGoal>
 
-		<!-- Resources -->
+		<!-- Resources to include -->
 		<resources>
+			<!-- Static resources -->
 			<resource>
-				<targetPath>.</targetPath>
 				<filtering>false</filtering>
-				<directory>${basedir}</directory>
+				<directory>.</directory>
+				<targetPath>.</targetPath>
 				<includes>
 					<include>LICENSE.txt</include>
 				</includes>
 			</resource>
+			<!-- Filtered resources -->
 			<resource>
-				<targetPath>.</targetPath>
 				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>src/main/resources</directory>
+				<targetPath>.</targetPath>
 				<includes>
 					<include>*.yml</include>
 				</includes>
 			</resource>
 		</resources>
 
-		<!-- Plugins -->
+		<!-- Build plugins -->
 		<plugins>
-			<!-- License headers check plugin -->
+			<!-- License header plugin -->
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<version>1.10.b1</version>
 				<executions>
 					<execution>
+						<configuration>
+							<properties>
+								<name>${project.name}</name>
+								<url>${project.organization.url}</url>
+								<inceptionYear>${project.inceptionYear}</inceptionYear>
+								<organization>${project.organization.name}</organization>
+							</properties>
+							<quiet>true</quiet>
+							<encoding>UTF-8</encoding>
+							<strictCheck>true</strictCheck>
+							<header>HEADER.txt</header>
+							<mapping>
+								<java>SLASHSTAR_STYLE</java>
+							</mapping>
+							<keywords>
+								<keyword>${project.name}</keyword>
+								<keyword>license</keyword>
+							</keywords>
+							<includes>
+								<include>src/main/java/**</include>
+								<include>src/test/java/**</include>
+							</includes>
+						</configuration>
 						<phase>clean</phase>
 						<goals>
 							<goal>format</goal>
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<quiet>true</quiet>
-					<encoding>UTF-8</encoding>
-					<strictCheck>true</strictCheck>
-					<header>${basedir}/HEADER.txt</header>
-					<keywords>
-						<keyword>${project.name}</keyword>
-						<keyword>license</keyword>
-					</keywords>
-					<mapping>
-						<java>SLASHSTAR_STYLE</java>
-					</mapping>
-					<properties>
-						<name>${project.name}</name>
-						<url>${project.organization.url}</url>
-						<license>GNU General Public License</license>
-						<licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
-						<copyright>Copyright (c) ${project.inceptionYear}, ${project.organization.name}</copyright>
-					</properties>
-					<includes>
-						<include>src/main/java/**</include>
-						<include>src/test/java/**</include>
-					</includes>
-				</configuration>
 			</plugin>
-			<!-- Version strip plugin -->
-			<plugin>
-				<groupId>com.sourcesense.maven</groupId>
-				<artifactId>maven-nosnapshot-plugin</artifactId>
-				<version>0.0.7-SNAPSHOT</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>strip</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<version>${project.version}</version>
-					<propertyName>releaseVersion</propertyName>
-				</configuration>
-			</plugin>
-			<!-- Compiler plugin -->
+			<!-- Source compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.4</version>
+				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<compilerArguments>
 						<O>-Xlint:all</O>
 						<O>-Xlint:-path</O>
 					</compilerArguments>
 					<showWarnings>true</showWarnings>
-					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-			<!-- JAR dependency addition plugin -->
+			<!-- Remapping plugin -->
+			<plugin>
+				<groupId>com.wolvereness</groupId>
+				<artifactId>overmapped</artifactId>
+				<version>0.0.2</version>
+				<executions>
+					<execution>
+						<configuration>
+							<maps>${project.build.directory}/maps.yml</maps>
+							<input>${project.build.directory}/${project.artifactId}-${project.version}.jar</input>
+							<original>${project.build.directory}/unmapped-${project.artifactId}-${project.version}.jar</original>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>map</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Dependency addition plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.6</version>
+				<version>2.1</version>
 				<executions>
 					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
 						<configuration>
 							<minimizeJar>true</minimizeJar>
 							<filters>
@@ -231,59 +236,13 @@
 								</filter>
 							</filters>
 						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
-            <plugin>
-                <groupId>com.wolvereness</groupId>
-                <artifactId>overmapped</artifactId>
-                <version>0.0.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>map</goal>
-                        </goals>
-                        <configuration>
-                            <maps>${basedir}/target/maps.yml</maps>
-                            <input>${basedir}/target/${project.artifactId}-${project.version}.jar</input>
-                            <original>${basedir}/target/unmapped-${project.artifactId}-${project.version}.jar</original>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 		</plugins>
-
-		<!-- Plugin management -->
-		<pluginManagement>
-			<plugins>
-				<!-- Eclipse exclusions -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.sourcesense.maven</groupId>
-										<artifactId>maven-nosnapshot-plugin</artifactId>
-										<versionRange>[0.0.7-SNAPSHOT,)</versionRange>
-										<goals>
-											<goal>strip</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore/>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
-
 </project>
