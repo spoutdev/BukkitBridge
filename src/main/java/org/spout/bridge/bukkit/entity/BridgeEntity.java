@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -32,7 +32,6 @@ import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spout.api.component.DatatableComponent;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
 
@@ -122,9 +121,9 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Location getLocation() {
-		Point pos = handle.getScene().getPosition();
+		Point pos = handle.getPhysics().getPosition();
 		World w = getServer().getWorld(handle.getWorld().getUID());
-		Quaternion rotation = handle.getScene().getRotation();
+		Quaternion rotation = handle.getPhysics().getRotation();
 		return new Location(w, pos.getX(), pos.getY(), pos.getZ(), rotation.getYaw(), rotation.getPitch());
 	}
 
@@ -155,7 +154,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Vector getVelocity() {
-		Vector3 velocity = getHandle().getScene().getMovementVelocity();
+		Vector3 velocity = getHandle().getPhysics().getMovementVelocity();
 		return new Vector(velocity.getX(), velocity.getY(), velocity.getZ());
 	}
 
@@ -240,8 +239,8 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public void setVelocity(Vector vec) {
-		if (handle.getScene().isActivated()) {
-			handle.getScene().force(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
+		if (handle.getPhysics().isActivated()) {
+			handle.getPhysics().force(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
 		}
 	}
 
@@ -264,8 +263,8 @@ public abstract class BridgeEntity implements Entity {
 		if (!event.isCancelled()) {
 			loc = BukkitUtil.fromPoint(event.getTo());
 			prev = BukkitUtil.fromPoint(event.getFrom());
-			handle.getScene().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
-			handle.getScene().setRotation(new Quaternion(loc.getPitch(), loc.getYaw(), 0, 0));
+			handle.getPhysics().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
+			handle.getPhysics().setRotation(new Quaternion(loc.getPitch(), loc.getYaw(), 0, 0));
 			return true;
 		}
 		return false;
@@ -298,8 +297,8 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public Location getLocation(Location loc) {
 		if (loc != null) {
-			Point pos = handle.getScene().getPosition();
-			Quaternion rotation = handle.getScene().getRotation();
+			Point pos = handle.getPhysics().getPosition();
+			Quaternion rotation = handle.getPhysics().getRotation();
 
 			loc.setWorld(getWorld());
 			loc.setX(pos.getX());
@@ -333,8 +332,4 @@ class BridgeComponent extends EntityComponent {
 	public void onTick(float dt) {
 		handle.getData().put(BridgeEntity.TICKS_LIVED, handle.getData().get(BridgeEntity.TICKS_LIVED) + 1);
 	}
-
-    public DatatableComponent getData() {
-        return getOwner().getData();
-    }
 }

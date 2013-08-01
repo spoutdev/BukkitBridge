@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -213,7 +213,7 @@ public class EntityListener extends AbstractListener {
 
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
 		event.setCancelled(bukkitEvent.isCancelled());
-		event.setDamage(bukkitEvent.getDamage());
+		event.setDamage((float) bukkitEvent.getDamage());
 	}
 
 	@EventHandler
@@ -272,7 +272,7 @@ public class EntityListener extends AbstractListener {
 		bukkitEvent = new EntityRegainHealthEvent(entity, event.getHealAmount(), bukkitCause);
 		Bukkit.getPluginManager().callEvent(bukkitEvent);
 		event.setCancelled(bukkitEvent.isCancelled());
-		event.setHealAmount(bukkitEvent.getAmount());
+		event.setHealAmount((float) bukkitEvent.getAmount());
 	}
 
 	@EventHandler

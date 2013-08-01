@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -46,18 +46,18 @@ public class PlayerMoveComponent extends EntityComponent {
 
 	@Override
 	public void onTick(float dt) {
-		if (prev != null && !prev.equals(getOwner().getScene().getTransform())) {
+		if (prev != null && !prev.equals(getOwner().getPhysics().getTransform())) {
 			Location from = BukkitUtil.fromTransform(prev);
-			Location to = BukkitUtil.fromTransform(getOwner().getScene().getTransform());
+			Location to = BukkitUtil.fromTransform(getOwner().getPhysics().getTransform());
 			PlayerMoveEvent event = new PlayerMoveEvent(player, from, to);
 			Bukkit.getPluginManager().callEvent(event);
 			if (event.isCancelled()) {
-				getOwner().getScene().setTransform(prev);
+				getOwner().getPhysics().setTransform(prev);
 			} else if (!event.getTo().equals(to)) {
-				getOwner().getScene().setPosition(BukkitUtil.toPoint(to));
+				getOwner().getPhysics().setPosition(BukkitUtil.toPoint(to));
 			}
 		}
 
-		prev = getOwner().getScene().getTransform();
+		prev = getOwner().getPhysics().getTransform();
 	}
 }

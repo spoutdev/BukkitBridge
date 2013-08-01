@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -33,7 +33,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
-import org.spout.api.component.type.BlockComponent;
 import org.spout.api.material.BlockMaterial;
 
 import org.spout.bridge.bukkit.BridgeChunk;

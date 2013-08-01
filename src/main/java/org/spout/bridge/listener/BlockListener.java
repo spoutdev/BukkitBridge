@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -40,14 +40,15 @@ import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 
-import org.spout.vanilla.event.block.BlockDisappearEvent;
-import org.spout.vanilla.event.block.BlockFormEvent;
-import org.spout.vanilla.event.block.BlockGrowEvent;
-import org.spout.vanilla.event.block.BlockIgniteEvent;
-import org.spout.vanilla.event.block.RedstoneChangeEvent;
-import org.spout.vanilla.event.block.SignUpdateEvent;
 import org.spout.vanilla.event.cause.PlayerBreakCause;
 import org.spout.vanilla.event.cause.PlayerPlacementCause;
+import org.spout.vanilla.event.material.BlockDisappearEvent;
+import org.spout.vanilla.event.material.BlockFormEvent;
+import org.spout.vanilla.event.material.BlockGrowEvent;
+import org.spout.vanilla.event.material.BlockIgniteEvent;
+import org.spout.vanilla.event.material.RedstoneChangeEvent;
+import org.spout.vanilla.event.material.network.SignUpdateEvent;
+
 
 public class BlockListener extends AbstractListener {
 	public BlockListener(VanillaBridgePlugin plugin) {

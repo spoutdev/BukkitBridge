@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -529,15 +529,25 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public boolean isScaledHealth() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public boolean isHealthScaled() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public void setScaleHealth(boolean b) {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void setHealthScaled(boolean b) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setHealthScale(double v) throws IllegalArgumentException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getHealthScale() {
+		throw new UnsupportedOperationException();
+	}
 
     @Override
 	public void sendMessage(String message) {

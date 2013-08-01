@@ -28,7 +28,7 @@ flags:
   "org/spout/bridge/bukkit/entity/BridgeEnderDragonPart damage (I)V": 0x1001
   "org/spout/bridge/bukkit/entity/BridgeLivingEntity damage (ILorg/bukkit/entity/Entity;)V": 0x1001
   "org/spout/bridge/bukkit/entity/BridgeEnderDragonPart damage (ILorg/bukkit/entity/Entity;)V": 0x1001
-  "org/spout/bridge/bukkit/entity/BridgeLivingEntity ()I": 0x1001
-  "org/spout/bridge/bukkit/entity/BridgeLivingEntity (I)V": 0x1001
+  "org/spout/bridge/bukkit/entity/BridgeLivingEntity getLastDamage ()I": 0x1001
+  "org/spout/bridge/bukkit/entity/BridgeLivingEntity setLastDamage (I)V": 0x1001
   "org/spout/bridge/bukkit/entity/BridgeMinecart setDamage (I)V": 0x1001
   "org/spout/bridge/bukkit/entity/BridgeMinecart getDamage ()I": 0x1001

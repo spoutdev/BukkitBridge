@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -729,7 +729,8 @@ public class BridgeWorld implements World {
 		org.spout.api.geo.cuboid.Chunk[] handle = chunk.getHandle(LoadOption.LOAD_GEN);
 		for (int i = 0; i < handle.length; i++) {
 			for (org.spout.api.entity.Player p : handle[i].getObservingPlayers()) {
-				p.getNetworkSynchronizer().sendChunk(handle[i]);
+				// TODO: Fix chunk refreshing
+				//p.getNetworkSynchronizer().sendChunk(handle[i]);
 			}
 		}
 		return true;

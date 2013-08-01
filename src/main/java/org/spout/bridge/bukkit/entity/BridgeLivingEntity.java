@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -40,6 +40,8 @@ import org.spout.vanilla.component.entity.misc.Drowning;
 import org.spout.vanilla.component.entity.misc.EntityHead;
 import org.spout.vanilla.component.entity.misc.Health;
 import org.spout.vanilla.data.VanillaData;
+import org.spout.vanilla.event.cause.DamageCause;
+import org.spout.vanilla.event.cause.EntityDamageCause;
 import org.spout.vanilla.event.cause.HealthChangeCause;
 
 public abstract class BridgeLivingEntity extends BridgeEntity implements LivingEntity {
@@ -62,7 +64,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	public void setHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.setHealth(d, HealthChangeCause.PLUGIN);
+			health.setHealth((float) d, HealthChangeCause.PLUGIN);
 		}
 	}
 
@@ -86,7 +88,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	public void setMaxHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.setMaxHealth(d);
+			health.setMaxHealth((float) d);
 		}
 	}
 
@@ -182,7 +184,7 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	public void damage(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			health.damage(d);
+			health.damage((float) d);
 		}
 	}
 
@@ -193,14 +195,10 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 
     @Override
 	public void damage(double d, Entity entity) {
-		throw new UnsupportedOperationException();
-		/*
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-		    //TODO: need to convert to spout entity
-			health.damage(i, new EntityDamageCause());
+			health.damage((float) d, new EntityDamageCause(this.getHandle(), DamageCause.DamageType.UNKNOWN));
 		}
-		*/
 	}
 
     @Override

@@ -1,7 +1,7 @@
 /*
  * This file is part of BukkitBridge.
  *
- * Copyright (c) 2012, VanillaDev <http://www.spout.org/>
+ * Copyright (c) 2012 Spout LLC <http://www.spout.org/>
  * BukkitBridge is licensed under the GNU General Public License.
  *
  * BukkitBridge is free software: you can redistribute it and/or modify
@@ -33,15 +33,17 @@ import org.bukkit.inventory.ItemStack;
 import org.spout.api.entity.Player;
 import org.spout.api.event.EventHandler;
 import org.spout.api.event.Order;
+import org.spout.api.event.player.Action;
 import org.spout.api.event.player.PlayerChatEvent;
-import org.spout.api.event.player.PlayerInteractEvent;
-import org.spout.api.event.player.PlayerInteractEvent.Action;
+import org.spout.api.event.player.PlayerInteractBlockEvent;
+import org.spout.api.event.player.PlayerInteractEntityEvent;
 import org.spout.api.event.player.PlayerJoinEvent;
 import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
 import org.spout.api.event.server.PreCommandEvent;
 
+import org.spout.api.material.MaterialRegistry;
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
@@ -122,22 +124,27 @@ public class PlayerListener extends AbstractListener {
 		}
 	}
 
+	@EventHandler
+	public void onPlayerInteractBlock(PlayerInteractEntityEvent event) {
+
+	}
+
 	@EventHandler(order = Order.EARLIEST)
-	public void onPlayerInteract(PlayerInteractEvent event) {
-		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		Human human = event.getPlayer().get(Human.class);
+	public void onPlayerInteractBlock(PlayerInteractBlockEvent event) {
+		BridgePlayer player = EntityFactory.createPlayer(event.getEntity());
+		Human human = event.getEntity().get(Human.class);
 		if (human == null) {
 			return;
 		}
 		org.bukkit.event.block.Action bukkitAction;
 		if (event.getAction() == Action.LEFT_CLICK) {
-			if (event.isAir()) {
+			if (event.getInteracted().isMaterial(MaterialRegistry.get(0))) {
 				bukkitAction = org.bukkit.event.block.Action.LEFT_CLICK_AIR;
 			} else {
 				bukkitAction = org.bukkit.event.block.Action.LEFT_CLICK_BLOCK;
 			}
 		} else if (event.getAction() == Action.RIGHT_CLICK) {
-			if (event.isAir()) {
+			if (event.getInteracted().isMaterial(MaterialRegistry.get(0))) {
 				bukkitAction = org.bukkit.event.block.Action.RIGHT_CLICK_AIR;
 			} else {
 				bukkitAction = org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK;
@@ -145,17 +152,19 @@ public class PlayerListener extends AbstractListener {
 		} else {
 			bukkitAction = org.bukkit.event.block.Action.PHYSICAL;
 		}
-		ItemStack item = BukkitUtil.fromItemStack(event.getPlayer().get(PlayerInventory.class).getQuickbar().getSelectedItem());
+		ItemStack item = BukkitUtil.fromItemStack(event.getEntity().get(PlayerInventory.class).getQuickbar().getSelectedItem());
 		Block clickedBlock = null;
-		if (event.getInteractedPoint() != null) {
-			clickedBlock = player.getWorld().getBlockAt(event.getInteractedPoint().getBlockX(), event.getInteractedPoint().getBlockY(), event.getInteractedPoint().getBlockZ());
+		if (event.getPoint() != null) {
+			clickedBlock = player.getWorld().getBlockAt(event.getPoint().getBlockX(), event.getPoint().getBlockY(), event.getPoint().getBlockZ());
 		}
-		BlockFace face = BukkitUtil.toBukkitBlockFace(event.getClickedFace());
+		BlockFace face = BukkitUtil.toBukkitBlockFace(event.getFace());
 		org.bukkit.event.player.PlayerInteractEvent interactEvent = new org.bukkit.event.player.PlayerInteractEvent(player, bukkitAction, item, clickedBlock, face);
 		Bukkit.getPluginManager().callEvent(interactEvent);
 		if (interactEvent.isCancelled()) {
 			event.setCancelled(true);
 		}
+		/*
+		 * TODO: Fix useItemInHand interactions.
 		if (interactEvent.useItemInHand() != org.bukkit.event.Event.Result.DEFAULT) {
 			if (interactEvent.useItemInHand() == org.bukkit.event.Event.Result.ALLOW) {
 				event.setUseItemInHand(org.spout.api.event.Result.ALLOW);
@@ -170,6 +179,7 @@ public class PlayerListener extends AbstractListener {
 				event.setInteractWithBlock(org.spout.api.event.Result.DENY);
 			}
 		}
+		*/
 	}
 
 	@EventHandler

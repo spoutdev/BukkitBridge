@@ -190,25 +190,6 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			<!-- Remapping plugin -->
-			<plugin>
-				<groupId>com.wolvereness</groupId>
-				<artifactId>overmapped</artifactId>
-				<version>0.0.2</version>
-				<executions>
-					<execution>
-						<configuration>
-							<maps>${project.build.directory}/maps.yml</maps>
-							<input>${project.build.directory}/${project.artifactId}-${project.version}.jar</input>
-							<original>${project.build.directory}/unmapped-${project.artifactId}-${project.version}.jar</original>
-						</configuration>
-						<phase>package</phase>
-						<goals>
-							<goal>map</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- Dependency addition plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -243,6 +224,52 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Resource Copying -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<id>maps-file</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>maps.yml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Remapping plugin -->
+			<plugin>
+				<groupId>com.wolvereness</groupId>
+				<artifactId>overmapped</artifactId>
+				<version>0.0.2</version>
+				<executions>
+					<execution>
+						<configuration>
+							<maps>${project.build.directory}/maps.yml</maps>
+							<input>${project.build.directory}/${project.artifactId}-${project.version}.jar</input>
+							<original>${project.build.directory}/unmapped-${project.artifactId}-${project.version}.jar</original>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>map</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
