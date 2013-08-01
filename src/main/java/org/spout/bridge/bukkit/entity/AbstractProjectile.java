@@ -39,7 +39,6 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 
 	@Override
 	public void setShooter(LivingEntity livingEntity) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -49,6 +48,5 @@ public abstract class AbstractProjectile extends BridgeEntity implements Project
 
 	@Override
 	public void setBounce(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 }

@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -42,10 +43,10 @@ import org.spout.api.event.player.PlayerKickEvent;
 import org.spout.api.event.player.PlayerLeaveEvent;
 import org.spout.api.event.player.PlayerLoginEvent;
 import org.spout.api.event.server.PreCommandEvent;
-
 import org.spout.api.material.MaterialRegistry;
+
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.player.PlayerMoveComponent;
@@ -56,17 +57,18 @@ import org.spout.vanilla.event.player.PlayerRespawnEvent;
 
 public class PlayerListener extends AbstractListener {
 	/**
-	 * Maintains a list of players from prelogin events to kick on login events, as Spout does not allow kicking in prelogin
+	 * Maintains a list of players from pre-login events to kick on login
+	 * events, as Spout does not allow kicking in pre-login.
 	 */
 	private Map<String, String> toKick = new ConcurrentHashMap<String, String>();
 
-	public PlayerListener(VanillaBridgePlugin plugin) {
+	public PlayerListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		//Handle the bukkit prelogin kicks
+		// Handle the Bukkit pre-login kicks
 		String kickMessage = toKick.remove(event.getPlayer().getName());
 		if (kickMessage != null) {
 			event.setAllowed(false);
@@ -86,9 +88,9 @@ public class PlayerListener extends AbstractListener {
 		}
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		//Refire event
+		// Re-fire event
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
 		final String joinMessage = event.getMessage();
 		org.bukkit.event.player.PlayerJoinEvent join = new org.bukkit.event.player.PlayerJoinEvent(player, joinMessage);
@@ -97,11 +99,11 @@ public class PlayerListener extends AbstractListener {
 			event.setMessage(join.getJoinMessage());
 		}
 
-		//Add components
+		// Add components
 		event.getPlayer().add(PlayerMoveComponent.class);
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerLeave(PlayerLeaveEvent event) {
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
 		final String leaveMessage = event.getMessage();
@@ -129,7 +131,7 @@ public class PlayerListener extends AbstractListener {
 
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerInteractBlock(PlayerInteractBlockEvent event) {
 		BridgePlayer player = EntityFactory.createPlayer(event.getEntity());
 		Human human = event.getEntity().get(Human.class);
@@ -184,61 +186,61 @@ public class PlayerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPlayerAnimation() {
-		//todo implement onPlayerAnimation
+		// TODO: Implement onPlayerAnimation
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerAnimationType() {
-		//todo implement onPlayerAnimationType
+		// TODO: Implement onPlayerAnimationType
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerBedEnter() {
-		//todo implement onPlayerBedEnter
+		// TODO: Implement onPlayerBedEnter
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerBedLeave() {
-		//todo implement onPlayerBedLeave
+		// TODO: Implement onPlayerBedLeave
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerBucketEmpty() {
-		//todo implement onPlayerBucketEmpty
+		// TODO: Implement onPlayerBucketEmpty
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerBucket() {
-		//todo implement onPlayerBucket
+		// TODO: Implement onPlayerBucket
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerBucketFill() {
-		//todo implement onPlayerBucketFill
+		// TODO: Implement onPlayerBucketFill
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerChangedWorld() {
-		//todo implement onPlayerChangedWorld
+		// TODO: Implement onPlayerChangedWorld
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerChannel() {
-		//todo implement onPlayerChannel
+		// TODO: Implement onPlayerChannel
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerChat(PlayerChatEvent event) {
-		//TODO: unable to handle list of players that will receive the message
+		// TODO: Unable to handle list of players that will receive the message
 		//if (event.isCancelled()) {
 		//	return;
 		//}
@@ -255,11 +257,11 @@ public class PlayerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPlayerChatTabComplete() {
-		//todo implement onPlayerChatTabComplete
+		// TODO: Implement onPlayerChatTabComplete
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerCommandPreProcess(PreCommandEvent event) {
 		if (!(event.getCommandSource() instanceof Player) || event.isCancelled()) {
 			return;
@@ -268,9 +270,9 @@ public class PlayerListener extends AbstractListener {
 		PlayerCommandPreprocessEvent preprocessEvent = new PlayerCommandPreprocessEvent(player, event.getCommand() + " " + event.getArguments());
 		Bukkit.getPluginManager().callEvent(preprocessEvent);
 		event.setCancelled(preprocessEvent.isCancelled());
-        List<String> arguments = Arrays.asList(preprocessEvent.getMessage().split(" "));
-        String command = arguments.get(0);
-        arguments.remove(0);
+		List<String> arguments = Arrays.asList(preprocessEvent.getMessage().split(" "));
+		String command = arguments.get(0);
+		arguments.remove(0);
 
 		event.setCommand(command);
 		event.setArguments(arguments.toArray(new String[arguments.size()]));
@@ -278,65 +280,65 @@ public class PlayerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPlayerDropItem() {
-		//todo implement onPlayerDropItem
+		// TODO: Implement onPlayerDropItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerEggThrow() {
-		//todo implement onPlayerEggThrow
+		// TODO: Implement onPlayerEggThrow
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayer() {
-		//todo implement onPlayer
+		// TODO: Implement onPlayer
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerExpChange() {
-		//todo implement onPlayerExpChange
+		// TODO: Implement onPlayerExpChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerFish() {
-		//todo implement onPlayerFish
+		// TODO: Implement onPlayerFish
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerGameModeChange() {
-		//todo implement onPlayerGameModeChange
+		// TODO: Implement onPlayerGameModeChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerInteractEntity() {
-		//todo implement onPlayerInteractEntity
+		// TODO: Implement onPlayerInteractEntity
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerInventory() {
-		//todo implement onPlayerInventory
+		// TODO: Implement onPlayerInventory
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerItemBreak() {
-		//todo implement onPlayerItemBreak
+		// TODO: Implement onPlayerItemBreak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerItemHeld() {
-		//todo implement onPlayerItemHeld
+		// TODO: Implement onPlayerItemHeld
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerKick(PlayerKickEvent event) {
 		if (event.isCancelled()) {
 			return;
@@ -351,35 +353,35 @@ public class PlayerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPlayerLevelChange() {
-		//todo implement onPlayerLevelChange
+		// TODO: Implement onPlayerLevelChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerMove() {
-		//todo implement onPlayerMove
+		// TODO: Implement onPlayerMove
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerPickUpItem() {
-		//todo implement onPlayerPickUpItem
+		// TODO: Implement onPlayerPickUpItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerPortal() {
-		//todo implement onPlayerPortal
+		// TODO: Implement onPlayerPortal
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerRegisterChannel() {
-		//todo implement onPlayerRegisterChannel
+		// TODO: Implement onPlayerRegisterChannel
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		if (event.isCancelled()) {
 			return;
@@ -392,37 +394,37 @@ public class PlayerListener extends AbstractListener {
 
 	@EventHandler
 	public void onPlayerShearEntity() {
-		//todo implement onPlayerShearEntity
+		// TODO: Implement onPlayerShearEntity
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerToggleFlight() {
-		//todo implement onPlayerToggleFlight
+		// TODO: Implement onPlayerToggleFlight
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerToggleSneak() {
-		//todo implement onPlayerToggleSneak
+		// TODO: Implement onPlayerToggleSneak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerToggleSprint() {
-		//todo implement onPlayerToggleSprint
+		// TODO: Implement onPlayerToggleSprint
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerUnregisterChannel() {
-		//todo implement onPlayerUnregisterChannel
+		// TODO: Implement onPlayerUnregisterChannel
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerVelocity() {
-		//todo implement onPlayerVelocity
+		// TODO: Implement onPlayerVelocity
 		throw new UnsupportedOperationException();
 	}
 }

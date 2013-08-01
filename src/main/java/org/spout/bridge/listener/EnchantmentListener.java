@@ -21,22 +21,22 @@ package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class EnchantmentListener extends AbstractListener {
-	public EnchantmentListener(VanillaBridgePlugin plugin) {
+	public EnchantmentListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onEnchantItem() {
-		//todo implement onEnchantItem
+		// TODO: Implement onEnchantItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPrepareItemEnchant() {
-		//todo implement onPrepareItemEnchant
+		// TODO: Implement onPrepareItemEnchant
 		throw new UnsupportedOperationException();
 	}
 }

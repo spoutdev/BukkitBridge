@@ -21,76 +21,76 @@ package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class VehicleListener extends AbstractListener {
-	public VehicleListener(VanillaBridgePlugin plugin) {
+	public VehicleListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onVehicleBlockCollision() {
-		//todo implement onVehicleBlockCollision
+		// TODO: Implement onVehicleBlockCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleCollision() {
-		//todo implement onVehicleCollision
+		// TODO: Implement onVehicleCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleCreate() {
-		//todo implement onVehicleCreate
+		// TODO: Implement onVehicleCreate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleDamage() {
-		//todo implement onVehicleDamage
+		// TODO: Implement onVehicleDamage
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleDestroy() {
-		//todo implement onVehicleDestroy
+		// TODO: Implement onVehicleDestroy
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleEnter() {
-		//todo implement onVehicleEnter
+		// TODO: Implement onVehicleEnter
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleEntityCollision() {
-		//todo implement onVehicleEntityCollision
+		// TODO: Implement onVehicleEntityCollision
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicle() {
-		//todo implement onVehicle
+		// TODO: Implement onVehicle
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleExit() {
-		//todo implement onVehicleExit
+		// TODO: Implement onVehicleExit
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleMove() {
-		//todo implement onVehicleMove
+		// TODO: Implement onVehicleMove
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onVehicleUpdate() {
-		//todo implement onVehicleUpdate
+		// TODO: Implement onVehicleUpdate
 		throw new UnsupportedOperationException();
 	}
 }

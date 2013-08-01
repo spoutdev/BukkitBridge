@@ -19,7 +19,6 @@
  */
 package org.spout.bridge.bukkit;
 
-import com.avaje.ebean.config.ServerConfig;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +31,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.avaje.ebean.config.ServerConfig;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
@@ -67,8 +69,8 @@ import org.bukkit.util.permissions.DefaultPermissions;
 
 import org.spout.api.util.access.BanType;
 
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.command.BridgeConsoleCommandSender;
 import org.spout.bridge.bukkit.entity.EntityFactory;
 import org.spout.bridge.bukkit.scheduler.BridgeScheduler;
@@ -81,7 +83,7 @@ import org.spout.vanilla.inventory.recipe.VanillaRecipes;
  * BridgeServer is Bridge's version of Bukkit's Server.
  */
 public class BridgeServer implements Server {
-	private final VanillaBridgePlugin plugin;
+	private final BukkitBridgePlugin plugin;
 	private final org.spout.api.Server server;
 	private final SimpleServicesManager servicesManager;
 	private final BridgeScheduler scheduler;
@@ -90,7 +92,7 @@ public class BridgeServer implements Server {
 	private final String serverVersion;
 	private final ConsoleCommandSender consoleSender;
 
-	public BridgeServer(org.spout.api.Server server, VanillaBridgePlugin plugin) {
+	public BridgeServer(org.spout.api.Server server, BukkitBridgePlugin plugin) {
 		this.server = server;
 		this.plugin = plugin;
 		this.consoleSender = new BridgeConsoleCommandSender();
@@ -248,7 +250,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public boolean isHardcore() {
-		return false;  //TODO:
+		return false;  // TODO:
 	}
 
 	@Override
@@ -343,7 +345,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public String getShutdownMessage() {
-		return null;  //TODO
+		return null;  // TODO
 	}
 
 	@Override
@@ -473,7 +475,7 @@ public class BridgeServer implements Server {
 
 	@Override
 	public int getAmbientSpawnLimit() {
-		return 0;  //TODO
+		return 0;  // TODO
 	}
 
 	@Override
@@ -515,7 +517,7 @@ public class BridgeServer implements Server {
 		return "DEFAULT";
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings ({"unchecked", "rawtypes"})
 	@Override
 	public List<World> getWorlds() {
 		return (List<World>) (List) plugin.getWorldListener().getWorlds();
@@ -634,7 +636,7 @@ public class BridgeServer implements Server {
 				properties.load(stream);
 				result = properties.getProperty("version");
 			} catch (IOException ex) {
-				VanillaBridgePlugin.getInstance().getEngine().getLogger().severe("Could not get Bridge version!\n" + ex);
+				BukkitBridgePlugin.getInstance().getEngine().getLogger().severe("Could not get Bridge version!\n" + ex);
 			}
 		}
 		return result;

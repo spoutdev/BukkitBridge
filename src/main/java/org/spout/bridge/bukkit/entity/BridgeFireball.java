@@ -32,7 +32,6 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setDirection(Vector vector) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -42,7 +41,6 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setYield(float v) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -52,7 +50,6 @@ public class BridgeFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setIsIncendiary(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -35,6 +35,5 @@ public class BridgeIronGolem extends BridgeGolem implements IronGolem {
 
 	@Override
 	public void setPlayerCreated(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 }

@@ -36,7 +36,6 @@ public class BridgeSlime extends BridgeLivingEntity implements Slime {
 
 	@Override
 	public void setSize(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

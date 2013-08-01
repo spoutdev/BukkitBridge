@@ -19,6 +19,9 @@
  */
 package org.spout.bridge;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -48,10 +51,6 @@ import org.spout.vanilla.material.enchantment.EnchantmentRegistry;
 import org.spout.vanilla.material.enchantment.SwordEnchantment;
 import org.spout.vanilla.material.enchantment.ToolEnchantment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Various utilities for converting Bukkit --> Spout objects and vice versa
  */
@@ -65,6 +64,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a Bukkit Location from a SpoutAPI Transform
+	 *
 	 * @param transform The SpoutAPI Transform to convert to a Location
 	 * @return A Location with the same values as given Transform
 	 */
@@ -77,6 +77,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a Bukkit block from a SpoutAPI block
+	 *
 	 * @param block The SpoutAPI block to convert to a Bukkit block
 	 * @return The corresponding Bukkit block
 	 */
@@ -87,6 +88,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI block from a Bukkit block
+	 *
 	 * @param block The Bukkit block to convert to a SpoutAPI block
 	 * @return The corresponding SpoutAPI block
 	 */
@@ -97,6 +99,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a Bukkit Location from a SpoutAPI Point
+	 *
 	 * @param point The SpoutAPI Point to convert to a Location
 	 * @return A Location with the same values as given Point
 	 */
@@ -111,6 +114,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI Point from a Bukkit Location
+	 *
 	 * @param loc The Bukkit Location to convert to a Point
 	 * @return A SpoutAPI Point with the same values as given Location
 	 */
@@ -120,6 +124,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI Vector3 from a Bukkit Location
+	 *
 	 * @param loc The Bukkit Location to convert to a Vector3
 	 * @return A SpoutAPI Vector3 with the same values as given Bukkit Location
 	 */
@@ -129,6 +134,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a BridgeItemStack from a SpoutAPI ItemStack
+	 *
 	 * @param item The SpoutAPI ItemStack to convert to a BridgeItemStack
 	 * @return The BridgeItemStack with the same values and type as given Spout ItemStack
 	 */
@@ -151,6 +157,7 @@ public class BukkitUtil {
 
 	/**
 	 * Creates a SpoutAPI ItemStack from a Bukkit ItemStack
+	 *
 	 * @param item The Bukkit ItemStack to convert to a SpoutAPI ItemStack
 	 * @return The converted SpoutAPI ItemStack
 	 */
@@ -226,13 +233,11 @@ public class BukkitUtil {
 
 	/**
 	 * Processes a commandLine through the Spout commandSource
-	 * @param source
-	 * @param commandLine
 	 */
 	public static void processCommand(CommandSource source, String commandLine) {
-        List<String> arguments = Arrays.asList(commandLine.split(" "));
-        String command = arguments.get(0);
-        arguments.remove(0);
+		List<String> arguments = Arrays.asList(commandLine.split(" "));
+		String command = arguments.get(0);
+		arguments.remove(0);
 
 		source.sendCommand(command, arguments.toArray(new String[arguments.size()]));
 	}

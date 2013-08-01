@@ -35,12 +35,12 @@ import org.bukkit.scheduler.BukkitWorker;
 
 import org.spout.api.scheduler.TaskPriority;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class BridgeScheduler implements BukkitScheduler {
-	private final VanillaBridgePlugin plugin;
+	private final BukkitBridgePlugin plugin;
 
-	public BridgeScheduler(VanillaBridgePlugin plugin) {
+	public BridgeScheduler(BukkitBridgePlugin plugin) {
 		this.plugin = plugin;
 	}
 

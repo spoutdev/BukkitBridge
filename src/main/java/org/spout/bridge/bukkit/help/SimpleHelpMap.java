@@ -39,17 +39,14 @@ public class SimpleHelpMap implements HelpMap {
 
 	@Override
 	public void addTopic(HelpTopic helpTopic) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void clear() {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void registerHelpTopicFactory(Class<?> aClass, HelpTopicFactory<?> helpTopicFactory) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -37,7 +37,6 @@ public class BridgeItem extends BridgeEntity implements Item {
 
 	@Override
 	public void setItemStack(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -47,7 +46,6 @@ public class BridgeItem extends BridgeEntity implements Item {
 
 	@Override
 	public void setPickupDelay(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

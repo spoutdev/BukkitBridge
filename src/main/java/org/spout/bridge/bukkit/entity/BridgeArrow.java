@@ -27,7 +27,7 @@ import org.spout.api.entity.Entity;
 public class BridgeArrow extends AbstractProjectile implements Arrow {
 	protected BridgeArrow(Entity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
+		// TODO: Auto-generated constructor stub
 	}
 
 	@Override

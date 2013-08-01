@@ -38,7 +38,6 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public void setMaxSpeed(double v) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -48,7 +47,6 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public void setOccupiedDeceleration(double v) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -58,7 +56,6 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public void setUnoccupiedDeceleration(double v) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -68,7 +65,6 @@ public class BridgeBoat extends BridgeVehicle implements Boat {
 
 	@Override
 	public void setWorkOnLand(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

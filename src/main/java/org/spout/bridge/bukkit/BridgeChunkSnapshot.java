@@ -23,13 +23,14 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Biome;
 
 /**
- * Represents a static, thread-safe snapshot of chunk of blocks
- * Purpose is to allow clean, efficient copy of a chunk data to be made, and then handed off for processing in another thread (e.g. map rendering)
+ * Represents a static, thread-safe snapshot of chunk of blocks. Purpose is to
+ * allow clean, efficient copy of a chunk data to be made, and then handed off
+ * for processing in another thread (e.g. map rendering).
  */
 public class BridgeChunkSnapshot implements ChunkSnapshot {
 	private final int x, z;
 	private final String worldname;
-	private final short[][] blockids; /* Block IDs, by section */
+	private final short[][] blockids; // Block IDs, by section
 	private final byte[][] blockdata;
 	private final byte[][] skylight;
 	private final byte[][] emitlight;

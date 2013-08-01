@@ -26,7 +26,7 @@ import org.bukkit.entity.EntityType;
 
 import org.spout.vanilla.component.block.material.MonsterSpawner;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings ("deprecation")
 public class BridgeCreatureSpawner extends BridgeBlockState implements CreatureSpawner {
 	private final MonsterSpawner spawner;
 

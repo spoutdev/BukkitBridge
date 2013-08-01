@@ -24,7 +24,8 @@ import org.bukkit.TravelAgent;
 
 import org.spout.api.geo.World;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
+
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.world.generator.object.VanillaObjects;
 
@@ -93,7 +94,7 @@ public class PortalTravelAgent implements TravelAgent {
 	@Override
 	public Location findPortal(Location location) {
 		String name = location.getWorld().getName();
-		World world = VanillaBridgePlugin.getInstance().getEngine().getWorld(name, true);
+		World world = BukkitBridgePlugin.getInstance().getEngine().getWorld(name, true);
 		if (world == null) {
 			throw new IllegalArgumentException("World '" + name + "' not found.");
 		}
@@ -119,7 +120,7 @@ public class PortalTravelAgent implements TravelAgent {
 	@Override
 	public boolean createPortal(Location location) {
 		String name = location.getWorld().getName();
-		World world = VanillaBridgePlugin.getInstance().getEngine().getWorld(name, true); //TODO Bad design again, figure out a better way to do these.
+		World world = BukkitBridgePlugin.getInstance().getEngine().getWorld(name, true); // TODO: Bad design again, figure out a better way to do these.
 		if (world == null) {
 			throw new IllegalArgumentException("World '" + name + "' not found.");
 		}

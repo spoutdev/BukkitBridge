@@ -43,7 +43,6 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public void setScale(Scale scale) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -58,12 +57,10 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public void setCenterX(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void setCenterZ(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -73,7 +70,6 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public void setWorld(World world) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -83,7 +79,6 @@ public class BridgeMapView implements MapView {
 
 	@Override
 	public void addRenderer(MapRenderer mapRenderer) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -22,7 +22,7 @@ package org.spout.bridge.bukkit.block;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class BridgeSign extends BridgeBlockState implements Sign {
 	private final org.spout.vanilla.component.block.material.Sign sign;
@@ -46,6 +46,6 @@ public class BridgeSign extends BridgeBlockState implements Sign {
 	public void setLine(int line, String text) throws IndexOutOfBoundsException {
 		String[] lines = sign.getText();
 		lines[line] = text;
-		sign.setText(lines, VanillaBridgePlugin.getCause());
+		sign.setText(lines, BukkitBridgePlugin.getCause());
 	}
 }

@@ -77,12 +77,10 @@ public abstract class BridgeCommandSender implements CommandSender {
 
 	@Override
 	public void removeAttachment(PermissionAttachment permissionAttachment) {
-
 	}
 
 	@Override
 	public void recalculatePermissions() {
-
 	}
 
 	@Override

@@ -30,30 +30,30 @@ import org.spout.api.event.world.WorldLoadEvent;
 import org.spout.api.event.world.WorldSaveEvent;
 import org.spout.api.event.world.WorldUnloadEvent;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
 
 public class WorldListener extends AbstractListener {
 	private final List<BridgeWorld> worlds = new ArrayList<BridgeWorld>();
 
-	public WorldListener(VanillaBridgePlugin plugin) {
+	public WorldListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onWorldLoad(WorldLoadEvent event) {
 		BridgeWorld world = new BridgeWorld((BridgeServer) Bukkit.getServer(), event.getWorld());
 		synchronized (worlds) {
 			worlds.add(world);
 		}
-		//Call init during world load because Spout has no init event
+		// Call init during world load because Spout has no init event
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldInitEvent(world));
 
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldLoadEvent(world));
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onWorldUnload(WorldUnloadEvent event) {
 		BridgeWorld found = null;
 		synchronized (worlds) {
@@ -78,43 +78,43 @@ public class WorldListener extends AbstractListener {
 
 	@EventHandler
 	public void onChunk() {
-		//todo implement onChunk
+		// TODO: Implement onChunk
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onChunkLoad() {
-		//todo implement onChunkLoad
+		// TODO: Implement onChunkLoad
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onChunkPopulate() {
-		//todo implement onChunkPopulate
+		// TODO: Implement onChunkPopulate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onChunkOnload() {
-		//todo implement onChunkOnload
+		// TODO: Implement onChunkOnload
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPortalCreate() {
-		//todo implement onPortalCreate
+		// TODO: Implement onPortalCreate
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onSpawnChange() {
-		//todo implement onSpawnChange
+		// TODO: Implement onSpawnChange
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onStructureGrow() {
-		//todo implement onStructureGrow
+		// TODO: Implement onStructureGrow
 		throw new UnsupportedOperationException();
 	}
 

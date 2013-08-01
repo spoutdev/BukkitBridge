@@ -21,34 +21,34 @@ package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class HangingListener extends AbstractListener {
-	public HangingListener(VanillaBridgePlugin plugin) {
+	public HangingListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onHangingBreakByEntity() {
-		//todo implement onHangingBreakByEntity
+		// TODO: Implement onHangingBreakByEntity
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onHangingBreak() {
-		//todo implement onHangingBreak
+		// TODO: Implement onHangingBreak
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onHanging() {
-		//todo implement onHanging
+		// TODO: Implement onHanging
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onHangingPlace() {
-		//todo implement onHangingPlace
+		// TODO: Implement onHangingPlace
 		throw new UnsupportedOperationException();
 	}
 }

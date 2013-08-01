@@ -28,13 +28,14 @@ import org.spout.vanilla.protocol.entity.creature.CreatureType;
 import org.spout.vanilla.protocol.entity.object.ObjectType;
 
 /**
- * Creates BridgeEntity and BridgePlayer objects upon request
+ * Creates BridgeEntity and BridgePlayer objects upon request.
  */
 public final class EntityFactory {
 	/**
-	 * Creates a BridgeEntity from a SpoutAPI Entity. If the Entity is a Player,
-	 * this method will return a BridgePlayer object instead of a plain
-	 * BridgeEntity
+	 * Creates a BridgeEntity from a SpoutAPI Entity. If the Entity is a
+	 * Player, this method will return a BridgePlayer object instead of a
+	 * plain BridgeEntity.
+	 *
 	 * @param entity The SpoutAPI Entity to create a BridgeEntity from
 	 * @return The BridgeEntity that represents the SpoutAPI Entity
 	 */
@@ -46,7 +47,7 @@ public final class EntityFactory {
 		if (living != null) {
 			switch (CreatureType.get(living.getClass())) {
 				case BAT:
-					return null; // TODO: implement Bat
+					return null; // TODO: Implement Bat
 				case BLAZE:
 					return new BridgeBlaze(entity);
 				case CAVE_SPIDER:
@@ -123,21 +124,21 @@ public final class EntityFactory {
 				case ENDER_PEARL:
 					return new BridgeEnderPearl(entity);
 				case WITHER_SKULL:
-					return null; //TODO: implement Wither skulls
+					return null; // TODO: Implement Wither skulls
 				case FALLING_OBJECT:
-					return new BridgeFallingSand(entity); //TODO: not sure if this is 100% correct
+					return new BridgeFallingSand(entity); // TODO: Not sure if this is 100% correct
 				case ITEM_FRAME:
-					return null; //TODO: implement item frames
+					return null; // TODO: Implement item frames
 				case EYE_OF_ENDER:
-					return null; //TODO: implement Eye of Ender
+					return null; // TODO: Implement Eye of Ender
 				case POTION:
 					return new BridgeThrownPotion(entity);
 				case DRAGON_EGG:
-					return null; //TODO implement Dragon egg
+					return null; // TODO: Implement Dragon egg
 				case EXP_BOTTLE:
 					return new BridgeThrownExpBottle(entity);
 				case FIREWORKS_ROCKET:
-					return null; //TODO: implement Fireworks
+					return null; // TODO: Implement Fireworks
 				case FISHING_BOB:
 					return new BridgeFish(entity);
 				default:
@@ -148,7 +149,8 @@ public final class EntityFactory {
 	}
 
 	/**
-	 * Creates a BridgePlayer from a SpoutAPI Player
+	 * Creates a BridgePlayer from a SpoutAPI Player.
+	 *
 	 * @param player The SpoutAPI Player to create a BridgePlayer from
 	 * @return The BridgePlayer that represents the SpoutAPI Player
 	 */

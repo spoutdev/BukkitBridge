@@ -44,62 +44,62 @@ public class BridgeEnderDragonPart extends BridgeComplexPart implements EnderDra
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public void _INVALID_damage(int i) {
-        damage(i);
-    }
+	@Override
+	public void _INVALID_damage(int i) {
+		damage(i);
+	}
 
-    @Override
+	@Override
 	public void damage(double d, org.bukkit.entity.Entity entity) {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public void _INVALID_damage(int i, org.bukkit.entity.Entity entity) {
-        damage(i, entity);
-    }
+	@Override
+	public void _INVALID_damage(int i, org.bukkit.entity.Entity entity) {
+		damage(i, entity);
+	}
 
-    @Override
+	@Override
 	public double getHealth() {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public int _INVALID_getHealth() {
-        return (int) getHealth();
-    }
+	@Override
+	public int _INVALID_getHealth() {
+		return (int) getHealth();
+	}
 
-    @Override
+	@Override
 	public void setHealth(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public void _INVALID_setHealth(int i) {
-        setHealth(i);
-    }
-
-    @Override
-	public double getMaxHealth() {
-        throw new UnsupportedOperationException();
+	@Override
+	public void _INVALID_setHealth(int i) {
+		setHealth(i);
 	}
 
-    @Override
-    public int _INVALID_getMaxHealth() {
-        return (int) getMaxHealth();
-    }
+	@Override
+	public double getMaxHealth() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
+	@Override
+	public int _INVALID_getMaxHealth() {
+		return (int) getMaxHealth();
+	}
+
+	@Override
 	public void setMaxHealth(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public void _INVALID_setMaxHealth(int i) {
-        setMaxHealth(i);
-    }
+	@Override
+	public void _INVALID_setMaxHealth(int i) {
+		setMaxHealth(i);
+	}
 
-    @Override
+	@Override
 	public void resetMaxHealth() {
 		throw new UnsupportedOperationException();
 	}

@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -66,8 +67,8 @@ import org.spout.api.material.BlockMaterial;
 import org.spout.api.math.Quaternion;
 import org.spout.api.math.Vector3;
 
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.block.BridgeBlock;
 import org.spout.bridge.bukkit.entity.BridgeItem;
 import org.spout.bridge.bukkit.entity.EntityFactory;
@@ -88,7 +89,7 @@ import org.spout.vanilla.world.generator.theend.TheEndGenerator;
 /**
  * BridgeWorld is Bridge's implementation of Bukkit's World.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings ("deprecation")
 public class BridgeWorld implements World {
 	private final BridgeServer server;
 	private final org.spout.api.geo.World handle;
@@ -130,12 +131,12 @@ public class BridgeWorld implements World {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		VanillaBridgePlugin.getInstance().getDataProvider().remove(handle, metadataKey);
+		BukkitBridgePlugin.getInstance().getDataProvider().remove(handle, metadataKey);
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		VanillaBridgePlugin.getInstance().getDataProvider().set(handle, metadataKey, newMetadataValue);
+		BukkitBridgePlugin.getInstance().getDataProvider().set(handle, metadataKey, newMetadataValue);
 	}
 
 	@Override
@@ -166,7 +167,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean fire, boolean breakBlocks) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
@@ -705,22 +706,22 @@ public class BridgeWorld implements World {
 
 	@Override
 	public String[] getGameRules() {
-		return new String[0];  //To change body of implemented methods use File | Settings | File Templates.
+		return new String[0];
 	}
 
 	@Override
 	public String getGameRuleValue(String s) {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;
 	}
 
 	@Override
 	public boolean setGameRuleValue(String s, String s2) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
 	public boolean isGameRule(String s) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
@@ -854,12 +855,11 @@ public class BridgeWorld implements World {
 
 	@Override
 	public int getAmbientSpawnLimit() {
-		return 0;  //To change body of implemented methods use File | Settings | File Templates.
+		return 0;
 	}
 
 	@Override
 	public void setAmbientSpawnLimit(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -39,12 +39,10 @@ public class BridgeMapCanvas implements MapCanvas {
 
 	@Override
 	public void setCursors(MapCursorCollection mapCursorCollection) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void setPixel(int i, int i1, byte b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -59,11 +57,9 @@ public class BridgeMapCanvas implements MapCanvas {
 
 	@Override
 	public void drawImage(int i, int i1, Image image) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void drawText(int i, int i1, MapFont mapFont, String s) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 }

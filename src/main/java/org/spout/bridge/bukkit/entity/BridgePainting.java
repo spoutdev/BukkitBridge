@@ -58,7 +58,6 @@ public class BridgePainting extends BridgeEntity implements Painting {
 
 	@Override
 	public void setFacingDirection(BlockFace blockFace) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

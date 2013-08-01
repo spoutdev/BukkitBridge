@@ -22,6 +22,7 @@ package org.spout.bridge.bukkit.entity;
 import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Set;
+
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
 import org.bukkit.Instrument;
@@ -52,7 +53,7 @@ import org.spout.vanilla.component.entity.misc.Hunger;
 import org.spout.vanilla.component.entity.misc.Level;
 import org.spout.vanilla.data.VanillaData;
 
-@DelegateDeserialization(BridgeOfflinePlayer.class)
+@DelegateDeserialization (BridgeOfflinePlayer.class)
 public class BridgePlayer extends BridgeHumanEntity implements Player {
 	public BridgePlayer(org.spout.api.entity.Player handle) {
 		super(handle);
@@ -125,7 +126,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void sendRawMessage(String message) {
-        throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -496,22 +497,22 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void setFlySpeed(float v) throws IllegalArgumentException {
-		getHandle().get(Human.class).setFlyingSpeed((byte) v, true); //TODO: Check speed conversion loss float -> byte
+		getHandle().get(Human.class).setFlyingSpeed((byte) v, true); // TODO: Check speed conversion loss float -> byte
 	}
 
 	@Override
 	public void setWalkSpeed(float v) throws IllegalArgumentException {
-		getHandle().get(Human.class).setWalkingSpeed((byte) v, true); //TODO: Check speed conversion loss float -> byte
+		getHandle().get(Human.class).setWalkingSpeed((byte) v, true); // TODO: Check speed conversion loss float -> byte
 	}
 
 	@Override
 	public float getFlySpeed() {
-		return getHandle().get(Human.class).getFlyingSpeed(); //TODO: possible speed conversion issue
+		return getHandle().get(Human.class).getFlyingSpeed(); // TODO: possible speed conversion issue
 	}
 
 	@Override
 	public float getWalkSpeed() {
-		return getHandle().get(Human.class).getWalkingSpeed(); //TODO: possible speed conversion issue
+		return getHandle().get(Human.class).getWalkingSpeed(); // TODO: possible speed conversion issue
 	}
 
 	@Override
@@ -549,14 +550,14 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
+	@Override
 	public void sendMessage(String message) {
 		getHandle().sendMessage(message);
 	}
 
 	@Override
 	public void sendMessage(String[] message) {
-        throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

@@ -42,7 +42,6 @@ public abstract class BridgeAgeable extends BridgeCreature implements Ageable {
 
 	@Override
 	public void setAgeLock(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

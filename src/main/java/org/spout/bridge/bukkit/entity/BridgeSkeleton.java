@@ -41,11 +41,10 @@ public class BridgeSkeleton extends BridgeMonster implements Skeleton {
 
 	@Override
 	public SkeletonType getSkeletonType() {
-		return null;  //To change body of implemented methods use File | Settings | File Templates.
+		return null;
 	}
 
 	@Override
 	public void setSkeletonType(SkeletonType skeletonType) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 }

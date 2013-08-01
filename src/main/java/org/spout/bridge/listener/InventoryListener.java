@@ -21,76 +21,76 @@ package org.spout.bridge.listener;
 
 import org.spout.api.event.EventHandler;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public class InventoryListener extends AbstractListener {
-	public InventoryListener(VanillaBridgePlugin plugin) {
+	public InventoryListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onBrew() {
-		//todo implement onBrew
+		// TODO: Implement onBrew
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onCraftItem() {
-		//todo implement onCraftItem
+		// TODO: Implement onCraftItem
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onFurnaceBurn() {
-		//todo implement onFurnaceBurn
+		// TODO: Implement onFurnaceBurn
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onFurnaceExtract() {
-		//todo implement onFurnaceExtract
+		// TODO: Implement onFurnaceExtract
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onFurnaceSmelt() {
-		//todo implement onFurnaceSmelt
+		// TODO: Implement onFurnaceSmelt
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onInventoryClick() {
-		//todo implement onInventoryClick
+		// TODO: Implement onInventoryClick
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onInventoryClose() {
-		//todo implement onInventoryClose
+		// TODO: Implement onInventoryClose
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onInventory() {
-		//todo implement onInventory
+		// TODO: Implement onInventory
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onInventoryOpen() {
-		//todo implement onInventoryOpen
+		// TODO: Implement onInventoryOpen
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onInventoryType() {
-		//todo implement onInventoryType
+		// TODO: Implement onInventoryType
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPrepareItemCraft() {
-		//todo implement onPreprareItemCraft
+		// TODO: Implement onPreprareItemCraft
 		throw new UnsupportedOperationException();
 	}
 }

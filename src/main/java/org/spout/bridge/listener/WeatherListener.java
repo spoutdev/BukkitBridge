@@ -23,25 +23,26 @@ import org.bukkit.Bukkit;
 
 import org.spout.api.event.EventHandler;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
+
 import org.spout.vanilla.data.Weather;
 import org.spout.vanilla.event.world.WeatherChangeEvent;
 
 public class WeatherListener extends AbstractListener {
-	public WeatherListener(VanillaBridgePlugin plugin) {
+	public WeatherListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onLightningStrike() {
-		//todo implement onLightningStrike
+		// TODO: Implement onLightningStrike
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onWeatherChange(WeatherChangeEvent event) {
 		org.bukkit.World world = Bukkit.getWorld(event.getWorld().getName());
-		//Rain
+		// Rain
 		org.bukkit.event.weather.WeatherChangeEvent weatherChange = null;
 		if ((event.getCurrentWeather() == Weather.RAIN || event.getCurrentWeather() == Weather.THUNDERSTORM) && event.getNewWeather() == Weather.CLEAR) {
 			weatherChange = new org.bukkit.event.weather.WeatherChangeEvent(world, false);
@@ -54,7 +55,7 @@ public class WeatherListener extends AbstractListener {
 			Bukkit.getPluginManager().callEvent(weatherChange);
 			event.setCancelled(weatherChange.isCancelled());
 		}
-		//Thunderstorm
+		// Thunderstorm
 		org.bukkit.event.weather.ThunderChangeEvent thunderChange = null;
 		if (event.getCurrentWeather() == Weather.THUNDERSTORM && (event.getNewWeather() == Weather.CLEAR || event.getNewWeather() == Weather.RAIN)) {
 			thunderChange = new org.bukkit.event.weather.ThunderChangeEvent(world, false);

@@ -36,8 +36,8 @@ import org.spout.api.event.block.BlockEvent;
 import org.spout.api.event.cause.BlockCause;
 import org.spout.api.event.cause.PlayerCause;
 
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 
 import org.spout.vanilla.event.cause.PlayerBreakCause;
@@ -49,9 +49,8 @@ import org.spout.vanilla.event.material.BlockIgniteEvent;
 import org.spout.vanilla.event.material.RedstoneChangeEvent;
 import org.spout.vanilla.event.material.network.SignUpdateEvent;
 
-
 public class BlockListener extends AbstractListener {
-	public BlockListener(VanillaBridgePlugin plugin) {
+	public BlockListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
@@ -80,7 +79,7 @@ public class BlockListener extends AbstractListener {
 		BlockBreakEvent breakEvent = new BlockBreakEvent(BukkitUtil.fromBlock(event.getBlock()), new BridgePlayer(pcause.getSource()));
 		Bukkit.getPluginManager().callEvent(breakEvent);
 		event.setCancelled(breakEvent.isCancelled());
-		//TODO finish onBlockBreak, exp drops and such!
+		// TODO: Finish onBlockBreak, experience drops and such
 	}
 
 	//public BlockPlaceEvent(final Block placedBlock, final BlockState replacedBlockState,
@@ -96,7 +95,7 @@ public class BlockListener extends AbstractListener {
 			return;
 		}
 		PlayerPlacementCause pcause = (PlayerPlacementCause) event.getCause();
-		//todo finish onBlockPlace
+		// TODO: Finish onBlockPlace
 		//PlayerInventory pinv = pcause.getSource().get(PlayerInventory.class);
 		//BlockPlaceEvent breakEvent = new BlockPlaceEvent(BukkitUtil.fromBlock(event.getBlock()), null,null,BukkitUtil.fromItemStack(pinv.getQuickbar().getCurrentItem()), new BridgePlayer(pcause.getSource()), event.isCancelled());
 		//Bukkit.getPluginManager().callEvent(breakEvent);
@@ -105,43 +104,42 @@ public class BlockListener extends AbstractListener {
 
 	@EventHandler
 	public void onBlockBurn(BlockChangeEvent event) {
-		//todo implement onBlockBurn
+		// TODO: Implement onBlockBurn
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockCanBuild(BlockCanBuildEvent event) {
-		//todo implement onBlockCanBuild
+		// TODO: Implement onBlockCanBuild
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockDamage(BlockChangeEvent event) {
-		//todo implement onBlockDamage
+		// TODO: Implement onBlockDamage
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockDispense() {
-		//todo implement onBlockDispense
+		// TODO: Implement onBlockDispense
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockEvent(BlockEvent event) {
-		//todo implement onBlockEvent
+		// TODO: Implement onBlockEvent
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockExp() {
-		//todo implement onBlockExp
+		// TODO: Implement onBlockExp
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * Handles block fading to melting, fading and disappearance
-	 * @param event
 	 */
 	@EventHandler
 	public void onBlockFade(BlockDisappearEvent event) {
@@ -171,7 +169,7 @@ public class BlockListener extends AbstractListener {
 
 	@EventHandler
 	public void onBlockFormTo() {
-		//todo implement onBlockFormTo
+		// TODO: Implement onBlockFormTo
 		throw new UnsupportedOperationException();
 	}
 
@@ -221,25 +219,25 @@ public class BlockListener extends AbstractListener {
 
 	@EventHandler
 	public void onBlockPhysics() {
-		//todo implement onBlockPhysics
+		// TODO: Implement onBlockPhysics
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockPiston() {
-		//todo implement onBlockPiston
+		// TODO: Implement onBlockPiston
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockPistonExtend() {
-		//todo implement onBlockPistonExtend
+		// TODO: Implement onBlockPistonExtend
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onBlockPistonRetract() {
-		//todo implement onBlockPistonRetract
+		// TODO: Implement onBlockPistonRetract
 		throw new UnsupportedOperationException();
 	}
 
@@ -262,7 +260,7 @@ public class BlockListener extends AbstractListener {
 
 	@EventHandler
 	public void onEntityBlockForm() {
-		//todo implement onEntityBlockForm
+		// TODO: Implement onEntityBlockForm
 		throw new UnsupportedOperationException();
 	}
 
@@ -281,7 +279,7 @@ public class BlockListener extends AbstractListener {
 
 	@EventHandler
 	public void onNotePlay() {
-		//todo implement onNotePlay
+		// TODO: Implement onNotePlay
 		throw new UnsupportedOperationException();
 	}
 

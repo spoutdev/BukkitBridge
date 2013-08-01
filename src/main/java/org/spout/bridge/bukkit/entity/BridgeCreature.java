@@ -31,7 +31,6 @@ public abstract class BridgeCreature extends BridgeLivingEntity implements Creat
 
 	@Override
 	public void setTarget(LivingEntity livingEntity) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

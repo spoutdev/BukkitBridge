@@ -21,12 +21,12 @@ package org.spout.bridge.listener;
 
 import org.spout.api.event.Listener;
 
-import org.spout.bridge.VanillaBridgePlugin;
+import org.spout.bridge.BukkitBridgePlugin;
 
 public abstract class AbstractListener implements Listener {
-	protected final VanillaBridgePlugin plugin;
+	protected final BukkitBridgePlugin plugin;
 
-	public AbstractListener(VanillaBridgePlugin plugin) {
+	public AbstractListener(BukkitBridgePlugin plugin) {
 		this.plugin = plugin;
 		plugin.getEngine().getEventManager().registerEvents(this, plugin);
 	}

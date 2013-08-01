@@ -60,6 +60,6 @@ public class BridgeEnchantment extends Enchantment {
 
 	@Override
 	public int getStartLevel() {
-		return 1; //Vanilla enchantments have no concept of a start level, and I think the only potential one in Vanilla MC is 1
+		return 1; // Vanilla enchantments have no concept of a start level, and I think the only potential one in Vanilla MC is 1
 	}
 }

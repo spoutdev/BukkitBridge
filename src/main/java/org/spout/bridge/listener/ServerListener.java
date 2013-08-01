@@ -28,19 +28,19 @@ import org.spout.api.event.server.plugin.PluginDisableEvent;
 import org.spout.api.event.server.plugin.PluginEnableEvent;
 import org.spout.api.event.server.service.ServiceRegisterEvent;
 import org.spout.api.event.server.service.ServiceUnregisterEvent;
-
 import org.spout.api.plugin.services.ServiceManager;
-import org.spout.bridge.VanillaBridgePlugin;
+
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.bukkit.plugin.SpoutPlugin;
 
 public class ServerListener extends AbstractListener {
-	public ServerListener(VanillaBridgePlugin plugin) {
+	public ServerListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onMapInitialze() {
-		//todo implement onMapInitialize
+		// TODO: Implement onMapInitialize
 		throw new UnsupportedOperationException();
 	}
 
@@ -56,29 +56,29 @@ public class ServerListener extends AbstractListener {
 
 	@EventHandler
 	public void onRemoteServerCommand() {
-		//todo implement onRemoteServerCommand
+		// TODO: Implement onRemoteServerCommand
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onServerCommand() {
-		//todo implement onServerCommand
+		// TODO: Implement onServerCommand
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onServer() {
-		//todo implement onServer
+		// TODO:  onServer
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onServerListPing() {
-		//todo implement onServerListPing
+		// TODO:  onServerListPing
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings ({"rawtypes", "unchecked"})
 	@EventHandler
 	public void onServiceRegister(ServiceRegisterEvent event) {
 		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());
@@ -86,7 +86,7 @@ public class ServerListener extends AbstractListener {
 		Bukkit.getPluginManager().callEvent(new org.bukkit.event.server.ServiceRegisterEvent(provider));
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings ({"rawtypes", "unchecked"})
 	@EventHandler
 	public void onServiceUnregister(ServiceUnregisterEvent event) {
 		Plugin plugin = new SpoutPlugin(event.getProvider().getPlugin());

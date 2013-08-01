@@ -36,7 +36,6 @@ public class BridgeVillager extends BridgeAgeable implements Villager {
 
 	@Override
 	public void setProfession(Profession profession) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

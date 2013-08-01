@@ -55,12 +55,12 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		return health != null ? health.getHealth() : 0;
 	}
 
-    @Override
-    public int _INVALID_getHealth() {
-        return (int) getHealth();
-    }
+	@Override
+	public int _INVALID_getHealth() {
+		return (int) getHealth();
+	}
 
-    @Override
+	@Override
 	public void setHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
@@ -68,23 +68,23 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		}
 	}
 
-    @Override
-    public void _INVALID_setHealth(int i) {
-        setHealth(i);
-    }
+	@Override
+	public void _INVALID_setHealth(int i) {
+		setHealth(i);
+	}
 
-    @Override
+	@Override
 	public double getMaxHealth() {
 		Health health = getHandle().get(Health.class);
 		return health != null ? health.getMaxHealth() : 0;
 	}
 
-    @Override
-    public int _INVALID_getMaxHealth() {
-        return (int) getMaxHealth();  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	@Override
+	public int _INVALID_getMaxHealth() {
+		return (int) getMaxHealth();
+	}
 
-    @Override
+	@Override
 	public void setMaxHealth(double d) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
@@ -92,18 +92,18 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		}
 	}
 
-    @Override
-    public void _INVALID_setMaxHealth(int i) {
-        setMaxHealth(i);
-    }
+	@Override
+	public void _INVALID_setMaxHealth(int i) {
+		setMaxHealth(i);
+	}
 
-    @Override
+	@Override
 	public void resetMaxHealth() {
 		throw new UnsupportedOperationException();
 		/*
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
-			//TODO: reset not implemented
+			// TODO: Reset not implemented
 		}
 		*/
 	}
@@ -188,12 +188,12 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		}
 	}
 
-    @Override
-    public void _INVALID_damage(int i) {
-        damage(i);
-    }
+	@Override
+	public void _INVALID_damage(int i) {
+		damage(i);
+	}
 
-    @Override
+	@Override
 	public void damage(double d, Entity entity) {
 		Health health = getHandle().get(Health.class);
 		if (health != null) {
@@ -201,12 +201,12 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		}
 	}
 
-    @Override
-    public void _INVALID_damage(int i, Entity entity) {
-        damage(i, entity);
-    }
+	@Override
+	public void _INVALID_damage(int i, Entity entity) {
+		damage(i, entity);
+	}
 
-    @Override
+	@Override
 	public int getMaximumNoDamageTicks() {
 		throw new UnsupportedOperationException();
 	}
@@ -221,22 +221,22 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public int _INVALID_getLastDamage() {
-        return (int) getLastDamage();
-    }
+	@Override
+	public int _INVALID_getLastDamage() {
+		return (int) getLastDamage();
+	}
 
-    @Override
+	@Override
 	public void setLastDamage(double d) {
 		throw new UnsupportedOperationException();
 	}
 
-    @Override
-    public void _INVALID_setLastDamage(int i) {
-        setLastDamage(i);
-    }
+	@Override
+	public void _INVALID_setLastDamage(int i) {
+		setLastDamage(i);
+	}
 
-    @Override
+	@Override
 	public int getNoDamageTicks() {
 		throw new UnsupportedOperationException();
 	}

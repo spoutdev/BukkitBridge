@@ -20,6 +20,7 @@
 package org.spout.bridge.bukkit.entity;
 
 import java.util.Set;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
@@ -44,6 +45,7 @@ import org.spout.vanilla.component.entity.misc.Sleep;
 public abstract class BridgeHumanEntity extends BridgeLivingEntity implements HumanEntity {
 	private BridgeInventoryPlayer inventory;
 	private BridgeInventory enderInventory;
+
 	protected BridgeHumanEntity(Entity handle) {
 		super(handle);
 		this.inventory = new BridgeInventoryPlayer(getHandle().get(org.spout.vanilla.component.entity.inventory.PlayerInventory.class).getMain(), (BridgePlayer) this);
@@ -87,12 +89,10 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public void openInventory(InventoryView inventoryView) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void closeInventory() {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -116,7 +116,6 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public void setItemOnCursor(ItemStack itemStack) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -137,7 +136,6 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public void setGameMode(GameMode gameMode) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -192,12 +190,10 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public void removeAttachment(PermissionAttachment permissionAttachment) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void recalculatePermissions() {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -212,7 +208,6 @@ public abstract class BridgeHumanEntity extends BridgeLivingEntity implements Hu
 
 	@Override
 	public void setOp(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

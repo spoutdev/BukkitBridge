@@ -57,11 +57,12 @@ import org.spout.api.event.entity.EntitySpawnEvent;
 import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.cuboid.Block;
 
+import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
-import org.spout.bridge.VanillaBridgePlugin;
 import org.spout.bridge.bukkit.entity.BridgeEntity;
 import org.spout.bridge.bukkit.entity.BridgePlayer;
 import org.spout.bridge.bukkit.entity.EntityFactory;
+
 import org.spout.vanilla.component.entity.substance.Item;
 import org.spout.vanilla.component.entity.substance.Lightning;
 import org.spout.vanilla.component.entity.substance.Tnt;
@@ -80,35 +81,35 @@ import org.spout.vanilla.event.player.PlayerFoodSaturationChangeEvent;
 import org.spout.vanilla.material.block.liquid.Lava;
 
 public class EntityListener extends AbstractListener {
-	public EntityListener(VanillaBridgePlugin plugin) {
+	public EntityListener(BukkitBridgePlugin plugin) {
 		super(plugin);
 	}
 
 	@EventHandler
 	public void onCreeperPower() {
-		//todo implement onCreeperPower
+		// TODO: Implement onCreeperPower
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onEntity(EntityEvent event) {
-		//todo implement onEntity
+		// TODO: Implement onEntity
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onEntityBreakDoor() {
-		//todo implement onEntityBreakDoor
+		// TODO: Implement onEntityBreakDoor
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onEntityChangeBlock() {
-		//todo implement onEntityChangeBlock
+		// TODO: Implement onEntityChangeBlock
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onEntityCombust(EntityCombustEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		org.bukkit.event.entity.EntityCombustEvent bukkitEvent;
@@ -130,11 +131,11 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onEntityCreatePortal() {
-		//todo implement onEntityCreatePortal
+		// TODO: Implement onEntityCreatePortal
 		throw new UnsupportedOperationException();
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onEntityDamage(EntityDamageEvent event) {
 		// TODO: Poison and Melting (Snowman), Bukkit damage causes.
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
@@ -218,7 +219,7 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
-		//todo implement onEntityDeath
+		// TODO: Implement onEntityDeath
 		throw new UnsupportedOperationException();
 	}
 
@@ -245,7 +246,7 @@ public class EntityListener extends AbstractListener {
 		event.setYield(bukkitEvent.getYield());
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onEntityHeal(EntityHealEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		EntityRegainHealthEvent bukkitEvent;
@@ -265,7 +266,7 @@ public class EntityListener extends AbstractListener {
 			case SATIATED:
 				bukkitCause = RegainReason.SATIATED;
 			case WITHER_SPAWN:
-				// TODO: Wither_Spawn is available in newer Bukkit Builds.
+				// TODO: Wither_Spawn is available in newer Bukkit builds.
 			default:
 				bukkitCause = RegainReason.CUSTOM;
 		}
@@ -277,19 +278,19 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onEntityInteract() {
-		//todo implement onEntityInteract
+		// TODO: Implement onEntityInteract
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onEntityPortalEnter() {
-		//todo implement onEntityPortalEnter
+		// TODO: Implement onEntityPortalEnter
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onEntityShootBow() {
-		//todo implement onEntityShootBow
+		// TODO: Implement onEntityShootBow
 		throw new UnsupportedOperationException();
 	}
 
@@ -361,7 +362,7 @@ public class EntityListener extends AbstractListener {
 		event.setTarget(((BridgeEntity) bukkitEvent.getTarget()).getHandle());
 	}
 
-	@EventHandler(order = Order.EARLIEST)
+	@EventHandler (order = Order.EARLIEST)
 	public void onEntityTeleport(EntityTeleportEvent event) {
 		BridgeEntity entity = EntityFactory.createEntity(event.getEntity());
 		Location from = BukkitUtil.fromPoint(event.getFrom());
@@ -381,13 +382,13 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onExpBottle() {
-		//todo implement onExpBottle
+		// TODO: Implement onExpBottle
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onExplosionPrime() {
-		//todo implement onExplosionPrime
+		// TODO: Implement onExplosionPrime
 		throw new UnsupportedOperationException();
 	}
 
@@ -464,13 +465,13 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onPigZap() {
-		//todo implement onPigZap
+		// TODO: Implement onPigZap
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onPlayerDeath() {
-		//todo implement onPlayerDeath
+		// TODO: Implement onPlayerDeath
 		throw new UnsupportedOperationException();
 	}
 
@@ -504,19 +505,19 @@ public class EntityListener extends AbstractListener {
 
 	@EventHandler
 	public void onProjectileLaunch() {
-		//todo implement onProjectileLaunch
+		// TODO: Implement onProjectileLaunch
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onSheepDyeWool() {
-		//todo implement onSheepDyeWool
+		// TODO: Implement onSheepDyeWool
 		throw new UnsupportedOperationException();
 	}
 
 	@EventHandler
 	public void onSheepRegrowWool() {
-		//todo implement onSheepRegrowWool
+		// TODO: Implement onSheepRegrowWool
 		throw new UnsupportedOperationException();
 	}
 
@@ -529,5 +530,3 @@ public class EntityListener extends AbstractListener {
 		event.setAmount(bukkitEvent.getCount());
 	}
 }
-
-

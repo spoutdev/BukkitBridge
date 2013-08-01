@@ -35,12 +35,10 @@ public class BridgePigZombie extends BridgeZombie implements PigZombie {
 
 	@Override
 	public void setAnger(int i) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public void setAngry(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

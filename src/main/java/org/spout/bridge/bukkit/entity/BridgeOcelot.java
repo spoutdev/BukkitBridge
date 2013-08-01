@@ -27,7 +27,7 @@ import org.spout.api.entity.Entity;
 public class BridgeOcelot extends BridgeTameableAnimal implements Ocelot {
 	protected BridgeOcelot(Entity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
+		// TODO: Auto-generated constructor stub
 	}
 
 	@Override
@@ -37,7 +37,6 @@ public class BridgeOcelot extends BridgeTameableAnimal implements Ocelot {
 
 	@Override
 	public void setCatType(Type type) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -47,7 +46,6 @@ public class BridgeOcelot extends BridgeTameableAnimal implements Ocelot {
 
 	@Override
 	public void setSitting(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

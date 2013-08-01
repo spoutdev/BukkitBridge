@@ -73,7 +73,7 @@ public class BridgeInventoryCrafting extends BridgeInventory implements Crafting
 
 	@Override
 	public Recipe getRecipe() {
-		// TODO: Converting the results from a crafting inventory to a bukkit recipe.
+		// TODO: Convert the results from a crafting inventory to a Bukkit recipe.
 		throw new UnsupportedOperationException();
 	}
 }

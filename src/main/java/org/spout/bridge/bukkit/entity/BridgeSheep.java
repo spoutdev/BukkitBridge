@@ -37,7 +37,6 @@ public class BridgeSheep extends BridgeAnimals implements Sheep {
 
 	@Override
 	public void setSheared(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -47,7 +46,6 @@ public class BridgeSheep extends BridgeAnimals implements Sheep {
 
 	@Override
 	public void setColor(DyeColor dyeColor) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

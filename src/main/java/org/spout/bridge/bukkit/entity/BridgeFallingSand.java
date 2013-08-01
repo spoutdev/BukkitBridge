@@ -52,7 +52,6 @@ public class BridgeFallingSand extends BridgeEntity implements FallingSand {
 
 	@Override
 	public void setDropItem(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public class ForwardingPluginManager implements PluginManager {
 	ForwardingPluginManager(Server server) {
 		manager = new SimplePluginManager(server, new SimpleCommandMap(server));
 		try {
-			fireEvent = SimplePluginManager.class.getDeclaredMethod("fireEvent", new Class[]{Event.class});
+			fireEvent = SimplePluginManager.class.getDeclaredMethod("fireEvent", new Class[] {Event.class});
 			fireEvent.setAccessible(true);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException("Unable to find SimplePluginManager.fireEvent(event)", e);
@@ -69,7 +69,7 @@ public class ForwardingPluginManager implements PluginManager {
 	}
 
 	private synchronized void callEventSafe(Event event) throws IllegalStateException {
-		//Can not forward to callEvent(event), it checks for bukkit-esque thread-safety
+		// Can not forward to callEvent(event), it checks for Bukkit-esque thread-safety
 		try {
 			fireEvent.invoke(manager, event);
 		} catch (IllegalAccessException e) {

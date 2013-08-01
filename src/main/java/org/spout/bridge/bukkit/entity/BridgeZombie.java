@@ -41,21 +41,19 @@ public class BridgeZombie extends BridgeMonster implements Zombie {
 
 	@Override
 	public boolean isBaby() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
 	public void setBaby(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
 	public boolean isVillager() {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		return false;
 	}
 
 	@Override
 	public void setVillager(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 }

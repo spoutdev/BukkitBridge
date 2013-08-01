@@ -37,6 +37,7 @@ import org.spout.api.material.BlockMaterial;
 
 import org.spout.bridge.bukkit.BridgeChunk;
 import org.spout.bridge.bukkit.BridgeWorld;
+
 import org.spout.vanilla.material.VanillaMaterial;
 import org.spout.vanilla.material.VanillaMaterials;
 import org.spout.vanilla.material.block.Liquid;
@@ -167,17 +168,17 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public byte getLightFromBlocks() {
-        return VanillaLighting.getBlockLight(getWorld().getHandle().getBlock(x, y, z));
+		return VanillaLighting.getBlockLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
 	public byte getLightFromSky() {
-        return VanillaLighting.getSkyLight(getWorld().getHandle().getBlock(x, y, z));
+		return VanillaLighting.getSkyLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
 	public byte getLightLevel() {
-        return VanillaLighting.getLight(getWorld().getHandle().getBlock(x, y, z));
+		return VanillaLighting.getLight(getWorld().getHandle().getBlock(x, y, z));
 	}
 
 	@Override
@@ -219,37 +220,37 @@ public class BridgeBlock implements Block {
 
 	@Override
 	public BlockState getState() {
-        org.spout.api.geo.cuboid.Block block = getWorld().getHandle().getBlock(x, y, z);
-        org.spout.vanilla.component.block.material.Sign sign = block.get(org.spout.vanilla.component.block.material.Sign.class);
-        if (sign != null) {
-            return new BridgeSign(this);
-        }
-        org.spout.vanilla.component.block.material.chest.Chest chest = block.get(org.spout.vanilla.component.block.material.chest.Chest.class);
-        if (chest != null) {
+		org.spout.api.geo.cuboid.Block block = getWorld().getHandle().getBlock(x, y, z);
+		org.spout.vanilla.component.block.material.Sign sign = block.get(org.spout.vanilla.component.block.material.Sign.class);
+		if (sign != null) {
+			return new BridgeSign(this);
+		}
+		org.spout.vanilla.component.block.material.chest.Chest chest = block.get(org.spout.vanilla.component.block.material.chest.Chest.class);
+		if (chest != null) {
 			return new BridgeChest(this);
 		}
-        org.spout.vanilla.component.block.material.Furnace furnace = block.get(org.spout.vanilla.component.block.material.Furnace.class);
-        if (furnace != null) {
+		org.spout.vanilla.component.block.material.Furnace furnace = block.get(org.spout.vanilla.component.block.material.Furnace.class);
+		if (furnace != null) {
 			return new BridgeFurnace(this);
 		}
-        org.spout.vanilla.component.block.material.Dispenser dispenser = block.get(org.spout.vanilla.component.block.material.Dispenser.class);
-        if (dispenser != null) {
+		org.spout.vanilla.component.block.material.Dispenser dispenser = block.get(org.spout.vanilla.component.block.material.Dispenser.class);
+		if (dispenser != null) {
 			return new BridgeDispenser(this);
 		}
-        org.spout.vanilla.component.block.material.MonsterSpawner spawner = block.get(org.spout.vanilla.component.block.material.MonsterSpawner.class);
-        if (spawner != null) {
+		org.spout.vanilla.component.block.material.MonsterSpawner spawner = block.get(org.spout.vanilla.component.block.material.MonsterSpawner.class);
+		if (spawner != null) {
 			return new BridgeCreatureSpawner(this);
 		}
-        org.spout.vanilla.component.block.material.NoteBlock note = block.get(org.spout.vanilla.component.block.material.NoteBlock.class);
-        if (note != null) {
+		org.spout.vanilla.component.block.material.NoteBlock note = block.get(org.spout.vanilla.component.block.material.NoteBlock.class);
+		if (note != null) {
 			return new BridgeNoteblock(this);
 		}
-        org.spout.vanilla.component.block.material.Jukebox jukebox = block.get(org.spout.vanilla.component.block.material.Jukebox.class);
-        if (jukebox != null) {
+		org.spout.vanilla.component.block.material.Jukebox jukebox = block.get(org.spout.vanilla.component.block.material.Jukebox.class);
+		if (jukebox != null) {
 			return new BridgeJukebox(this);
 		}
-        org.spout.vanilla.component.block.material.BrewingStand brewingStand = block.get(org.spout.vanilla.component.block.material.BrewingStand.class);
-        if (brewingStand != null) {
+		org.spout.vanilla.component.block.material.BrewingStand brewingStand = block.get(org.spout.vanilla.component.block.material.BrewingStand.class);
+		if (brewingStand != null) {
 			return new BridgeBrewingStand(this);
 		}
 		return new BridgeBlockState(this);

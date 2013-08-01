@@ -36,7 +36,6 @@ public class BridgePig extends BridgeAnimals implements Pig {
 
 	@Override
 	public void setSaddle(boolean b) {
-		//To change body of implemented methods use File | Settings | File Templates.
 	}
 
 	@Override
