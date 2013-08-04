@@ -63,9 +63,9 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a Bukkit Location from a SpoutAPI Transform
+	 * Creates a Bukkit Location from a Spout API Transform
 	 *
-	 * @param transform The SpoutAPI Transform to convert to a Location
+	 * @param transform The Spout API Transform to convert to a Location
 	 * @return A Location with the same values as given Transform
 	 */
 	public static Location fromTransform(Transform transform) {
@@ -76,9 +76,9 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a Bukkit block from a SpoutAPI block
+	 * Creates a Bukkit block from a Spout API block
 	 *
-	 * @param block The SpoutAPI block to convert to a Bukkit block
+	 * @param block The Spout API block to convert to a Bukkit block
 	 * @return The corresponding Bukkit block
 	 */
 	public static Block fromBlock(org.spout.api.geo.cuboid.Block block) {
@@ -87,10 +87,10 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a SpoutAPI block from a Bukkit block
+	 * Creates a Spout API block from a Bukkit block
 	 *
-	 * @param block The Bukkit block to convert to a SpoutAPI block
-	 * @return The corresponding SpoutAPI block
+	 * @param block The Bukkit block to convert to a Spout API block
+	 * @return The corresponding Spout API block
 	 */
 	public static org.spout.api.geo.cuboid.Block toBlock(Block block) {
 		Point point = toPoint(block.getLocation());
@@ -98,9 +98,9 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a Bukkit Location from a SpoutAPI Point
+	 * Creates a Bukkit Location from a Spout API Point
 	 *
-	 * @param point The SpoutAPI Point to convert to a Location
+	 * @param point The Spout API Point to convert to a Location
 	 * @return A Location with the same values as given Point
 	 */
 	public static Location fromPoint(Point point) {
@@ -113,29 +113,29 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a SpoutAPI Point from a Bukkit Location
+	 * Creates a Spout API Point from a Bukkit Location
 	 *
 	 * @param loc The Bukkit Location to convert to a Point
-	 * @return A SpoutAPI Point with the same values as given Location
+	 * @return A Spout API Point with the same values as given Location
 	 */
 	public static Point toPoint(Location loc) {
 		return new Point(toVector3(loc), ((BridgeWorld) loc.getWorld()).getHandle());
 	}
 
 	/**
-	 * Creates a SpoutAPI Vector3 from a Bukkit Location
+	 * Creates a Spout API Vector3 from a Bukkit Location
 	 *
 	 * @param loc The Bukkit Location to convert to a Vector3
-	 * @return A SpoutAPI Vector3 with the same values as given Bukkit Location
+	 * @return A Spout API Vector3 with the same values as given Bukkit Location
 	 */
 	public static Vector3 toVector3(Location loc) {
 		return new Vector3(loc.getX(), loc.getY(), loc.getZ());
 	}
 
 	/**
-	 * Creates a BridgeItemStack from a SpoutAPI ItemStack
+	 * Creates a BridgeItemStack from a Spout API ItemStack
 	 *
-	 * @param item The SpoutAPI ItemStack to convert to a BridgeItemStack
+	 * @param item The Spout API ItemStack to convert to a BridgeItemStack
 	 * @return The BridgeItemStack with the same values and type as given Spout ItemStack
 	 */
 	public static BridgeItemStack fromItemStack(ItemStack item) {
@@ -156,10 +156,10 @@ public class BukkitUtil {
 	}
 
 	/**
-	 * Creates a SpoutAPI ItemStack from a Bukkit ItemStack
+	 * Creates a Spout API ItemStack from a Bukkit ItemStack
 	 *
-	 * @param item The Bukkit ItemStack to convert to a SpoutAPI ItemStack
-	 * @return The converted SpoutAPI ItemStack
+	 * @param item The Bukkit ItemStack to convert to a Spout API ItemStack
+	 * @return The converted Spout API ItemStack
 	 */
 	public static ItemStack toItemStack(org.bukkit.inventory.ItemStack item) {
 		if (item == null) {

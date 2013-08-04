@@ -32,12 +32,10 @@ import org.spout.vanilla.protocol.entity.object.ObjectType;
  */
 public final class EntityFactory {
 	/**
-	 * Creates a BridgeEntity from a SpoutAPI Entity. If the Entity is a
-	 * Player, this method will return a BridgePlayer object instead of a
-	 * plain BridgeEntity.
+	 * Creates a BridgeEntity from a Spout API Entity. If the Entity is a Player, this method will return a BridgePlayer object instead of a plain BridgeEntity.
 	 *
-	 * @param entity The SpoutAPI Entity to create a BridgeEntity from
-	 * @return The BridgeEntity that represents the SpoutAPI Entity
+	 * @param entity The Spout API Entity to create a BridgeEntity from
+	 * @return The BridgeEntity that represents the Spout API Entity
 	 */
 	public static BridgeEntity createEntity(Entity entity) {
 		if (entity instanceof Player) {
@@ -149,10 +147,10 @@ public final class EntityFactory {
 	}
 
 	/**
-	 * Creates a BridgePlayer from a SpoutAPI Player.
+	 * Creates a BridgePlayer from a Spout API Player.
 	 *
-	 * @param player The SpoutAPI Player to create a BridgePlayer from
-	 * @return The BridgePlayer that represents the SpoutAPI Player
+	 * @param player The Spout API Player to create a BridgePlayer from
+	 * @return The BridgePlayer that represents the Spout API Player
 	 */
 	public static BridgePlayer createPlayer(Player player) {
 		return new BridgePlayer(player);

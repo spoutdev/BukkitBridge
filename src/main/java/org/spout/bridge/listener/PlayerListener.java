@@ -57,8 +57,7 @@ import org.spout.vanilla.event.player.PlayerRespawnEvent;
 
 public class PlayerListener extends AbstractListener {
 	/**
-	 * Maintains a list of players from pre-login events to kick on login
-	 * events, as Spout does not allow kicking in pre-login.
+	 * Maintains a list of players from pre-login events to kick on login events, as Spout does not allow kicking in pre-login.
 	 */
 	private Map<String, String> toKick = new ConcurrentHashMap<String, String>();
 

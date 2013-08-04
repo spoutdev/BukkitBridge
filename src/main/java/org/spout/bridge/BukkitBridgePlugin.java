@@ -36,8 +36,7 @@ import org.spout.bridge.listener.PlayerListener;
 import org.spout.bridge.listener.WorldListener;
 
 /**
- * Bridge redirects Bukkit method calls to the SpoutAPI, allowing Bukkit
- * plugins to run on Spout.
+ * Bridge redirects Bukkit method calls to the Spout API, allowing Bukkit plugins to run on Spout.
  */
 public class BukkitBridgePlugin extends Plugin {
 	private static BukkitBridgePlugin instance;
@@ -56,7 +55,7 @@ public class BukkitBridgePlugin extends Plugin {
 		Bukkit.setServer(server);
 		server.loadPlugins();
 
-		getEngine().getLogger().info("Enablng pre-world Bukkit plugins");
+		getEngine().getLogger().info("Enabling pre-world Bukkit plugins");
 		server.enablePlugins(PluginLoadOrder.STARTUP);
 
 		worldListener = new WorldListener(this);
