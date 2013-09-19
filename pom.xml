@@ -5,11 +5,11 @@
 	<name>BukkitBridge</name>
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>1.6.2-R0.2-SNAPSHOT</version>
+	<version>1.6.2-R1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<url>http://www.spout.org</url>
 	<inceptionYear>2012</inceptionYear>
-	<description>Bridge plugin that allows Bukkit plugins to be used on the Spout game voxel platform server.</description>
+	<url>https://github.com/Vanilla/BukkitBridge</url>
+	<description>Bridge plugin that allows Bukkit plugins to be used on the Spout voxel game platform server.</description>
 
 	<!-- Parent information -->
 	<parent>
@@ -24,7 +24,7 @@
 		<buildNumber>0</buildNumber>
 		<ciSystem>unknown</ciSystem>
 		<commit>unknown</commit>
-		<mainClass>${project.groupId}.bridge.VanillaBridgePlugin</mainClass>
+		<mainClass>${project.groupId}.bridge.${project.artifactId}Plugin</mainClass>
 	</properties>
 
 	<!-- Organization information -->
@@ -64,14 +64,34 @@
 	<!-- Dependency repositories -->
 	<repositories>
 		<repository>
-			<id>spout-repo</id>
-			<url>http://nexus.spout.org/content/groups/public/</url>
+			<id>sonatype-nexus-releases</id>
+			<url>https://oss.sonatype.org/content/repositories/releases</url>
+		</repository>
+		<repository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
 	</repositories>
+
+	<!-- Build plugin repositories -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-nexus-releases</id>
+			<url>https://oss.sonatype.org/content/repositories/releases</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<!-- Project dependencies -->
 	<dependencies>
