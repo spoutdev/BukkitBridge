@@ -5,7 +5,7 @@
 	<name>BukkitBridge</name>
 	<groupId>org.spout</groupId>
 	<artifactId>bukkitbridge</artifactId>
-	<version>1.6.2-R1.1-SNAPSHOT</version>
+	<version>1.6.4-R0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<inceptionYear>2012</inceptionYear>
 	<url>https://github.com/Vanilla/BukkitBridge</url>
@@ -14,8 +14,8 @@
 	<!-- Parent information -->
 	<parent>
 		<groupId>org.spout</groupId>
-		<artifactId>shared-parent</artifactId>
-		<version>1</version>
+		<artifactId>spout-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<!-- Build properties -->
@@ -70,6 +70,14 @@
 		<repository>
 			<id>sonatype-nexus-snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>bukkit-public-repository</id>
+			<url>http://repo.bukkit.org/content/groups/public</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>

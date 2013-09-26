@@ -317,6 +317,21 @@ public abstract class BridgeLivingEntity extends BridgeEntity implements LivingE
 	}
 
 	@Override
+	public boolean isLeashed() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Entity getLeashHolder() throws IllegalStateException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean setLeashHolder(Entity entity) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void setCustomNameVisible(boolean val) {
 		getComponent().getData().put(VanillaData.IS_CUSTOM_NAME_VISIBLE, val);
 	}

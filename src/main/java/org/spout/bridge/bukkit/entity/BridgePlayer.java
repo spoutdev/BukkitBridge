@@ -96,7 +96,7 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public InetSocketAddress getAddress() {
-		return getHandle().getSession().getAddress();
+		return getHandle().getNetwork().getSession().getAddress();
 	}
 
 	@Override
@@ -197,6 +197,11 @@ public class BridgePlayer extends BridgeHumanEntity implements Player {
 
 	@Override
 	public void playSound(Location location, Sound sound, float v, float v1) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void playSound(Location location, String s, float v, float v2) {
 		throw new UnsupportedOperationException();
 	}
 

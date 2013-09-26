@@ -37,7 +37,7 @@ import org.spout.api.inventory.ItemStack;
 import org.spout.api.material.Material;
 import org.spout.api.material.block.BlockFace;
 import org.spout.api.material.block.BlockSnapshot;
-import org.spout.api.math.Vector3;
+import org.spout.math.vector.Vector3;
 
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
@@ -70,8 +70,9 @@ public class BukkitUtil {
 	 */
 	public static Location fromTransform(Transform transform) {
 		Location loc = fromPoint(transform.getPosition());
-		loc.setPitch(transform.getRotation().getPitch());
-		loc.setYaw(transform.getRotation().getYaw());
+		Vector3 rotation = transform.getRotation().getAxesAnglesRad();
+		loc.setPitch(rotation.getZ());
+		loc.setYaw(rotation.getY());
 		return loc;
 	}
 
@@ -238,7 +239,6 @@ public class BukkitUtil {
 		List<String> arguments = Arrays.asList(commandLine.split(" "));
 		String command = arguments.get(0);
 		arguments.remove(0);
-
-		source.sendCommand(command, arguments.toArray(new String[arguments.size()]));
+		source.processCommand(command, arguments.toArray(new String[arguments.size()]));
 	}
 }

@@ -76,8 +76,8 @@ public class PlayerListener extends AbstractListener {
 		}
 
 		BridgePlayer player = EntityFactory.createPlayer(event.getPlayer());
-		String hostname = event.getPlayer().getAddress().getHostName();
-		org.bukkit.event.player.PlayerLoginEvent login = new org.bukkit.event.player.PlayerLoginEvent(player, hostname, event.getPlayer().getAddress());
+		String hostname = event.getPlayer().getNetwork().getAddress().getHostName();
+		org.bukkit.event.player.PlayerLoginEvent login = new org.bukkit.event.player.PlayerLoginEvent(player, hostname, event.getPlayer().getNetwork().getAddress());
 		if (!event.isAllowed()) {
 			login.disallow(Result.KICK_OTHER, event.getMessage());
 		}
