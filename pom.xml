@@ -13,9 +13,9 @@
 
 	<!-- Parent information -->
 	<parent>
-		<groupId>org.spout</groupId>
-		<artifactId>spout-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
 	</parent>
 
 	<!-- Build properties -->
