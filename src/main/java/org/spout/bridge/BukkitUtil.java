@@ -37,7 +37,7 @@ import org.spout.api.inventory.ItemStack;
 import org.spout.api.material.Material;
 import org.spout.api.material.block.BlockFace;
 import org.spout.api.material.block.BlockSnapshot;
-import org.spout.math.vector.Vector3;
+import org.spout.math.vector.Vector3f;
 
 import org.spout.bridge.bukkit.BridgeServer;
 import org.spout.bridge.bukkit.BridgeWorld;
@@ -70,7 +70,7 @@ public class BukkitUtil {
 	 */
 	public static Location fromTransform(Transform transform) {
 		Location loc = fromPoint(transform.getPosition());
-		Vector3 rotation = transform.getRotation().getAxesAnglesRad();
+		Vector3f rotation = transform.getRotation().getAxesAnglesRad();
 		loc.setPitch(rotation.getZ());
 		loc.setYaw(rotation.getY());
 		return loc;
@@ -129,8 +129,8 @@ public class BukkitUtil {
 	 * @param loc The Bukkit Location to convert to a Vector3
 	 * @return A Spout API Vector3 with the same values as given Bukkit Location
 	 */
-	public static Vector3 toVector3(Location loc) {
-		return new Vector3(loc.getX(), loc.getY(), loc.getZ());
+	public static Vector3f toVector3(Location loc) {
+		return new Vector3f(loc.getX(), loc.getY(), loc.getZ());
 	}
 
 	/**

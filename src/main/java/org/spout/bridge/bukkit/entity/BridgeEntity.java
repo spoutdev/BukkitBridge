@@ -39,8 +39,8 @@ import org.spout.api.event.entity.EntityTeleportEvent;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.map.DefaultedKey;
 import org.spout.api.map.DefaultedKeyImpl;
-import org.spout.math.imaginary.Quaternion;
-import org.spout.math.vector.Vector3;
+import org.spout.math.imaginary.Quaternionf;
+import org.spout.math.vector.Vector3f;
 
 import org.spout.bridge.BukkitUtil;
 import org.spout.bridge.bukkit.BridgeServer;
@@ -125,8 +125,8 @@ public abstract class BridgeEntity implements Entity {
 	public Location getLocation() {
 		Point pos = handle.getPhysics().getPosition();
 		World w = getServer().getWorld(handle.getWorld().getUID());
-		Quaternion rotation = handle.getPhysics().getRotation();
-		Vector3 rot = rotation.getAxesAnglesRad();
+		Quaternionf rotation = handle.getPhysics().getRotation();
+		Vector3f rot = rotation.getAxesAnglesRad();
 		return new Location(w, pos.getX(), pos.getY(), pos.getZ(), rot.getY(), rot.getZ());
 	}
 
@@ -157,7 +157,7 @@ public abstract class BridgeEntity implements Entity {
 
 	@Override
 	public Vector getVelocity() {
-		Vector3 velocity = getHandle().getPhysics().getMovementVelocity();
+		Vector3f velocity = getHandle().getPhysics().getMovementVelocity();
 		return new Vector(velocity.getX(), velocity.getY(), velocity.getZ());
 	}
 
@@ -243,7 +243,7 @@ public abstract class BridgeEntity implements Entity {
 	@Override
 	public void setVelocity(Vector vec) {
 		if (handle.getPhysics().isActivated()) {
-			handle.getPhysics().force(new Vector3(vec.getX(), vec.getY(), vec.getZ()));
+			handle.getPhysics().force(new Vector3f(vec.getX(), vec.getY(), vec.getZ()));
 		}
 	}
 
@@ -267,7 +267,7 @@ public abstract class BridgeEntity implements Entity {
 			loc = BukkitUtil.fromPoint(event.getTo());
 			prev = BukkitUtil.fromPoint(event.getFrom());
 			handle.getPhysics().setPosition(new Point(handle.getWorld(), (float) loc.getX(), (float) loc.getY(), (float) loc.getZ()));
-			handle.getPhysics().setRotation(new Quaternion(loc.getPitch(), loc.getYaw(), 0, 0));
+			handle.getPhysics().setRotation(new Quaternionf(loc.getPitch(), loc.getYaw(), 0, 0));
 			return true;
 		}
 		return false;
@@ -301,8 +301,8 @@ public abstract class BridgeEntity implements Entity {
 	public Location getLocation(Location loc) {
 		if (loc != null) {
 			Point pos = handle.getPhysics().getPosition();
-			Quaternion rotation = handle.getPhysics().getRotation();
-			Vector3 rot = rotation.getAxesAnglesRad();
+			Quaternionf rotation = handle.getPhysics().getRotation();
+			Vector3f rot = rotation.getAxesAnglesRad();
 			loc.setWorld(getWorld());
 			loc.setX(pos.getX());
 			loc.setY(pos.getY());
