@@ -64,8 +64,8 @@ import org.spout.api.geo.cuboid.Region;
 import org.spout.api.geo.discrete.Point;
 import org.spout.api.geo.discrete.Transform;
 import org.spout.api.material.BlockMaterial;
-import org.spout.math.imaginary.Quaternion;
-import org.spout.math.vector.Vector3;
+import org.spout.math.imaginary.Quaternionf;
+import org.spout.math.vector.Vector3f;
 
 import org.spout.bridge.BukkitBridgePlugin;
 import org.spout.bridge.BukkitUtil;
@@ -174,7 +174,7 @@ public class BridgeWorld implements World {
 	public Item dropItem(Location location, ItemStack item) {
 		Point pos = BukkitUtil.toPoint(location);
 		org.spout.api.inventory.ItemStack is = BukkitUtil.toItemStack(item);
-		org.spout.vanilla.component.entity.substance.Item i = org.spout.vanilla.component.entity.substance.Item.drop(pos, is, Vector3.ZERO);
+		org.spout.vanilla.component.entity.substance.Item i = org.spout.vanilla.component.entity.substance.Item.drop(pos, is, Vector3f.ZERO);
 		return new BridgeItem(i.getOwner());
 	}
 
@@ -814,7 +814,7 @@ public class BridgeWorld implements World {
 
 	@Override
 	public boolean setSpawnLocation(int x, int y, int z) {
-		handle.setSpawnPoint(new Transform(new Point(handle, x, y, z), Quaternion.IDENTITY, Vector3.ZERO));
+		handle.setSpawnPoint(new Transform(new Point(handle, x, y, z), Quaternionf.IDENTITY, Vector3f.ZERO));
 		return true;
 	}
 
